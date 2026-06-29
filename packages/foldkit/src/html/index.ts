@@ -480,6 +480,7 @@ export type Attribute<Message> = Data.TaggedEnum<{
   OnCopyText: { readonly text: string }
   OnCutText: { readonly text: string; readonly message: Message }
   OnCancel: { readonly message: Message }
+  OnCancelPreventDefault: {}
   OnToggle: { readonly f: (isOpen: boolean) => Message }
   OnContextMenu: { readonly message: Message }
   OnDragStart: { readonly message: Message }
@@ -735,6 +736,7 @@ const {
   OnCopyText,
   OnCutText,
   OnCancel,
+  OnCancelPreventDefault,
   OnToggle,
   OnContextMenu,
   OnDragStart,
@@ -1384,6 +1386,12 @@ const attributeMatcher: (
             ctx.dispatch(message)
           },
         }),
+    OnCancelPreventDefault: () => (ctx: BuildContext) =>
+      updateDataOn(ctx, {
+        cancel: (event: Event) => {
+          event.preventDefault()
+        },
+      }),
     OnToggle:
       ({ f }) =>
       (ctx: BuildContext) =>
@@ -3125,6 +3133,7 @@ type HtmlAttributes<Message> = {
     readonly _tag: 'OnCancel'
     readonly message: Message
   }
+  OnCancelPreventDefault: () => { readonly _tag: 'OnCancelPreventDefault' }
   OnToggle: (f: (isOpen: boolean) => Message) => {
     readonly _tag: 'OnToggle'
     readonly f: (isOpen: boolean) => Message
@@ -3912,6 +3921,15 @@ const htmlAttributes = <Message>(): HtmlAttributes<Message> => ({
    */
   OnCutText: (text: string, message: Message) => OnCutText({ text, message }),
   OnCancel: (message: Message) => OnCancel({ message }),
+  /**
+   * Binds the `cancel` event and calls `preventDefault` without dispatching a
+   * Message. On a modal `<dialog>` this suppresses the browser's automatic
+   * close, leaving dismissal to an explicit handler such as a `keydown` for
+   * Escape. Useful because Chromium fires the parent `<dialog>`'s `cancel`
+   * when an inner file picker is dismissed, which would otherwise close the
+   * dialog.
+   */
+  OnCancelPreventDefault: () => OnCancelPreventDefault(),
   OnToggle: (f: (isOpen: boolean) => Message) => OnToggle({ f }),
   OnContextMenu: (message: Message) => OnContextMenu({ message }),
   OnDragStart: (message: Message) => OnDragStart({ message }),

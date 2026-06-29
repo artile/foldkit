@@ -297,6 +297,8 @@ export const close = (model: Model): UpdateReturn =>
 
 // VIEW
 
+const escapeKey = 'Escape'
+
 /** Returns the ID used for `aria-labelledby` on the dialog. Apply this to your title element. */
 export const titleId = (model: Model): string => `${model.id}-title`
 
@@ -306,10 +308,11 @@ export const descriptionId = (model: Model): string => `${model.id}-description`
 /** Render-time payload published to the consumer's `toView`.
  *
  *  - `dialog`: attributes for the native `<dialog>` element. Carries
- *    the id, ARIA labelling, `open` prop, positioning style, and the
- *    `OnCancel` handler that wires Escape to `RequestedClose`. The
- *    consumer MUST render an `h.dialog(...)` element so the framework can
- *    open and close it.
+ *    the id, ARIA labelling, `open` prop, positioning style, a `keydown`
+ *    handler that wires Escape to `RequestedClose`, and a `cancel` handler
+ *    that calls `preventDefault` so the browser's automatic dismiss never
+ *    fires. The consumer MUST render an `h.dialog(...)` element so the
+ *    framework can open and close it.
  *  - `backdrop`: attributes for the backdrop element. Includes the
  *    Animation data attributes and the `OnClick` handler that closes
  *    the dialog on outside-click (suppressed while a leave animation
@@ -379,7 +382,14 @@ export const view = defineView<Model, Message, ViewInputs>(
       h.Id(id),
       h.AriaLabelledBy(`${id}-title`),
       h.AriaDescribedBy(`${id}-description`),
-      h.OnCancel(RequestedClose()),
+      // NOTE: Chromium fires the modal `<dialog>`'s `cancel` event when an
+      // inner file picker is dismissed, indistinguishable from a real Esc.
+      // Suppress the native dismiss with `preventDefault` and drive Esc-to-close
+      // from `keydown` instead, so canceling a file picker leaves the dialog open.
+      h.OnCancelPreventDefault(),
+      h.OnKeyDownPreventDefault(key =>
+        key === escapeKey ? Option.some(RequestedClose()) : Option.none(),
+      ),
       h.Open(isVisible),
       h.Style({
         width: '100%',
