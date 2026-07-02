@@ -11,11 +11,7 @@ import {
   Schema as S,
   pipe,
 } from 'effect'
-import {
-  FetchHttpClient,
-  HttpClient,
-  HttpClientRequest,
-} from 'effect/unstable/http'
+import { HttpClient, HttpClientRequest } from 'effect/unstable/http'
 import { KeyValueStore } from 'effect/unstable/persistence'
 import {
   Calendar,
@@ -27,6 +23,7 @@ import {
   Subscription,
 } from 'foldkit'
 import { type Document, html } from 'foldkit/html'
+import * as Http from 'foldkit/http'
 import { load, pushUrl } from 'foldkit/navigation'
 import { evo } from 'foldkit/struct'
 import { Url, toString as urlToString } from 'foldkit/url'
@@ -1342,8 +1339,7 @@ const SubscribeToNewsletter = Command.define(
     return SucceededSubscribeToNewsletter()
   }).pipe(
     Effect.catch(() => Effect.succeed(FailedSubscribeToNewsletter())),
-    Effect.provideService(HttpClient.TracerPropagationEnabled, false),
-    Effect.provide(FetchHttpClient.layer),
+    Effect.provide(Http.layer),
   ),
 )
 
@@ -1379,8 +1375,7 @@ const FetchGitHubStars = Command.define(
         }),
       ),
     ),
-    Effect.provideService(HttpClient.TracerPropagationEnabled, false),
-    Effect.provide(FetchHttpClient.layer),
+    Effect.provide(Http.layer),
   ),
 )
 

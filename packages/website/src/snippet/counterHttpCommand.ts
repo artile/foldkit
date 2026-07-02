@@ -1,10 +1,7 @@
 import { Effect, Match as M, Schema as S } from 'effect'
-import {
-  FetchHttpClient,
-  HttpClient,
-  HttpClientRequest,
-} from 'effect/unstable/http'
+import { HttpClient, HttpClientRequest } from 'effect/unstable/http'
 import { Command } from 'foldkit'
+import * as Http from 'foldkit/http'
 import { m } from 'foldkit/message'
 
 const ClickedFetchCount = m('ClickedFetchCount')
@@ -38,7 +35,7 @@ const FetchCount = Command.define(
     Effect.catch(error =>
       Effect.succeed(FailedFetchCount({ error: String(error) })),
     ),
-    Effect.provide(FetchHttpClient.layer),
+    Effect.provide(Http.layer),
   ),
 )
 
