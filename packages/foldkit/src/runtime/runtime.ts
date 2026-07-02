@@ -638,20 +638,19 @@ type RuntimeConfig<
    * Command runs. The built services are reused for the application's
    * lifetime and released at runtime teardown.
    *
-   * Put a service here when construction is expensive relative to how often
-   * Commands need it (an RPC client rebuilt on every invocation, for
-   * example), or when every Command must see the same instance (an
-   * AudioContext, an RTCPeerConnection). A Layer that fails to build crashes
-   * the app with the crash view: the runtime provides this Layer to every
-   * Command, so a service that cannot be constructed leaves no Command safe
-   * to run.
-   *
-   * Provide a service inside the Command's Effect instead when construction
-   * is cheap (`FetchHttpClient.layer`), when different Commands need
+   * The deciding question is whether a service is an ambient app-wide
+   * capability with one correct configuration, or a per-Command decision.
+   * Ambient capabilities belong here: an HTTP client via `foldkit/http`, an
+   * AudioContext whose oscillators share one audio graph. Provide a service
+   * inside the Command's Effect instead when different Commands want
    * different implementations of the same tag (`KeyValueStore` over
-   * localStorage in one Command and sessionStorage in another), or when a
-   * service that can fail to construct should only take down the Commands
-   * that use it.
+   * localStorage in one Command and sessionStorage in another).
+   *
+   * A Layer that fails to build crashes the app with the crash view: the
+   * runtime provides this Layer to every Command, so a service that cannot
+   * be constructed leaves no Command safe to run. A service that can fail
+   * to construct and should only take down the Commands that use it also
+   * belongs in those Commands' Effects.
    */
   resources?: Layer.Layer<Resources>
   /**
