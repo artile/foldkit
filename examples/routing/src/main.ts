@@ -38,6 +38,7 @@ export type Model = typeof Model.Type
 // MESSAGE
 
 const NavigationShortcut = Schema.Literals(['GH', 'GP', 'GF', 'GN'])
+type NavigationShortcut = typeof NavigationShortcut.Type
 
 export const Message = defineMessageUnion({
   CompletedNavigateInternal: {},
@@ -91,6 +92,15 @@ const LoadExternal = Command.define('LoadExternal', {
 
 type UpdateReturn = Update.Return<Model, Message>
 
+const navigationUrlByShortcut: Readonly<
+  Record<NavigationShortcut, () => string>
+> = {
+  GH: homeRouter,
+  GP: () => peopleRouter({ searchText: Option.none() }),
+  GF: filesIndexRouter,
+  GN: nestedRouter,
+}
+
 const foldPeopleEntry = <Input>(
   update: (peoplePage: People.Model, input: Input) => People.UpdateReturn,
 ): Update.Fold<Model, Message, Input> =>
@@ -142,14 +152,7 @@ export const update = (model: Model, message: Message) =>
     },
 
     EnteredNavigationShortcut: ({ shortcut }) => {
-      const url = Match.value(shortcut).pipe(
-        Match.withReturnType<string>(),
-        Match.when('GH', homeRouter),
-        Match.when('GP', () => peopleRouter({ searchText: Option.none() })),
-        Match.when('GF', filesIndexRouter),
-        Match.when('GN', nestedRouter),
-        Match.exhaustive,
-      )
+      const url = navigationUrlByShortcut[shortcut]()
 
       return { model, commands: [NavigateInternal({ url })] }
     },
