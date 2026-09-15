@@ -2,7 +2,9 @@ import {
   Array,
   Duration,
   Effect,
+  Match,
   Option,
+  Predicate,
   Queue,
   Stream,
   String,
@@ -54,15 +56,19 @@ export type KeyboardShortcutsConfig<Message> = Readonly<{
   sequenceTimeout?: Duration.Input
 }>
 
-type ParsedPress = Readonly<{
+type PressRequirements = Readonly<{
   key: string
   isAltRequired: boolean
   isControlRequired: boolean
   isMetaRequired: boolean
   isModRequired: boolean
   isShiftRequired: boolean
-  identifier: string
 }>
+
+type ParsedPress = PressRequirements &
+  Readonly<{
+    identifier: string
+  }>
 
 type CompiledBinding<Message> = Readonly<{
   presses: Array.NonEmptyReadonlyArray<ParsedPress>
@@ -77,10 +83,43 @@ type SequenceState<Message> = Readonly<{
   matchedPressCount: number
 }>
 
-type ListenerState<Message> = {
-  maybeSequence: Option.Option<SequenceState<Message>>
-  maybeSequenceTimeout: Option.Option<ReturnType<typeof globalThis.setTimeout>>
-}
+type ActiveSequence<Message> = SequenceState<Message> &
+  Readonly<{
+    timeout: ReturnType<typeof globalThis.setTimeout>
+  }>
+
+type SequenceController<Message> = Readonly<{
+  clearSequence: () => void
+  readSequence: () => Option.Option<ActiveSequence<Message>>
+  setSequence: (sequence: SequenceState<Message>) => void
+}>
+
+type KeyboardShortcutHandlerContext<Message> = Readonly<{
+  bindings: ReadonlyArray<CompiledBinding<Message>>
+  emitMessage: (message: Message) => void
+  modKey: ModKey
+  sequenceController: SequenceController<Message>
+}>
+
+type KeyboardShortcutHandler = Readonly<{
+  clearSequence: () => void
+  handleEvent: (event: Event) => void
+}>
+
+type CompiledKeyboardShortcutsConfig<Message> = Readonly<{
+  bindings: ReadonlyArray<CompiledBinding<Message>>
+  modKey: ModKey | undefined
+  sequenceTimeout: number
+  target: EventTarget | (() => EventTarget) | undefined
+}>
+
+type AcquiredKeyboardShortcutListener = Readonly<{
+  clearSequence: () => void
+  handleEvent: (event: Event) => void
+  ownerDocument: Document
+  ownerWindow: Window
+  target: EventTarget
+}>
 
 const DEFAULT_SEQUENCE_TIMEOUT = Duration.seconds(1)
 const APPLE_PLATFORM_PATTERN = /Mac|iPhone|iPad|iPod/
@@ -122,36 +161,60 @@ const normalizeKey = (key: string): string => {
 
   const normalized = pipe(key, String.trim, String.toLowerCase)
 
-  if (normalized === 'space') {
-    return ' '
-  }
-
-  if (normalized === 'plus') {
-    return '+'
-  }
-
-  return normalized
+  return Match.value(normalized).pipe(
+    Match.withReturnType<string>(),
+    Match.when('space', () => ' '),
+    Match.when('plus', () => '+'),
+    Match.orElse(value => value),
+  )
 }
 
-const displayKey = (key: string): string => {
-  if (key === ' ') {
-    return 'space'
-  }
+const displayKey = (key: string): string =>
+  Match.value(key).pipe(
+    Match.withReturnType<string>(),
+    Match.when(' ', () => 'space'),
+    Match.when('+', () => 'plus'),
+    Match.orElse(value => value),
+  )
 
-  if (key === '+') {
-    return 'plus'
-  }
+const identifierPartWhen = (
+  isIncluded: boolean,
+  identifier: string,
+): Option.Option<string> => Option.liftPredicate(identifier, () => isIncluded)
 
-  return key
+const pressIdentifier = (press: PressRequirements, modKey?: ModKey): string => {
+  const isModUnresolved = press.isModRequired && modKey === undefined
+  const isControlRequired =
+    press.isControlRequired || (press.isModRequired && modKey === 'Control')
+  const isMetaRequired =
+    press.isMetaRequired || (press.isModRequired && modKey === 'Meta')
+
+  return pipe(
+    [
+      identifierPartWhen(isModUnresolved, 'mod'),
+      identifierPartWhen(isControlRequired, 'control'),
+      identifierPartWhen(isMetaRequired, 'meta'),
+      identifierPartWhen(press.isAltRequired, 'alt'),
+      identifierPartWhen(press.isShiftRequired, 'shift'),
+      Option.some(displayKey(press.key)),
+    ],
+    Array.getSomes,
+    Array.join('+'),
+  )
 }
 
 const invalidShortcut = (shortcut: string, reason: string): never => {
   throw new Error(`Invalid keyboard shortcut "${shortcut}": ${reason}`)
 }
 
+const hasDuplicateModifiers = (modifiers: ReadonlyArray<string>): boolean =>
+  Array.length(Array.dedupe(modifiers)) !== Array.length(modifiers)
+
 const parsePress = (shortcut: string): ParsedPress => {
-  const tokens = Array.map(shortcut.split('+'), token =>
-    pipe(token, String.trim, String.toLowerCase),
+  const tokens: Array.NonEmptyReadonlyArray<string> = pipe(
+    shortcut,
+    String.split('+'),
+    Array.map((token: string) => pipe(token, String.trim, String.toLowerCase)),
   )
 
   if (Array.some(tokens, String.isEmpty)) {
@@ -171,12 +234,7 @@ const parsePress = (shortcut: string): ParsedPress => {
     )
   }
 
-  const maybeKeyToken = Array.last(tokens)
-  if (Option.isNone(maybeKeyToken)) {
-    return invalidShortcut(shortcut, 'a key is required')
-  }
-
-  const keyToken = maybeKeyToken.value
+  const [modifiers, keyToken] = Array.unappend<string>(tokens)
   const key = normalizeKey(keyToken)
   if (
     Array.contains(SHORTCUT_MODIFIERS, keyToken) ||
@@ -185,7 +243,6 @@ const parsePress = (shortcut: string): ParsedPress => {
     return invalidShortcut(shortcut, 'a non-modifier key is required')
   }
 
-  const modifiers = Array.dropRight(tokens, 1)
   const maybeUnknownModifier = Array.findFirst(
     modifiers,
     modifier => !Array.contains(SHORTCUT_MODIFIERS, modifier),
@@ -197,7 +254,7 @@ const parsePress = (shortcut: string): ParsedPress => {
     )
   }
 
-  if (Array.length(Array.dedupe(modifiers)) !== Array.length(modifiers)) {
+  if (hasDuplicateModifiers(modifiers)) {
     return invalidShortcut(shortcut, 'a modifier is repeated')
   }
 
@@ -213,26 +270,18 @@ const parsePress = (shortcut: string): ParsedPress => {
 
   const isAltRequired = Array.contains(modifiers, 'alt')
   const isShiftRequired = Array.contains(modifiers, 'shift')
-  const identifier = pipe(
-    [
-      ...(isModRequired ? ['mod'] : []),
-      ...(isControlRequired ? ['control'] : []),
-      ...(isMetaRequired ? ['meta'] : []),
-      ...(isAltRequired ? ['alt'] : []),
-      ...(isShiftRequired ? ['shift'] : []),
-      displayKey(key),
-    ],
-    Array.join('+'),
-  )
-
-  return {
+  const pressRequirements: PressRequirements = {
     key,
     isAltRequired,
     isControlRequired,
     isMetaRequired,
     isModRequired,
     isShiftRequired,
-    identifier,
+  }
+
+  return {
+    ...pressRequirements,
+    identifier: pressIdentifier(pressRequirements),
   }
 }
 
@@ -240,16 +289,15 @@ const compileBinding = <Message>(
   binding: KeyboardShortcutBinding<Message>,
 ): CompiledBinding<Message> => {
   if (
-    typeof binding.shortcut !== 'string' &&
+    !Predicate.isString(binding.shortcut) &&
     Array.length(binding.shortcut) < 2
   ) {
     throw new Error('A keyboard shortcut sequence requires at least two keys')
   }
 
-  const presses =
-    typeof binding.shortcut === 'string'
-      ? Array.of(parsePress(binding.shortcut))
-      : Array.map(binding.shortcut, parsePress)
+  const presses = Predicate.isString(binding.shortcut)
+    ? Array.of(parsePress(binding.shortcut))
+    : Array.map(binding.shortcut, parsePress)
 
   return {
     presses,
@@ -267,60 +315,66 @@ const bindingLabel = <Message>(binding: CompiledBinding<Message>): string =>
     Array.join(' '),
   )
 
-const effectiveIdentifier = (press: ParsedPress, modKey: ModKey): string =>
-  pipe(
-    [
-      ...(press.isControlRequired ||
-      (press.isModRequired && modKey === 'Control')
-        ? ['control']
-        : []),
-      ...(press.isMetaRequired || (press.isModRequired && modKey === 'Meta')
-        ? ['meta']
-        : []),
-      ...(press.isAltRequired ? ['alt'] : []),
-      ...(press.isShiftRequired ? ['shift'] : []),
-      displayKey(press.key),
-    ],
-    Array.join('+'),
-  )
-
 const pressesOverlap = (
   first: ParsedPress,
   second: ParsedPress,
   modKey: ModKey,
-): boolean =>
-  effectiveIdentifier(first, modKey) === effectiveIdentifier(second, modKey)
+): boolean => pressIdentifier(first, modKey) === pressIdentifier(second, modKey)
 
 const isBindingPrefix = <Message>(
   prefix: CompiledBinding<Message>,
   binding: CompiledBinding<Message>,
   modKey: ModKey,
-): boolean =>
-  Array.length(prefix.presses) <= Array.length(binding.presses) &&
-  Array.every(prefix.presses, (press, index) =>
-    pipe(
-      Array.get(binding.presses, index),
-      Option.exists(candidate => pressesOverlap(candidate, press, modKey)),
-    ),
+): boolean => {
+  if (Array.length(prefix.presses) > Array.length(binding.presses)) {
+    return false
+  }
+
+  return Array.every(
+    Array.zip(prefix.presses, binding.presses),
+    ([prefixPress, bindingPress]) =>
+      pressesOverlap(prefixPress, bindingPress, modKey),
   )
+}
 
 const sharesFirstPress = <Message>(
   first: CompiledBinding<Message>,
   second: CompiledBinding<Message>,
   modKey: ModKey,
 ): boolean =>
-  pipe(
-    Array.head(first.presses),
-    Option.flatMap(firstPress =>
-      pipe(
-        Array.head(second.presses),
-        Option.map(secondPress =>
-          pressesOverlap(firstPress, secondPress, modKey),
-        ),
-      ),
-    ),
-    Option.getOrElse(() => false),
+  pressesOverlap(
+    Array.headNonEmpty(first.presses),
+    Array.headNonEmpty(second.presses),
+    modKey,
   )
+
+const validateBindingPair = <Message>(
+  binding: CompiledBinding<Message>,
+  otherBinding: CompiledBinding<Message>,
+  modKey: ModKey,
+): void => {
+  const bindingIsPrefix = isBindingPrefix(binding, otherBinding, modKey)
+  const otherBindingIsPrefix = isBindingPrefix(otherBinding, binding, modKey)
+
+  if (bindingIsPrefix || otherBindingIsPrefix) {
+    const relation =
+      Array.length(binding.presses) === Array.length(otherBinding.presses)
+        ? 'duplicates'
+        : 'overlaps as a complete shortcut and a sequence prefix'
+    throw new Error(
+      `Keyboard shortcut "${bindingLabel(binding)}" ${relation} "${bindingLabel(otherBinding)}"`,
+    )
+  }
+
+  if (
+    sharesFirstPress(binding, otherBinding, modKey) &&
+    binding.preventDefault !== otherBinding.preventDefault
+  ) {
+    throw new Error(
+      `Keyboard shortcut sequences beginning with the same key must use the same preventDefault setting: "${bindingLabel(binding)}" and "${bindingLabel(otherBinding)}"`,
+    )
+  }
+}
 
 const validateBindings = <Message>(
   bindings: ReadonlyArray<CompiledBinding<Message>>,
@@ -328,44 +382,19 @@ const validateBindings = <Message>(
 ): void => {
   Array.forEach(bindings, (binding, index) => {
     Array.forEach(Array.drop(bindings, index + 1), otherBinding => {
-      const bindingIsPrefix = isBindingPrefix(binding, otherBinding, modKey)
-      const otherBindingIsPrefix = isBindingPrefix(
-        otherBinding,
-        binding,
-        modKey,
-      )
-
-      if (bindingIsPrefix || otherBindingIsPrefix) {
-        const relation =
-          Array.length(binding.presses) === Array.length(otherBinding.presses)
-            ? 'duplicates'
-            : 'overlaps as a complete shortcut and a sequence prefix'
-        throw new Error(
-          `Keyboard shortcut "${bindingLabel(binding)}" ${relation} "${bindingLabel(otherBinding)}"`,
-        )
-      }
-
-      if (
-        sharesFirstPress(binding, otherBinding, modKey) &&
-        binding.preventDefault !== otherBinding.preventDefault
-      ) {
-        throw new Error(
-          `Keyboard shortcut sequences beginning with the same key must use the same preventDefault setting: "${bindingLabel(binding)}" and "${bindingLabel(otherBinding)}"`,
-        )
-      }
+      validateBindingPair(binding, otherBinding, modKey)
     })
   })
 }
 
-const compileBindings = <Message>(
+const compileEnabledBindings = <Message>(
   bindings: ReadonlyArray<KeyboardShortcutBinding<Message>>,
-): ReadonlyArray<CompiledBinding<Message>> => {
-  return pipe(
+): ReadonlyArray<CompiledBinding<Message>> =>
+  pipe(
     bindings,
     Array.filter(binding => binding.isEnabled !== false),
     Array.map(compileBinding),
   )
-}
 
 const isSequence = <Message>(binding: CompiledBinding<Message>): boolean =>
   Array.length(binding.presses) > 1
@@ -378,7 +407,7 @@ const isEditableTarget = (target: EventTarget): boolean => {
     return false
   }
 
-  const tag = pipe(target.tagName, String.toLowerCase)
+  const tag = String.toLowerCase(target.tagName)
   return (
     tag === 'input' ||
     tag === 'textarea' ||
@@ -395,9 +424,7 @@ const isAllowedWhileTyping = <Message>(
   isEditable: boolean,
 ): boolean => !isEditable || binding.whileTyping === 'Allow'
 
-const resolveModKey = (
-  configuredModKey: KeyboardShortcutsConfig<unknown>['modKey'],
-): ModKey => {
+const resolveModKey = (configuredModKey: ModKey | undefined): ModKey => {
   if (configuredModKey !== undefined) {
     return configuredModKey
   }
@@ -428,11 +455,7 @@ const firstPressMatches = <Message>(
   binding: CompiledBinding<Message>,
   event: KeyboardEvent,
   modKey: ModKey,
-): boolean =>
-  pipe(
-    Array.head(binding.presses),
-    Option.exists(press => pressMatches(press, event, modKey)),
-  )
+): boolean => pressMatches(Array.headNonEmpty(binding.presses), event, modKey)
 
 const nextPressMatches = <Message>(
   binding: CompiledBinding<Message>,
@@ -440,20 +463,312 @@ const nextPressMatches = <Message>(
   event: KeyboardEvent,
   modKey: ModKey,
 ): boolean =>
-  pipe(
-    Array.get(binding.presses, matchedPressCount),
-    Option.exists(press => pressMatches(press, event, modKey)),
+  Option.exists(Array.get(binding.presses, matchedPressCount), press =>
+    pressMatches(press, event, modKey),
   )
 
 const resolveTarget = (
-  target: KeyboardShortcutsConfig<unknown>['target'],
+  target: EventTarget | (() => EventTarget) | undefined,
 ): EventTarget => {
-  if (typeof target === 'function') {
+  if (Predicate.isFunction(target)) {
     return target()
   }
 
   return target ?? document
 }
+
+const resolveValidationModKey = (
+  configuredModKey: ModKey | undefined,
+): Option.Option<ModKey> => {
+  if (configuredModKey !== undefined) {
+    return Option.some(configuredModKey)
+  }
+
+  if (typeof navigator === 'undefined') {
+    return Option.none()
+  }
+
+  return Option.some(resolveModKey(undefined))
+}
+
+const compileKeyboardShortcutsConfig = <Message>(
+  config: KeyboardShortcutsConfig<Message>,
+): CompiledKeyboardShortcutsConfig<Message> => {
+  const bindings = compileEnabledBindings(config.bindings)
+  const sequenceTimeout = Duration.toMillis(
+    config.sequenceTimeout ?? DEFAULT_SEQUENCE_TIMEOUT,
+  )
+
+  if (!globalThis.Number.isFinite(sequenceTimeout) || sequenceTimeout <= 0) {
+    throw new Error('sequenceTimeout must be a finite duration above zero')
+  }
+
+  const maybeValidationModKey = resolveValidationModKey(config.modKey)
+  if (Option.isSome(maybeValidationModKey)) {
+    validateBindings(bindings, maybeValidationModKey.value)
+  }
+
+  return {
+    bindings,
+    modKey: config.modKey,
+    sequenceTimeout,
+    target: config.target,
+  }
+}
+
+const makeSequenceController = <Message>(
+  sequenceTimeout: number,
+): SequenceController<Message> => {
+  const state: {
+    maybeSequence: Option.Option<ActiveSequence<Message>>
+  } = {
+    maybeSequence: Option.none(),
+  }
+
+  const clearSequence = (): void => {
+    if (Option.isSome(state.maybeSequence)) {
+      globalThis.clearTimeout(state.maybeSequence.value.timeout)
+    }
+
+    state.maybeSequence = Option.none()
+  }
+
+  const setSequence = (sequence: SequenceState<Message>): void => {
+    clearSequence()
+    state.maybeSequence = Option.some({
+      ...sequence,
+      timeout: globalThis.setTimeout(clearSequence, sequenceTimeout),
+    })
+  }
+
+  return {
+    clearSequence,
+    readSequence: () => state.maybeSequence,
+    setSequence,
+  }
+}
+
+const emitBindingMessage = <Message>(
+  context: KeyboardShortcutHandlerContext<Message>,
+  binding: CompiledBinding<Message>,
+  event: KeyboardEvent,
+): void => {
+  context.sequenceController.clearSequence()
+  if (binding.preventDefault) {
+    event.preventDefault()
+  }
+
+  context.emitMessage(binding.toMessage(event))
+}
+
+const startFreshSequence = <Message>(
+  context: KeyboardShortcutHandlerContext<Message>,
+  event: KeyboardEvent,
+): void => {
+  const isEditable = isFromEditable(event)
+  const maybeKeyBinding = Array.findFirst(
+    context.bindings,
+    binding =>
+      !isSequence(binding) &&
+      isAllowedWhileTyping(binding, isEditable) &&
+      (!event.repeat || binding.whenRepeated === 'Allow') &&
+      firstPressMatches(binding, event, context.modKey),
+  )
+
+  if (Option.isSome(maybeKeyBinding)) {
+    emitBindingMessage(context, maybeKeyBinding.value, event)
+    return
+  }
+
+  if (event.repeat) {
+    return
+  }
+
+  const sequenceBindings = Array.filter(
+    context.bindings,
+    binding =>
+      isSequence(binding) &&
+      isAllowedWhileTyping(binding, isEditable) &&
+      firstPressMatches(binding, event, context.modKey),
+  )
+
+  if (Array.isArrayNonEmpty(sequenceBindings)) {
+    const firstBinding = Array.headNonEmpty(sequenceBindings)
+    context.sequenceController.setSequence({
+      bindings: sequenceBindings,
+      matchedPressCount: 1,
+    })
+
+    if (firstBinding.preventDefault) {
+      event.preventDefault()
+    }
+  }
+}
+
+const continueSequence = <Message>(
+  context: KeyboardShortcutHandlerContext<Message>,
+  sequence: SequenceState<Message>,
+  event: KeyboardEvent,
+): void => {
+  const isEditable = isFromEditable(event)
+  const matchingBindings = Array.filter(
+    sequence.bindings,
+    binding =>
+      isAllowedWhileTyping(binding, isEditable) &&
+      nextPressMatches(
+        binding,
+        sequence.matchedPressCount,
+        event,
+        context.modKey,
+      ),
+  )
+
+  if (!Array.isReadonlyArrayNonEmpty(matchingBindings)) {
+    context.sequenceController.clearSequence()
+    startFreshSequence(context, event)
+    return
+  }
+
+  const firstBinding = Array.headNonEmpty(matchingBindings)
+  const nextMatchedPressCount = sequence.matchedPressCount + 1
+  const maybeCompletedBinding = Array.findFirst(
+    matchingBindings,
+    binding => Array.length(binding.presses) === nextMatchedPressCount,
+  )
+
+  if (Option.isSome(maybeCompletedBinding)) {
+    emitBindingMessage(context, maybeCompletedBinding.value, event)
+    return
+  }
+
+  context.sequenceController.setSequence({
+    bindings: matchingBindings,
+    matchedPressCount: nextMatchedPressCount,
+  })
+
+  if (firstBinding.preventDefault) {
+    event.preventDefault()
+  }
+}
+
+const handleKeyboardShortcutEvent = <Message>(
+  context: KeyboardShortcutHandlerContext<Message>,
+  event: Event,
+): void => {
+  if (!(event instanceof KeyboardEvent)) {
+    return
+  }
+
+  if (event.defaultPrevented || event.isComposing) {
+    context.sequenceController.clearSequence()
+    return
+  }
+
+  if (isModifierEvent(event)) {
+    return
+  }
+
+  const maybeSequence = context.sequenceController.readSequence()
+  if (event.repeat && Option.isSome(maybeSequence)) {
+    return
+  }
+
+  Option.match(maybeSequence, {
+    onNone: () => startFreshSequence(context, event),
+    onSome: sequence => continueSequence(context, sequence, event),
+  })
+}
+
+const makeKeyboardShortcutHandler = <Message>(
+  config: Readonly<{
+    bindings: ReadonlyArray<CompiledBinding<Message>>
+    emitMessage: (message: Message) => void
+    modKey: ModKey
+    sequenceTimeout: number
+  }>,
+): KeyboardShortcutHandler => {
+  const sequenceController = makeSequenceController<Message>(
+    config.sequenceTimeout,
+  )
+  const context: KeyboardShortcutHandlerContext<Message> = {
+    bindings: config.bindings,
+    emitMessage: config.emitMessage,
+    modKey: config.modKey,
+    sequenceController,
+  }
+
+  return {
+    clearSequence: sequenceController.clearSequence,
+    handleEvent: event => handleKeyboardShortcutEvent(context, event),
+  }
+}
+
+const resolveOwnerDocument = (target: EventTarget): Document => {
+  if (target instanceof Document) {
+    return target
+  }
+
+  if (target instanceof Node && target.ownerDocument !== null) {
+    return target.ownerDocument
+  }
+
+  return document
+}
+
+const acquireKeyboardShortcutListener = <Message>(
+  config: CompiledKeyboardShortcutsConfig<Message>,
+  emitMessage: (message: Message) => void,
+): AcquiredKeyboardShortcutListener => {
+  const target = resolveTarget(config.target)
+  const modKey = resolveModKey(config.modKey)
+  validateBindings(config.bindings, modKey)
+
+  const handler = makeKeyboardShortcutHandler({
+    bindings: config.bindings,
+    emitMessage,
+    modKey,
+    sequenceTimeout: config.sequenceTimeout,
+  })
+  const ownerDocument = resolveOwnerDocument(target)
+  const ownerWindow = ownerDocument.defaultView ?? window
+
+  target.addEventListener('keydown', handler.handleEvent)
+  ownerWindow.addEventListener('blur', handler.clearSequence)
+  ownerDocument.addEventListener('visibilitychange', handler.clearSequence)
+
+  return {
+    ...handler,
+    ownerDocument,
+    ownerWindow,
+    target,
+  }
+}
+
+const releaseKeyboardShortcutListener = (
+  listener: AcquiredKeyboardShortcutListener,
+): void => {
+  listener.target.removeEventListener('keydown', listener.handleEvent)
+  listener.ownerWindow.removeEventListener('blur', listener.clearSequence)
+  listener.ownerDocument.removeEventListener(
+    'visibilitychange',
+    listener.clearSequence,
+  )
+  listener.clearSequence()
+}
+
+const keyboardShortcutStream = <Message>(
+  config: CompiledKeyboardShortcutsConfig<Message>,
+): Stream.Stream<Message> =>
+  Stream.callback<Message>(queue => {
+    const emitMessage = (message: Message): void => {
+      Queue.offerUnsafe(queue, message)
+    }
+
+    return Effect.acquireRelease(
+      Effect.sync(() => acquireKeyboardShortcutListener(config, emitMessage)),
+      listener => Effect.sync(() => releaseKeyboardShortcutListener(listener)),
+    )
+  })
 
 /**
  * Build a Stream that turns declarative keyboard shortcuts into Messages.
@@ -530,210 +845,5 @@ const resolveTarget = (
  */
 export const keyboardShortcuts = <Message>(
   config: KeyboardShortcutsConfig<Message>,
-): Stream.Stream<Message> => {
-  const bindings = compileBindings(config.bindings)
-  const sequenceTimeout = Duration.toMillis(
-    config.sequenceTimeout ?? DEFAULT_SEQUENCE_TIMEOUT,
-  )
-
-  if (!globalThis.Number.isFinite(sequenceTimeout) || sequenceTimeout <= 0) {
-    throw new Error('sequenceTimeout must be a finite duration above zero')
-  }
-
-  const validationModKey =
-    config.modKey ??
-    (typeof navigator === 'undefined' ? undefined : resolveModKey(undefined))
-  if (validationModKey !== undefined) {
-    validateBindings(bindings, validationModKey)
-  }
-
-  return Stream.callback<Message>(queue =>
-    Effect.acquireRelease(
-      Effect.sync(() => {
-        const target = resolveTarget(config.target)
-        const modKey = resolveModKey(config.modKey)
-        validateBindings(bindings, modKey)
-        const state: ListenerState<Message> = {
-          maybeSequence: Option.none(),
-          maybeSequenceTimeout: Option.none(),
-        }
-
-        const clearSequence = (): void => {
-          if (Option.isSome(state.maybeSequenceTimeout)) {
-            globalThis.clearTimeout(state.maybeSequenceTimeout.value)
-          }
-
-          state.maybeSequence = Option.none()
-          state.maybeSequenceTimeout = Option.none()
-        }
-
-        const setSequence = (sequence: SequenceState<Message>): void => {
-          clearSequence()
-          state.maybeSequence = Option.some(sequence)
-          state.maybeSequenceTimeout = Option.some(
-            globalThis.setTimeout(clearSequence, sequenceTimeout),
-          )
-        }
-
-        const emit = (
-          binding: CompiledBinding<Message>,
-          event: KeyboardEvent,
-        ): void => {
-          clearSequence()
-          if (binding.preventDefault) {
-            event.preventDefault()
-          }
-          Queue.offerUnsafe(queue, binding.toMessage(event))
-        }
-
-        const startFresh = (event: KeyboardEvent): void => {
-          const isEditable = isFromEditable(event)
-          const maybeKeyBinding = Array.findFirst(
-            bindings,
-            binding =>
-              !isSequence(binding) &&
-              isAllowedWhileTyping(binding, isEditable) &&
-              (!event.repeat || binding.whenRepeated === 'Allow') &&
-              firstPressMatches(binding, event, modKey),
-          )
-
-          if (Option.isSome(maybeKeyBinding)) {
-            emit(maybeKeyBinding.value, event)
-            return
-          }
-
-          if (event.repeat) {
-            return
-          }
-
-          const sequenceBindings = Array.filter(
-            bindings,
-            binding =>
-              isSequence(binding) &&
-              isAllowedWhileTyping(binding, isEditable) &&
-              firstPressMatches(binding, event, modKey),
-          )
-
-          if (Array.isReadonlyArrayNonEmpty(sequenceBindings)) {
-            const firstBinding = Array.headNonEmpty(sequenceBindings)
-            setSequence({
-              bindings: sequenceBindings,
-              matchedPressCount: 1,
-            })
-            if (firstBinding.preventDefault) {
-              event.preventDefault()
-            }
-          }
-        }
-
-        const continueSequence = (
-          sequence: SequenceState<Message>,
-          event: KeyboardEvent,
-        ): void => {
-          const isEditable = isFromEditable(event)
-          const matchingBindings = Array.filter(
-            sequence.bindings,
-            binding =>
-              isSequence(binding) &&
-              isAllowedWhileTyping(binding, isEditable) &&
-              nextPressMatches(
-                binding,
-                sequence.matchedPressCount,
-                event,
-                modKey,
-              ),
-          )
-
-          const maybeFirstBinding = Array.head(matchingBindings)
-          if (Option.isNone(maybeFirstBinding)) {
-            clearSequence()
-            startFresh(event)
-            return
-          }
-
-          const firstBinding = maybeFirstBinding.value
-          const nextMatchedPressCount = sequence.matchedPressCount + 1
-          const maybeCompletedBinding = Array.findFirst(
-            matchingBindings,
-            binding => Array.length(binding.presses) === nextMatchedPressCount,
-          )
-
-          if (Option.isSome(maybeCompletedBinding)) {
-            emit(maybeCompletedBinding.value, event)
-            return
-          }
-
-          setSequence({
-            bindings: matchingBindings,
-            matchedPressCount: nextMatchedPressCount,
-          })
-          if (firstBinding.preventDefault) {
-            event.preventDefault()
-          }
-        }
-
-        const handleEvent = (event: Event): void => {
-          if (!(event instanceof KeyboardEvent)) {
-            return
-          }
-
-          if (event.defaultPrevented || event.isComposing) {
-            clearSequence()
-            return
-          }
-
-          if (isModifierEvent(event)) {
-            return
-          }
-
-          if (event.repeat && Option.isSome(state.maybeSequence)) {
-            return
-          }
-
-          Option.match(state.maybeSequence, {
-            onNone: () => startFresh(event),
-            onSome: sequence => continueSequence(sequence, event),
-          })
-        }
-
-        const ownerDocument =
-          target instanceof Node ? (target.ownerDocument ?? document) : document
-        const ownerWindow = ownerDocument.defaultView ?? window
-        const clearSequenceFromLifecycle = (): void => clearSequence()
-
-        target.addEventListener('keydown', handleEvent)
-        ownerWindow.addEventListener('blur', clearSequenceFromLifecycle)
-        ownerDocument.addEventListener(
-          'visibilitychange',
-          clearSequenceFromLifecycle,
-        )
-
-        return {
-          target,
-          handleEvent,
-          ownerWindow,
-          ownerDocument,
-          clearSequence,
-          clearSequenceFromLifecycle,
-        }
-      }),
-      ({
-        target,
-        handleEvent,
-        ownerWindow,
-        ownerDocument,
-        clearSequence,
-        clearSequenceFromLifecycle,
-      }) =>
-        Effect.sync(() => {
-          target.removeEventListener('keydown', handleEvent)
-          ownerWindow.removeEventListener('blur', clearSequenceFromLifecycle)
-          ownerDocument.removeEventListener(
-            'visibilitychange',
-            clearSequenceFromLifecycle,
-          )
-          clearSequence()
-        }),
-    ).pipe(Effect.flatMap(() => Effect.never)),
-  )
-}
+): Stream.Stream<Message> =>
+  keyboardShortcutStream(compileKeyboardShortcutsConfig(config))
