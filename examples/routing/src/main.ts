@@ -37,12 +37,14 @@ export type Model = typeof Model.Type
 
 // MESSAGE
 
+const NavigationShortcut = Schema.Literals(['GH', 'GP', 'GF', 'GN'])
+
 export const Message = defineMessageUnion({
   CompletedNavigateInternal: {},
   CompletedLoadExternal: {},
   ClickedLink: { request: UrlRequest },
   ChangedUrl: { url: Url },
-  PressedNavigationShortcut: { url: Schema.String },
+  EnteredNavigationShortcut: { shortcut: NavigationShortcut },
   GotPeopleMessage: { message: People.Message },
 })
 
@@ -71,7 +73,7 @@ export const init: Runtime.RoutingApplicationInit<Model, Message> = (
 
 // COMMAND
 
-const NavigateInternal = Command.define('NavigateInternal', {
+export const NavigateInternal = Command.define('NavigateInternal', {
   args: { url: Schema.String },
   messages: [Message.CompletedNavigateInternal],
   execute: ({ url }) =>
@@ -139,10 +141,18 @@ export const update = (model: Model, message: Message) =>
       return Update.combine(model, [setRoute(nextRoute), ...routeSteps])
     },
 
-    PressedNavigationShortcut: ({ url }) => ({
-      model,
-      commands: [NavigateInternal({ url })],
-    }),
+    EnteredNavigationShortcut: ({ shortcut }) => {
+      const url = Match.value(shortcut).pipe(
+        Match.withReturnType<string>(),
+        Match.when('GH', homeRouter),
+        Match.when('GP', () => peopleRouter({ searchText: Option.none() })),
+        Match.when('GF', filesIndexRouter),
+        Match.when('GN', nestedRouter),
+        Match.exhaustive,
+      )
+
+      return { model, commands: [NavigateInternal({ url })] }
+    },
 
     GotPeopleMessage: ({ message }) => foldPeople(model, message),
   })
@@ -156,24 +166,22 @@ export const subscriptions = Subscription.make<Model, Message>()(() => ({
         {
           shortcut: ['G', 'H'],
           toMessage: () =>
-            Message.PressedNavigationShortcut({ url: homeRouter() }),
+            Message.EnteredNavigationShortcut({ shortcut: 'GH' }),
         },
         {
           shortcut: ['G', 'P'],
           toMessage: () =>
-            Message.PressedNavigationShortcut({
-              url: peopleRouter({ searchText: Option.none() }),
-            }),
+            Message.EnteredNavigationShortcut({ shortcut: 'GP' }),
         },
         {
           shortcut: ['G', 'F'],
           toMessage: () =>
-            Message.PressedNavigationShortcut({ url: filesIndexRouter() }),
+            Message.EnteredNavigationShortcut({ shortcut: 'GF' }),
         },
         {
           shortcut: ['G', 'N'],
           toMessage: () =>
-            Message.PressedNavigationShortcut({ url: nestedRouter() }),
+            Message.EnteredNavigationShortcut({ shortcut: 'GN' }),
         },
       ],
     }),
