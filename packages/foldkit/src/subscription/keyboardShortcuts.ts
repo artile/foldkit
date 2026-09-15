@@ -560,31 +560,22 @@ const emitBindingMessage = <Message>(
   context.emitMessage(binding.toMessage(event))
 }
 
-const findMatchingOnePressBinding = <Message>(
-  bindings: ReadonlyArray<CompiledBinding<Message>>,
-  event: KeyboardEvent,
-  modKey: ModKey,
-  isEditable: boolean,
-): Option.Option<CompiledBinding<Message>> =>
-  Array.findFirst(
-    bindings,
-    binding =>
-      !isSequence(binding) &&
-      isAllowedWhileTyping(binding, isEditable) &&
-      (!event.repeat || binding.whenRepeated === 'Allow') &&
-      firstPressMatches(binding, event, modKey),
-  )
+const isMatchingOnePressBinding =
+  (event: KeyboardEvent, modKey: ModKey, isEditable: boolean) =>
+  <Message>(binding: CompiledBinding<Message>): boolean =>
+    !isSequence(binding) &&
+    isAllowedWhileTyping(binding, isEditable) &&
+    (!event.repeat || binding.whenRepeated === 'Allow') &&
+    firstPressMatches(binding, event, modKey)
 
 const startFreshSequence = <Message>(
   context: KeyboardShortcutHandlerContext<Message>,
   event: KeyboardEvent,
 ): void => {
   const isEditable = isFromEditable(event)
-  const maybeKeyBinding = findMatchingOnePressBinding(
+  const maybeKeyBinding = Array.findFirst(
     context.bindings,
-    event,
-    context.modKey,
-    isEditable,
+    isMatchingOnePressBinding(event, context.modKey, isEditable),
   )
 
   if (Option.isSome(maybeKeyBinding)) {
