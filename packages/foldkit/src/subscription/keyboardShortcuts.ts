@@ -3,6 +3,7 @@ import {
   Duration,
   Effect,
   Match,
+  Number,
   Option,
   Predicate,
   Queue,
@@ -85,7 +86,7 @@ type SequenceState<Message> = Readonly<{
 
 type ActiveSequence<Message> = SequenceState<Message> &
   Readonly<{
-    timeout: ReturnType<typeof globalThis.setTimeout>
+    timeout: ReturnType<typeof setTimeout>
   }>
 
 type SequenceController<Message> = Readonly<{
@@ -203,7 +204,7 @@ const pressIdentifier = (press: PressRequirements, modKey?: ModKey): string => {
   )
 }
 
-const invalidShortcut = (shortcut: string, reason: string): never => {
+const throwInvalidShortcut = (shortcut: string, reason: string): never => {
   throw new Error(`Invalid keyboard shortcut "${shortcut}": ${reason}`)
 }
 
@@ -211,14 +212,14 @@ const hasDuplicateModifiers = (modifiers: ReadonlyArray<string>): boolean =>
   Array.length(Array.dedupe(modifiers)) !== Array.length(modifiers)
 
 const parsePress = (shortcut: string): ParsedPress => {
-  const tokens: Array.NonEmptyReadonlyArray<string> = pipe(
+  const tokens = pipe(
     shortcut,
     String.split('+'),
-    Array.map((token: string) => pipe(token, String.trim, String.toLowerCase)),
+    Array.map(token => pipe(token, String.trim, String.toLowerCase)),
   )
 
   if (Array.some(tokens, String.isEmpty)) {
-    return invalidShortcut(
+    return throwInvalidShortcut(
       shortcut,
       'each modifier and key must be named; use "Plus" for the + key',
     )
@@ -228,7 +229,7 @@ const parsePress = (shortcut: string): ParsedPress => {
     Array.contains(NON_CANONICAL_MODIFIERS, token),
   )
   if (Option.isSome(maybeNonCanonicalModifier)) {
-    return invalidShortcut(
+    return throwInvalidShortcut(
       shortcut,
       `unknown modifier "${maybeNonCanonicalModifier.value}"`,
     )
@@ -240,7 +241,7 @@ const parsePress = (shortcut: string): ParsedPress => {
     Array.contains(SHORTCUT_MODIFIERS, keyToken) ||
     Array.contains(MODIFIER_KEYS, key)
   ) {
-    return invalidShortcut(shortcut, 'a non-modifier key is required')
+    return throwInvalidShortcut(shortcut, 'a non-modifier key is required')
   }
 
   const maybeUnknownModifier = Array.findFirst(
@@ -248,21 +249,21 @@ const parsePress = (shortcut: string): ParsedPress => {
     modifier => !Array.contains(SHORTCUT_MODIFIERS, modifier),
   )
   if (Option.isSome(maybeUnknownModifier)) {
-    return invalidShortcut(
+    return throwInvalidShortcut(
       shortcut,
       `unknown modifier "${maybeUnknownModifier.value}"`,
     )
   }
 
   if (hasDuplicateModifiers(modifiers)) {
-    return invalidShortcut(shortcut, 'a modifier is repeated')
+    return throwInvalidShortcut(shortcut, 'a modifier is repeated')
   }
 
   const isModRequired = Array.contains(modifiers, 'mod')
   const isControlRequired = Array.contains(modifiers, 'control')
   const isMetaRequired = Array.contains(modifiers, 'meta')
   if (isModRequired && (isControlRequired || isMetaRequired)) {
-    return invalidShortcut(
+    return throwInvalidShortcut(
       shortcut,
       'Mod cannot be combined with Control or Meta',
     )
@@ -519,15 +520,13 @@ const compileKeyboardShortcutsConfig = <Message>(
 const makeSequenceController = <Message>(
   sequenceTimeout: number,
 ): SequenceController<Message> => {
-  const state: {
-    maybeSequence: Option.Option<ActiveSequence<Message>>
-  } = {
-    maybeSequence: Option.none(),
+  const state = {
+    maybeSequence: Option.none<ActiveSequence<Message>>(),
   }
 
   const clearSequence = (): void => {
     if (Option.isSome(state.maybeSequence)) {
-      globalThis.clearTimeout(state.maybeSequence.value.timeout)
+      clearTimeout(state.maybeSequence.value.timeout)
     }
 
     state.maybeSequence = Option.none()
@@ -537,7 +536,7 @@ const makeSequenceController = <Message>(
     clearSequence()
     state.maybeSequence = Option.some({
       ...sequence,
-      timeout: globalThis.setTimeout(clearSequence, sequenceTimeout),
+      timeout: setTimeout(clearSequence, sequenceTimeout),
     })
   }
 
@@ -561,18 +560,31 @@ const emitBindingMessage = <Message>(
   context.emitMessage(binding.toMessage(event))
 }
 
+const findMatchingOnePressBinding = <Message>(
+  bindings: ReadonlyArray<CompiledBinding<Message>>,
+  event: KeyboardEvent,
+  modKey: ModKey,
+  isEditable: boolean,
+): Option.Option<CompiledBinding<Message>> =>
+  Array.findFirst(
+    bindings,
+    binding =>
+      !isSequence(binding) &&
+      isAllowedWhileTyping(binding, isEditable) &&
+      (!event.repeat || binding.whenRepeated === 'Allow') &&
+      firstPressMatches(binding, event, modKey),
+  )
+
 const startFreshSequence = <Message>(
   context: KeyboardShortcutHandlerContext<Message>,
   event: KeyboardEvent,
 ): void => {
   const isEditable = isFromEditable(event)
-  const maybeKeyBinding = Array.findFirst(
+  const maybeKeyBinding = findMatchingOnePressBinding(
     context.bindings,
-    binding =>
-      !isSequence(binding) &&
-      isAllowedWhileTyping(binding, isEditable) &&
-      (!event.repeat || binding.whenRepeated === 'Allow') &&
-      firstPressMatches(binding, event, context.modKey),
+    event,
+    context.modKey,
+    isEditable,
   )
 
   if (Option.isSome(maybeKeyBinding)) {
@@ -630,7 +642,7 @@ const continueSequence = <Message>(
   }
 
   const firstBinding = Array.headNonEmpty(matchingBindings)
-  const nextMatchedPressCount = sequence.matchedPressCount + 1
+  const nextMatchedPressCount = Number.increment(sequence.matchedPressCount)
   const maybeCompletedBinding = Array.findFirst(
     matchingBindings,
     binding => Array.length(binding.presses) === nextMatchedPressCount,

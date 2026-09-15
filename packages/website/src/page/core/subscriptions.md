@@ -122,7 +122,11 @@ Modifier matching is exact: `'Mod+K'` does not also match Shift-Mod-K. `Mod` res
 
 By default, a binding calls `preventDefault()` and does not fire from an `input`, `textarea`, `select`, or contenteditable composed path. `whileTyping: 'Allow'` opts in shortcuts such as Escape that must work inside an editor. Events during IME composition and held-key repeats are ignored; a one-press binding can opt into repeats with `whenRepeated: 'Allow'`. An event that an element-level handler already canceled is also ignored, so local interactions take precedence over global shortcuts.
 
+### Sequences
+
 Sequences may have any length and expire after one second unless `sequenceTimeout` overrides the duration. The helper rejects duplicate bindings, a one-press shortcut that is also a sequence prefix, and shared sequence prefixes with inconsistent `preventDefault` policies. A mismatched key clears the current sequence and is reconsidered as a fresh press.
+
+### Model-Dependent Shortcuts
 
 The helper returns a Stream. Put a fixed table in `Subscription.persistent`, or construct it from an entry's dependency record when availability follows the Model that owns the entry. Derive `isEnabled` from those dependencies, as the example does for Escape. If a parent owns a condition for a lifted child, declare the shortcut table at that parent or put shortcuts with different parent-owned lifetimes in separate child entries so `Subscription.lift` can gate them individually. If the meaning of a key depends on the Model, dispatch a factual Message such as `PressedEscape` and make the decision in update; `toMessage` should not read application state.
 
