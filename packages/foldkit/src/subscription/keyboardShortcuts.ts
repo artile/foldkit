@@ -108,6 +108,12 @@ const SHORTCUT_MODIFIERS: ReadonlyArray<string> = [
   'mod',
   'shift',
 ]
+const NON_CANONICAL_MODIFIERS: ReadonlyArray<string> = [
+  'cmd',
+  'command',
+  'ctrl',
+  'option',
+]
 
 const normalizeKey = (key: string): string => {
   if (key === ' ') {
@@ -125,22 +131,6 @@ const normalizeKey = (key: string): string => {
   }
 
   return normalized
-}
-
-const normalizeModifier = (modifier: string): string => {
-  if (modifier === 'ctrl') {
-    return 'control'
-  }
-
-  if (modifier === 'cmd' || modifier === 'command') {
-    return 'meta'
-  }
-
-  if (modifier === 'option') {
-    return 'alt'
-  }
-
-  return modifier
 }
 
 const displayKey = (key: string): string => {
@@ -161,13 +151,23 @@ const invalidShortcut = (shortcut: string, reason: string): never => {
 
 const parsePress = (shortcut: string): ParsedPress => {
   const tokens = Array.map(shortcut.split('+'), token =>
-    pipe(token, String.trim, String.toLowerCase, normalizeModifier),
+    pipe(token, String.trim, String.toLowerCase),
   )
 
   if (Array.some(tokens, String.isEmpty)) {
     return invalidShortcut(
       shortcut,
       'each modifier and key must be named; use "Plus" for the + key',
+    )
+  }
+
+  const maybeNonCanonicalModifier = Array.findFirst(tokens, token =>
+    Array.contains(NON_CANONICAL_MODIFIERS, token),
+  )
+  if (Option.isSome(maybeNonCanonicalModifier)) {
+    return invalidShortcut(
+      shortcut,
+      `unknown modifier "${maybeNonCanonicalModifier.value}"`,
     )
   }
 
@@ -459,9 +459,9 @@ const resolveTarget = (
  * Build a Stream that turns declarative keyboard shortcuts into Messages.
  *
  * A string shortcut describes one key press. Modifiers are joined with `+`:
- * `'Mod+K'`, `'Control+Shift+P'`, or `'Alt+ArrowDown'`. `Ctrl`, `Cmd`, and
- * `Option` are aliases for `Control`, `Meta`, and `Alt`. `Mod` resolves to Meta
- * on Apple platforms and Control elsewhere; `modKey` can override that choice.
+ * `'Mod+K'`, `'Control+Shift+P'`, or `'Alt+ArrowDown'`. The supported modifiers
+ * are `Mod`, `Control`, `Meta`, `Alt`, and `Shift`. `Mod` resolves to Meta on
+ * Apple platforms and Control elsewhere; `modKey` can override that choice.
  * Matching uses `KeyboardEvent.key`, case-insensitively, after the active
  * keyboard layout has been applied. Use `Space` and `Plus` for those keys.
  *

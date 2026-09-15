@@ -102,12 +102,12 @@ describe('keyboardShortcuts', () => {
     ])
   })
 
-  it('accepts modifier aliases and key aliases', async () => {
+  it('matches canonical modifiers and special key spellings', async () => {
     const { fiber, received } = await start({
       bindings: [
         {
-          shortcut: 'Ctrl+Option+Shift+Plus',
-          toMessage: toMessage('PressedAliasedShortcut'),
+          shortcut: 'Control+Alt+Shift+Plus',
+          toMessage: toMessage('PressedModifiedPlus'),
         },
         {
           shortcut: 'Space',
@@ -122,9 +122,26 @@ describe('keyboardShortcuts', () => {
     await stop(fiber)
 
     expect(received).toEqual([
-      Message.PressedShortcut({ name: 'PressedAliasedShortcut' }),
+      Message.PressedShortcut({ name: 'PressedModifiedPlus' }),
       Message.PressedShortcut({ name: 'PressedSpace' }),
     ])
+  })
+
+  it('rejects non-canonical modifier names', () => {
+    for (const modifier of ['Ctrl', 'Cmd', 'Command', 'Option']) {
+      for (const shortcut of [`${modifier}+K`, modifier, `Shift+${modifier}`]) {
+        expect(() =>
+          keyboardShortcuts<Message>({
+            bindings: [
+              {
+                shortcut,
+                toMessage: toMessage('PressedShortcut'),
+              },
+            ],
+          }),
+        ).toThrowError(/unknown modifier/)
+      }
+    }
   })
 
   it('matches arbitrary-length sequences with the same grammar at every step', async () => {
@@ -559,7 +576,7 @@ describe('keyboardShortcuts', () => {
             toMessage: toMessage('PressedFirst'),
           },
           {
-            shortcut: 'Ctrl+K',
+            shortcut: 'Control+K',
             toMessage: toMessage('PressedSecond'),
           },
         ],
