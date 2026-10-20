@@ -235,10 +235,9 @@ const wrapEffectAsStream =
  * do with the acknowledgment.
  *
  * The runtime starts cleanup from snabbdom's `destroy` hook by forking
- * `Fiber.interrupt`, and it does not wait for the interruption to finish. A
- * release with no asynchronous step normally runs inside `destroy`, before
- * snabbdom removes the element's event listeners. A release that waits on
- * something asynchronous finishes after `destroy` has returned. For idempotent
+ * `Fiber.interrupt` without waiting. A release with no asynchronous step
+ * normally finishes inside `destroy`, before snabbdom removes the element's
+ * event listeners; one with an asynchronous step finishes later. For idempotent
  * DOM operations (`element.remove()`, observer `disconnect()`,
  * `removeEventListener`) this is fine; if your cleanup has ordering
  * requirements relative to other DOM removals, prefer doing the imperative
@@ -426,10 +425,8 @@ export function define(name: string, config: DefineConfig): unknown {
  * effect stays observable; `update` simply has nothing meaningful to
  * do with the acknowledgment. Re-check the cause.
  *
- * Cleanup timing relative to snabbdom's `destroy` hook is the same as
- * `Mount.define`: a release with no asynchronous step normally runs inside
- * `destroy`, and a release that waits on something asynchronous finishes
- * after it.
+ * Cleanup has the same timing relative to snabbdom's `destroy` hook as
+ * `Mount.define`.
  *
  * For a Mount that produces exactly one Message at acquire and then holds
  * lifecycle-scoped resources, use `Mount.define` with `Effect<Message>`.

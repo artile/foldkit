@@ -293,14 +293,14 @@ const wrapViewInputsForOuterBoundary = <ViewInputs>(
 
 /** Returns a copy of the vnode with a snabbdom `postdestroy` hook that
  *  deregisters this Submodel's boundary when snabbdom destroys the vnode.
- *  Composes with any `postdestroy` hook already on the vnode, such as the one
- *  of a Submodel nested at the same vnode.
+ *  Composes with any existing `postdestroy` hook, including one from a
+ *  Submodel nested at the same vnode.
  *
  *  snabbdom runs a vnode's `destroy` hook before it detaches that vnode's
  *  listeners and before it visits the descendants. A `destroy` hook in the
  *  subtree can make the browser fire an event on an element that still
- *  listens. For example: in Chromium, a Mount release that removes a focused
- *  element fires `blur` on it. `postdestroy` runs after every `destroy` hook
+ *  listens. For example, Chromium fires `blur` when a Mount release removes a
+ *  focused element. `postdestroy` runs after every `destroy` hook
  *  in the subtree, so the wrap is still registered when that listener
  *  dispatches.
  *

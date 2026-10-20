@@ -434,7 +434,7 @@ describe('h.submodel', () => {
     expect(registry.wraps.has('remounted')).toBe(true)
   })
 
-  it('keeps the user-supplied destroy hook beside the boundary cleanup hook', () => {
+  it('preserves the user-supplied destroy hook when adding boundary cleanup', () => {
     let userDestroyCalled = false
     const viewWithDestroy = defineView<{ value: number }, ChildMessage>(_ => {
       const dispatch = requireDispatch()
