@@ -515,9 +515,6 @@ describe('OnUnmount across a Submodel boundary', () => {
     const { dispatch, dispatched } = createCapturingDispatch()
     const registry = createHtmlBoundaryRegistry()
 
-    // The OnUnmount-bearing element lives inside the Submodel, which is
-    // removed entirely on the second render. The same patch deregisters the
-    // Submodel's boundary wrap, and both Messages must still reach the parent.
     const withChild = () =>
       h.div(
         [],

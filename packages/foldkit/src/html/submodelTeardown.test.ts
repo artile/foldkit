@@ -45,23 +45,15 @@ const ChildMessage = defineMessageUnion({
 })
 type ChildMessage = typeof ChildMessage.Type
 
-type GotChildMessage = Readonly<{
-  _tag: 'GotChildMessage'
-  message: ChildMessage
-}>
-const GotChildMessage = (message: ChildMessage): GotChildMessage => ({
-  _tag: 'GotChildMessage',
-  message,
+const ParentMessage = defineMessageUnion({
+  GotChildMessage: { message: ChildMessage },
 })
+type ParentMessage = typeof ParentMessage.Type
 
-type GotOuterMessage = Readonly<{
-  _tag: 'GotOuterMessage'
-  message: GotChildMessage
-}>
-const GotOuterMessage = (message: GotChildMessage): GotOuterMessage => ({
-  _tag: 'GotOuterMessage',
-  message,
+const OuterMessage = defineMessageUnion({
+  GotOuterMessage: { message: ParentMessage },
 })
+type OuterMessage = typeof OuterMessage.Type
 
 // NOTE: Chromium fires `blur` on a focused element when that element leaves
 // the document. happy-dom does not, so the release fires the event itself.
@@ -137,7 +129,7 @@ const mountedContainer = (): HTMLElement => {
 
 describe('an event fired while a Submodel boundary is torn down', () => {
   it('reaches the parent when the listening element is the Submodel root', async () => {
-    const h = __htmlBuilder<GotChildMessage>()
+    const h = __htmlBuilder<ParentMessage>()
     const { dispatch, dispatched } = createCapturingDispatch()
     const registry = createHtmlBoundaryRegistry()
     const listenerErrors: Array<unknown> = []
@@ -157,7 +149,8 @@ describe('an event fired while a Submodel boundary is torn down', () => {
             slotId: 'panel',
             model: {},
             view: panelView,
-            toParentMessage: GotChildMessage,
+            toParentMessage: message =>
+              ParentMessage.GotChildMessage({ message }),
           }),
         ],
       )
@@ -169,7 +162,9 @@ describe('an event fired while a Submodel boundary is torn down', () => {
     )
     await vi.waitFor(() => {
       expect(dispatched).toStrictEqual([
-        GotChildMessage(ChildMessage.CompletedPortalPanel()),
+        ParentMessage.GotChildMessage({
+          message: ChildMessage.CompletedPortalPanel(),
+        }),
       ])
     })
 
@@ -177,14 +172,18 @@ describe('an event fired while a Submodel boundary is torn down', () => {
 
     expect(listenerErrors).toStrictEqual([])
     expect(dispatched).toStrictEqual([
-      GotChildMessage(ChildMessage.CompletedPortalPanel()),
-      GotChildMessage(ChildMessage.BlurredPanel()),
+      ParentMessage.GotChildMessage({
+        message: ChildMessage.CompletedPortalPanel(),
+      }),
+      ParentMessage.GotChildMessage({
+        message: ChildMessage.BlurredPanel(),
+      }),
     ])
     expect(registry.wraps.has('panel')).toBe(false)
   })
 
   it('reaches the parent when the listening element is a descendant inside nested Submodels', async () => {
-    const h = __htmlBuilder<GotOuterMessage>()
+    const h = __htmlBuilder<OuterMessage>()
     const { dispatch, dispatched } = createCapturingDispatch()
     const registry = createHtmlBoundaryRegistry()
     const listenerErrors: Array<unknown> = []
@@ -201,7 +200,7 @@ describe('an event fired while a Submodel boundary is torn down', () => {
         ],
       ),
     )
-    const outerView = defineView<object, GotChildMessage>((_model, outerHtml) =>
+    const outerView = defineView<object, ParentMessage>((_model, outerHtml) =>
       outerHtml.article(
         [],
         [
@@ -209,7 +208,8 @@ describe('an event fired while a Submodel boundary is torn down', () => {
             slotId: 'panel',
             model: {},
             view: panelView,
-            toParentMessage: GotChildMessage,
+            toParentMessage: message =>
+              ParentMessage.GotChildMessage({ message }),
           }),
         ],
       ),
@@ -222,14 +222,17 @@ describe('an event fired while a Submodel boundary is torn down', () => {
             slotId: 'outer',
             model: {},
             view: outerView,
-            toParentMessage: GotOuterMessage,
+            toParentMessage: message =>
+              OuterMessage.GotOuterMessage({ message }),
           }),
         ],
       )
     const withoutPanel = () => h.div([])
-    const completedPortalPanel = GotOuterMessage(
-      GotChildMessage(ChildMessage.CompletedPortalPanel()),
-    )
+    const completedPortalPanel = OuterMessage.GotOuterMessage({
+      message: ParentMessage.GotChildMessage({
+        message: ChildMessage.CompletedPortalPanel(),
+      }),
+    })
 
     const mounted = patch(
       toVNode(mountedContainer()),
@@ -244,7 +247,11 @@ describe('an event fired while a Submodel boundary is torn down', () => {
     expect(listenerErrors).toStrictEqual([])
     expect(dispatched).toStrictEqual([
       completedPortalPanel,
-      GotOuterMessage(GotChildMessage(ChildMessage.BlurredPanel())),
+      OuterMessage.GotOuterMessage({
+        message: ParentMessage.GotChildMessage({
+          message: ChildMessage.BlurredPanel(),
+        }),
+      }),
     ])
     expect(registry.wraps.has('outer')).toBe(false)
     expect(registry.wraps.has('outer|panel')).toBe(false)

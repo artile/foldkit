@@ -409,9 +409,6 @@ describe('h.submodel', () => {
 
     expect(registry.wraps.has('destroyable')).toBe(true)
 
-    // A genuine unmount: a later render does not re-register the boundary,
-    // so `beginRender` clears it from `seenThisRender` before snabbdom
-    // removes the vnode and fires its destroy and postdestroy hooks.
     beginRender(registry)
     destroyVNode(result)
 
@@ -427,18 +424,12 @@ describe('h.submodel', () => {
         toParentMessage: message => GotChild({ entryId: 'remounted', message }),
       })
 
-    // Render N: the keyed root is registered and produces a vnode whose
-    // destroy hooks fire when snabbdom swaps the root on the next render.
     const first = render()
 
-    // Render N+1: the keyed root's key changed, so the parent re-renders the
-    // same boundary, re-registering it before snabbdom patches.
     beginRender(registry)
     render()
     expect(registry.wraps.has('remounted')).toBe(true)
 
-    // Patch N+1: snabbdom removes the OLD root vnode and fires its destroy
-    // hooks. The wrap from the re-render must survive.
     destroyVNode(first)
     expect(registry.wraps.has('remounted')).toBe(true)
   })
@@ -471,7 +462,6 @@ describe('h.submodel', () => {
         GotChild({ entryId: 'with-user-destroy', message }),
     })
 
-    // Genuine unmount: the boundary is not re-registered this render.
     beginRender(registry)
     destroyVNode(result)
 
@@ -639,8 +629,6 @@ describe('h.submodel', () => {
     })
 
     expect(result).toBeNull()
-    // No vnode means no postdestroy hook will ever fire, so the wrap must be
-    // deregistered eagerly to avoid a leak.
     expect(registry.wraps.has('null-view')).toBe(false)
   })
 
