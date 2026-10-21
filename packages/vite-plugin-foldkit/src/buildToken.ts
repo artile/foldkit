@@ -196,6 +196,7 @@ const transformBuildIdentity = (
       FRAMEWORK_BUILD_ID_PLACEHOLDER,
       DEVELOPMENT_BUILD_ID_BINDING,
     )
+
     if (!transformedFramework) {
       return undefined
     }
@@ -205,12 +206,14 @@ const transformBuildIdentity = (
     )
   } else {
     const buildId = buildIdForConfig(config, configuredBuildId)
+
     const transformedFramework = replaceAll(
       transformed,
       code,
       FRAMEWORK_BUILD_ID_PLACEHOLDER,
       buildIdLiteral(buildId),
     )
+
     if (!transformedFramework) {
       return undefined
     }
