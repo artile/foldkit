@@ -1,4 +1,4 @@
-Contribution `<slug>` is currently at `<the state your instructions set for the latest step, verbatim, such as analysis: in progress; where they set none, the state as it was>`.
+Contribution `<slug>` is currently at `<the state your instructions set for the latest step, verbatim, such as analysis: in progress, or `<stage>: abandoned` when autonomous mode gives up; where they set none, the state as it was>`.
 
 Steps taken so far, oldest first:
 

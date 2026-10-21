@@ -16,6 +16,7 @@ const ROOT_ENTRIES = new Set([
   'assignment.md',
   'reproduction',
   'evaluation',
+  '.lock',
 ])
 
 const STATE_PATTERNS: ReadonlyArray<RegExp> = [
@@ -27,6 +28,7 @@ const STATE_PATTERNS: ReadonlyArray<RegExp> = [
   /^evaluation: failed round [1-9]\d*$/,
   /^evaluation: promoted round [1-9]\d*$/,
   /^(analysis|implementation|evaluation): escalated$/,
+  /^(analysis|implementation|evaluation): abandoned$/,
 ]
 
 const pass = (message: string): Check => ({ ok: true, message })

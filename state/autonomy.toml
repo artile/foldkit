@@ -1,0 +1,24 @@
+# Foldkit Steward autonomy. Every run reads this first. See AGENTS.md, "Autonomy".
+mode = "autonomous"   # autonomous | supervised
+paused = false        # true: no GitHub writes outside the steward branch
+
+[limits]              # per UTC day, across all cycles
+pull_requests_opened = 3
+issue_comments = 6     # claims, sweeper comments, analysis revision comments
+review_replies = 10
+issues_opened = 1
+discussions_opened = 1
+pushes = 20
+force_pushes = 5
+awesome_foldkit_pull_requests = 1
+
+[counts]
+day = ""
+pull_requests_opened = 0
+issue_comments = 0
+review_replies = 0
+issues_opened = 0
+discussions_opened = 0
+pushes = 0
+force_pushes = 0
+awesome_foldkit_pull_requests = 0

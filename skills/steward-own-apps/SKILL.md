@@ -5,7 +5,7 @@ description: Weekly Foldkit Steward cycle that checks Taras's own Foldkit apps a
 
 # steward-own-apps
 
-Taras's apps are the closest view of what using Foldkit costs. Read `/Users/tao/Tools/foldkit/.steward/AGENTS.md` first. This cycle does not edit the apps. It reports, and it proposes upstream changes.
+Taras's apps are the closest view of what using Foldkit costs. Read `/Users/tao/Tools/foldkit/.steward/AGENTS.md` first. This cycle does not edit the apps. It reports, and it hands each `P1` to `P3` DX finding that has no upstream issue to `steward-contribution` as a new shortcoming, within the daily limits.
 
 ## 1. Versions
 

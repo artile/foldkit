@@ -1,0 +1,5 @@
+id = "driver"
+skill = "steward-driver"
+schedule = { type = "interval", everyMs = 3600000 }
+t3_scheduled_task_id = "scheduled-task:command:mcp:c5324381-323b-44ab-aaa6-0dc8214252df:schedule-task:steward-driver-v1"
+prompt = "Run the $steward-driver skill for Foldkit Steward. Read /Users/tao/Tools/foldkit/.steward/AGENTS.md first."

@@ -32,16 +32,18 @@ Everything else is a candidate. Tag each one with a `priority` from "Maintainer 
 
 ## 3. Reproduce
 
-For each candidate, run the `steward-contribution` skill with the issue as input (the "issue from `steward-issue-claim`" entry row). Its analysis stage pins `upstream/main`, writes a failing reproduction under `contributions/<slug>/reproduction/`, finds the root cause, and returns a recommendation.
+For each candidate, derive the slug `issue-<number>-<topic>` (kebab-case, not taken under `contributions/`), take the contribution lock per "Locks" in `AGENTS.md`, then run the `steward-contribution` skill with the issue and that slug as input (the "issue from `steward-issue-claim`" entry row). Its analysis stage pins `upstream/main`, writes a failing reproduction under `contributions/<slug>/reproduction/`, finds the root cause, and returns a recommendation.
 
 - No reproduction, or the path is not Implementation: record `decision = "no-claim"` with the reason. Put it in the digest.
-- Implementation path: the analysis stage is paused at Decision with `analysis: in progress`. Record `decision = "awaiting-approval"` and the slug, and stop here.
+- Implementation path: the analysis stage is paused at Decision with `analysis: in progress`. Record `decision = "awaiting-approval"` and the slug. In supervised mode, stop here; in autonomous mode, go on to step 4.
 
-## 4. Ask Taras
+## 4. Approve the claim
 
-Reply in the thread with, per candidate: the issue link, a one-line summary, the reproduction result, the planned fix in two lines, and the exact claim comment text. The claim comment states the pinned commit, the minimal reproduction, observed and expected results, and one line saying a pull request follows.
+The claim comment states the pinned commit, the minimal reproduction, observed and expected results, and one line saying a pull request follows.
 
-After Taras approves, relay the approved text to the paused analysis stage of `steward-contribution`. The analysis stage posts the comment, records its URL in `status.md`, writes `assignment.md`, and sets `analysis: assignment ready`. Then record `decision = "claimed"` with the comment URL here, and let `steward-contribution` continue into implementation and evaluation. That opens a draft pull request from `artile/foldkit` with `Fixes #<number>`.
+In autonomous mode, put the exact claim text through the publish gate in "Autonomy" in `AGENTS.md` and check the `issue_comments` limit. In supervised mode, reply in the thread with, per candidate: the issue link, a one-line summary, the reproduction result, the planned fix in two lines, and the exact claim text, and wait for Taras.
+
+Once approved, relay the approved text to the paused analysis stage of `steward-contribution`. The analysis stage posts the comment, records its URL in `status.md`, writes `assignment.md`, and sets `analysis: assignment ready`. Then record `decision = "claimed"` with the comment URL here, and let `steward-contribution` continue into implementation in this run until `implementation: delivered round 1`. Then release the contribution lock; `steward-driver` runs evaluation and every later round. That opens a draft pull request from `artile/foldkit` with `Fixes #<number>`.
 
 ## 5. Report
 

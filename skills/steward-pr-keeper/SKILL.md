@@ -18,13 +18,16 @@ For each pull request also read `gh pr checks <n> -R foldkit/foldkit` and the re
 
 ## 2. Act
 
+Skip any pull request that a contribution under `.steward/contributions/` holds in a state other than `evaluation: promoted round N`: `steward-driver` owns it. For one that a contribution holds as promoted, take its contribution lock first, per "Locks" in `AGENTS.md`.
+
 | State | Action |
 |---|---|
-| `mergeable == CONFLICTING`, no contribution under `.steward/contributions/` holds this pull request in a state other than `evaluation: promoted round N`, and every commit author on the branch is `artile` or Taras Kornichuk | Rebase on `upstream/main` (below). Automatic. |
+| `mergeable == CONFLICTING` and every commit author on the branch is `artile` or Taras Kornichuk | Rebase on `upstream/main` (below). Automatic. |
 | `CONFLICTING` and someone else pushed commits (often `devinjameson`) | Do not rewrite. Put it in the digest for Taras. |
 | Only `BEHIND` | Nothing. Pull requests are squash-merged, so being behind does not block a merge. |
-| A failing check that `upstream/main` does not also fail | Diagnose. Put the cause and a proposed fix in the digest. Do not push a fix without approval. |
-| Unanswered review comment | Draft a reply, or a fix plus a reply, in the digest. Do not post. |
+| A failing check that `upstream/main` does not also fail | Diagnose and fix it in a new commit; push through the push gate in "Autonomy" in `AGENTS.md` and the `pushes` limit. Track tries per pull request and check name in `state/pr-keeper.toml`. After 2 failed tries, stop and list it in the digest. |
+| Unanswered review comment from an author whose `authorAssociation` is `OWNER`, `MEMBER`, or `COLLABORATOR` | Make the change it asks for in a new commit when you agree, push through the push gate, then reply with what changed. When you disagree, reply with the reason. Each reply goes through the publish gate and the `review_replies` limit. When the comment asks for a direction choice only Taras can make (scope, API shape he proposed), reply that he will follow up, and list it first in the digest. |
+| Unanswered comment from anyone else | Do not change code. List it in the digest with a draft reply. |
 | Maintainer approved and checks pass | List it as "ready, waiting for merge". |
 
 ### Rebase
@@ -35,10 +38,10 @@ For each pull request also read `gh pr checks <n> -R foldkit/foldkit` and the re
 4. `git rebase upstream/main`. When a conflict needs a judgment call about behavior, run `git rebase --abort` and put it in the digest.
 5. Run the checks for the touched packages: `pnpm -F <package> typecheck`, `pnpm -F <package> test`, and `pnpm lint:ci`.
 6. The repository requires a separate review after any rewritten commit: run one fresh-context subagent on `git diff upstream/main...HEAD` against the repository's `AGENTS.md`. When it finds anything, do not push; put the findings in the digest.
-7. `git push <remote> HEAD:<headRefName> --force-with-lease=<headRefName>:<sha> --no-verify`.
+7. Check the `force_pushes` limit, then `git push <remote> HEAD:<headRefName> --force-with-lease=<headRefName>:<sha> --no-verify`.
 
 ## 3. Report
 
 Tag every item with its `priority` from "Maintainer priorities" in `AGENTS.md` and sort each table by priority.
 
-Write `digests/pr-keeper/<YYYY-MM-DD>.md` per the digest format in `AGENTS.md`, commit it on `steward`, and push. Reply in the thread with only the items that need Taras.
+Write `digests/pr-keeper/<YYYY-MM-DD>.md` per the digest format in `AGENTS.md`, commit it on `steward`, and push. Reply in the thread with the digest tables.

@@ -37,4 +37,4 @@ A comment states facts with links at the pinned commit. One short paragraph, no 
 
 Tag every item with its `priority` from "Maintainer priorities" in `AGENTS.md`. Group by `class` as below, then sort by priority within each group.
 
-Write `digests/issue-sweeper/<YYYY-MM-DD>.md` (Resolved and Partly resolved first, each with its draft comment), update `state/sweeper.toml` with `checked_at`, `class`, and `priority` for every checked issue, commit both on `steward`, and push. Post a comment only after Taras approves its exact text: `gh issue comment <n> -R foldkit/foldkit --body-file <file>`.
+Write `digests/issue-sweeper/<YYYY-MM-DD>.md` (Resolved and Partly resolved first, each with its draft comment), update `state/sweeper.toml` with `checked_at`, `class`, and `priority` for every checked issue, commit both on `steward`, and push. Then post each Resolved and Partly resolved comment that passes the publish gate in "Autonomy" in `AGENTS.md`, within the `issue_comments` limit, highest priority first: `gh issue comment <n> -R foldkit/foldkit --body-file <file>`. Record the comment URL in `state/sweeper.toml`. Never comment twice on one issue for the same class.
