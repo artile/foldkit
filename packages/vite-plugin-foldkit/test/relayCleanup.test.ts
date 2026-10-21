@@ -27,6 +27,8 @@ vi.mock('node:http', async importOriginal => {
 
 const PACKAGE_ROOT = resolve(import.meta.dirname, '..')
 const RELAY_LOG_PREFIX = '[foldkit:devTools] MCP relay listening at '
+const RELAY_DEFECT_MESSAGE =
+  '[foldkit:devTools] MCP relay failed with an unexpected error'
 
 const closeHttpServer = (server: HttpServer): Promise<void> => {
   if (!server.listening) {
@@ -54,6 +56,7 @@ it('closes a relay acquired before startup logging fails', async () => {
   })
 
   let maybeRelayUrl = Option.none<string>()
+  vi.spyOn(console, 'error').mockImplementation(() => {})
   vi.spyOn(console, 'log').mockImplementation((...args) => {
     const line = args.map(String).join(' ')
     if (line.startsWith(RELAY_LOG_PREFIX)) {
@@ -90,4 +93,87 @@ it('closes a relay acquired before startup logging fails', async () => {
 
   expect(relayServer.listening).toBe(false)
   expect(await canConnect(relayPort)).toBe(false)
+})
+
+it('reports a relay defect on stderr', async () => {
+  httpServers.splice(0)
+  onTestFinished(async () => {
+    vi.restoreAllMocks()
+    await Promise.all(Array.map(httpServers, closeHttpServer))
+  })
+
+  let isRelayListening = false
+  const stdoutClosed = new Error('stdout is closed')
+  vi.spyOn(console, 'error').mockImplementation(() => {})
+  vi.spyOn(console, 'log').mockImplementation((...args) => {
+    const line = args.map(String).join(' ')
+    if (line.startsWith(RELAY_LOG_PREFIX)) {
+      isRelayListening = true
+      throw stdoutClosed
+    }
+  })
+
+  const server = await createServer({
+    root: PACKAGE_ROOT,
+    configFile: false,
+    logLevel: 'silent',
+    server: { middlewareMode: true },
+    plugins: [foldkit()],
+  })
+  onTestFinished(() => server.close().catch(() => undefined))
+
+  await expect
+    .poll(() => isRelayListening, { timeout: POLL_TIMEOUT })
+    .toBe(true)
+
+  await expect
+    .poll(
+      () =>
+        Array.some(
+          vi.mocked(console.error).mock.calls,
+          ([message, defect]) =>
+            message === RELAY_DEFECT_MESSAGE && defect === stdoutClosed,
+        ),
+      { timeout: POLL_TIMEOUT },
+    )
+    .toBe(true)
+})
+
+it('reports no relay defect when the dev server closes', async () => {
+  httpServers.splice(0)
+  onTestFinished(async () => {
+    vi.restoreAllMocks()
+    await Promise.all(Array.map(httpServers, closeHttpServer))
+  })
+
+  let isRelayListening = false
+  vi.spyOn(console, 'error').mockImplementation(() => {})
+  vi.spyOn(console, 'log').mockImplementation((...args) => {
+    const line = args.map(String).join(' ')
+    if (line.startsWith(RELAY_LOG_PREFIX)) {
+      isRelayListening = true
+    }
+  })
+
+  const server = await createServer({
+    root: PACKAGE_ROOT,
+    configFile: false,
+    logLevel: 'silent',
+    server: { middlewareMode: true },
+    plugins: [foldkit()],
+  })
+  onTestFinished(() => server.close().catch(() => undefined))
+
+  await expect
+    .poll(() => isRelayListening, { timeout: POLL_TIMEOUT })
+    .toBe(true)
+
+  await server.close()
+
+  expect(
+    Array.some(
+      vi.mocked(console.error).mock.calls,
+      ([message]) => message === RELAY_DEFECT_MESSAGE,
+    ),
+  ).toBe(false)
 })
