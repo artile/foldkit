@@ -139,17 +139,6 @@ const replaceAll = (
 const buildIdLiteral = (buildId: string | undefined): string =>
   buildId === undefined ? 'undefined' : JSON.stringify(buildId)
 
-const placeholderReplacement = (
-  config: ResolvedConfig,
-  configuredBuildId: string | undefined,
-): string => {
-  if (config.command === 'serve') {
-    return DEVELOPMENT_BUILD_ID_BINDING
-  } else {
-    return buildIdLiteral(buildIdForConfig(config, configuredBuildId))
-  }
-}
-
 const isFoldkitBuildTokenModule = (id: string): boolean => {
   const fileName = (id.split('?', 1)[0] ?? '').replaceAll('\\', '/')
   return (
@@ -183,15 +172,6 @@ const transformBuildIdentity = (
   }
 
   const transformed = new MagicString(code)
-  const transformedFramework = replaceAll(
-    transformed,
-    code,
-    FRAMEWORK_BUILD_ID_PLACEHOLDER,
-    placeholderReplacement(config, configuredBuildId),
-  )
-  if (!transformedFramework) {
-    return undefined
-  }
 
   if (config.command === 'serve') {
     // NOTE: Vite serves files from node_modules with `?v=<browserHash>` and an
@@ -199,9 +179,30 @@ const transformBuildIdentity = (
     // build id. A browser therefore reuses this module from an earlier dev
     // server. Vite serves a virtual module with `no-cache` and an ETag, so the
     // browser revalidates the id on each load.
+    const transformedFramework = replaceAll(
+      transformed,
+      code,
+      FRAMEWORK_BUILD_ID_PLACEHOLDER,
+      DEVELOPMENT_BUILD_ID_BINDING,
+    )
+    if (!transformedFramework) {
+      return undefined
+    }
+
     transformed.prepend(
       `import { buildId as ${DEVELOPMENT_BUILD_ID_BINDING} } from '${DEVELOPMENT_BUILD_ID_MODULE_ID}';\n`,
     )
+  } else {
+    const buildId = buildIdForConfig(config, configuredBuildId)
+    const transformedFramework = replaceAll(
+      transformed,
+      code,
+      FRAMEWORK_BUILD_ID_PLACEHOLDER,
+      buildIdLiteral(buildId),
+    )
+    if (!transformedFramework) {
+      return undefined
+    }
   }
 
   return {
