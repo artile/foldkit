@@ -1,3 +1,4 @@
+import { Array, Option } from 'effect'
 import type { Plugin } from 'vite'
 
 export const recordModuleIds = (moduleIds: Array<string>): Plugin => ({
@@ -8,6 +9,6 @@ export const recordModuleIds = (moduleIds: Array<string>): Plugin => ({
 })
 
 export const isFoldkitBuildTokenModuleId = (id: string): boolean =>
-  (id.split('?', 1)[0] ?? '')
+  Option.getOrThrow(Array.head(id.split('?', 1)))
     .replaceAll('\\', '/')
     .endsWith('/foldkit/dist/buildToken.js')

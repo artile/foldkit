@@ -1,9 +1,11 @@
-import { Option } from 'effect'
+import { Array, Option } from 'effect'
+import { readFileSync } from 'node:fs'
 import {
   type Server as HttpServer,
   createServer as createHttpServer,
   request as nodeRequest,
 } from 'node:http'
+import { SourceMap } from 'node:module'
 import type { AddressInfo } from 'node:net'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -387,6 +389,50 @@ const automaticIdentityFrom = async (
 }
 
 describe('foldkitSsr', () => {
+  it(
+    'maps the development build id binding to its original source line',
+    async () => {
+      const running = await startAutomaticIdentityServer()
+      const transformed = Option.getOrThrow(
+        Option.fromNullishOr(
+          await running.server.environments.client.transformRequest(
+            FOLDKIT_BUILD_TOKEN_URL,
+          ),
+        ),
+      )
+      const { map } = transformed
+
+      if (map === null || !('version' in map)) {
+        throw new Error('The build-token transform returned no source map')
+      }
+
+      const originalCode = readFileSync(
+        fileURLToPath(
+          new URL('./buildToken.js', import.meta.resolve('foldkit')),
+        ),
+        'utf8',
+      )
+      const originalLine = Option.getOrThrow(
+        Array.findFirstIndex(originalCode.split('\n'), line =>
+          line.startsWith('export const injectedBuildId'),
+        ),
+      )
+      const generatedLine = Option.getOrThrow(
+        Array.findFirstIndex(transformed.code.split('\n'), line =>
+          line.startsWith('export const injectedBuildId'),
+        ),
+      )
+      const sourceMap = new SourceMap({ ...map, sourceRoot: '' })
+
+      expect(transformed.code).toContain(DEVELOPMENT_BUILD_ID_MODULE_ID)
+      expect(sourceMap.findEntry(generatedLine, 0)).toMatchObject({
+        originalLine,
+        originalColumn: 0,
+      })
+    },
+    AGGREGATE_DEV_SERVER_TEST_TIMEOUT_MS,
+  )
+
   it(
     'serves one fresh development build id for each aggregate dev server',
     async () => {
