@@ -1,11 +1,11 @@
 ---
-name: steward-own-apps
-description: Weekly Foldkit Steward cycle that checks Taras's own Foldkit apps against the latest Foldkit release, lists the breaking changes each one must absorb, and turns friction found there into Foldkit DX findings. Use when the own apps schedule fires or when asked how far Taras's apps lag behind Foldkit.
+name: maintainer-own-apps
+description: Weekly Foldkit Maintainer cycle that checks Taras's own Foldkit apps against the latest Foldkit release, lists the breaking changes each one must absorb, and turns friction found there into Foldkit DX findings. Use when the own apps schedule fires or when asked how far Taras's apps lag behind Foldkit.
 ---
 
-# steward-own-apps
+# maintainer-own-apps
 
-Taras's apps are the closest view of what using Foldkit costs. Read `/Users/tao/Tools/foldkit/.steward/AGENTS.md` first. This cycle does not edit the apps. It reports, and it hands each `P0` to `P2` DX finding that has no upstream issue to `steward-contribution` as a new shortcoming, within the daily limits.
+Taras's apps are the closest view of what using Foldkit costs. Read `/Users/tao/Tools/foldkit/.maintainer/AGENTS.md` first. This cycle does not edit the apps. It reports, and it hands each `P0` to `P2` DX finding that has no upstream issue to `maintainer-contribution` as a new shortcoming, within the daily limits.
 
 ## 1. Versions
 
@@ -36,4 +36,4 @@ Write `digests/own-apps/<YYYY-MM-DD>.md`:
 | Migration order | Apps ordered by the smallest migration first |
 | DX findings | What hurt, where, the upstream issue or "none", proposed upstream change |
 
-Update `last_checked` in `state/apps.toml`, commit on `steward`, and push.
+Update `last_checked` in `state/apps.toml`, commit on `maintainer`, and push.

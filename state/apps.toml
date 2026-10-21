@@ -1,4 +1,4 @@
-# Taras's own apps that use Foldkit. steward-own-apps reads this list.
+# Taras's own apps that use Foldkit. maintainer-own-apps reads this list.
 [apps.citata-frontend]
 path = "/Users/tao/Projects/citata.ai/frontend"
 last_checked = ""

@@ -1,11 +1,11 @@
 ---
-name: steward-ecosystem-miner
-description: Weekly Foldkit Steward cycle that reads public projects built with Foldkit, from awesome-foldkit and GitHub code search, to find Foldkit bugs, workarounds, DX gaps, and new projects worth listing. Use when the ecosystem miner schedule fires or when asked what other Foldkit users struggle with.
+name: maintainer-ecosystem-miner
+description: Weekly Foldkit Maintainer cycle that reads public projects built with Foldkit, from awesome-foldkit and GitHub code search, to find Foldkit bugs, workarounds, DX gaps, and new projects worth listing. Use when the ecosystem miner schedule fires or when asked what other Foldkit users struggle with.
 ---
 
-# steward-ecosystem-miner
+# maintainer-ecosystem-miner
 
-Learn from code other people write with Foldkit. A workaround in someone's app is often a Foldkit bug or a missing API. Read `/Users/tao/Tools/foldkit/.steward/AGENTS.md` first.
+Learn from code other people write with Foldkit. A workaround in someone's app is often a Foldkit bug or a missing API. Read `/Users/tao/Tools/foldkit/.maintainer/AGENTS.md` first.
 
 ## 1. Find projects
 
@@ -40,8 +40,8 @@ Write `digests/ecosystem-miner/<YYYY-MM-DD>.md` with three tables:
 
 Then act, each through the publish gate in "Autonomy" in `AGENTS.md` and its daily limit, highest priority first:
 
-- A possible bug with a reproduction you ran on `upstream/main` and no upstream issue: start `steward-contribution` with it as a new shortcoming. Its analysis files the issue (`issues_opened`) or, on the Implementation path, goes on to a pull request.
-- A `P0` to `P2` DX idea repeated in at least two projects and not yet discussed upstream: open a discussion in the Ideas category from `steward-contribution/references/discussion-template.md` (`discussions_opened`).
+- A possible bug with a reproduction you ran on `upstream/main` and no upstream issue: start `maintainer-contribution` with it as a new shortcoming. Its analysis files the issue (`issues_opened`) or, on the Implementation path, goes on to a pull request.
+- A `P0` to `P2` DX idea repeated in at least two projects and not yet discussed upstream: open a discussion in the Ideas category from `maintainer-contribution/references/discussion-template.md` (`discussions_opened`).
 - A new project that fits `foldhub/awesome-foldkit`: open one pull request there adding it in the README's existing format (`awesome_foldkit_pull_requests`). Taras owns that repository.
 
-Update `state/ecosystem.toml` with what was filed, commit on `steward`, and push.
+Update `state/ecosystem.toml` with what was filed, commit on `maintainer`, and push.

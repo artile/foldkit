@@ -1,1 +1,1 @@
-# steward-pr-keeper state: [pulls.<number>] fix_tries = { "<check name>" = <count> }
+# maintainer-pr-keeper state: [pulls.<number>] fix_tries = { "<check name>" = <count> }

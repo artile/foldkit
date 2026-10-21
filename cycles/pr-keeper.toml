@@ -1,5 +1,5 @@
 id = "pr-keeper"
-skill = "steward-pr-keeper"
+skill = "maintainer-pr-keeper"
 schedule = { type = "fixed_time", timeOfDay = "09:00" }
 t3_scheduled_task_id = "scheduled-task:command:mcp:7eb692a0-b909-4377-9aaf-a4d139612c34:schedule-task:steward-pr-keeper-v2"
-prompt = "Run the $steward-pr-keeper skill for Foldkit Steward. Read /Users/tao/Tools/foldkit/.steward/AGENTS.md first."
+prompt = "Run the $maintainer-pr-keeper skill for Foldkit Maintainer. Read /Users/tao/Tools/foldkit/.maintainer/AGENTS.md first."
