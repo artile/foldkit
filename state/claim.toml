@@ -1,22 +1,28 @@
 # steward-issue-claim state. decision: skip | watch | no-claim | awaiting-approval | claimed
-last_poll = "2026-10-21T12:22:21Z"
+last_poll = "2026-10-21T14:22:26Z"
 
 # Deferred bug candidates (2-per-run limit). Next run takes them smallest first.
 [issues.1682]
 decision = "watch"
-reason = "candidate, deferred: Calendar heading aria-label hides visible month and year (small)"
+priority = "P4 other"
+reason = "candidate, deferred: Calendar heading aria-label hides visible month and year (small); fix picks between aria-describedby and a new label callback (API choice)"
 
 [issues.1681]
-decision = "watch"
-reason = "candidate, deferred: Calendar Enter after arrow in one frame selects stale day"
+decision = "awaiting-approval"
+priority = "P4 other"
+slug = "issue-1681-calendar-stale-enter"
+reason = "reproduced on 7ee214268 (Days; Months and Years same shape); decided autonomously: Implementation path; claim held, publish gate failed two rounds (reproduction id, unobserved focus claim); revised text fixes both, next run re-gates from round 1. Maintainer label P2 on the issue"
 
 [issues.1641]
 decision = "watch"
-reason = "candidate, deferred: OnMount dispatch after lifecycle end"
+priority = "P4 other"
+reason = "candidate, deferred: OnMount dispatch after lifecycle end (console noise on teardown)"
 
 [issues.1677]
-decision = "watch"
-reason = "candidate, deferred: dev server buildToken cached immutable across restarts"
+decision = "reproducing"
+priority = "P1 unblock"
+slug = "issue-1677-dev-build-id"
+reason = "candidate taken 2026-10-21T14:22Z: SSR dev server hydration refused after restart (buildToken cached immutable); still on upstream/main 7ee214268"
 
 # Discussion candidates: need a maintainer design or API decision.
 [issues.1724]

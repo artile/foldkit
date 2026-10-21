@@ -1,0 +1,17 @@
+{
+  "name": "foldkit-dev-build-id-reproduction",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite"
+  },
+  "dependencies": {
+    "effect": "4.0.0",
+    "foldkit": "file:../tarballs/foldkit.tgz"
+  },
+  "devDependencies": {
+    "@foldkit/vite-plugin": "file:../tarballs/foldkit-vite-plugin.tgz",
+    "playwright": "1.63.0",
+    "vite": "8.3.1"
+  }
+}

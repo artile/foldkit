@@ -1,0 +1,13 @@
+Run: bash reproduction/run.sh /Users/tao/Tools/foldkit-worktrees/issue-1681-calendar-stale-enter
+Base: upstream/main 7ee214268c602967937b80f6f20d1e831f2e8ab6, @foldkit/ui Vitest config (happy-dom), Runtime.makeElement.
+Setup: Calendar id `calendar` (grid id `calendar-grid`), today 2026-05-13, focus starts on today. Both keydowns dispatched on the grid in one task. Models are read from each update result.
+
+Observed on the base, 21-10-2026:
+  PASS  control: Days mode, ArrowRight, render, Enter: SelectedDate 2026-05-14
+  FAIL  Days mode: focus after ArrowRight 2026-05-14 (as expected); SelectedDate 2026-05-13 and focus after Enter 2026-05-13, expected 2026-05-14 for both
+  FAIL  Months mode: viewMode Days, viewYear 2026, viewMonth 5; expected viewMonth 6
+  FAIL  Years mode: viewMode Months, viewYear 2026; expected viewYear 2027
+  Tests  3 failed | 1 passed (4)
+
+Observed with the candidate resolution in a disposable worktree (removed afterwards), on the previous revision of this test (id `stale-commit-calendar`, same keys and expected values):
+  Tests  4 passed (4); @foldkit/ui suite 1256 passed; also 4 passed on top of PR #1542 head 2fadeab33.

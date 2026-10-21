@@ -1,0 +1,71 @@
+Pinned commit: 7ee214268c602967937b80f6f20d1e831f2e8ab6 (foldkit 0.169.0, @foldkit/vite-plugin 0.28.0, vite 8.3.1, playwright 1.63.0 chromium)
+Run: bash run.sh <built foldkit worktree> [default|fixed|explicit-per-session]   (build first: pnpm --filter foldkit build && pnpm --filter @foldkit/vite-plugin build)
+Expected: every mode prints PASSED and exits 0. On the pinned commit, default and explicit-per-session fail.
+Note: right after npm install, Vite may re-optimize once and change ?v= (session 2 below); session 3 then shows the failure.
+
+=== mode: default
+session 1, first load
+  id stamped on page:    46a4924d-1d98-4443-9f82-d75b9744488c
+  id in client module:   46a4924d-1d98-4443-9f82-d75b9744488c
+  buildToken.js:         /node_modules/foldkit/dist/buildToken.js?v=d76f5ba9 cache-control=max-age=31536000,immutable
+  buildToken.js timing:  transferSize=8135 (0 means served from the browser cache)
+  body refused:          false
+session 2, restarted dev server, normal reload
+  id stamped on page:    1c67c6ef-10cd-4e67-8090-c66ea27888e0
+  id in client module:   1c67c6ef-10cd-4e67-8090-c66ea27888e0
+  buildToken.js:         /node_modules/foldkit/dist/buildToken.js?v=5456b857 cache-control=max-age=31536000,immutable
+  buildToken.js timing:  transferSize=8135 (0 means served from the browser cache)
+  body refused:          false
+session 3, restarted dev server, normal reload
+  id stamped on page:    b33a310b-2964-4855-a0bb-032fcb061eb9
+  id in client module:   1c67c6ef-10cd-4e67-8090-c66ea27888e0
+  buildToken.js:         /node_modules/foldkit/dist/buildToken.js?v=5456b857 cache-control=max-age=31536000,immutable
+  buildToken.js timing:  transferSize=0 (0 means served from the browser cache)
+  body refused:          true
+REPRODUCED: hydration refused a page from the current dev server
+exit=1
+
+=== mode: explicit-per-session
+session 1, first load
+  id stamped on page:    release-1
+  id in client module:   release-1
+  buildToken.js:         /node_modules/foldkit/dist/buildToken.js?v=5456b857 cache-control=max-age=31536000,immutable
+  buildToken.js timing:  transferSize=8108 (0 means served from the browser cache)
+  body refused:          false
+session 2, restarted dev server, normal reload
+  id stamped on page:    release-2
+  id in client module:   release-1
+  buildToken.js:         /node_modules/foldkit/dist/buildToken.js?v=5456b857 cache-control=max-age=31536000,immutable
+  buildToken.js timing:  transferSize=0 (0 means served from the browser cache)
+  body refused:          true
+session 3, restarted dev server, normal reload
+  id stamped on page:    release-3
+  id in client module:   release-1
+  buildToken.js:         /node_modules/foldkit/dist/buildToken.js?v=5456b857 cache-control=max-age=31536000,immutable
+  buildToken.js timing:  transferSize=0 (0 means served from the browser cache)
+  body refused:          true
+REPRODUCED: hydration refused a page from the current dev server
+exit=1
+
+=== mode: fixed
+session 1, first load
+  id stamped on page:    development
+  id in client module:   development
+  buildToken.js:         /node_modules/foldkit/dist/buildToken.js?v=5456b857 cache-control=max-age=31536000,immutable
+  buildToken.js timing:  transferSize=8110 (0 means served from the browser cache)
+  body refused:          false
+session 2, restarted dev server, normal reload
+  id stamped on page:    development
+  id in client module:   development
+  buildToken.js:         /node_modules/foldkit/dist/buildToken.js?v=5456b857 cache-control=max-age=31536000,immutable
+  buildToken.js timing:  transferSize=0 (0 means served from the browser cache)
+  body refused:          false
+session 3, restarted dev server, normal reload
+  id stamped on page:    development
+  id in client module:   development
+  buildToken.js:         /node_modules/foldkit/dist/buildToken.js?v=5456b857 cache-control=max-age=31536000,immutable
+  buildToken.js timing:  transferSize=0 (0 means served from the browser cache)
+  body refused:          false
+PASSED: every reload hydrated
+exit=0
+
