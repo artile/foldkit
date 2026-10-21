@@ -27,9 +27,20 @@ import { isFoldkitSingletonPackageSpecifier } from './foldkitPackages.js'
 
 const BUILD_ID_ENVIRONMENT_VARIABLE = 'FOLDKIT_BUILD_ID'
 const FRAMEWORK_BUILD_ID_PLACEHOLDER = 'foldkitBuildIdPlaceholder()'
-const DEVELOPMENT_BUILD_ID_MODULE_ID = 'virtual:foldkit/development-build-id'
-const RESOLVED_DEVELOPMENT_BUILD_ID_MODULE_ID = `\0${DEVELOPMENT_BUILD_ID_MODULE_ID}`
 const DEVELOPMENT_BUILD_ID_BINDING = '__foldkitDevelopmentBuildId'
+
+/** The id that Foldkit's build-token module imports in serve mode.
+ *
+ * @internal Exported for tests.
+ */
+export const DEVELOPMENT_BUILD_ID_MODULE_ID =
+  'virtual:foldkit/development-build-id'
+
+/** The id the plugin resolves `DEVELOPMENT_BUILD_ID_MODULE_ID` to.
+ *
+ * @internal Exported for tests.
+ */
+export const RESOLVED_DEVELOPMENT_BUILD_ID_MODULE_ID = `\0${DEVELOPMENT_BUILD_ID_MODULE_ID}`
 
 type BuildIdentitySession = {
   readonly buildId: string | undefined

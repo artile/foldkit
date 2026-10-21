@@ -20,6 +20,10 @@ import {
 import { createServer as createHostViteServer } from 'vite-host'
 import { describe, expect, it, onTestFinished } from 'vitest'
 
+import {
+  DEVELOPMENT_BUILD_ID_MODULE_ID,
+  RESOLVED_DEVELOPMENT_BUILD_ID_MODULE_ID,
+} from '../src/buildToken.ts'
 import { foldkit } from '../src/index.ts'
 import { foldkitSsr } from '../src/ssr.ts'
 import { boundPort } from './boundPort.ts'
@@ -107,8 +111,6 @@ const FOLDKIT_BUILD_TOKEN_URL = `/@fs${resolve(
   dirname(fileURLToPath(import.meta.resolve('foldkit'))),
   'buildToken.js',
 )}`
-const DEVELOPMENT_BUILD_ID_MODULE_ID = 'virtual:foldkit/development-build-id'
-const RESOLVED_DEVELOPMENT_BUILD_ID_MODULE_ID = `\0${DEVELOPMENT_BUILD_ID_MODULE_ID}`
 const DEVELOPMENT_BUILD_ID_URL = `/@id/__x00__${DEVELOPMENT_BUILD_ID_MODULE_ID}`
 const AGGREGATE_DEV_SERVER_TEST_TIMEOUT_MS = 20_000
 const originOf = (address: AddressInfo | string | null | undefined): string =>

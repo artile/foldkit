@@ -29,6 +29,10 @@ import {
 } from 'vite'
 import { describe, expect, it, onTestFinished } from 'vitest'
 
+import {
+  DEVELOPMENT_BUILD_ID_MODULE_ID,
+  RESOLVED_DEVELOPMENT_BUILD_ID_MODULE_ID,
+} from '../src/buildToken.ts'
 import { crawlFoldkitPackages } from '../src/foldkitPackages.ts'
 import { foldkit } from '../src/index.ts'
 import { readForcedEffectEntries } from './forcedEffectEntries.ts'
@@ -203,7 +207,6 @@ const UI_PEER: Files = {
 }
 
 const SERVER_ENTRY = 'entry.server.js'
-const DEVELOPMENT_BUILD_ID_MODULE_ID = 'virtual:foldkit/development-build-id'
 
 const SERVER_RENDER_PACKAGES: Files = {
   ...appPackage({ foldkit: '*', effect: '*' }),
@@ -401,7 +404,7 @@ const renderServerEntry = async (
     )
   const clientBuildIdTransform =
     await server.environments.client.transformRequest(
-      `\0${DEVELOPMENT_BUILD_ID_MODULE_ID}`,
+      RESOLVED_DEVELOPMENT_BUILD_ID_MODULE_ID,
     )
 
   return {
