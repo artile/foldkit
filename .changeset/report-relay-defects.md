@@ -6,4 +6,4 @@ Print unexpected errors from the DevTools MCP relay. Before, an unexpected error
 
 The dev server now prints `[foldkit:devTools] MCP relay failed with an unexpected error` followed by the error on stderr. Stopping or restarting the dev server does not print this line.
 
-Thanks @Makisuo for the report.
+Thanks @Makisuo for the report and the diagnosis.
