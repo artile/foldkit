@@ -427,9 +427,7 @@ describe('foldkitSsr', () => {
     'serves the development build id to the browser for revalidation',
     async () => {
       const running = await startAutomaticIdentityServer()
-      const page = await (await fetch(`${running.origin}/`)).text()
-      const buildId = /data-foldkit-build="([^"]+)"/.exec(page)?.[1]
-      expect(buildId).toBeDefined()
+      const buildId = await automaticIdentityFrom(running)
 
       const response = await fetch(
         `${running.origin}${DEVELOPMENT_BUILD_ID_URL}`,
