@@ -1,13 +1,17 @@
 import { Array, Option } from 'effect'
 import type { Server as HttpServer } from 'node:http'
-import { createConnection } from 'node:net'
+import { Server, createConnection } from 'node:net'
 import { resolve } from 'node:path'
 import { createServer } from 'vite'
 import { expect, it, onTestFinished, vi } from 'vitest'
 
-import { foldkit } from '../src/index.ts'
+import { type FoldkitPluginOptions, foldkit } from '../src/index.ts'
 import { boundPort } from './boundPort.ts'
-import { POLL_TIMEOUT } from './relayFixtures.ts'
+import {
+  POLL_TIMEOUT,
+  holdFreePort,
+  isListenAttemptedOn,
+} from './relayFixtures.ts'
 
 const httpServers = vi.hoisted(() => new globalThis.Array<HttpServer>())
 
@@ -48,15 +52,34 @@ const canConnect = (port: number): Promise<boolean> =>
     socket.once('error', () => resolveConnected(false))
   })
 
-it('closes a relay acquired before startup logging fails', async () => {
+const startDevServer = async (options: FoldkitPluginOptions = {}) => {
   httpServers.splice(0)
   onTestFinished(async () => {
     vi.restoreAllMocks()
     await Promise.all(Array.map(httpServers, closeHttpServer))
   })
-
-  let maybeRelayUrl = Option.none<string>()
   vi.spyOn(console, 'error').mockImplementation(() => {})
+
+  const server = await createServer({
+    root: PACKAGE_ROOT,
+    configFile: false,
+    logLevel: 'silent',
+    server: { middlewareMode: true },
+    plugins: [foldkit(options)],
+  })
+  onTestFinished(() => server.close().catch(() => undefined))
+
+  return server
+}
+
+const relayDefectCalls = () =>
+  Array.filter(
+    vi.mocked(console.error).mock.calls,
+    ([message]) => message === RELAY_DEFECT_MESSAGE,
+  )
+
+it('closes a relay acquired before startup logging fails', async () => {
+  let maybeRelayUrl = Option.none<string>()
   vi.spyOn(console, 'log').mockImplementation((...args) => {
     const line = args.map(String).join(' ')
     if (line.startsWith(RELAY_LOG_PREFIX)) {
@@ -65,14 +88,7 @@ it('closes a relay acquired before startup logging fails', async () => {
     }
   })
 
-  const server = await createServer({
-    root: PACKAGE_ROOT,
-    configFile: false,
-    logLevel: 'silent',
-    server: { middlewareMode: true },
-    plugins: [foldkit()],
-  })
-  onTestFinished(() => server.close().catch(() => undefined))
+  const server = await startDevServer()
 
   await expect
     .poll(() => Option.isSome(maybeRelayUrl), { timeout: POLL_TIMEOUT })
@@ -96,84 +112,36 @@ it('closes a relay acquired before startup logging fails', async () => {
 })
 
 it('reports a relay defect on stderr', async () => {
-  httpServers.splice(0)
-  onTestFinished(async () => {
-    vi.restoreAllMocks()
-    await Promise.all(Array.map(httpServers, closeHttpServer))
-  })
-
-  let isRelayListening = false
   const stdoutClosed = new Error('stdout is closed')
-  vi.spyOn(console, 'error').mockImplementation(() => {})
   vi.spyOn(console, 'log').mockImplementation((...args) => {
     const line = args.map(String).join(' ')
     if (line.startsWith(RELAY_LOG_PREFIX)) {
-      isRelayListening = true
       throw stdoutClosed
     }
   })
 
-  const server = await createServer({
-    root: PACKAGE_ROOT,
-    configFile: false,
-    logLevel: 'silent',
-    server: { middlewareMode: true },
-    plugins: [foldkit()],
-  })
-  onTestFinished(() => server.close().catch(() => undefined))
-
-  await expect
-    .poll(() => isRelayListening, { timeout: POLL_TIMEOUT })
-    .toBe(true)
+  await startDevServer()
 
   await expect
     .poll(
       () =>
-        Array.some(
-          vi.mocked(console.error).mock.calls,
-          ([message, defect]) =>
-            message === RELAY_DEFECT_MESSAGE && defect === stdoutClosed,
-        ),
+        Array.some(relayDefectCalls(), ([, defect]) => defect === stdoutClosed),
       { timeout: POLL_TIMEOUT },
     )
     .toBe(true)
 })
 
-it('reports no relay defect when the dev server closes', async () => {
-  httpServers.splice(0)
-  onTestFinished(async () => {
-    vi.restoreAllMocks()
-    await Promise.all(Array.map(httpServers, closeHttpServer))
-  })
+it('reports no relay defect when closing interrupts a retrying bind', async () => {
+  const port = await holdFreePort()
+  vi.spyOn(Server.prototype, 'listen')
 
-  let isRelayListening = false
-  vi.spyOn(console, 'error').mockImplementation(() => {})
-  vi.spyOn(console, 'log').mockImplementation((...args) => {
-    const line = args.map(String).join(' ')
-    if (line.startsWith(RELAY_LOG_PREFIX)) {
-      isRelayListening = true
-    }
-  })
-
-  const server = await createServer({
-    root: PACKAGE_ROOT,
-    configFile: false,
-    logLevel: 'silent',
-    server: { middlewareMode: true },
-    plugins: [foldkit()],
-  })
-  onTestFinished(() => server.close().catch(() => undefined))
+  const server = await startDevServer({ devToolsMcpPort: port })
 
   await expect
-    .poll(() => isRelayListening, { timeout: POLL_TIMEOUT })
+    .poll(() => isListenAttemptedOn(port), { timeout: POLL_TIMEOUT })
     .toBe(true)
 
   await server.close()
 
-  expect(
-    Array.some(
-      vi.mocked(console.error).mock.calls,
-      ([message]) => message === RELAY_DEFECT_MESSAGE,
-    ),
-  ).toBe(false)
+  expect(relayDefectCalls()).toStrictEqual([])
 })
