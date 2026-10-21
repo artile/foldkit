@@ -5,7 +5,7 @@ description: Weekly Foldkit Maintainer cycle that reads public projects built wi
 
 # maintainer-ecosystem-miner
 
-Learn from code other people write with Foldkit. A workaround in someone's app is often a Foldkit bug or a missing API. Read `/Users/tao/Tools/foldkit/.maintainer/AGENTS.md` first.
+Learn from code other people write with Foldkit. A workaround in someone's app is often a Foldkit bug or a missing API. Read `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md` first.
 
 ## 1. Find projects
 

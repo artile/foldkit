@@ -5,11 +5,11 @@ description: Weekly Foldkit Maintainer cycle that checks open foldkit/foldkit is
 
 # maintainer-issue-sweeper
 
-Find open issues on `foldkit/foldkit` that `main` already resolves, fully or in part, and draft a short comment for each one. Read `/Users/tao/Tools/foldkit/.maintainer/AGENTS.md` first. This cycle includes issues opened by `devinjameson`: telling the maintainer that their issue is done saves them time.
+Find open issues on `foldkit/foldkit` that `main` already resolves, fully or in part, and draft a short comment for each one. Read `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md` first. This cycle includes issues opened by `devinjameson`: telling the maintainer that their issue is done saves them time.
 
 ## 1. Pick the batch
 
-- `git -C /Users/tao/Tools/foldkit fetch upstream main`. Pin the run to that commit.
+- `git -C /home/om/TAO/Tools/foldkit fetch upstream main`. Pin the run to that commit.
 - `gh issue list -R foldkit/foldkit --state open --limit 300 --json number,title,author,createdAt,updatedAt,labels,comments`.
 - Skip issues listed in `state/sweeper.toml` with a `checked_at` newer than their `updatedAt`.
 - Check at most 40 issues per run, oldest `updatedAt` first.

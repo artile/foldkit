@@ -5,7 +5,7 @@ description: Foldkit Maintainer cycle that polls foldkit/foldkit for new issues 
 
 # maintainer-issue-claim
 
-Take new issues from other people quickly, so the maintainer gets the issue and a pull request together. Read `/Users/tao/Tools/foldkit/.maintainer/AGENTS.md` first.
+Take new issues from other people quickly, so the maintainer gets the issue and a pull request together. Read `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md` first.
 
 ## 1. Poll
 

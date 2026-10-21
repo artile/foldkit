@@ -9,7 +9,7 @@ Guiding a contribution to an open-source GitHub project end to end spans three s
 
 ## Autonomous mode
 
-When `/Users/tao/Tools/foldkit/.maintainer/state/autonomy.toml` has `mode = "autonomous"`, you act as the contributor's proxy. Wherever this skill or a stage waits for the contributor (a decision, an approval of exact text, permission to push, promotion), decide through the gates in "Autonomy" in `/Users/tao/Tools/foldkit/.maintainer/AGENTS.md` instead, relay the result to the stage as the contributor's reply, and record it in `status.md` as "decided autonomously". Respect the daily limits and `paused`: before each upstream write, check its key from the limit table in `AGENTS.md`. Where a stage or template says a permission prompt confirms a write, the gate result is the confirmation; unattended runs get no prompt.
+When `/home/om/TAO/Tools/foldkit/.maintainer/state/autonomy.toml` has `mode = "autonomous"`, you act as the contributor's proxy. Wherever this skill or a stage waits for the contributor (a decision, an approval of exact text, permission to push, promotion), decide through the gates in "Autonomy" in `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md` instead, relay the result to the stage as the contributor's reply, and record it in `status.md` as "decided autonomously". Respect the daily limits and `paused`: before each upstream write, check its key from the limit table in `AGENTS.md`. Where a stage or template says a permission prompt confirms a write, the gate result is the confirmation; unattended runs get no prompt.
 
 In autonomous mode also:
 
@@ -31,11 +31,11 @@ All three stages run as fresh subagents, each guided by its own file under `stag
 
 ## Workspace
 
-This copy is set up for `foldkit/foldkit` from the Foldkit Maintainer checkout `/Users/tao/Tools/foldkit`. Read `/Users/tao/Tools/foldkit/.maintainer/AGENTS.md` first; it overrides this file where they differ.
+This copy is set up for `foldkit/foldkit` from the Foldkit Maintainer checkout `/home/om/TAO/Tools/foldkit`. Read `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md` first; it overrides this file where they differ.
 
 - `upstream` tracks `foldkit/foldkit`. The fork is the `artile` remote (`artile/foldkit`, a personal-account fork, so the maintainer can push to pull request branches). Every mention of `origin` in this skill and its stages means the `artile` remote.
-- A slug names each contribution. Its worktree is `/Users/tao/Tools/foldkit-worktrees/<slug>`. Its artifact directory is `/Users/tao/Tools/foldkit/.maintainer/contributions/<slug>/`, which is tracked on the `maintainer` branch.
-- After `git worktree add`, run `pnpm install && bash scripts/cloud-session-setup.sh && bash /Users/tao/Tools/foldkit/.maintainer/bin/link-skills.sh` in the new worktree.
+- A slug names each contribution. Its worktree is `/home/om/TAO/Tools/foldkit-worktrees/<slug>`. Its artifact directory is `/home/om/TAO/Tools/foldkit/.maintainer/contributions/<slug>/`, which is tracked on the `maintainer` branch.
+- After `git worktree add`, run `pnpm install && bash scripts/cloud-session-setup.sh && bash /home/om/TAO/Tools/foldkit/.maintainer/bin/link-skills.sh` in the new worktree.
 
 On entry, confirm on GitHub that `artile/foldkit` is a fork of `foldkit/foldkit` with Actions disabled. Before each stage starts, fetch both remotes; then reuse the worktree of the contribution as is if it already exists, or otherwise create one detached at `upstream/main`. If the clone or either remote is missing, or anything else fails, flag the problem for the contributor rather than work around it.
 

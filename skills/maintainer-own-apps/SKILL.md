@@ -5,15 +5,15 @@ description: Weekly Foldkit Maintainer cycle that checks Taras's own Foldkit app
 
 # maintainer-own-apps
 
-Taras's apps are the closest view of what using Foldkit costs. Read `/Users/tao/Tools/foldkit/.maintainer/AGENTS.md` first. This cycle does not edit the apps. It reports, and it hands each `P0` to `P2` DX finding that has no upstream issue to `maintainer-contribution` as a new shortcoming, within the daily limits.
+Taras's apps are the closest view of what using Foldkit costs. Read `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md` first. This cycle does not edit the apps. It reports, and it hands each `P0` to `P2` DX finding that has no upstream issue to `maintainer-contribution` as a new shortcoming, within the daily limits.
 
 ## 1. Versions
 
-For every app in `state/apps.toml`:
+For every app in `state/apps.toml` (when an entry has `host = "macmax"`, run each read command on that host through `ssh macmax`, for example `ssh macmax cat <path>/package.json` and `ssh macmax git -C <path> log`):
 
 - Read the Foldkit packages and versions in its `package.json`.
 - Latest version: `npm view foldkit version`, and the same for each `@foldkit/*` package it uses.
-- Breaking changes between the two versions: after `git -C /Users/tao/Tools/foldkit fetch upstream main`, read each package changelog with `git -C /Users/tao/Tools/foldkit show upstream/main:packages/<package>/CHANGELOG.md` for the range, and collect entries that require consumer code changes.
+- Breaking changes between the two versions: after `git -C /home/om/TAO/Tools/foldkit fetch upstream main`, read each package changelog with `git -C /home/om/TAO/Tools/foldkit show upstream/main:packages/<package>/CHANGELOG.md` for the range, and collect entries that require consumer code changes.
 
 ## 2. Friction
 

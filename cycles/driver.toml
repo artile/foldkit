@@ -2,4 +2,4 @@ id = "driver"
 skill = "maintainer-driver"
 schedule = { type = "interval", everyMs = 3600000 }
 t3_scheduled_task_id = "scheduled-task:command:mcp:7eb692a0-b909-4377-9aaf-a4d139612c34:schedule-task:steward-driver-v2"
-prompt = "Run the $maintainer-driver skill for Foldkit Maintainer. Read /Users/tao/Tools/foldkit/.maintainer/AGENTS.md first."
+prompt = "Run the $maintainer-driver skill for Foldkit Maintainer. Read /home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md first."

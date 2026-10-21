@@ -1,24 +1,31 @@
 # Taras's own apps that use Foldkit. maintainer-own-apps reads this list.
+# host = "macmax": the app lives on macmax; read it with `ssh macmax`.
 [apps.citata-frontend]
 path = "/Users/tao/Projects/citata.ai/frontend"
+host = "macmax"
 last_checked = ""
 
 [apps.kup-tutor]
 path = "/Users/tao/Projects/kup/apps/tutor"
+host = "macmax"
 last_checked = ""
 
 [apps.foldkit-gallery]
 path = "/Users/tao/Projects/foldkit-gallery"
+host = "macmax"
 last_checked = ""
 
 [apps.foldcase-docs]
 path = "/Users/tao/Projects/foldcase-docs"
+host = "macmax"
 last_checked = ""
 
 [apps.shadcn-foldkit]
 path = "/Users/tao/Tools/shadcn-foldkit"
+host = "macmax"
 last_checked = ""
 
 [apps.auto-dark-extension]
 path = "/Users/tao/Tools/auto-dark-extension"
+host = "macmax"
 last_checked = ""

@@ -5,18 +5,18 @@ description: Hourly Foldkit Maintainer loop that moves every open contribution i
 
 # maintainer-driver
 
-Keep every contribution moving. Read `/Users/tao/Tools/foldkit/.maintainer/AGENTS.md` and `state/autonomy.toml` first.
+Keep every contribution moving. Read `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md` and `state/autonomy.toml` first.
 
 ## 1. List
 
-For each directory in `/Users/tao/Tools/foldkit/.maintainer/contributions/`, read the state line in `status.md`. Skip:
+For each directory in `/home/om/TAO/Tools/foldkit/.maintainer/contributions/`, read the state line in `status.md`. Skip:
 
 - `analysis: concluded`, any `<stage>: abandoned`, and `evaluation: promoted round N` whose pull request is merged or closed.
 - A contribution with a `.lock` younger than 3 hours.
 
 ## 2. Route
 
-Order the rest by `priority` (recorded in `state/claim.toml` or the contribution's `status.md`), then by age. Work through at most 3 per run. For each one, take the contribution lock per "Locks" in `AGENTS.md`, run `node /Users/tao/Tools/foldkit/.maintainer/skills/maintainer-contribution/scripts/check.ts <dir>`, then run `maintainer-contribution` with the slug. It routes by state per its Handoffs table and decides through the gates in "Autonomy".
+Order the rest by `priority` (recorded in `state/claim.toml` or the contribution's `status.md`), then by age. Work through at most 3 per run. For each one, take the contribution lock per "Locks" in `AGENTS.md`, run `node /home/om/TAO/Tools/foldkit/.maintainer/skills/maintainer-contribution/scripts/check.ts <dir>`, then run `maintainer-contribution` with the slug. It routes by state per its Handoffs table and decides through the gates in "Autonomy".
 
 | State | What the run does |
 |---|---|
