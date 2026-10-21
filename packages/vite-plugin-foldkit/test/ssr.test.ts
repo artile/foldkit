@@ -428,17 +428,38 @@ describe('foldkitSsr', () => {
   it(
     'serves the development build id to the browser for revalidation',
     async () => {
-      const running = await startAutomaticIdentityServer()
-      const buildId = await automaticIdentityFrom(running)
+      const first = await startAutomaticIdentityServer()
+      const second = await startAutomaticIdentityServer()
+      const firstBuildId = await automaticIdentityFrom(first)
+      const secondBuildId = await automaticIdentityFrom(second)
 
-      const response = await fetch(
-        `${running.origin}${DEVELOPMENT_BUILD_ID_URL}`,
+      const response = await fetch(`${first.origin}${DEVELOPMENT_BUILD_ID_URL}`)
+      const etag = Option.getOrThrowWith(
+        Option.fromNullishOr(response.headers.get('etag')),
+        () => new Error('The development build id response has no ETag'),
       )
 
       expect(response.status).toBe(200)
       expect(response.headers.get('cache-control')).toBe('no-cache')
       expect(await response.text()).toContain(
-        `export const buildId = ${JSON.stringify(buildId)}`,
+        `export const buildId = ${JSON.stringify(firstBuildId)}`,
+      )
+
+      const unchanged = await fetch(
+        `${first.origin}${DEVELOPMENT_BUILD_ID_URL}`,
+        { headers: { 'If-None-Match': etag } },
+      )
+
+      expect(unchanged.status).toBe(304)
+
+      const restarted = await fetch(
+        `${second.origin}${DEVELOPMENT_BUILD_ID_URL}`,
+        { headers: { 'If-None-Match': etag } },
+      )
+
+      expect(restarted.status).toBe(200)
+      expect(await restarted.text()).toContain(
+        `export const buildId = ${JSON.stringify(secondBuildId)}`,
       )
     },
     AGGREGATE_DEV_SERVER_TEST_TIMEOUT_MS,
