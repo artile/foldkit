@@ -134,10 +134,10 @@ reason = "reporter took the helper; #1679 merged"
 
 # Reproduced this run.
 [issues.1733]
-decision = "awaiting-approval"
+decision = "claimed"
 priority = "P4 other"
 slug = "issue-1733-relay-uuid"
-reason = "reproduced on effect 4.0.3+; UUID part covered by open PR #1699, claim scoped to printing relay defects; decided autonomously: Implementation path; claim held, publish gate failed two rounds, driver retries"
+reason = "claimed: https://github.com/foldkit/foldkit/issues/1733#issuecomment-6317480108; PR #1751 promoted to ready for review (round 2, scores 96/96); UUID fix left to #1699"
 
 [issues.1680]
 decision = "no-claim"

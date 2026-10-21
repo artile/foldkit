@@ -1,0 +1,21 @@
+# Evaluation — maintainer — round 2
+
+- **Score:** 96
+- **Critical findings:** 0
+- **Verdict:** ready
+
+## Findings
+
+| # | Severity | Location | Finding | Suggested fix |
+|---|---|---|---|---|
+| 1 | minor | `packages/vite-plugin-foldkit/src/index.ts:1000-1004` (`reportRelayDefect`) | The new diagnostic says only that the relay "failed with an unexpected error". It does not tell the developer what happens next. The sibling `reportRelayBindFailed` 10 lines above ends with "; continuing without the relay", and AGENTS.md asks that a failure say what happens to the person. After this defect, the relay is closed (I2) and the dev server keeps running without MCP access, but the line does not say so. | Name the consequence in the same form as the neighbor, for example `'[foldkit:devTools] MCP relay stopped after an unexpected error; continuing without the relay'`. Update `RELAY_DEFECT_MESSAGE` in `test/relayCleanup.test.ts`, the changeset, and the PR description to match. |
+| 2 | nit | `.changeset/report-relay-defects.md:5` | "the relay did not start and printed no output" makes the relay the subject of "printed". The sentence before it correctly says the dev server printed nothing. The changeset now uses two subjects for the same output. | "For example, with `effect` 4.0.3 or later the relay did not start and the dev server printed nothing about it." |
+
+## Notes
+
+- Understanding of the contribution: for a consumer, a defect in the forked DevTools MCP relay fiber now prints one `console.error` line with the defect. Before, nothing printed. The fix belongs in `@foldkit/vite-plugin`: the plugin owns the fiber that loses the defect. It adds no exports and changes no options. `Effect.tapDefect` at the `Effect.forkScoped` site is the smallest fix and leaves the `RelayBindFailed` path and interruption untouched. The `reportRelayDefect` name and placement match `reportRelayBindFailed`. The pull request is a draft, and no maintainer has commented on it. All 14 CI checks pass (`checks.md`). The changeset (`patch`, file named for the change, thanks at the end) follows `CONTRIBUTING.md` and the precedent in earlier changelogs ("Thanks @artile for the report and the diagnosis."). The diff stays clear of `relayId`, `package.json` and the lockfile, so it does not overlap #1699. #1699 edits the same `src/index.ts`, but in different hunks.
+- Disagreement with recorded choice D1 (status step 12): the changeset says "Before, ... with `effect` 4.0.3 or later the relay did not start". A user on `effect` 4.0.4 who reads this patch note will expect the relay to start after the upgrade. It still does not start until #1699 lands. Only the error output changes. Consider: "With `effect` 4.0.3 or later, the relay does not start. The dev server now prints the cause (`TypeError: yield* (intermediate value) is not iterable`) instead of nothing." Or drop the version example.
+- Disagreement with recorded choices D2 and D4 (status step 12): `test/mcpRelay.test.ts` already has `closes promptly while a contended bind is still retrying`, which holds the configured port and closes during bind retries. That is the same setup as the new I1 test. A maintainer might add the `console.error` assertion to that test and leave `holdFreePort` where it was. The defect tests also sit in a file named for relay cleanup, which the assignment asked for. Neither choice is a deduction.
+- Disagreement with recorded choice D3 (status step 13), wording only: "This change does not change relayId." uses "change" twice. "relayId is unchanged; #1699 changes it to call crypto.randomUUIDv4()." says the same thing.
+- `devtools-mcp/src/server.ts` reports its fatal cause with `Effect.tapCause`, `Cause.hasInterruptsOnly` and `Cause.pretty`. This PR uses `Effect.tapDefect` with the raw defect, as the assignment specified. That is narrower, and it is correct here because typed failures are already handled. It is not a second way to do one thing.
+- Prose pass covered the changeset, the source string, the test names (`reports a relay defect on stderr`, `reports no relay defect when closing interrupts a retrying bind`), the moved `// NOTE:` on `holdFreePort` (moved without changes and still accurate), the PR title and the description. The description has no em dashes, no attribution and no verification material, and it ends with `Refs #1733` as Completion asks.
