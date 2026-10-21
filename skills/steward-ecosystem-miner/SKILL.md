@@ -41,7 +41,7 @@ Write `digests/ecosystem-miner/<YYYY-MM-DD>.md` with three tables:
 Then act, each through the publish gate in "Autonomy" in `AGENTS.md` and its daily limit, highest priority first:
 
 - A possible bug with a reproduction you ran on `upstream/main` and no upstream issue: start `steward-contribution` with it as a new shortcoming. Its analysis files the issue (`issues_opened`) or, on the Implementation path, goes on to a pull request.
-- A `P1` to `P3` DX idea repeated in at least two projects and not yet discussed upstream: open a discussion in the Ideas category from `steward-contribution/references/discussion-template.md` (`discussions_opened`).
+- A `P0` to `P2` DX idea repeated in at least two projects and not yet discussed upstream: open a discussion in the Ideas category from `steward-contribution/references/discussion-template.md` (`discussions_opened`).
 - A new project that fits `foldhub/awesome-foldkit`: open one pull request there adding it in the README's existing format (`awesome_foldkit_pull_requests`). Taras owns that repository.
 
 Update `state/ecosystem.toml` with what was filed, commit on `steward`, and push.

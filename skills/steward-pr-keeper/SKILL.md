@@ -40,7 +40,13 @@ Skip any pull request that a contribution under `.steward/contributions/` holds 
 6. The repository requires a separate review after any rewritten commit: run one fresh-context subagent on `git diff upstream/main...HEAD` against the repository's `AGENTS.md`. When it finds anything, do not push; put the findings in the digest.
 7. Check the `force_pushes` limit, then `git push <remote> HEAD:<headRefName> --force-with-lease=<headRefName>:<sha> --no-verify`.
 
-## 3. Report
+## 3. Clean up
+
+- Archive Foldkit Steward threads in T3 that are settled and older than 24 hours, including their subagent threads (`t3_thread_list` for the Foldkit Steward project, then `t3_thread_organize` with `archive`). Leave a thread that holds an open question or a pull request still in review.
+- Remove worktrees under `/Users/tao/Tools/foldkit-worktrees/` whose contribution is `analysis: concluded` or `<stage>: abandoned`, or whose pull request is merged, and whose branch has no unpushed commits. Take the contribution lock first and skip the worktree when you cannot; release it after `git worktree remove`.
+- Remove contribution locks whose `owner` time is older than 3 hours. Never remove a lock directory that has no `owner` file yet.
+
+## 4. Report
 
 Tag every item with its `priority` from "Maintainer priorities" in `AGENTS.md` and sort each table by priority.
 

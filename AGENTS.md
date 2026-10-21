@@ -51,8 +51,8 @@ When `paused = true`, a run makes no write on GitHub outside the `steward` branc
 
 | Decision | Gate |
 |---|---|
-| Choose the contribution path | Take the path analysis recommends. When it needs a maintainer decision (Proposal or Exploration), publish it only for `P1` to `P3`; otherwise conclude. |
-| Publish any text upstream (claim, issue, discussion, sweeper comment, review reply, pull request description, Validation comment) | A fresh-context subagent reviews the exact text against the repository's `AGENTS.md` prose rules, `.agents/writing-prose.md`, and the facts it claims. Publish only after a clean review. Two failed rounds: do not publish; record it in the digest. |
+| Choose the contribution path | Take the path analysis recommends. When it needs a maintainer decision (Proposal or Exploration), publish it only for `P0` to `P2`; otherwise conclude. |
+| Publish any text upstream (claim, issue, discussion, sweeper comment, review reply, pull request description, Validation comment) | A fresh-context subagent reviews the exact text against the repository's `AGENTS.md` prose rules, `.agents/writing-prose.md`, and the facts it claims. Publish only after a clean review. Count rounds per text across runs: in the contribution's `status.md`, or for a text with no contribution, in the cycle's own `state/*.toml` entry for that item. After 2 failed rounds in one run, hold the text for the next run; after 4 failed rounds in total, do not publish it at all and record that in the digest. |
 | Push a branch | The pre-push review of `git diff upstream/main...HEAD` comes back clean and the tests the change touches pass. |
 | Promote a draft pull request to ready | The evaluation gate passes (both lenses at least 95, no critical findings, CI green apart from failures `upstream/main` shares). |
 | Force-push a rebase | As in `steward-pr-keeper`. |
@@ -90,16 +90,20 @@ Devin Jameson, the maintainer, described which pull requests get his attention f
 > - Introduce APIs that meaningfully improve ergonomics and make Foldkit apps easier to reason about (e.g. Query).
 > - Make significant breaking core API changes. I try to do those as soon as I recognize they're inevitable, because they change what a Foldkit application is, and I'd rather get those into the community sooner rather than later.
 
-Every cycle tags each candidate with one of these priorities (field name `priority`) and sorts by them, in this order:
+The maintainer also labels issues and pull requests with his own priority scale. Use it as `priority`, the field every cycle tags and sorts by:
 
-| Priority | Meaning | Examples |
-|---|---|---|
-| `P1 unblock` | Without it, people cannot build something with Foldkit | A missing UI component, SSR, a show-stopping bug |
-| `P2 ergonomics` | A new API that makes apps easier to write and reason about | Query |
-| `P3 core change` | A significant breaking change to the core API that is coming anyway | A change to what a Foldkit application is |
-| `P4 other` | Docs, small fixes, cleanup, tests | Typos, minor a11y, refactors |
+| Label | Maintainer's description |
+|---|---|
+| `P0` | Critical: address immediately; blocks release, security, or data integrity |
+| `P1` | Next: highest-value actionable work |
+| `P2` | Planned: important after P1 |
+| `P3` | Backlog: low urgency, exploratory, or opportunistic |
 
-`P4` work is still welcome, but expect it to wait. Lead each pull request description with the consumer impact that sets its priority. Never inflate a priority to get attention.
+- When the issue or pull request has one of these labels, that label is its `priority`. Never override it.
+- When it has none, estimate on the same scale from the quote above and record `priority_source = "estimate"`. Re-read the labels on every run; the maintainer's label replaces an estimate as soon as it appears.
+- Other labels he uses: `review next` marks the head of his review queue, `has PR` marks an issue with an open fix, `superseded` marks replaced work, `merge conflicts` marks a pull request that cannot merge, and `size/XS` to `size/XL` give the diff size. Pull requests from outside contributors that he merged are mostly `P1` and `size/XS` to `size/M`: keep pull requests small, and split work that would reach `size/L` (over 500 lines) into increments.
+
+Lead each pull request description with the consumer impact. Never argue for a higher priority in published text.
 
 ## Cycles
 
@@ -123,7 +127,17 @@ Cycles run in parallel in one `.steward` worktree, so two kinds of lock keep the
 - Contribution lock, `contributions/<slug>/.lock/`: hold it while any run acts on that contribution or its pull request. Skip the contribution when you cannot take it. `steward-issue-claim` takes it before it first writes `status.md`; `steward-pr-keeper` takes it before it touches a pull request that a contribution owns.
 - Steward lock, `.steward/.state-lock/`: hold it for each read-modify-write of `state/*.toml` and for each `git add`, `git commit`, `git push` on `steward`. Keep it for seconds, not for the whole run. Stage only the files your run changed.
 
-Every cycle commits, at the end of its run, each `state/*.toml` file and contribution file it changed, together with its digest.
+### End of every run
+
+Before the run's final reply, in this order:
+
+1. For each contribution the run touched, make sure the state line in `status.md` is one that `check.ts` accepts, and run `check.ts`. Never write a state the script does not know, such as `implementation: in progress`; an unfinished implementation round keeps `analysis: assignment ready` (round 1) or `evaluation: failed round N` and records the progress as a step.
+2. Release every lock the run holds.
+3. Commit, under the steward lock, each `state/*.toml` file, contribution file, and digest the run changed, then push `steward`.
+
+### Reviews
+
+Run each review (publish gate, pre-push review, evaluation lens) as one subagent and wait for it before starting the next round. Never launch several rounds of the same review at once. Allow at most 3 pre-push review rounds per push: when the third still finds problems, keep the commits local, record the findings in `status.md`, and let the next driver run continue.
 
 ## Digest format
 

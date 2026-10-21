@@ -22,8 +22,10 @@ Also re-check entries with `decision = "watch"`. Set `last_poll` to the start ti
 
 Skip the issue, and record `decision = "skip"` with the reason, when any of these is true:
 
-- The author is `devinjameson`, or the issue has an assignee.
+- The author is `devinjameson`, or the issue has an assignee, or the `has PR` or `superseded` label.
+- Its entry in `state/claim.toml` already has a `slug`: `steward-driver` owns that contribution. Skip it without changing its entry.
 - An open pull request references it: `gh pr list -R foldkit/foldkit --search "<number>" --state open`.
+- Another person's open pull request already fixes its root cause, even without referencing the issue. A remaining side part qualifies only when it is `P0` to `P2` on its own.
 - A comment says someone is working on it.
 - It asks for a design or direction decision the maintainer has not made. Record `decision = "watch"` instead, and add it to the digest under "discussion candidates".
 - It is a question, or a duplicate. Name the duplicate in the digest.

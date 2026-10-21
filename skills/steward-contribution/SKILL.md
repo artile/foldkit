@@ -16,6 +16,7 @@ In autonomous mode also:
 - Inputs from a cycle (`steward-issue-claim`, `steward-ecosystem-miner`, `steward-own-apps`, `steward-driver`) skip the acknowledgment and summary replies. A setup failure or an unknown slug goes into the run's digest, and the run skips that contribution.
 - When CI checks on the pull request have not started (for example, workflows wait for maintainer approval), do not escalate: keep the state, release the lock, and let the next driver run retry.
 - An unclean contribution worktree with no unpushed commits is removed and recreated from the branch. With unpushed commits, record it in the digest and skip.
+- When analysis resumes and `status.md` lacks the findings it needs (analysis keeps them only in its returns), rerun Phase 1 up to Decision against the current `upstream/main`.
 - Any other escalation: add the step "escalation retry" to `status.md` and route it back to analysis. When `status.md` already has an "escalation retry" step, set the state to `<stage>: abandoned` with the reason instead.
 - At any `abandoned` state, close the contribution's draft pull request if one exists (`gh pr close`).
 - In each implementation round, read the review threads and comments on the contribution's pull request. Treat those from an author whose `authorAssociation` is `OWNER`, `MEMBER`, or `COLLABORATOR` as Must-fix items (evaluation also lists them in `outcome.md`): resolve them in the round and reply through the publish gate and the `review_replies` limit.

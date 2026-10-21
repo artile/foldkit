@@ -2,151 +2,217 @@
 last_poll = "2026-10-21T14:22:26Z"
 
 # Deferred bug candidates (2-per-run limit). Next run takes them smallest first.
+
 [issues.1682]
 decision = "watch"
-priority = "P4 other"
+priority = "P2"
+priority_source = "label"
 reason = "candidate, deferred: Calendar heading aria-label hides visible month and year (small); fix picks between aria-describedby and a new label callback (API choice)"
 
 [issues.1681]
 decision = "awaiting-approval"
-priority = "P4 other"
+priority = "P2"
+priority_source = "label"
 slug = "issue-1681-calendar-stale-enter"
-reason = "reproduced on 7ee214268 (Days; Months and Years same shape); decided autonomously: Implementation path; claim held, publish gate failed two rounds (reproduction id, unobserved focus claim); revised text fixes both, next run re-gates from round 1. Maintainer label P2 on the issue"
+reason = "reproduced on 7ee214268 (Days; Months and Years same shape); decided autonomously: Implementation path; claim held, publish gate failed two rounds (reproduction id, unobserved focus claim); revised text fixes both, 2 of 4 publish gate rounds used."
 
 [issues.1641]
 decision = "watch"
-priority = "P4 other"
+priority = "P2"
+priority_source = "label"
 reason = "candidate, deferred: OnMount dispatch after lifecycle end (console noise on teardown)"
 
 [issues.1677]
 decision = "reproducing"
-priority = "P1 unblock"
+priority = "P2"
+priority_source = "label"
 slug = "issue-1677-dev-build-id"
 reason = "candidate taken 2026-10-21T14:22Z: SSR dev server hydration refused after restart (buildToken cached immutable); still on upstream/main 7ee214268"
 
 # Discussion candidates: need a maintainer design or API decision.
+
 [issues.1724]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "direction: who owns the size transition (inline style vs consumer class)"
 
 [issues.1670]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "direction: draggable input shape and mid-drag ActivatedKeyboardDrag policy"
 
 [issues.1635]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "direction: dev Model preservation key (URL, tab)"
 
 [issues.1629]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "direction: Animation.ViewInputs content callback"
 
 [issues.1628]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "reporter still investigating root cause (E2E cold Vite cache)"
 
 [issues.1665]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "feature request: history state in pushUrl/replaceUrl"
 
 [issues.1683]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "feature request: top-layer anchor support"
 
 [issues.1686]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "feature request: non-modal Dialog"
 
 [issues.1687]
+priority = "P3"
+priority_source = "label"
 decision = "watch"
 reason = "feature request: Tooltip arrow"
 
 [issues.1688]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "feature request: anchor boundary options, depends on #1683"
 
 [issues.1689]
+priority = "P3"
+priority_source = "label"
 decision = "watch"
 reason = "feature request: showModal opt-in"
 
 [issues.1690]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "feature request: VirtualList row attributes"
 
 [issues.1710]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "feature request: anchor CSS variables"
 
 [issues.1712]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "feature request (Makisuo UI batch)"
 
 [issues.1713]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "feature request (Makisuo UI batch)"
 
 [issues.1714]
+priority = "P3"
+priority_source = "label"
 decision = "watch"
 reason = "feature request (Makisuo UI batch)"
 
 [issues.1715]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "feature request (Makisuo UI batch)"
 
 [issues.1716]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "feature request (Makisuo UI batch)"
 
 [issues.1717]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "feature request (Makisuo UI batch)"
 
 [issues.1718]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "feature request (Makisuo UI batch)"
 
 [issues.1719]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "feature request (Makisuo UI batch)"
 
 [issues.1720]
+priority = "P3"
+priority_source = "label"
 decision = "watch"
 reason = "feature request (Makisuo UI batch)"
 
 [issues.1721]
+priority = "P3"
+priority_source = "label"
 decision = "watch"
 reason = "feature request (Makisuo UI batch)"
 
 [issues.1722]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "feature request (Makisuo UI batch)"
 
 [issues.1723]
+priority = "P2"
+priority_source = "label"
 decision = "watch"
 reason = "feature request (Makisuo UI batch)"
 
 # Skipped.
+
 [issues.1642]
+priority = "P2"
+priority_source = "label"
 decision = "skip"
 reason = "open PR #1746 (Taras)"
 
 [issues.1657]
+priority = "P2"
+priority_source = "label"
 decision = "skip"
 reason = "open PR #1728"
 
 [issues.1669]
+priority = "P3"
+priority_source = "label"
 decision = "skip"
 reason = "reporter took the helper; #1679 merged"
 
 # Reproduced this run.
+
 [issues.1733]
 decision = "claimed"
-priority = "P4 other"
+priority = "P1"
+priority_source = "label"
 slug = "issue-1733-relay-uuid"
 reason = "claimed: https://github.com/foldkit/foldkit/issues/1733#issuecomment-6317480108; PR #1751 promoted to ready for review (round 2, scores 96/96); UUID fix left to #1699"
 
 [issues.1680]
-decision = "no-claim"
-priority = "P4 other"
+decision = "watch"
+priority = "P2"
+priority_source = "label"
 slug = "issue-1680-disabled-submit"
-reason = "reproduced; full fix needs a new foldkit/html attribute (maintainer API decision, conflicts with #1723 native disabled). Proposal path; decided autonomously: concluded, gate publishes Proposal only for P1-P3"
+reason = "reproduced; full fix needs a new foldkit/html attribute (maintainer API decision, conflicts with #1723 native disabled). Reopened 2026-10-21 for the Proposal path: maintainer label P2 qualifies."

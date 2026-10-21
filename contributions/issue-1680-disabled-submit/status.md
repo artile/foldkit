@@ -1,4 +1,4 @@
-Contribution `issue-1680-disabled-submit` is currently at `analysis: concluded`.
+Contribution `issue-1680-disabled-submit` is currently at `analysis: in progress`.
 
 Steps taken so far, oldest first:
 
@@ -8,3 +8,4 @@ Steps taken so far, oldest first:
 4. On 21-10-2026, analysis traced the root cause to `packages/ui/src/button/index.ts`: `isDisabled` adds `aria-disabled` and `data-disabled` and drops `OnClick`, but nothing cancels the button's click activation, so the button stays a working submit button and the form's default button. In a disposable worktree, a message-less click `preventDefault` attribute on the disabled Button made the reproduction pass 4 of 4 (exit 0); rendering `type="button"` while disabled passed 3 of 4 (Enter in a single text field still submits). Native `disabled` blocks all four but removes the button from the tab order. Firefox was not checked; WebKit matched Chromium.
 5. On 21-10-2026, analysis returned its findings for a decision, recommending the Proposal path on issue #1680, because the full resolution needs a new event attribute in the `foldkit` html module and #1723 asks for a conflicting native `disabled` direction.
 6. On 21-10-2026, the contributor decided autonomously (Steward autonomous mode, relayed by the orchestrator): conclude the analysis without publishing, because the recommended path is Proposal and the steward priority is P4 other (Button fix with an app-side workaround, not a show-stopper), and the gate publishes Proposal or Exploration only for P1 to P3. The reproduction stays in `reproduction/`; no GitHub writes. Analysis concluded.
+7. On 21-10-2026, orchestrator reopened the analysis: the steward now uses the maintainer's priority labels, and #1680 carries `P2`, so the Proposal path qualifies for publication under the autonomy gate (`P0` to `P2`). Resume at Decision with the Proposal path.
