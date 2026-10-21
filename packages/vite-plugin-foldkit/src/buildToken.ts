@@ -269,9 +269,11 @@ export const foldkitBuildToken = (
         },
       },
       resolveId(id) {
-        return id === DEVELOPMENT_BUILD_ID_MODULE_ID
-          ? RESOLVED_DEVELOPMENT_BUILD_ID_MODULE_ID
-          : undefined
+        if (id === DEVELOPMENT_BUILD_ID_MODULE_ID) {
+          return RESOLVED_DEVELOPMENT_BUILD_ID_MODULE_ID
+        } else {
+          return undefined
+        }
       },
       load(id) {
         if (id !== RESOLVED_DEVELOPMENT_BUILD_ID_MODULE_ID) {
