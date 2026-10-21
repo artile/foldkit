@@ -1,0 +1,9 @@
+Contribution `issue-1680-disabled-submit` is currently at `analysis: in progress`.
+
+Steps taken so far, oldest first:
+
+1. On 21-10-2026, analysis started for GitHub issue https://github.com/foldkit/foldkit/issues/1680, pinned to `upstream/main` at `7ee214268c602967937b80f6f20d1e831f2e8ab6`, in a clean detached worktree.
+2. On 21-10-2026, analysis reviewed related threads: closed issue #944 (Checkbox and Switch render a submitting button, closed without a recorded decision), merged PR #955 (type button on consumer-rendered control attributes), and open issue #1723 (by Makisuo, asks for an option to render native `disabled` on Button and refers to #1680). No open pull request touches `packages/ui/src/button`.
+3. On 21-10-2026, analysis reproduced the shortcoming with `reproduction/run.mjs` (Chromium through Playwright 1.63.0, real `Button.view` and Foldkit runtime): on the base, all four actions (click, Enter on the button, Space on the button, Enter in the text field) dispatch `SubmittedForm` once; expected 0; exit 1.
+4. On 21-10-2026, analysis traced the root cause to `packages/ui/src/button/index.ts`: `isDisabled` adds `aria-disabled` and `data-disabled` and drops `OnClick`, but nothing cancels the button's click activation, so the button stays a working submit button and the form's default button. In a disposable worktree, a message-less click `preventDefault` attribute on the disabled Button made the reproduction pass 4 of 4 (exit 0); rendering `type="button"` while disabled passed 3 of 4 (Enter in a single text field still submits). Native `disabled` blocks all four but removes the button from the tab order. Firefox was not checked; WebKit matched Chromium.
+5. On 21-10-2026, analysis returned its findings for a decision, recommending the Proposal path on issue #1680, because the full resolution needs a new event attribute in the `foldkit` html module and #1723 asks for a conflicting native `disabled` direction.

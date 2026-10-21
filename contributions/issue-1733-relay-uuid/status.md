@@ -1,0 +1,5 @@
+Contribution `issue-1733-relay-uuid` is currently at `analysis: in progress`.
+
+Steps taken so far, oldest first:
+
+1. On 21-10-2026, analysis pinned upstream/main 7ee214268c602967937b80f6f20d1e831f2e8ab6 and reproduced issue #1733 with `reproduction/run.sh <effect-version>`: with the published @foldkit/vite-plugin 0.28.0, the DevTools MCP relay starts on effect 4.0.0 and 4.0.2, and does not start on 4.0.3, 4.0.4 and 4.0.5, with nothing on stdout or stderr. Cause confirmed: `crypto.randomUUIDv4` became a method in effect 4.0.3, so `relayId` dies with `TypeError: yield* (intermediate value) is not iterable`, and the fiber forked with `Effect.forkScoped` drops the defect. Open PR #1699 (klukacin) already changes `relayId` to `crypto.randomUUIDv4()` and moves the plugin peer to `effect ^4.0.5`; it does not report relay defects. Validated on a patched published build: `Effect.tapDefect` with `Console.error` on the forked relay prints the TypeError on 4.0.4 and prints nothing extra on a normal close on 4.0.0. Paused at Decision; recommended path: Implementation, scoped to reporting relay fiber defects, leaving the UUID call to #1699.

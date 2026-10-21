@@ -1,2 +1,144 @@
 # steward-issue-claim state. decision: skip | watch | no-claim | awaiting-approval | claimed
-last_poll = "2026-10-07T00:00:00Z"
+last_poll = "2026-10-21T12:22:21Z"
+
+# Deferred bug candidates (2-per-run limit). Next run takes them smallest first.
+[issues.1682]
+decision = "watch"
+reason = "candidate, deferred: Calendar heading aria-label hides visible month and year (small)"
+
+[issues.1681]
+decision = "watch"
+reason = "candidate, deferred: Calendar Enter after arrow in one frame selects stale day"
+
+[issues.1641]
+decision = "watch"
+reason = "candidate, deferred: OnMount dispatch after lifecycle end"
+
+[issues.1677]
+decision = "watch"
+reason = "candidate, deferred: dev server buildToken cached immutable across restarts"
+
+# Discussion candidates: need a maintainer design or API decision.
+[issues.1724]
+decision = "watch"
+reason = "direction: who owns the size transition (inline style vs consumer class)"
+
+[issues.1670]
+decision = "watch"
+reason = "direction: draggable input shape and mid-drag ActivatedKeyboardDrag policy"
+
+[issues.1635]
+decision = "watch"
+reason = "direction: dev Model preservation key (URL, tab)"
+
+[issues.1629]
+decision = "watch"
+reason = "direction: Animation.ViewInputs content callback"
+
+[issues.1628]
+decision = "watch"
+reason = "reporter still investigating root cause (E2E cold Vite cache)"
+
+[issues.1665]
+decision = "watch"
+reason = "feature request: history state in pushUrl/replaceUrl"
+
+[issues.1683]
+decision = "watch"
+reason = "feature request: top-layer anchor support"
+
+[issues.1686]
+decision = "watch"
+reason = "feature request: non-modal Dialog"
+
+[issues.1687]
+decision = "watch"
+reason = "feature request: Tooltip arrow"
+
+[issues.1688]
+decision = "watch"
+reason = "feature request: anchor boundary options, depends on #1683"
+
+[issues.1689]
+decision = "watch"
+reason = "feature request: showModal opt-in"
+
+[issues.1690]
+decision = "watch"
+reason = "feature request: VirtualList row attributes"
+
+[issues.1710]
+decision = "watch"
+reason = "feature request: anchor CSS variables"
+
+[issues.1712]
+decision = "watch"
+reason = "feature request (Makisuo UI batch)"
+
+[issues.1713]
+decision = "watch"
+reason = "feature request (Makisuo UI batch)"
+
+[issues.1714]
+decision = "watch"
+reason = "feature request (Makisuo UI batch)"
+
+[issues.1715]
+decision = "watch"
+reason = "feature request (Makisuo UI batch)"
+
+[issues.1716]
+decision = "watch"
+reason = "feature request (Makisuo UI batch)"
+
+[issues.1717]
+decision = "watch"
+reason = "feature request (Makisuo UI batch)"
+
+[issues.1718]
+decision = "watch"
+reason = "feature request (Makisuo UI batch)"
+
+[issues.1719]
+decision = "watch"
+reason = "feature request (Makisuo UI batch)"
+
+[issues.1720]
+decision = "watch"
+reason = "feature request (Makisuo UI batch)"
+
+[issues.1721]
+decision = "watch"
+reason = "feature request (Makisuo UI batch)"
+
+[issues.1722]
+decision = "watch"
+reason = "feature request (Makisuo UI batch)"
+
+[issues.1723]
+decision = "watch"
+reason = "feature request (Makisuo UI batch)"
+
+# Skipped.
+[issues.1642]
+decision = "skip"
+reason = "open PR #1746 (Taras)"
+
+[issues.1657]
+decision = "skip"
+reason = "open PR #1728"
+
+[issues.1669]
+decision = "skip"
+reason = "reporter took the helper; #1679 merged"
+
+# Reproduced this run.
+[issues.1733]
+decision = "awaiting-approval"
+slug = "issue-1733-relay-uuid"
+reason = "reproduced on effect 4.0.3+; UUID part covered by open PR #1699, claim scoped to printing relay defects"
+
+[issues.1680]
+decision = "no-claim"
+slug = "issue-1680-disabled-submit"
+reason = "reproduced; full fix needs a new foldkit/html attribute (maintainer API decision, conflicts with #1723 native disabled). Proposal path, analysis paused at Decision"
