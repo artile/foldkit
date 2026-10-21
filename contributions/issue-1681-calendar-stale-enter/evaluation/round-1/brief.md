@@ -1,0 +1,8 @@
+- **Slug:** `issue-1681-calendar-stale-enter`
+- **Merge base:** `7ee214268c602967937b80f6f20d1e831f2e8ab6`
+- **Round:** 1
+- **Assignment:** `/home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1681-calendar-stale-enter/assignment.md`
+- **Status:** `/home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1681-calendar-stale-enter/status.md`
+- **Checks:** `/home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1681-calendar-stale-enter/evaluation/round-1/checks.md`
+- **Analysis:** https://github.com/foldkit/foldkit/issues/1681 and https://github.com/foldkit/foldkit/issues/1681#issuecomment-6319936575
+- **Pull request:** https://github.com/foldkit/foldkit/pull/1754

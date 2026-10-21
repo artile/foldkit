@@ -10,11 +10,11 @@ priority_source = "label"
 reason = "candidate, deferred: Calendar heading aria-label hides visible month and year (small); fix picks between aria-describedby and a new label callback (API choice)"
 
 [issues.1681]
-decision = "awaiting-approval"
+decision = "no-claim"
 priority = "P2"
 priority_source = "label"
 slug = "issue-1681-calendar-stale-enter"
-reason = "reproduced on 7ee214268 (Days; Months and Years same shape); decided autonomously: Implementation path; claim held, publish gate failed two rounds (reproduction id, unobserved focus claim); revised text fixes both, 2 of 4 publish gate rounds used."
+reason = "Contribution evaluation abandoned under the repeated-escalation gate; own draft PR #1754 closed. Round 1 scores 100/60 with critical missing I5 unrelated-key event and I6 DatePicker Enter integration tests; branch and artifacts preserved."
 
 [issues.1641]
 decision = "watch"
@@ -23,11 +23,11 @@ priority_source = "label"
 reason = "candidate, deferred: OnMount dispatch after lifecycle end (console noise on teardown)"
 
 [issues.1677]
-decision = "reproducing"
+decision = "claimed"
 priority = "P2"
 priority_source = "label"
 slug = "issue-1677-dev-build-id"
-reason = "candidate taken 2026-10-21T14:22Z: SSR dev server hydration refused after restart (buildToken cached immutable); still on upstream/main 7ee214268"
+reason = "PR #1752 promoted to ready for review: evaluation round 2 scores 100/100, zero findings, all 14 CI checks pass; maintainer-pr-keeper owns follow-up."
 
 # Discussion candidates: need a maintainer design or API decision.
 
