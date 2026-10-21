@@ -210,5 +210,7 @@ describe('separately invoked aggregate builds', () => {
     const server = readBuiltFiles(serverOutput)
     expect(client).toContain(buildId)
     expect(server).toContain(buildId)
+    expect(client).not.toContain('development-build-id')
+    expect(server).not.toContain('development-build-id')
   })
 })

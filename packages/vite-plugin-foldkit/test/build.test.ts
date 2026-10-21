@@ -1136,6 +1136,8 @@ describe('the build id across environments', () => {
       )
       expect(clientBundle).toContain(buildId)
       expect(serverBundle).toContain(buildId)
+      expect(clientBundle).not.toContain('development-build-id')
+      expect(serverBundle).not.toContain('development-build-id')
       return buildId ?? ''
     }
 

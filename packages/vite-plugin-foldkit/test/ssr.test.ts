@@ -107,6 +107,9 @@ const FOLDKIT_BUILD_TOKEN_URL = `/@fs${resolve(
   dirname(fileURLToPath(import.meta.resolve('foldkit'))),
   'buildToken.js',
 )}`
+const DEVELOPMENT_BUILD_ID_MODULE_ID = 'virtual:foldkit/development-build-id'
+const RESOLVED_DEVELOPMENT_BUILD_ID_MODULE_ID = `\0${DEVELOPMENT_BUILD_ID_MODULE_ID}`
+const DEVELOPMENT_BUILD_ID_URL = `/@id/__x00__${DEVELOPMENT_BUILD_ID_MODULE_ID}`
 const AGGREGATE_DEV_SERVER_TEST_TIMEOUT_MS = 20_000
 const originOf = (address: AddressInfo | string | null | undefined): string =>
   `http://127.0.0.1:${Option.getOrThrowWith(
@@ -368,7 +371,15 @@ const automaticIdentityFrom = async (
     await running.server.environments.client.transformRequest(
       FOLDKIT_BUILD_TOKEN_URL,
     )
-  expect(transformedClientToken?.code).toContain(JSON.stringify(buildId))
+  expect(transformedClientToken?.code).toContain(DEVELOPMENT_BUILD_ID_MODULE_ID)
+
+  const transformedClientBuildId =
+    await running.server.environments.client.transformRequest(
+      RESOLVED_DEVELOPMENT_BUILD_ID_MODULE_ID,
+    )
+  expect(transformedClientBuildId?.code).toContain(
+    `export const buildId = ${JSON.stringify(buildId)}`,
+  )
 
   return buildId ?? ''
 }
@@ -384,6 +395,51 @@ describe('foldkitSsr', () => {
       const secondBuildId = await automaticIdentityFrom(second)
 
       expect(secondBuildId).not.toBe(firstBuildId)
+    },
+    AGGREGATE_DEV_SERVER_TEST_TIMEOUT_MS,
+  )
+
+  it(
+    'serves the same Foldkit build-token module from every aggregate dev server',
+    async () => {
+      const first = await startAutomaticIdentityServer()
+      const second = await startAutomaticIdentityServer()
+
+      const firstBuildId = await automaticIdentityFrom(first)
+      const secondBuildId = await automaticIdentityFrom(second)
+      const firstClientToken =
+        await first.server.environments.client.transformRequest(
+          FOLDKIT_BUILD_TOKEN_URL,
+        )
+      const secondClientToken =
+        await second.server.environments.client.transformRequest(
+          FOLDKIT_BUILD_TOKEN_URL,
+        )
+
+      expect(secondClientToken?.code).toBe(firstClientToken?.code)
+      expect(firstClientToken?.code).not.toContain(firstBuildId)
+      expect(firstClientToken?.code).not.toContain(secondBuildId)
+    },
+    AGGREGATE_DEV_SERVER_TEST_TIMEOUT_MS,
+  )
+
+  it(
+    'serves the development build id to the browser for revalidation',
+    async () => {
+      const running = await startAutomaticIdentityServer()
+      const page = await (await fetch(`${running.origin}/`)).text()
+      const buildId = /data-foldkit-build="([^"]+)"/.exec(page)?.[1]
+      expect(buildId).toBeDefined()
+
+      const response = await fetch(
+        `${running.origin}${DEVELOPMENT_BUILD_ID_URL}`,
+      )
+
+      expect(response.status).toBe(200)
+      expect(response.headers.get('cache-control')).toBe('no-cache')
+      expect(await response.text()).toContain(
+        `export const buildId = ${JSON.stringify(buildId)}`,
+      )
     },
     AGGREGATE_DEV_SERVER_TEST_TIMEOUT_MS,
   )
