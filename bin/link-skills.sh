@@ -7,6 +7,7 @@ steward_dir="$(cd "$(dirname "$0")/.." && pwd)"
 checkout="$(cd "${1:-.}" && pwd)"
 
 mkdir -p "$checkout/.claude/skills"
+find "$checkout/.claude/skills" -maxdepth 1 -name 'steward-*' -type l -delete
 for skill in "$steward_dir"/skills/*/; do
   name="$(basename "$skill")"
   ln -sfn "${skill%/}" "$checkout/.claude/skills/$name"
@@ -15,6 +16,7 @@ done
 printf '@%s/AGENTS.md\n' "$steward_dir" > "$checkout/CLAUDE.local.md"
 
 exclude="$(git -C "$checkout" rev-parse --path-format=absolute --git-common-dir)/info/exclude"
+mkdir -p "$(dirname "$exclude")"
 for pattern in '/.steward/' '/.claude/skills/steward-*' '/CLAUDE.local.md'; do
   grep -qxF "$pattern" "$exclude" || printf '%s\n' "$pattern" >> "$exclude"
 done

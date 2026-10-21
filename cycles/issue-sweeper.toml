@@ -1,5 +1,5 @@
 id = "issue-sweeper"
 skill = "steward-issue-sweeper"
 schedule = { type = "fixed_time", timeOfDay = "10:00", weekdays = [1] }
-t3_scheduled_task_id = ""
+t3_scheduled_task_id = "scheduled-task:command:mcp:c5324381-323b-44ab-aaa6-0dc8214252df:schedule-task:steward-issue-sweeper-v1"
 prompt = "Run the $steward-issue-sweeper skill for Foldkit Steward. Read /Users/tao/Tools/foldkit/.steward/AGENTS.md first."

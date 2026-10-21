@@ -1,15 +1,15 @@
-**TL;DR:** <One sentence stating what the change does and the shortcoming it resolves.>
+<Title: the Conventional Commit subject, with `!` after the scope for a breaking change.>
+
+<Description: written as the squash commit body. One source line per paragraph, no hard wrapping.>
+
+<Paragraph: what was wrong or missing before, as a reader of `git log` on `main` needs it.>
+
+<Paragraph: what changed, by area, naming the affected modules, the version impact, and any public API or behavior change.>
+
+<Paragraph, only when it applies: what stays the same, deliberate exclusions, and the later increments.>
 
 <Fixes #N, or Refs #N for an incremental resolution.>
 
-## Changes
+<First pull request comment, posted after the draft opens, not part of the description:>
 
-<Summarize the change briefly by area, naming the affected modules. State the version impact and any public API or observable behavior changes, or that there are none.>
-
-## Validation
-
-<Name the added or updated tests and what they pin, in a sentence or two.>
-
-## Scope
-
-<For an incremental resolution, name this increment and what follows. List deliberate exclusions a reviewer might otherwise expect. Omit if neither applies.>
+**Validation:** <the added or updated tests and what they pin, in a sentence or two.>

@@ -35,13 +35,13 @@ Everything else is a candidate. Order candidates by likely size, smallest first.
 For each candidate, run the `steward-contribution` skill with the issue as input (the "issue from `steward-issue-claim`" entry row). Its analysis stage pins `upstream/main`, writes a failing reproduction under `contributions/<slug>/reproduction/`, finds the root cause, and returns a recommendation.
 
 - No reproduction, or the path is not Implementation: record `decision = "no-claim"` with the reason. Put it in the digest.
-- Implementation path: record `decision = "awaiting-approval"` and stop here.
+- Implementation path: the analysis stage is paused at Decision with `analysis: in progress`. Record `decision = "awaiting-approval"` and the slug, and stop here.
 
 ## 4. Ask Taras
 
 Reply in the thread with, per candidate: the issue link, a one-line summary, the reproduction result, the planned fix in two lines, and the exact claim comment text. The claim comment states the pinned commit, the minimal reproduction, observed and expected results, and one line saying a pull request follows.
 
-After Taras approves, post the comment (`gh issue comment`), record `decision = "claimed"` with the comment URL, and continue `steward-contribution` into implementation and evaluation. That opens a draft pull request from `artile/foldkit` with `Fixes #<number>`.
+After Taras approves, relay the approved text to the paused analysis stage of `steward-contribution`. The analysis stage posts the comment, records its URL in `status.md`, writes `assignment.md`, and sets `analysis: assignment ready`. Then record `decision = "claimed"` with the comment URL here, and let `steward-contribution` continue into implementation and evaluation. That opens a draft pull request from `artile/foldkit` with `Fixes #<number>`.
 
 ## 5. Report
 

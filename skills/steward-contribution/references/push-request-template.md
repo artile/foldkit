@@ -1,4 +1,4 @@
-I request your permission to push `<branch>` to `origin`.
+I request your permission to push `<branch>` to `artile` (`artile/foldkit`).
 
 Commits to push:
 

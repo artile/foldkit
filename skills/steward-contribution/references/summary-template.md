@@ -6,9 +6,9 @@ I’ve thought through your request. Here’s how I understand it:
 
 | Check | Result |
 |---|---|
-| `upstream` and `origin` exist as remotes | <“Passed” or “Failed”> |
-| `origin` is a fork of `upstream` | <“Passed” or “Failed”> |
-| `origin` has Actions disabled | <“Passed” or “Failed”> |
+| `upstream` and `artile` exist as remotes | <“Passed” or “Failed”> |
+| `artile` is a fork of `upstream` | <“Passed” or “Failed”> |
+| `artile` has Actions disabled | <“Passed” or “Failed”> |
 
 <If every check passed and the worktree was set up, write “Work will take place in the worktree `<absolute path of the worktree>`, detached at `upstream/<default branch>`, and be recorded in `<absolute path of the artifact directory>`.”; otherwise, write “I’ll set up the worktree once the problems below are resolved.”>
 

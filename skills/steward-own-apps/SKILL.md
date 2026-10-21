@@ -13,7 +13,7 @@ For every app in `state/apps.toml`:
 
 - Read the Foldkit packages and versions in its `package.json`.
 - Latest version: `npm view foldkit version`, and the same for each `@foldkit/*` package it uses.
-- Breaking changes between the two versions: read the `CHANGELOG.md` of each package in `/Users/tao/Tools/foldkit/packages/*` (on `upstream/main`) for the range, and collect entries that require consumer code changes.
+- Breaking changes between the two versions: after `git -C /Users/tao/Tools/foldkit fetch upstream main`, read each package changelog with `git -C /Users/tao/Tools/foldkit show upstream/main:packages/<package>/CHANGELOG.md` for the range, and collect entries that require consumer code changes.
 
 ## 2. Friction
 

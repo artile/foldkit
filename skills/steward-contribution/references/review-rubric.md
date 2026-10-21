@@ -8,7 +8,7 @@ Anything in the diff that those sources do not explain is a finding. A choice th
 
 Each lens asks a different question of the same diff:
 
-- **Maintainer lens:** reads every line as the maintainers of the project would, weighing public API shape, contracts, and consistent factoring and naming far above mechanics; its bar is code that looks maintainer-written. In `foldkit/foldkit`, also apply the maintainer's own review procedure in `.agents/skills/review-contributor-pr/SKILL.md`, including its separate prose pass against `AGENTS.md` and `.agents/writing-prose.md`.
+- **Maintainer lens:** reads every line as the maintainers of the project would, weighing public API shape, contracts, and consistent factoring and naming far above mechanics; its bar is code that looks maintainer-written. In `foldkit/foldkit`, also apply the read-only sections of the maintainer's own review procedure in `.agents/skills/review-contributor-pr/SKILL.md`: "Understand the contribution", "Review the full change", and "Review every piece of prose" (its prose pass against `AGENTS.md` and `.agents/writing-prose.md`). Skip its other sections: they commit, push, and write to GitHub.
 - **Implementation lens:** reads for what maintainers expect contributors to have settled: correctness, edge cases, test quality, types, error handling, and leftovers.
 
 Review through your lens only. Where unsure, overlap is acceptable; silence is not.
