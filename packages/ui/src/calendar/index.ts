@@ -872,9 +872,10 @@ export type ViewLabels = Readonly<{
 
 /** Per-render view inputs passed to `view` via `h.submodel`'s `viewInputs` field.
  *
- *  The Calendar dispatches its own `ClickedDay` message on date commit
- *  and emits a `SelectedDate` OutMessage. Handle the selection in the
- *  `foldOutMessage` of the Calendar's `Update.foldChild` config. */
+ *  The Calendar dispatches its own Messages on date commit (`ClickedDay`
+ *  for a click, `PressedKeyOnGrid` for Enter or Space) and emits a
+ *  `SelectedDate` OutMessage. Handle the selection in the `foldOutMessage`
+ *  of the Calendar's `Update.foldChild` config. */
 export type ViewInputs = Readonly<{
   /** The selected date, read straight from the parent Model. The selected-day
    *  marker derives from it. */
