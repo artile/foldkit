@@ -135,10 +135,12 @@ reason = "reporter took the helper; #1679 merged"
 # Reproduced this run.
 [issues.1733]
 decision = "awaiting-approval"
+priority = "P4 other"
 slug = "issue-1733-relay-uuid"
-reason = "reproduced on effect 4.0.3+; UUID part covered by open PR #1699, claim scoped to printing relay defects"
+reason = "reproduced on effect 4.0.3+; UUID part covered by open PR #1699, claim scoped to printing relay defects; decided autonomously: Implementation path; claim held, publish gate failed two rounds, driver retries"
 
 [issues.1680]
 decision = "no-claim"
+priority = "P4 other"
 slug = "issue-1680-disabled-submit"
-reason = "reproduced; full fix needs a new foldkit/html attribute (maintainer API decision, conflicts with #1723 native disabled). Proposal path, analysis paused at Decision"
+reason = "reproduced; full fix needs a new foldkit/html attribute (maintainer API decision, conflicts with #1723 native disabled). Proposal path; decided autonomously: concluded, gate publishes Proposal only for P1-P3"
