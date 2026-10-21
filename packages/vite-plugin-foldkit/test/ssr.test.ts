@@ -433,6 +433,14 @@ describe('foldkitSsr', () => {
       const firstBuildId = await automaticIdentityFrom(first)
       const secondBuildId = await automaticIdentityFrom(second)
 
+      const buildToken = await fetch(
+        `${first.origin}${FOLDKIT_BUILD_TOKEN_URL}`,
+      )
+
+      expect(await buildToken.text()).toContain(
+        `from ${JSON.stringify(DEVELOPMENT_BUILD_ID_URL)}`,
+      )
+
       const response = await fetch(`${first.origin}${DEVELOPMENT_BUILD_ID_URL}`)
       const etag = Option.getOrThrowWith(
         Option.fromNullishOr(response.headers.get('etag')),
