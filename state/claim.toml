@@ -22,7 +22,7 @@ priority = "P2"
 priority_source = "label"
 slug = "issue-1641-mount-late-dispatch"
 comment_url = "https://github.com/foldkit/foldkit/issues/1641#issuecomment-6323514249"
-reason = "decided autonomously: Implementation path; claim publish gate round 1 clean; local commit 86b10af0e, 55 focused tests and readiness checks pass; draft held at daily PR limit 3/3; driver owns pending pre-push and publication reviews; natural Dialog frequency unverified"
+reason = "decided autonomously: hold local commit 86b10af0e at daily PR limit 3/3; full-range code review round 1 and final text review round 2 clean; all pre-push stages pass, 7187 workspace tests and 204 script tests pass, Chromium 15 passed plus 3 passed on retry; next driver rechecks freshness/capacity before publication; natural Dialog frequency unverified"
 
 [issues.1677]
 decision = "claimed"
