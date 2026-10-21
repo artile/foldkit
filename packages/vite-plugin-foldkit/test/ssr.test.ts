@@ -430,6 +430,7 @@ describe('foldkitSsr', () => {
     async () => {
       const first = await startAutomaticIdentityServer()
       const second = await startAutomaticIdentityServer()
+
       const firstBuildId = await automaticIdentityFrom(first)
       const secondBuildId = await automaticIdentityFrom(second)
 
@@ -437,6 +438,7 @@ describe('foldkitSsr', () => {
         `${first.origin}${FOLDKIT_BUILD_TOKEN_URL}`,
       )
 
+      expect(buildToken.status).toBe(200)
       expect(await buildToken.text()).toContain(
         `from ${JSON.stringify(DEVELOPMENT_BUILD_ID_URL)}`,
       )
