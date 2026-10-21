@@ -9,7 +9,7 @@ review_replies = 10
 issues_opened = 1
 discussions_opened = 1
 pushes = 20
-force_pushes = 5
+force_pushes = 11
 awesome_foldkit_pull_requests = 1
 
 [counts]

@@ -52,7 +52,7 @@ When `paused = true`, a run makes no write on GitHub outside the `steward` branc
 | Decision | Gate |
 |---|---|
 | Choose the contribution path | Take the path analysis recommends. When it needs a maintainer decision (Proposal or Exploration), publish it only for `P0` to `P2`; otherwise conclude. |
-| Publish any text upstream (claim, issue, discussion, sweeper comment, review reply, pull request description, Validation comment) | A fresh-context subagent reviews the exact text against the repository's `AGENTS.md` prose rules, `.agents/writing-prose.md`, and the facts it claims. Publish only after a clean review. Count rounds per text across runs: in the contribution's `status.md`, or for a text with no contribution, in the cycle's own `state/*.toml` entry for that item. After 2 failed rounds in one run, hold the text for the next run; after 4 failed rounds in total, do not publish it at all and record that in the digest. |
+| Publish any text upstream (claim, issue, discussion, sweeper comment, review reply, pull request description, Validation comment) | A fresh-context subagent on the `sonnet` model (Agent tool `model: "sonnet"`) reviews the exact text against the repository's `AGENTS.md` prose rules, `.agents/writing-prose.md`, and the facts it claims. Publish only after a clean review. Count rounds per text across runs: in the contribution's `status.md`, or for a text with no contribution, in the cycle's own `state/*.toml` entry for that item. After 2 failed rounds in one run, hold the text for the next run; after 4 failed rounds in total, do not publish it at all and record that in the digest. |
 | Push a branch | The pre-push review of `git diff upstream/main...HEAD` comes back clean and the tests the change touches pass. |
 | Promote a draft pull request to ready | The evaluation gate passes (both lenses at least 95, no critical findings, CI green apart from failures `upstream/main` shares). |
 | Force-push a rebase | As in `steward-pr-keeper`. |
@@ -137,7 +137,7 @@ Before the run's final reply, in this order:
 
 ### Reviews
 
-Run each review (publish gate, pre-push review, evaluation lens) as one subagent and wait for it before starting the next round. Never launch several rounds of the same review at once. Allow at most 3 pre-push review rounds per push: when the third still finds problems, keep the commits local, record the findings in `status.md`, and let the next driver run continue.
+Run each review (publish gate, pre-push review, evaluation lens) as one subagent. The publish gate uses `sonnet`; pre-push reviews and evaluation lenses keep the default model, because they review code and found the real code defects on the first day. Wait for each review before starting the next round. Never launch several rounds of the same review at once. Allow at most 3 pre-push review rounds per push: when the third still finds problems, keep the commits local, record the findings in `status.md`, and let the next driver run continue.
 
 ## Digest format
 
