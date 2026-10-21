@@ -10,7 +10,7 @@ Rules for agents that work in `/Users/tao/Tools/foldkit` for Taras Kornichuk (`a
 | `/Users/tao/Tools/foldkit/.steward` | Worktree of the orphan `steward` branch. Tools, state, digests. |
 | `/Users/tao/Tools/foldkit/.steward/contributions/<slug>` | Artifacts of one `steward-contribution` run. |
 | `/Users/tao/Tools/foldkit-worktrees/<slug>` | One worktree per contribution branch. |
-| `.claude/skills/steward-*`, `CLAUDE.local.md` | Symlinks and loader made by `bin/link-skills.sh`. Excluded through `.git/info/exclude`. |
+| `.claude/skills/steward-*`, `.agents/skills/steward-*`, `CLAUDE.local.md` | Made by `bin/link-skills.sh` and excluded through `.git/info/exclude`. The skill links serve Claude Code and Codex. `CLAUDE.local.md` loads these rules in Claude Code only. Codex reads them because every schedule prompt and every steward skill opens by naming this file. Do not add `AGENTS.override.md`: Codex would drop the repository's own `AGENTS.md`. |
 
 ## Remotes
 
@@ -52,7 +52,7 @@ When `paused = true`, a run makes no write on GitHub outside the `steward` branc
 | Decision | Gate |
 |---|---|
 | Choose the contribution path | Take the path analysis recommends. When it needs a maintainer decision (Proposal or Exploration), publish it only for `P0` to `P2`; otherwise conclude. |
-| Publish any text upstream (claim, issue, discussion, sweeper comment, review reply, pull request description, Validation comment) | A fresh-context subagent on the `sonnet` model (Agent tool `model: "sonnet"`) reviews the exact text against the repository's `AGENTS.md` prose rules, `.agents/writing-prose.md`, and the facts it claims. Publish only after a clean review. Count rounds per text across runs: in the contribution's `status.md`, or for a text with no contribution, in the cycle's own `state/*.toml` entry for that item. After 2 failed rounds in one run, hold the text for the next run; after 4 failed rounds in total, do not publish it at all and record that in the digest. |
+| Publish any text upstream (claim, issue, discussion, sweeper comment, review reply, pull request description, Validation comment) | A fresh-context subagent on the smaller review model (see "Reviews") reviews the exact text against the repository's `AGENTS.md` prose rules, `.agents/writing-prose.md`, and the facts it claims. Publish only after a clean review. Count rounds per text across runs: in the contribution's `status.md`, or for a text with no contribution, in the cycle's own `state/*.toml` entry for that item. After 2 failed rounds in one run, hold the text for the next run; after 4 failed rounds in total, do not publish it at all and record that in the digest. |
 | Push a branch | The pre-push review of `git diff upstream/main...HEAD` comes back clean and the tests the change touches pass. |
 | Promote a draft pull request to ready | The evaluation gate passes (both lenses at least 95, no critical findings, CI green apart from failures `upstream/main` shares). |
 | Force-push a rebase | As in `steward-pr-keeper`. |
@@ -134,10 +134,13 @@ Before the run's final reply, in this order:
 1. For each contribution the run touched, make sure the state line in `status.md` is one that `check.ts` accepts, and run `check.ts`. Never write a state the script does not know, such as `implementation: in progress`; an unfinished implementation round keeps `analysis: assignment ready` (round 1) or `evaluation: failed round N` and records the progress as a step.
 2. Release every lock the run holds.
 3. Commit, under the steward lock, each `state/*.toml` file, contribution file, and digest the run changed, then push `steward`.
+4. Settle the run's own T3 thread: `t3_thread_organize` with `action: "settle"` and no `threadId`. It takes effect when the turn ends. Skip this step only when the run stopped on an error that needs Taras.
 
 ### Reviews
 
-Run each review (publish gate, pre-push review, evaluation lens) as one subagent. The publish gate uses `sonnet`; pre-push reviews and evaluation lenses keep the default model, because they review code and found the real code defects on the first day. Wait for each review before starting the next round. Never launch several rounds of the same review at once. Allow at most 3 pre-push review rounds per push: when the third still finds problems, keep the commits local, record the findings in `status.md`, and let the next driver run continue.
+Runs use the project's default model, GPT-6.1-Sol in Codex, unless T3 starts them on another provider. Start a subagent the way the current harness does it: the Agent tool in Claude Code, a native subagent in Codex, or T3 `delegate_task` with the same provider when neither exists.
+
+Run each review (publish gate, pre-push review, evaluation lens) as one subagent. The publish gate uses the smaller review model: `gpt-6-luna` in Codex, `sonnet` in Claude Code. Pre-push reviews and evaluation lenses keep the run's own model, because they review code and found the real code defects on the first day. Wait for each review before starting the next round. Never launch several rounds of the same review at once. Allow at most 3 pre-push review rounds per push: when the third still finds problems, keep the commits local, record the findings in `status.md`, and let the next driver run continue.
 
 ## Digest format
 
