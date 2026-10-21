@@ -8,4 +8,6 @@ export const recordModuleIds = (moduleIds: Array<string>): Plugin => ({
 })
 
 export const isFoldkitBuildTokenModuleId = (id: string): boolean =>
-  id.endsWith('/foldkit/dist/buildToken.js')
+  (id.split('?', 1)[0] ?? '')
+    .replaceAll('\\', '/')
+    .endsWith('/foldkit/dist/buildToken.js')
