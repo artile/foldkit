@@ -795,9 +795,7 @@ describe('Calendar', () => {
       )
     })
 
-    it('pressing Enter on a disabled focused month does not commit (view-layer filter)', () => {
-      // maxDate clamps the calendar to April 2026; September 2026 is fully
-      // disabled. Focus stays on April after Enter, with no transition to Days.
+    it('pressing Enter on a month disabled by maxDate stays in Months mode', () => {
       const maxDate = Calendar.make(2026, 4, 30)
       Scene.scene(
         { update, view: sceneView() },
@@ -807,14 +805,12 @@ describe('Calendar', () => {
         Scene.keydown(grid, 'ArrowDown'),
         Scene.keydown(grid, 'ArrowDown'),
         Scene.keydown(grid, 'Enter'),
-        Scene.expectIgnored(),
+        Scene.expectHandled(),
         Scene.expect(yearsHeadingButton).toExist(),
       )
     })
 
-    it('pressing Enter on a disabled focused year does not commit (view-layer filter)', () => {
-      // minDate clamps to 2020; arrowing back past 2020 lands the cursor on a
-      // disabled year. Enter should be a no-op. Cursor stays in Years mode.
+    it('pressing Enter on a year disabled by minDate stays in Years mode', () => {
       const minDate = Calendar.make(2020, 1, 1)
       Scene.scene(
         { update, view: sceneView() },
@@ -825,7 +821,7 @@ describe('Calendar', () => {
         resolveFocusGrid,
         Scene.keydown(grid, 'PageUp'),
         Scene.keydown(grid, 'Enter'),
-        Scene.expectIgnored(),
+        Scene.expectHandled(),
         Scene.expect(previousYearsPageButton).toExist(),
       )
     })

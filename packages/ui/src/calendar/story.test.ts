@@ -743,6 +743,85 @@ describe('Calendar', () => {
         )
       })
 
+      it('Enter commits the focused month like SelectedMonth', () => {
+        Story.story(
+          update,
+          Story.given(
+            init({
+              id: 'test',
+              today,
+              initialViewDate: Calendar.make(2026, 5, 13),
+            }),
+          ),
+          Story.message(Message.ClickedHeading()),
+          resolveFocusGrid,
+          Story.message(
+            Message.PressedKeyOnGrid({ key: 'Enter', isShift: false }),
+          ),
+          Story.Command.expectExact(FocusGrid),
+          Story.expectNoOutMessage(),
+          resolveFocusGrid,
+          Story.model(model => {
+            expect(model.viewMode).toBe('Days')
+            expect(model.viewMonth).toBe(5)
+          }),
+        )
+      })
+
+      it('Space commits the month the cursor moved to', () => {
+        Story.story(
+          update,
+          Story.given(
+            init({
+              id: 'test',
+              today,
+              initialViewDate: Calendar.make(2026, 5, 13),
+            }),
+          ),
+          Story.message(Message.ClickedHeading()),
+          resolveFocusGrid,
+          Story.message(
+            Message.PressedKeyOnGrid({ key: 'ArrowRight', isShift: false }),
+          ),
+          Story.message(Message.PressedKeyOnGrid({ key: ' ', isShift: false })),
+          Story.Command.expectExact(FocusGrid),
+          Story.expectOutMessage(
+            OutMessage.ChangedViewMonth({ year: 2026, month: 6 }),
+          ),
+          resolveFocusGrid,
+          Story.model(model => {
+            expect(model.viewMode).toBe('Days')
+            expect(model.viewMonth).toBe(6)
+          }),
+        )
+      })
+
+      it('Enter on a month disabled by maxDate is a no-op', () => {
+        const maxDate = Calendar.make(2026, 4, 30)
+        Story.story(
+          update,
+          Story.given(init({ id: 'test', today, maxDate })),
+          Story.message(Message.ClickedHeading()),
+          resolveFocusGrid,
+          Story.message(
+            Message.PressedKeyOnGrid({ key: 'ArrowRight', isShift: false }),
+          ),
+          Story.message(
+            Message.PressedKeyOnGrid({ key: 'Enter', isShift: false }),
+          ),
+          Story.Command.expectNone(),
+          Story.expectNoOutMessage(),
+          Story.model(model => {
+            expect(model.viewMode).toBe('Months')
+            expect(model.viewYear).toBe(2026)
+            expect(model.viewMonth).toBe(4)
+            expect(model.maybeFocusedDate).toStrictEqual(
+              Option.some(Calendar.make(2026, 5, 13)),
+            )
+          }),
+        )
+      })
+
       it('unknown keys are no-ops in Months mode', () => {
         Story.story(
           update,
@@ -841,6 +920,90 @@ describe('Calendar', () => {
           Story.model(model => {
             expect(model.maybeFocusedDate).toStrictEqual(
               Option.some(Calendar.make(2038, 4, 13)),
+            )
+          }),
+        )
+      })
+
+      it('Enter commits the focused year like SelectedYear', () => {
+        Story.story(
+          update,
+          Story.given(
+            init({
+              id: 'test',
+              today,
+              initialViewDate: Calendar.make(2026, 5, 13),
+            }),
+          ),
+          Story.message(Message.ClickedHeading()),
+          resolveFocusGrid,
+          Story.message(Message.ClickedHeading()),
+          resolveFocusGrid,
+          Story.message(
+            Message.PressedKeyOnGrid({ key: 'Enter', isShift: false }),
+          ),
+          Story.Command.expectExact(FocusGrid),
+          Story.expectNoOutMessage(),
+          resolveFocusGrid,
+          Story.model(model => {
+            expect(model.viewMode).toBe('Months')
+            expect(model.viewYear).toBe(2026)
+          }),
+        )
+      })
+
+      it('Space commits the year the cursor moved to', () => {
+        Story.story(
+          update,
+          Story.given(
+            init({
+              id: 'test',
+              today,
+              initialViewDate: Calendar.make(2026, 5, 13),
+            }),
+          ),
+          Story.message(Message.ClickedHeading()),
+          resolveFocusGrid,
+          Story.message(Message.ClickedHeading()),
+          resolveFocusGrid,
+          Story.message(
+            Message.PressedKeyOnGrid({ key: 'ArrowRight', isShift: false }),
+          ),
+          Story.message(Message.PressedKeyOnGrid({ key: ' ', isShift: false })),
+          Story.Command.expectExact(FocusGrid),
+          Story.expectOutMessage(
+            OutMessage.ChangedViewMonth({ year: 2027, month: 5 }),
+          ),
+          resolveFocusGrid,
+          Story.model(model => {
+            expect(model.viewMode).toBe('Months')
+            expect(model.viewYear).toBe(2027)
+          }),
+        )
+      })
+
+      it('Enter on a year disabled by minDate is a no-op', () => {
+        const minDate = Calendar.make(2020, 1, 1)
+        Story.story(
+          update,
+          Story.given(init({ id: 'test', today, minDate })),
+          Story.message(Message.ClickedHeading()),
+          resolveFocusGrid,
+          Story.message(Message.ClickedHeading()),
+          resolveFocusGrid,
+          Story.message(
+            Message.PressedKeyOnGrid({ key: 'PageUp', isShift: false }),
+          ),
+          Story.message(
+            Message.PressedKeyOnGrid({ key: 'Enter', isShift: false }),
+          ),
+          Story.Command.expectNone(),
+          Story.expectNoOutMessage(),
+          Story.model(model => {
+            expect(model.viewMode).toBe('Years')
+            expect(model.viewYear).toBe(2026)
+            expect(model.maybeFocusedDate).toStrictEqual(
+              Option.some(Calendar.make(2014, 4, 13)),
             )
           }),
         )

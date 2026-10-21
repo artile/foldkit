@@ -354,6 +354,19 @@ const currentOrFallbackFocus = (model: Model): CalendarDate =>
     Calendar.make(model.viewYear, model.viewMonth, 1),
   )
 
+const toFocusedMonth = (model: Model): number =>
+  Option.match(model.maybeFocusedDate, {
+    onNone: () => model.viewMonth,
+    onSome: date =>
+      date.year === model.viewYear ? date.month : model.viewMonth,
+  })
+
+const toFocusedYear = (model: Model): number =>
+  Option.match(model.maybeFocusedDate, {
+    onNone: () => model.viewYear,
+    onSome: date => date.year,
+  })
+
 /** Applies a date selection to the model: commits the selection, moves the
  * cursor onto the date, and syncs the view month if the selection crosses a
  * month boundary. Always emits `SelectedDate` carrying the committed date;
@@ -513,6 +526,54 @@ const applyYearsFocusShift = (
   }
 }
 
+const selectMonth = (model: Model, month: number): UpdateReturn => {
+  if (isMonthDisabled(model, model.viewYear, month)) {
+    return { model }
+  } else {
+    const viewMonthChange = applyViewMonthChange(
+      model,
+      model.viewYear,
+      month,
+      jumpDirection(model, model.viewYear, month),
+    )
+    const monthSelection: Update.Return<Model, Message> = {
+      model: modifyFields(viewMonthChange.model, {
+        viewMode: () => 'Days',
+      }),
+      commands: [FocusGrid({ id: model.id })],
+    }
+
+    return pipe(
+      monthSelection,
+      Update.withOutMessage(viewMonthChange.outMessage),
+    )
+  }
+}
+
+const selectYear = (model: Model, year: number): UpdateReturn => {
+  if (isYearDisabled(model, year)) {
+    return { model }
+  } else {
+    const yearViewMonthChange = applyViewMonthChange(
+      model,
+      year,
+      model.viewMonth,
+      jumpDirection(model, year, model.viewMonth),
+    )
+    const yearSelection: Update.Return<Model, Message> = {
+      model: modifyFields(yearViewMonthChange.model, {
+        viewMode: () => 'Months',
+      }),
+      commands: [FocusGrid({ id: model.id })],
+    }
+
+    return pipe(
+      yearSelection,
+      Update.withOutMessage(yearViewMonthChange.outMessage),
+    )
+  }
+}
+
 /** Processes a Calendar Message and returns the next Model, optional Commands,
  *  and an optional OutMessage. */
 export const update = (model: Model, message: Message) =>
@@ -553,18 +614,26 @@ export const update = (model: Model, message: Message) =>
             )
           }
         }),
-        Match.when('Months', () =>
-          Option.match(resolveMonthsKey(key), {
-            onNone: () => ({ model }),
-            onSome: shift => applyMonthsFocusShift(model, shift),
-          }),
-        ),
-        Match.when('Years', () =>
-          Option.match(resolveYearsKey(key), {
-            onNone: () => ({ model }),
-            onSome: shift => applyYearsFocusShift(model, shift),
-          }),
-        ),
+        Match.when('Months', () => {
+          if (isCommitKey(key)) {
+            return selectMonth(model, toFocusedMonth(model))
+          } else {
+            return Option.match(resolveMonthsKey(key), {
+              onNone: () => ({ model }),
+              onSome: shift => applyMonthsFocusShift(model, shift),
+            })
+          }
+        }),
+        Match.when('Years', () => {
+          if (isCommitKey(key)) {
+            return selectYear(model, toFocusedYear(model))
+          } else {
+            return Option.match(resolveYearsKey(key), {
+              onNone: () => ({ model }),
+              onSome: shift => applyYearsFocusShift(model, shift),
+            })
+          }
+        }),
         Match.exhaustive,
       ),
 
@@ -599,53 +668,9 @@ export const update = (model: Model, message: Message) =>
         Match.exhaustive,
       ),
 
-    SelectedMonth: ({ month }) => {
-      if (isMonthDisabled(model, model.viewYear, month)) {
-        return { model }
-      } else {
-        const viewMonthChange = applyViewMonthChange(
-          model,
-          model.viewYear,
-          month,
-          jumpDirection(model, model.viewYear, month),
-        )
-        const monthSelection: Update.Return<Model, Message> = {
-          model: modifyFields(viewMonthChange.model, {
-            viewMode: () => 'Days',
-          }),
-          commands: [FocusGrid({ id: model.id })],
-        }
+    SelectedMonth: ({ month }) => selectMonth(model, month),
 
-        return pipe(
-          monthSelection,
-          Update.withOutMessage(viewMonthChange.outMessage),
-        )
-      }
-    },
-
-    SelectedYear: ({ year }) => {
-      if (isYearDisabled(model, year)) {
-        return { model }
-      } else {
-        const yearViewMonthChange = applyViewMonthChange(
-          model,
-          year,
-          model.viewMonth,
-          jumpDirection(model, year, model.viewMonth),
-        )
-        const yearSelection: Update.Return<Model, Message> = {
-          model: modifyFields(yearViewMonthChange.model, {
-            viewMode: () => 'Months',
-          }),
-          commands: [FocusGrid({ id: model.id })],
-        }
-
-        return pipe(
-          yearSelection,
-          Update.withOutMessage(yearViewMonthChange.outMessage),
-        )
-      }
-    },
+    SelectedYear: ({ year }) => selectYear(model, year),
 
     PagedYears: ({ direction }) =>
       applyYearsFocusShift(model, direction * YEARS_PAGE_SIZE),
@@ -969,23 +994,14 @@ const buildDaysAttributes = (
   const handleKeyDown = (
     key: string,
     modifiers: { readonly shiftKey: boolean },
-  ): Option.Option<ClickedDay | PressedKeyOnGrid> => {
+  ): Option.Option<PressedKeyOnGrid> => {
     if (!NAV_KEYS.has(key)) {
       return Option.none()
-    }
-    if (isCommitKey(key)) {
-      const maybeCommit = pipe(
-        maybeFocusedDate,
-        Option.filter(date => !isDateDisabled(model, date)),
-        Option.map(date => Message.ClickedDay({ date })),
+    } else {
+      return Option.some(
+        Message.PressedKeyOnGrid({ key, isShift: modifiers.shiftKey }),
       )
-      if (Option.isSome(maybeCommit)) {
-        return maybeCommit
-      }
     }
-    return Option.some(
-      Message.PressedKeyOnGrid({ key, isShift: modifiers.shiftKey }),
-    )
   }
 
   const activeDescendantAttributes = pipe(
@@ -1100,15 +1116,7 @@ const buildMonthsAttributes = (
   viewInputs: ViewInputs,
   h: HtmlBuilder<Message>,
 ): MonthsModeAttributes => {
-  const {
-    id,
-    viewYear,
-    viewMonth,
-    maybeFocusedDate,
-    today,
-    locale,
-    isGridFocused,
-  } = model
+  const { id, viewYear, viewMonth, today, locale, isGridFocused } = model
 
   const headingButtonLabel =
     viewInputs.monthsHeadingButtonLabel ?? 'Switch to year picker'
@@ -1125,22 +1133,14 @@ const buildMonthsAttributes = (
     h.OnClick(Message.ClickedHeading()),
   ]
 
-  const focusedMonth = Option.match(maybeFocusedDate, {
-    onNone: () => viewMonth,
-    onSome: date => (date.year === viewYear ? date.month : viewMonth),
-  })
+  const focusedMonth = toFocusedMonth(model)
 
   const handleKeyDown = (
     key: string,
     modifiers: { readonly shiftKey: boolean },
-  ): Option.Option<SelectedMonth | PressedKeyOnGrid> => {
+  ): Option.Option<PressedKeyOnGrid> => {
     if (!NAV_KEYS.has(key)) {
       return Option.none()
-    } else if (isCommitKey(key)) {
-      return OptionExt.when(
-        !isMonthDisabled(model, viewYear, focusedMonth),
-        Message.SelectedMonth({ month: focusedMonth }),
-      )
     } else {
       return Option.some(
         Message.PressedKeyOnGrid({ key, isShift: modifiers.shiftKey }),
@@ -1230,7 +1230,7 @@ const buildYearsAttributes = (
   viewInputs: ViewInputs,
   h: HtmlBuilder<Message>,
 ): YearsModeAttributes => {
-  const { id, viewYear, maybeFocusedDate, today, isGridFocused } = model
+  const { id, viewYear, today, isGridFocused } = model
 
   const previousYearsPageLabel =
     viewInputs.previousYearsPageLabel ?? 'Previous 12 years'
@@ -1239,10 +1239,7 @@ const buildYearsAttributes = (
     viewInputs.toYearsGridLabel ??
     ((startYear, endYear) => `Year picker, ${startYear}–${endYear}`)
 
-  const cursorYear = Option.match(maybeFocusedDate, {
-    onNone: () => viewYear,
-    onSome: date => date.year,
-  })
+  const cursorYear = toFocusedYear(model)
   const pageStart = yearsPageStart(cursorYear)
   const pageEnd = pageStart + YEARS_PAGE_SIZE - 1
   const headingText = `${pageStart}–${pageEnd}`
@@ -1266,14 +1263,9 @@ const buildYearsAttributes = (
   const handleKeyDown = (
     key: string,
     modifiers: { readonly shiftKey: boolean },
-  ): Option.Option<SelectedYear | PressedKeyOnGrid> => {
+  ): Option.Option<PressedKeyOnGrid> => {
     if (!NAV_KEYS.has(key)) {
       return Option.none()
-    } else if (isCommitKey(key)) {
-      return OptionExt.when(
-        !isYearDisabled(model, focusedYear),
-        Message.SelectedYear({ year: focusedYear }),
-      )
     } else {
       return Option.some(
         Message.PressedKeyOnGrid({ key, isShift: modifiers.shiftKey }),
