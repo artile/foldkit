@@ -442,12 +442,14 @@ describe('foldkitSsr', () => {
       )
 
       const response = await fetch(`${first.origin}${DEVELOPMENT_BUILD_ID_URL}`)
+
+      expect(response.status).toBe(200)
+
       const etag = Option.getOrThrowWith(
         Option.fromNullishOr(response.headers.get('etag')),
         () => new Error('The development build id response has no ETag'),
       )
 
-      expect(response.status).toBe(200)
       expect(response.headers.get('cache-control')).toBe('no-cache')
       expect(await response.text()).toContain(
         `export const buildId = ${JSON.stringify(firstBuildId)}`,
