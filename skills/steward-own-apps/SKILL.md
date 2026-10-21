@@ -26,6 +26,8 @@ For each item, check `foldkit/foldkit` for an existing issue or fix.
 
 ## 3. Report
 
+Tag every DX finding with its `priority` from "Maintainer priorities" in `AGENTS.md` and sort the DX findings table by priority.
+
 Write `digests/own-apps/<YYYY-MM-DD>.md`:
 
 | Section | Content |

@@ -35,4 +35,6 @@ A comment states facts with links at the pinned commit. One short paragraph, no 
 
 ## 3. Report
 
-Write `digests/issue-sweeper/<YYYY-MM-DD>.md` (Resolved and Partly resolved first, each with its draft comment), update `state/sweeper.toml` with `checked_at` and `class` for every checked issue, commit both on `steward`, and push. Post a comment only after Taras approves its exact text: `gh issue comment <n> -R foldkit/foldkit --body-file <file>`.
+Tag every item with its `priority` from "Maintainer priorities" in `AGENTS.md`. Group by `class` as below, then sort by priority within each group.
+
+Write `digests/issue-sweeper/<YYYY-MM-DD>.md` (Resolved and Partly resolved first, each with its draft comment), update `state/sweeper.toml` with `checked_at`, `class`, and `priority` for every checked issue, commit both on `steward`, and push. Post a comment only after Taras approves its exact text: `gh issue comment <n> -R foldkit/foldkit --body-file <file>`.

@@ -28,7 +28,7 @@ Skip the issue, and record `decision = "skip"` with the reason, when any of thes
 - It asks for a design or direction decision the maintainer has not made. Record `decision = "watch"` instead, and add it to the digest under "discussion candidates".
 - It is a question, or a duplicate. Name the duplicate in the digest.
 
-Everything else is a candidate. Order candidates by likely size, smallest first. Take at most 2 per run.
+Everything else is a candidate. Tag each one with a `priority` from "Maintainer priorities" in `AGENTS.md`. Order candidates by priority, then by likely size, smallest first. Take at most 2 per run. Record `priority` in `state/claim.toml`, and fill it in for any `watch` entry that lacks one.
 
 ## 3. Reproduce
 

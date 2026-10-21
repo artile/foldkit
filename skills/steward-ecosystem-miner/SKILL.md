@@ -28,6 +28,8 @@ For each finding, check `foldkit/foldkit` for an existing issue, discussion, or 
 
 ## 3. Report
 
+Tag every row in "Possible Foldkit bugs" and "DX and API ideas" with its `priority` from "Maintainer priorities" in `AGENTS.md` and sort those two tables by priority.
+
 Write `digests/ecosystem-miner/<YYYY-MM-DD>.md` with three tables:
 
 | Section | Each row |

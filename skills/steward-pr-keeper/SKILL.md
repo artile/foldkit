@@ -39,4 +39,6 @@ For each pull request also read `gh pr checks <n> -R foldkit/foldkit` and the re
 
 ## 3. Report
 
+Tag every item with its `priority` from "Maintainer priorities" in `AGENTS.md` and sort each table by priority.
+
 Write `digests/pr-keeper/<YYYY-MM-DD>.md` per the digest format in `AGENTS.md`, commit it on `steward`, and push. Reply in the thread with only the items that need Taras.
