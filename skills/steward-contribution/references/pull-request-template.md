@@ -12,4 +12,4 @@
 
 <First pull request comment, posted after the draft opens, not part of the description:>
 
-**Validation:** <the added or updated tests and what they pin, in a sentence or two.>
+**Validation:** <the added or updated tests and what they pin, in a sentence or two; then what could not be verified, or "Nothing left unverified.">
