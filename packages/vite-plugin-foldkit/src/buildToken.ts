@@ -246,7 +246,9 @@ const verifyBuildIdentity = (builder: ViteBuilder): void => {
   )
 }
 
-/** Compiles one build identity into application entries and Foldkit itself.
+/** Supplies one build identity to application entries and Foldkit itself. A
+ *  build inlines the id in Foldkit's build-token module, and a dev server
+ *  serves it from a virtual module that the browser revalidates.
  *
  * @internal
  */
