@@ -1,5 +1,5 @@
 # maintainer-issue-claim state. decision: skip | watch | no-claim | awaiting-approval | claimed
-last_poll = "2026-10-21T14:22:26Z"
+last_poll = "2026-10-21T18:15:36Z"
 
 # Deferred bug candidates (2-per-run limit). Next run takes them smallest first.
 
@@ -7,7 +7,7 @@ last_poll = "2026-10-21T14:22:26Z"
 decision = "watch"
 priority = "P2"
 priority_source = "label"
-reason = "candidate, deferred: Calendar heading aria-label hides visible month and year (small); fix picks between aria-describedby and a new label callback (API choice)"
+reason = "awaiting maintainer direction: accessible heading name versus description and label callback API; rechecked 2026-10-21T18:15Z, P2, unassigned, no comments or referencing open PR"
 
 [issues.1681]
 decision = "no-claim"
@@ -17,10 +17,12 @@ slug = "issue-1681-calendar-stale-enter"
 reason = "Contribution evaluation abandoned under the repeated-escalation gate; own draft PR #1754 closed. Round 1 scores 100/60 with critical missing I5 unrelated-key event and I6 DatePicker Enter integration tests; branch and artifacts preserved."
 
 [issues.1641]
-decision = "watch"
+decision = "claimed"
 priority = "P2"
 priority_source = "label"
-reason = "candidate, deferred: OnMount dispatch after lifecycle end (console noise on teardown)"
+slug = "issue-1641-mount-late-dispatch"
+comment_url = "https://github.com/foldkit/foldkit/issues/1641#issuecomment-6323514249"
+reason = "decided autonomously: Implementation path; claim publish gate round 1 clean; local commit 86b10af0e, 55 focused tests and readiness checks pass; draft held at daily PR limit 3/3; driver owns pending pre-push and publication reviews; natural Dialog frequency unverified"
 
 [issues.1677]
 decision = "claimed"
@@ -216,3 +218,9 @@ priority = "P2"
 priority_source = "label"
 slug = "issue-1680-disabled-submit"
 reason = "Proposal published: https://github.com/foldkit/foldkit/issues/1680#issuecomment-6320359620; publish gate round 3 clean; awaiting the maintainer Button API decision."
+
+[issues.1737]
+decision = "skip"
+priority = "P1"
+priority_source = "label"
+reason = "opened by devinjameson; maintainer-owned plan excluded from claiming"
