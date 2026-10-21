@@ -1,0 +1,5 @@
+id = "own-apps"
+skill = "steward-own-apps"
+schedule = { type = "fixed_time", timeOfDay = "10:00", weekdays = [5] }
+t3_scheduled_task_id = ""
+prompt = "Run the $steward-own-apps skill for Foldkit Steward. Read /Users/tao/Tools/foldkit/.steward/AGENTS.md first."

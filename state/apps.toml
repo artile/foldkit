@@ -1,0 +1,24 @@
+# Taras's own apps that use Foldkit. steward-own-apps reads this list.
+[apps.citata-frontend]
+path = "/Users/tao/Projects/citata.ai/frontend"
+last_checked = ""
+
+[apps.kup-tutor]
+path = "/Users/tao/Projects/kup/apps/tutor"
+last_checked = ""
+
+[apps.foldkit-gallery]
+path = "/Users/tao/Projects/foldkit-gallery"
+last_checked = ""
+
+[apps.foldcase-docs]
+path = "/Users/tao/Projects/foldcase-docs"
+last_checked = ""
+
+[apps.shadcn-foldkit]
+path = "/Users/tao/Tools/shadcn-foldkit"
+last_checked = ""
+
+[apps.auto-dark-extension]
+path = "/Users/tao/Tools/auto-dark-extension"
+last_checked = ""
