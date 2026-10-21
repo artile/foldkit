@@ -1,5 +1,5 @@
 id = "ecosystem-miner"
 skill = "steward-ecosystem-miner"
 schedule = { type = "fixed_time", timeOfDay = "10:00", weekdays = [3] }
-t3_scheduled_task_id = "scheduled-task:command:mcp:c5324381-323b-44ab-aaa6-0dc8214252df:schedule-task:steward-ecosystem-miner-v1"
+t3_scheduled_task_id = "scheduled-task:command:mcp:7eb692a0-b909-4377-9aaf-a4d139612c34:schedule-task:steward-ecosystem-miner-v2"
 prompt = "Run the $steward-ecosystem-miner skill for Foldkit Steward. Read /Users/tao/Tools/foldkit/.steward/AGENTS.md first."
