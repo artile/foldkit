@@ -386,7 +386,7 @@ const automaticIdentityFrom = async (
 
 describe('foldkitSsr', () => {
   it(
-    'compiles one fresh identity into Foldkit for each aggregate dev server',
+    'serves one fresh development build id for each aggregate dev server',
     async () => {
       const first = await startAutomaticIdentityServer()
       const second = await startAutomaticIdentityServer()

@@ -282,6 +282,7 @@ export const foldkitBuildToken = (
           this.environment.getTopLevelConfig(),
           configuredBuildId,
         )
+
         return `export const buildId = ${buildIdLiteral(buildId)}\n`
       },
       transform(code, id) {
