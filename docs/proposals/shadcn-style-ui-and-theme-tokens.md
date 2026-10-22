@@ -21,7 +21,9 @@ import { type Html, html } from 'foldkit/html'
 
 import { Button } from '@foldkit/ui'
 
-import { cn } from './cn' // clsx + tailwind-merge, the shadcn helper, verbatim
+import { cn } from './cn'
+
+// clsx + tailwind-merge, the shadcn helper, verbatim
 
 export const buttonVariants = cva(
   'inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
@@ -29,9 +31,12 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-        outline: 'border border-input bg-transparent hover:bg-accent hover:text-accent-foreground',
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        destructive:
+          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+        outline:
+          'border border-input bg-transparent hover:bg-accent hover:text-accent-foreground',
+        secondary:
+          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
       },
@@ -57,15 +62,21 @@ export type ButtonConfig<Message> = Readonly<{
 
 export const button = <Message>(config: ButtonConfig<Message>): Html => {
   const h = html<Message>()
-  const children = typeof config.label === 'string' ? [config.label] : config.label
+  const children =
+    typeof config.label === 'string' ? [config.label] : config.label
   return Button.view<Message>({
     onClick: config.onClick,
     isDisabled: config.isDisabled,
-    toView: (attributes) =>
+    toView: attributes =>
       h.button(
         [
           ...attributes.button,
-          h.Class(cn(buttonVariants({ variant: config.variant, size: config.size }), config.class)),
+          h.Class(
+            cn(
+              buttonVariants({ variant: config.variant, size: config.size }),
+              config.class,
+            ),
+          ),
         ],
         children,
       ),
@@ -85,18 +96,18 @@ The same shape covers the other stateless render helpers (Input, Textarea, Selec
 
 A registry needs a stable set of CSS-variable names to style against. This is the one piece that genuinely belongs in core, because it is neutral: it names slots, not colors. Recipes reference these via Tailwind v4 theme colors (`bg-primary`, `text-primary-foreground`, `border-input`, `ring-ring`, and so on). Proposed contract:
 
-| Token | Role |
-| --- | --- |
-| `--background` / `--foreground` | app surface and default text |
-| `--primary` / `--primary-foreground` | primary action |
-| `--secondary` / `--secondary-foreground` | secondary surface |
-| `--muted` / `--muted-foreground` | muted surface and text |
-| `--accent` / `--accent-foreground` | hover and highlight surface |
-| `--destructive` / `--destructive-foreground` | destructive action |
-| `--border` | default border |
-| `--input` | form-control border |
-| `--ring` | focus ring |
-| `--radius` | corner radius scale |
+| Token                                        | Role                         |
+| -------------------------------------------- | ---------------------------- |
+| `--background` / `--foreground`              | app surface and default text |
+| `--primary` / `--primary-foreground`         | primary action               |
+| `--secondary` / `--secondary-foreground`     | secondary surface            |
+| `--muted` / `--muted-foreground`             | muted surface and text       |
+| `--accent` / `--accent-foreground`           | hover and highlight surface  |
+| `--destructive` / `--destructive-foreground` | destructive action           |
+| `--border`                                   | default border               |
+| `--input`                                    | form-control border          |
+| `--ring`                                     | focus ring                   |
+| `--radius`                                   | corner radius scale          |
 
 These are the shadcn slot names. Adopting them verbatim means shadcn themes (and the themes at ui.shadcn.com) apply to a Foldkit app unchanged, and any Foldkit registry themes against the same names.
 
