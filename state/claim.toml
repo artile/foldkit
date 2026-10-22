@@ -22,7 +22,7 @@ priority = "P2"
 priority_source = "label"
 slug = "issue-1641-mount-late-dispatch"
 comment_url = "https://github.com/foldkit/foldkit/issues/1641#issuecomment-6323514249"
-reason = "Draft PR #1758 delivered round 1 at 86b10af0e: code and exact-text gates CLEAN, required local checks pass; CI and ten E2E shards running in the 2026-10-22T00:19:49Z snapshot. Evaluation waits for CI; next driver resumes. Natural Dialog frequency unverified."
+reason = "PR #1758 promoted to ready for review: evaluation round 1 scores 100/100, zero findings, all 13 CI checks pass; maintainer-pr-keeper owns follow-up. Natural Dialog frequency and browser latency unverified."
 
 [issues.1677]
 decision = "claimed"
