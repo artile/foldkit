@@ -1,1 +1,62 @@
-# maintainer-pr-keeper state: [pulls.<number>] fix_tries = { "<check name>" = <count> }
+# PR keeper state. fix_tries counts code-fix attempts per PR/check.
+
+last_run_utc = "2026-10-22T06:24:56.494342+00:00"
+last_thread_id = "thread:project:4501f5c1-0d46-4dc4-8c8e-c2182a8be093:2f06b723-76ba-4287-a1d8-f531f0ccaee2"
+open_pr_count = 36
+mergeable_pr_count = 34
+conflicting_pr_count = 2
+unanswered_comments = 0
+approved_prs = 0
+
+[pulls."620"]
+priority = "P3"
+priority_source = "label"
+url = "https://github.com/foldkit/foldkit/pull/620"
+checked_at = "2026-10-22T06:24:56.494342+00:00"
+observed_head = "923e52ca1e6795b098643cacb4876f1bbafc38b6"
+fix_tries = { "Lint, Typecheck & Test" = 0 }
+disposition = "held: tooling direction; rebase aborted"
+diagnosis = "ERR_PNPM_OUTDATED_LOCKFILE: missing @effect/language-service; current main uses TypeScript 7/@effect/tsgo"
+
+[pulls."626"]
+priority = "P2"
+priority_source = "label"
+url = "https://github.com/foldkit/foldkit/pull/626"
+checked_at = "2026-10-22T06:24:56.494342+00:00"
+observed_head = "bcdfdc804a1eb3e0182d5beb28e0aaa57c67abbb"
+fix_tries = {  }
+disposition = "held: replay behavior decision; rebase aborted"
+diagnosis = "Root Message re-mapping and interrupted pending Commands are incompatible with FIFO session replay"
+
+[pulls."628"]
+priority = "P3"
+priority_source = "label"
+url = "https://github.com/foldkit/foldkit/pull/628"
+checked_at = "2026-10-22T06:24:56.494342+00:00"
+observed_head = "de4cb229fd449e1c0d8ab124e54644e9e8b447a2"
+fix_tries = { "Lint, Typecheck & Test" = 1 }
+disposition = "maintenance pushed; draft; CI pending"
+pushed_head = "f5c34592ceb538d4ba61245d72fc6253fcffd080"
+pre_push_review_rounds = 3
+pre_push_review_result = "CLEAN"
+document_review_rounds_total = 2
+document_review_failed_rounds_total = 1
+document_review_result = "CLEAN"
+description_review_rounds_total = 1
+description_review_failed_rounds_total = 0
+description_review_result = "CLEAN"
+document_sha256 = "e2f020d821821f95cd508e34372167980c87d7659a197970e03cbcfb417afb2e"
+ci_run = 39733399257
+
+[pulls."1514"]
+priority = "P2"
+priority_source = "label"
+url = "https://github.com/foldkit/foldkit/pull/1514"
+checked_at = "2026-10-22T06:24:56.494342+00:00"
+observed_head = "b25de73d3a4f4296598ce4d2ce812b135b2fbaa6"
+fix_tries = { "Registry trust and discovery" = 0 }
+disposition = "held: Windows timeout; rerun permission denied"
+retry_attempts = 1
+retry_blocked = true
+retry_block_reason = "Must have admin rights to Repository"
+diagnosis = "Canonical private-directory test timed out at 5000ms on Windows; relevant files equal upstream/main; Linux 30 pass/2 skip"
