@@ -15,15 +15,16 @@ The opinionated styled components and their distribution (a shadcn-style registr
 
 ## Recipe: a shadcn-style Button over `@foldkit/ui`
 
+The application supplies `cn`, which combines `clsx` and `tailwind-merge`. Pass the view's `HtmlBuilder<Message>` through the styled helper to `Button.view` so the button uses the application's Message type.
+
 ```ts
 import { type VariantProps, cva } from 'class-variance-authority'
-import { type Html, html } from 'foldkit/html'
+import { Predicate } from 'effect'
+import type { Html, HtmlBuilder } from 'foldkit/html'
 
 import { Button } from '@foldkit/ui'
 
 import { cn } from './cn'
-
-// clsx + tailwind-merge, the shadcn helper, verbatim
 
 export const buttonVariants = cva(
   'inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
@@ -60,41 +61,51 @@ export type ButtonConfig<Message> = Readonly<{
   class?: string
 }>
 
-export const button = <Message>(config: ButtonConfig<Message>): Html => {
-  const h = html<Message>()
-  const children =
-    typeof config.label === 'string' ? [config.label] : config.label
-  return Button.view<Message>({
-    onClick: config.onClick,
-    isDisabled: config.isDisabled,
-    toView: attributes =>
-      h.button(
-        [
-          ...attributes.button,
-          h.Class(
-            cn(
-              buttonVariants({ variant: config.variant, size: config.size }),
-              config.class,
+export const button = <Message>(
+  config: ButtonConfig<Message>,
+  h: HtmlBuilder<Message>,
+): Html => {
+  const children = Predicate.isString(config.label)
+    ? [config.label]
+    : config.label
+
+  return Button.view<Message>(
+    {
+      onClick: config.onClick,
+      isDisabled: config.isDisabled,
+      toView: attributes =>
+        h.button(
+          [
+            ...attributes.button,
+            h.Class(
+              cn(
+                buttonVariants({ variant: config.variant, size: config.size }),
+                config.class,
+              ),
             ),
-          ),
-        ],
-        children,
-      ),
-  })
+          ],
+          children,
+        ),
+    },
+    h,
+  )
 }
 ```
 
-Call site, plug-and-play like React shadcn:
+Inside a view, pass a Message value and the view's builder:
 
 ```ts
-button({ label: 'Delete', variant: 'destructive', onClick: ClickedDelete() })
+button(
+  { label: 'Delete', variant: 'destructive', onClick: Message.ClickedDelete() },
+  h,
+)
 ```
 
-The same shape covers the other stateless render helpers (Input, Textarea, Select, Badge, Card). Stateful components (Dialog, Menu, Combobox, Tabs) keep their Submodel in `@foldkit/ui` and only ship a styled `toView` recipe, so they remain single-file drops rather than copies of a state machine.
+The same pattern applies to the Input, Textarea, and Select render helpers in `@foldkit/ui`. Badge and Card would be components in the companion project. For stateful components such as Dialog, Menu, Combobox, and Tabs, the application owns the Submodel and forwards its Messages through update; a styled helper supplies the `toView` recipe.
 
 ## Theme-token contract
 
-A registry needs a stable set of CSS-variable names to style against. This is the one piece that genuinely belongs in core, because it is neutral: it names slots, not colors. Recipes reference these via Tailwind v4 theme colors (`bg-primary`, `text-primary-foreground`, `border-input`, `ring-ring`, and so on). Proposed contract:
+A registry needs a shared set of CSS-variable names for its recipes. This proposal uses the following slots for colors and corner radii:
 
 | Token                                        | Role                         |
 | -------------------------------------------- | ---------------------------- |
@@ -109,7 +120,32 @@ A registry needs a stable set of CSS-variable names to style against. This is th
 | `--ring`                                     | focus ring                   |
 | `--radius`                                   | corner radius scale          |
 
-These are the shadcn slot names. Adopting them verbatim means shadcn themes (and the themes at ui.shadcn.com) apply to a Foldkit app unchanged, and any Foldkit registry themes against the same names.
+These slots use shadcn's variable names. A theme supplies their values in `:root` and any theme selectors. Tailwind v4 also needs mappings from those variables to its color and radius namespaces before recipes can use utilities such as `bg-primary`, `ring-ring`, and `rounded-lg`:
+
+```css
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+}
+```
+
+A Foldkit registry can use themes that supply these slots together with these mappings. Themes that require additional slots or utility configuration need corresponding additions to the application's stylesheet.
 
 ## Scope of this PR
 
