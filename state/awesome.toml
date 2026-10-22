@@ -1,0 +1,12 @@
+# maintainer-awesome-curator state. See skills/maintainer-awesome-curator/SKILL.md.
+last_issue_update = ""   # updatedAt of the radar issue at the last run
+last_review = ""         # date of the last monthly review
+queue = []               # "owner/name" entries from maintainer-ecosystem-miner
+
+# [decisions."owner/name"]
+# decision = "add" | "watch" | "reject" | "removed"
+# score = 7
+# section = "apps"
+# reason = "7 = depth 3, substance 2, health 2, signal 0. Real product with a live site."
+# decided = "YYYY-MM-DD"
+# revisit = "YYYY-MM-DD"   # watch only

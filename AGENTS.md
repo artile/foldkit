@@ -18,6 +18,7 @@ The Foldkit Maintainer lives on `macair` (Arch Linux ARM, 8 cores, 7.5 GB RAM, u
 | `/home/om/TAO/Tools/foldkit/.maintainer` | Worktree of the orphan `maintainer` branch. Tools, state, digests. |
 | `/home/om/TAO/Tools/foldkit/.maintainer/contributions/<slug>` | Artifacts of one `maintainer-contribution` run. |
 | `/home/om/TAO/Tools/foldkit-worktrees/<slug>` | One worktree per contribution branch. |
+| `/home/om/TAO/Tools/awesome-foldkit` | Checkout of `foldhub/awesome-foldkit`, which Taras owns. `origin` is `foldhub`, not `tao-io`. Only `maintainer-awesome-curator` writes here. |
 | `.claude/skills/maintainer-*`, `.agents/skills/maintainer-*`, `CLAUDE.local.md` | Made by `bin/link-skills.sh` and excluded through `.git/info/exclude`. The skill links serve Claude Code and Codex. `CLAUDE.local.md` loads these rules in Claude Code only. Codex reads them because every schedule prompt and every `maintainer-*` skill opens by naming this file. Do not add `AGENTS.override.md`: Codex would drop the repository's own `AGENTS.md`. |
 
 ## Remotes
@@ -123,7 +124,8 @@ Each cycle has a skill under `skills/` and a schedule in `cycles/<id>.toml`. Eac
 | PR keeper | `maintainer-pr-keeper` | daily | Rebases conflicts, fixes failing checks, answers review comments |
 | Issue sweeper | `maintainer-issue-sweeper` | weekly | Comments on issues `main` already resolves |
 | Issue claim | `maintainer-issue-claim` | every 2 hours | Triage, reproduction, claim comment, starts the contribution |
-| Ecosystem miner | `maintainer-ecosystem-miner` | weekly | Files bugs with a reproduction, opens DX discussions, adds projects to `awesome-foldkit` |
+| Ecosystem miner | `maintainer-ecosystem-miner` | weekly | Files bugs with a reproduction, opens DX discussions, queues new projects for the curator |
+| Awesome curator | `maintainer-awesome-curator` | started by the driver | Reviews the radar issue of `foldhub/awesome-foldkit`, adds projects that pass the quality bar, rejects the rest, prunes the list monthly |
 | Own apps | `maintainer-own-apps` | weekly | Reports only; files DX issues through the same gates |
 
 `maintainer-contribution` runs one contribution through analysis, implementation, and evaluation. The issue claim cycle starts a contribution; the driver keeps it moving until the pull request is ready for review.
@@ -150,6 +152,14 @@ Before the run's final reply, in this order:
 Runs use the project's default model, GPT-6.1-Sol in Codex, unless T3 starts them on another provider. Start a subagent the way the current harness does it: the Agent tool in Claude Code, a native subagent in Codex, or T3 `delegate_task` with the same provider when neither exists.
 
 Run each review (publish gate, pre-push review, evaluation lens) as one subagent. The publish gate uses the smaller review model: `gpt-6-luna` in Codex, `sonnet` in Claude Code. Pre-push reviews and evaluation lenses keep the run's own model, because they review code and found the real code defects on the first day. Wait for each review before starting the next round. Never launch several rounds of the same review at once. Allow at most 3 pre-push review rounds per push: when the third still finds problems, keep the commits local, record the findings in `status.md`, and let the next driver run continue.
+
+## awesome-foldkit
+
+`foldhub/awesome-foldkit` is Taras's own list of Foldkit projects. The goal is a list that runs itself and gets more selective as it grows.
+
+- A GitHub Action there (`discover.yml`, Mondays 06:41 UTC) searches GitHub and npm for repositories that depend on Foldkit and updates the issue "New Foldkit projects to review". It needs the `RADAR_TOKEN` secret, a fine-grained token of `artile` with read access to public repositories and no expiration date.
+- `maintainer-awesome-curator` reviews that issue, scores each candidate with `skills/maintainer-awesome-curator/references/rubric.md`, and adds, watches, or rejects it. Once a month it re-scores the list and removes entries that fell below the bar.
+- Taras approved that the curator merges its own pull requests in this repository after the publish gate. The "Never" rules still apply: no AI mention, and the curator does not close the radar issue.
 
 ## Digest format
 

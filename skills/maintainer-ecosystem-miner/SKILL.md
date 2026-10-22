@@ -9,7 +9,7 @@ Learn from code other people write with Foldkit. A workaround in someone's app i
 
 ## 1. Find projects
 
-- The list in `foldhub/awesome-foldkit`: `gh api repos/foldhub/awesome-foldkit/readme --jq .content | base64 -d`.
+- The list in `foldhub/awesome-foldkit`: `/home/om/TAO/Tools/awesome-foldkit/data/projects.toml` after `git -C /home/om/TAO/Tools/awesome-foldkit pull --ff-only`.
 - GitHub code search: `gh search code "from 'foldkit'" --language TypeScript --limit 100 --json repository,path` and `gh search code "\"foldkit\":" --filename package.json --limit 100 --json repository`.
 - Drop forks of `foldkit/foldkit`, the repositories in `state/apps.toml` (Taras's own apps), and archived repositories.
 - Merge with `state/ecosystem.toml`. Each repository has `last_commit_seen`. Read only repositories with new commits since then. At most 15 per run, most recently pushed first.
@@ -42,6 +42,6 @@ Then act, each through the publish gate in "Autonomy" in `AGENTS.md` and its dai
 
 - A possible bug with a reproduction you ran on `upstream/main` and no upstream issue: start `maintainer-contribution` with it as a new shortcoming. Its analysis files the issue (`issues_opened`) or, on the Implementation path, goes on to a pull request.
 - A `P0` to `P2` DX idea repeated in at least two projects and not yet discussed upstream: open a discussion in the Ideas category from `maintainer-contribution/references/discussion-template.md` (`discussions_opened`).
-- A new project that fits `foldhub/awesome-foldkit`: open one pull request there adding it in the README's existing format (`awesome_foldkit_pull_requests`). Taras owns that repository.
+- A new project that may fit `foldhub/awesome-foldkit` and is not in its `data/projects.toml`: add `owner/name` to `queue` in `state/awesome.toml` under the state lock. `maintainer-awesome-curator` scores it and decides. Do not open pull requests there yourself.
 
 Update `state/ecosystem.toml` with what was filed, commit on `maintainer`, and push.

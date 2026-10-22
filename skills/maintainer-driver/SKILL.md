@@ -30,6 +30,10 @@ Order the rest by `priority` (recorded in `state/claim.toml` or the contribution
 
 Release the lock when the contribution reaches a state that waits for something outside this run (CI, a maintainer reply) or when the run ends.
 
-## 3. Report
+## 3. awesome-foldkit
+
+After the contributions, check the triggers in step 1 of `maintainer-awesome-curator`: the radar issue changed since `last_issue_update` in `state/awesome.toml`, `queue` has entries, a `watch` decision is due, or `last_review` is older than 30 days. When one is true and `.maintainer/.awesome-lock/` is free, run `maintainer-awesome-curator`. When none is true, do nothing. The check costs one `gh issue list` call.
+
+## 4. Report
 
 Commit the changed `contributions/` files and `state/autonomy.toml` on `maintainer` (not `.lock`), push, and append to `digests/driver/<YYYY-MM-DD>.md` per the digest format in `AGENTS.md`. When nothing moved, reply in one line.

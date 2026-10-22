@@ -1,0 +1,7 @@
+id = "awesome-curator"
+skill = "maintainer-awesome-curator"
+# No T3 schedule of its own. maintainer-driver starts it every hour when the
+# radar issue changed, the queue has entries, or the monthly review is due.
+# The radar itself runs in foldhub/awesome-foldkit Actions, Mondays 06:41 UTC.
+trigger = "driver"
+prompt = "Run the $maintainer-awesome-curator skill for Foldkit Maintainer. Read /home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md first."
