@@ -1,5 +1,5 @@
 # maintainer-issue-claim state. decision: skip | watch | no-claim | awaiting-approval | claimed
-last_poll = "2026-10-22T04:15:56Z"
+last_poll = "2026-10-22T06:16:00Z"
 
 # Deferred bug candidates (2-per-run limit). Next run takes them smallest first.
 
@@ -228,11 +228,11 @@ reason = "opened by devinjameson; maintainer-owned plan excluded from claiming"
 [issues.1759]
 decision = "skip"
 priority = "P3"
-priority_source = "estimate"
+priority_source = "label"
 reason = "opened by devinjameson; maintainer-owned plan excluded from claiming; explicitly deferred nonblocking assessment"
 
 [issues.1760]
 decision = "skip"
 priority = "P3"
-priority_source = "estimate"
+priority_source = "label"
 reason = "opened by devinjameson; maintainer-owned plan excluded from claiming; explicitly deferred nonblocking assessment"
