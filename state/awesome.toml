@@ -1,6 +1,6 @@
 # maintainer-awesome-curator state. See skills/maintainer-awesome-curator/SKILL.md.
-last_issue_update = ""   # updatedAt of the radar issue at the last run
-last_review = ""         # date of the last monthly review
+last_issue_update = "2026-10-22T12:36:50Z"
+last_review = "2026-10-22"
 queue = []               # "owner/name" entries from maintainer-ecosystem-miner
 
 # [decisions."owner/name"]
@@ -10,3 +10,1503 @@ queue = []               # "owner/name" entries from maintainer-ecosystem-miner
 # reason = "7 = depth 3, substance 2, health 2, signal 0. Real product with a live site."
 # decided = "YYYY-MM-DD"
 # revisit = "YYYY-MM-DD"   # watch only
+
+[publication_reviews."2026-10-22-candidates"]
+rounds = 2
+failed_rounds = 1
+status = "clean"
+review_task = "node:delegated-task:command%3Amcp%3A49f81138-4a0c-430d-9999-a16cfa23253d%3Adelegate-task%3Adriver-20261022-curator-publish-r2"
+
+[decisions."joelhooks/rat-king"]
+decision = "add"
+score = 6
+section = "ai"
+bar = 6
+reason = "6 = depth 1, substance 2, health 2, signal 1. The Foldkit dependency and apps/ratking-sh/src/page.ts implement the public connection page; the network code has a separate CLI and service surface."
+decided = "2026-10-22"
+
+[decisions."guidefari/here_hugo"]
+decision = "add"
+score = 7
+section = "apps"
+bar = 7
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/gpu depends on Foldkit; app.ts composes random-dot and noise-beam scenes beside a Hugo blog; the GPU site returns HTTP 200."
+decided = "2026-10-22"
+
+[decisions."joelhooks/howtoyoutube"]
+decision = "watch"
+score = 6
+section = "apps"
+bar = 8
+reason = "6 = depth 1, substance 3, health 2, signal 0. A live static instructional page with a typed content tree and non-hydratable Foldkit rendering; HTTP 200; below the app bar."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."dearlordylord/dalph"]
+decision = "reject"
+score = 2
+section = "ai"
+bar = 6
+reason = "2 = depth 0, substance 0, health 2, signal 0. All 36 prototype TypeScript files were checked: Foldkit is used only for Message/Schema constructors in playback data; the browser view uses direct DOM rendering."
+decided = "2026-10-22"
+
+[decisions."elianiva/oru"]
+decision = "add"
+score = 7
+section = "ai"
+bar = 6
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/oru depends on Foldkit and shell.ts/panel.ts compose its plugin UI; setup and browser verification are documented."
+decided = "2026-10-22"
+
+[decisions."mariusom/optio"]
+decision = "add"
+score = 8
+section = "apps"
+bar = 7
+reason = "8 = depth 3, substance 3, health 2, signal 0. The live app and src/app/view.ts implement time-study sessions, templates, history, backups and CSV export; HTTP 200."
+decided = "2026-10-22"
+
+[decisions."reilley64/mtgfr"]
+decision = "add"
+score = 7
+section = "apps"
+bar = 7
+reason = "7 = depth 2, substance 3, health 2, signal 0. client/package.json depends on Foldkit; client/app/view.ts composes lobby, deck builder and board; live origin returns HTTP 200."
+decided = "2026-10-22"
+
+[decisions."byronli8565/bookclub"]
+decision = "watch"
+score = 7
+section = "apps"
+bar = 7
+reason = "7 = depth 3, substance 3, health 1, signal 0. A Foldkit application entry and collaboration/reader tests exist, but no README was returned; hold for documentation."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."mpsuesser/interview-me-phonecall"]
+decision = "add"
+score = 7
+section = "apps"
+bar = 7
+reason = "7 = depth 2, substance 3, health 2, signal 0. packages/website uses Foldkit for recordings, preferences and its landing page; setup is documented and the public site returns HTTP 200."
+decided = "2026-10-22"
+
+[decisions."jigargosar/incubator"]
+decision = "reject"
+score = 4
+section = "apps"
+bar = 8
+reason = "4 = depth 1, substance 1, health 2, signal 0. The Foldkit manifests belong to evaluation drawing and rock-paper-scissors demos inside an idea incubator, rather than a differentiated product."
+decided = "2026-10-22"
+
+[decisions."dearlordylord/piglatin"]
+decision = "watch"
+score = 6
+section = "apps"
+bar = 8
+reason = "6 = depth 1, substance 3, health 2, signal 0. The live word-transformation visualization is an educational demo with Foldkit views and Quint specifications; below the app bar."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."elianiva/quorum"]
+decision = "watch"
+score = 6
+section = "apps"
+bar = 8
+reason = "6 = depth 2, substance 2, health 2, signal 0. Foldkit game screens and simulation update code exist, but the README describes a design/prototype rather than a released learning game."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."phibkro/job-application-assistant"]
+decision = "add"
+score = 7
+section = "apps"
+bar = 7
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/web uses Foldkit for a saved-application workspace, profile and job browsing; source and README explicitly distinguish local operation from deployment evidence."
+decided = "2026-10-22"
+
+[decisions."bjacobso/module-ls"]
+decision = "add"
+score = 7
+section = "interop"
+bar = 5
+reason = "7 = depth 2, substance 3, health 2, signal 0. web/package.json and web/src/main.ts implement the local source explorer, annotations and walkthroughs; the CLI and run commands are documented."
+decided = "2026-10-22"
+
+[decisions."filipfalcon/contriba"]
+decision = "watch"
+score = 3
+section = "apps"
+bar = 8
+reason = "3 = depth 2, substance 0, health 1, signal 0. The README describes a contributions map, but world.ts implements a rotating Three.js cube; hold as an early prototype."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."thiagofelix/isavail"]
+decision = "watch"
+score = 7
+section = "apps"
+bar = 8
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/isavail depends on Foldkit; its client handles domain checks and retries; README documents the Node server, Registro.br UDP protocol and SQLite cache. Admission bar is 8 after earlier additions in this section."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."martinthommesen/std"]
+decision = "watch"
+score = 5
+section = "apps"
+bar = 8
+reason = "5 = depth 2, substance 1, health 2, signal 0. The platform API is substantial, but the README identifies the web app as a sign-in shell; hold until the Foldkit workspace develops."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."rxssula/github-card"]
+decision = "add"
+score = 8
+section = "apps"
+bar = 7
+reason = "8 = depth 3, substance 3, health 2, signal 0. src/view/view.ts implements profile-card preview/download routes; the Vercel site returns HTTP 200."
+decided = "2026-10-22"
+
+[decisions."filipfalcon/website"]
+decision = "reject"
+score = 3
+section = "apps"
+bar = 8
+reason = "3 = depth 1, substance 1, health 1, signal 0. The Foldkit portion is a small portfolio site; README gives no run instructions and no deployment URL is declared."
+decided = "2026-10-22"
+
+[decisions."yovanoc/devchris"]
+decision = "reject"
+score = 4
+section = "apps"
+bar = 8
+reason = "4 = depth 1, substance 1, health 2, signal 0. foldkit-site/src/main.ts renders a portfolio alongside prior React versions; the live portfolio responds, but the site does not meet the app bar."
+decided = "2026-10-22"
+
+[decisions."laroccacharly/ccal"]
+decision = "watch"
+score = 7
+section = "apps"
+bar = 8
+reason = "7 = depth 2, substance 3, health 2, signal 0. React BookingPage embeds a Foldkit element and subscribes to its confirmed port; booking/view.ts renders the calendar. README documents Google Meet and local operation. Admission bar is 8 after earlier additions in this section."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."xiniha/helpspeaking-downloader"]
+decision = "add"
+score = 8
+section = "apps"
+bar = 7
+reason = "8 = depth 3, substance 3, health 2, signal 0. src/app/view.ts implements the recording library and pattern-lock UI; README documents ffmpeg, R2 and local deployment."
+decided = "2026-10-22"
+
+[decisions."lambdasolver2/winning-is-a-bug-effect"]
+decision = "watch"
+score = 6
+section = "apps"
+bar = 8
+reason = "6 = depth 1, substance 3, health 2, signal 0. A proof-oriented game demonstration has a Foldkit frontend and tests, but the demo integration is below the app bar."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."phibkro/course-data-platform"]
+decision = "watch"
+score = 7
+section = "apps"
+bar = 8
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/student-web depends on Foldkit and renders the course catalogue/comparison workspace; README documents NTNU and DBH evidence sources. Admission bar is 8 after earlier additions in this section."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."elianiva/photo.elianiva.com"]
+decision = "watch"
+score = 7
+section = "apps"
+bar = 8
+reason = "7 = depth 2, substance 3, health 2, signal 0. packages/web depends on Foldkit and includes public/admin views; the live photo site returns HTTP 200 and README documents R2/D1. Admission bar is 8 after earlier additions in this section."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."benjamin-htr/bobinarium"]
+decision = "reject"
+score = 3
+section = "apps"
+bar = 8
+reason = "3 = depth 2, substance 0, health 1, signal 0. No README is available; the inspected frontend renders fixture people and an example file tree, without a documented product or run path."
+decided = "2026-10-22"
+
+[decisions."web-infer/ax-distiller"]
+decision = "reject"
+score = 2
+section = "interop"
+bar = 6
+reason = "2 = depth 1, substance 0, health 1, signal 0. The inspector panel main.ts is a generated increment/decrement/reset counter; it does not expose the browser-automation product through Foldkit."
+decided = "2026-10-22"
+
+[decisions."phibkro/effx"]
+decision = "reject"
+score = 2
+section = "interop"
+bar = 6
+reason = "2 = depth 0, substance 0, health 2, signal 0. No Foldkit HTML import was found; apps/docs uses Next/React and the detected Foldkit relation is root development tooling."
+decided = "2026-10-22"
+
+[decisions."kimlercorey/aimy-v0"]
+decision = "add"
+score = 7
+section = "ai"
+bar = 6
+reason = "7 = depth 2, substance 3, health 2, signal 0. core/ui/src/app.ts uses Foldkit application wiring and core/ui/src/chat/view.ts renders the streaming chat; the companion has a separate agent core."
+decided = "2026-10-22"
+
+[decisions."cameronapak/melos-next"]
+decision = "reject"
+score = 3
+section = "apps"
+bar = 8
+reason = "3 = depth 1, substance 0, health 2, signal 0. The actual src/ui/main.ts is the cafe-stack counter starter; its README is the template README, duplicating a listed starter."
+decided = "2026-10-22"
+
+[decisions."just-be-dev/entity-store"]
+decision = "add"
+score = 8
+section = "apps"
+bar = 7
+reason = "8 = depth 3, substance 3, health 2, signal 0. src/ui/main.ts and typeList/main.ts implement schema/type/entity workspaces; README documents D1 storage, versioned lenses and links."
+decided = "2026-10-22"
+
+[decisions."just-be-dev/agent-feed"]
+decision = "reject"
+score = 3
+section = "apps"
+bar = 8
+reason = "3 = depth 1, substance 0, health 2, signal 0. src/ui/main.ts is a counter starter and the README reproduces cafe-stack; no agent-feed product is implemented in the inspected UI."
+decided = "2026-10-22"
+
+[decisions."vektorprogrammet/mono-web"]
+decision = "watch"
+score = 7
+section = "apps"
+bar = 8
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/dashboard contains many Foldkit administrative workspaces; README documents a native replacement and explicitly says production uses the older PHP application. Admission bar is 8 after earlier additions in this section."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."sakompella/cf-stumble"]
+decision = "add"
+score = 6
+section = "ai"
+bar = 6
+reason = "6 = depth 3, substance 2, health 1, signal 0. The Foldkit owner-page entry and views implement projects, conversations and generation controls; README marks the harness incomplete and omits setup instructions."
+decided = "2026-10-22"
+
+[decisions."michaelvessia/garage"]
+decision = "watch"
+score = 7
+section = "apps"
+bar = 8
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/subq uses Foldkit for weight, injections, scheduling and settings in a broader Bun monorepo; root README explains the workspace and setup. Admission bar is 8 after earlier additions in this section."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."r4ravi2008/remix-workflow-v3"]
+decision = "watch"
+score = 7
+section = "apps"
+bar = 8
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/release-kit-studio depends on Foldkit; its view renders artist profiles, release assets and downloadable kits within a music-remix toolchain. Admission bar is 8 after earlier additions in this section."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."chr33s/effect-reconciler"]
+decision = "add"
+score = 6
+section = "interop"
+bar = 5
+reason = "6 = depth 1, substance 3, health 2, signal 0. The published Effect reconciler has Foldkit command/update integration examples; its main product is resource lifetime coordination rather than a Foldkit UI."
+decided = "2026-10-22"
+
+[decisions."phibkro/chatlog"]
+decision = "add"
+score = 7
+section = "ai"
+bar = 6
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/workbench-web depends on Foldkit and main.ts renders governed insights, evidence and context; README documents local pre-release operation."
+decided = "2026-10-22"
+
+[decisions."oldgeese/ryutama-charsheet"]
+decision = "watch"
+score = 6
+section = "apps"
+bar = 8
+reason = "6 = depth 2, substance 3, health 1, signal 0. Foldkit character-sheet routes and Firebase character queries exist, but README has only a title and some routes are placeholders."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."alexanderdev2004/hlsl-editor"]
+decision = "watch"
+score = 7
+section = "apps"
+bar = 8
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/web depends on Foldkit; the editor view renders a typed shader graph and uses compiler/validation packages; README documents checks and local startup. Admission bar is 8 after earlier additions in this section."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."mococa/foldkit-todo"]
+decision = "watch"
+score = 6
+section = "apps"
+bar = 8
+reason = "6 = depth 3, substance 1, health 2, signal 0. The app has login/session and todo/drawing-related source, but its README is generated starter documentation; hold for a clear product description."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."opsydyn/astro-azure-integration"]
+decision = "add"
+score = 6
+section = "interop"
+bar = 6
+reason = "6 = depth 1, substance 3, health 2, signal 0. The Azure Static Web Apps adapter is published, and its example explicitly loads @opsydyn/astro-foldkit and renders a Foldkit counter; deployment host differs from listed integrations."
+decided = "2026-10-22"
+
+[decisions."silk-lang/docs"]
+decision = "reject"
+score = 5
+section = "apps"
+bar = 8
+reason = "5 = depth 1, substance 2, health 2, signal 0. Foldkit powers a language documentation/landing site; the depth and substance score is below the app bar, and it is not an official Foldkit resource."
+decided = "2026-10-22"
+
+[decisions."kamn/empty-vessel"]
+decision = "add"
+score = 6
+section = "ai"
+bar = 6
+reason = "6 = depth 2, substance 2, health 2, signal 0. The terminal application imports foldkit/command, foldkit/message and foldkit/update; a custom terminal runtime renders its Model rather than Foldkit HTML."
+decided = "2026-10-22"
+
+[decisions."nalpr/opencode-luminacad"]
+decision = "add"
+score = 8
+section = "apps"
+bar = 7
+reason = "8 = depth 3, substance 3, health 2, signal 0. src/main.ts starts a Foldkit application and src/view.ts renders the parametric lamp editor; README documents STL/STEP workflows and checks."
+decided = "2026-10-22"
+
+[decisions."zloiy/foldkitapp"]
+decision = "watch"
+score = 6
+section = "apps"
+bar = 8
+reason = "6 = depth 3, substance 2, health 1, signal 0. Foldkit views and user-management components exist, but the README only says dating-app and provides no purpose or run instructions."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."kndwin/fullstack-effect"]
+decision = "watch"
+score = 5
+section = "fullstack"
+bar = 5
+reason = "5 = depth 2, substance 2, health 1, signal 0. There is substantial Foldkit UI/preview code and an organization/task app, but the README only identifies an Effect/Foldkit playground."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."choyai/choyai-dev"]
+decision = "reject"
+score = 2
+section = "apps"
+bar = 8
+reason = "2 = depth 1, substance 1, health 0, signal 0. The Foldkit portion is a personal portfolio; no README or live URL is supplied and the last push is older than 180 days."
+decided = "2026-10-22"
+
+[decisions."bjoerge/battery-calculator"]
+decision = "add"
+score = 8
+section = "apps"
+bar = 7
+reason = "8 = depth 3, substance 3, health 2, signal 0. The live calculator returns HTTP 200; src/app/view.ts implements chemistry, duty-cycle and battery-pack inputs with Foldkit."
+decided = "2026-10-22"
+
+[decisions."djobbo/timeline"]
+decision = "watch"
+score = 5
+section = "apps"
+bar = 8
+reason = "5 = depth 2, substance 2, health 1, signal 0. The Foldkit apps implement timeline editing and a gymnastics routine editor, but README describes only the Vite monorepo starter."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."johnschoeman/languages_and_tools"]
+decision = "reject"
+score = 2
+section = "apps"
+bar = 8
+reason = "2 = depth 1, substance 0, health 1, signal 0. The only inspected Foldkit application is the framework counter example inside a language-learning repository."
+decided = "2026-10-22"
+
+[decisions."roninlp/jibkeep-effect"]
+decision = "watch"
+score = 6
+section = "apps"
+bar = 8
+reason = "6 = depth 2, substance 3, health 1, signal 0. Foldkit client code handles accounts, transactions, Jalali dates and toman amounts, but no README was returned."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."dennistruemper/monodroch"]
+decision = "reject"
+score = 4
+section = "apps"
+bar = 8
+reason = "4 = depth 2, substance 1, health 1, signal 0. Two Foldkit apps demonstrate a shared counter and synchronized colour; no README or differentiated product is documented."
+decided = "2026-10-22"
+
+[decisions."gaganref/confect"]
+decision = "reject"
+score = 2
+section = "fullstack"
+bar = 5
+reason = "2 = depth 0, substance 0, health 2, signal 0. README explicitly identifies a fork of rjdellecese/confect, which is already listed; the rubric fast-rejects forks."
+decided = "2026-10-22"
+
+[decisions."guidefari/efa-template"]
+decision = "add"
+score = 7
+section = "fullstack"
+bar = 5
+reason = "7 = depth 2, substance 3, health 2, signal 0. Foldkit frontend implements account, passkeys, API keys and admin-user pages; README documents Better Auth, StyleX and Cloudflare D1, distinct from the listed plain starters."
+decided = "2026-10-22"
+
+[decisions."willtraweek/vibe-starter"]
+decision = "watch"
+score = 4
+section = "fullstack"
+bar = 5
+reason = "4 = depth 1, substance 2, health 1, signal 0. A Foldkit stack pack exists, but the root README consists of placeholders and gives no concrete install/run commands."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."joelhooks/mischief"]
+decision = "reject"
+score = 2
+section = "ai"
+bar = 6
+reason = "2 = depth 0, substance 0, health 2, signal 0. The manifest lists only @foldkit/oxlint-plugin in devDependencies; the plan runner has no Foldkit UI."
+decided = "2026-10-22"
+
+[decisions."gregwebs/tiny-desk-splitter"]
+decision = "watch"
+score = 7
+section = "apps"
+bar = 8
+reason = "7 = depth 2, substance 3, health 2, signal 0. The radar tooling-only label misses concert-tracker/frontend: its manifest depends on Foldkit, and player/splitter/playlist widgets have real views and tests. Admission bar is 8 after earlier additions in this section."
+decided = "2026-10-22"
+revisit = "2026-11-21"
+
+[decisions."mpsuesser/opencode-imagen"]
+decision = "reject"
+score = 2
+section = "ai"
+bar = 6
+reason = "2 = depth 0, substance 0, health 2, signal 0. Only @foldkit/oxlint-plugin appears in development dependencies; the OpenCode image plugin has no Foldkit UI."
+decided = "2026-10-22"
+
+[decisions."lambda-solver/lambdabench-pro"]
+decision = "reject"
+score = 2
+section = "ai"
+bar = 6
+reason = "2 = depth 0, substance 0, health 2, signal 0. The documented frontend is React; the Foldkit-related manifest entry is @foldkit/devtools-mcp development tooling."
+decided = "2026-10-22"
+
+[decisions."goat-si/goat"]
+decision = "reject"
+score = 2
+section = "ai"
+bar = 6
+reason = "2 = depth 0, substance 0, health 2, signal 0. README describes a T3 Code derivative; checked manifests have no Foldkit dependency and apps/web/src/main.tsx starts React."
+decided = "2026-10-22"
+
+[decisions."dxv-3/rere"]
+decision = "reject"
+score = 2
+section = "ai"
+bar = 6
+reason = "2 = depth 0, substance 0, health 2, signal 0. README identifies a T3 Code fork; checked manifests have no Foldkit dependency and the web entry starts React."
+decided = "2026-10-22"
+
+[decisions."nicepakproducts/effect-digital-shelf"]
+decision = "reject"
+score = 1
+section = "apps"
+bar = 8
+reason = "1 = depth 0, substance 0, health 1, signal 0. Checked manifests have no Foldkit dependency; apps/web/src/main.tsx uses React with Effect Atom."
+decided = "2026-10-22"
+
+[decisions."simcity400/codegui"]
+decision = "reject"
+score = 2
+section = "ai"
+bar = 6
+reason = "2 = depth 0, substance 0, health 2, signal 0. The T3 derivative has no Foldkit dependency in checked manifests and the web entry starts React."
+decided = "2026-10-22"
+
+[decisions."lvl0lvl/t3_bot"]
+decision = "reject"
+score = 2
+section = "ai"
+bar = 6
+reason = "2 = depth 0, substance 0, health 2, signal 0. The T3 derivative has no Foldkit dependency in checked manifests and the web entry starts React."
+decided = "2026-10-22"
+
+[prepush_reviews."2026-10-22-additions"]
+rounds = 1
+status = "clean"
+head = "d90e99576b81d1308ac972b4eb0bfaae2399b97d"
+
+[publications."2026-10-22-additions"]
+pull_request = "https://github.com/foldhub/awesome-foldkit/pull/8"
+merged = true
+merge_commit = "7330471975d92fb3a8c16a408bbda203933f1727"
+radar = "https://github.com/foldhub/awesome-foldkit/issues/7"
+decision = "Decided autonomously: publish and squash-merge because the build, publication review, and pre-push review passed."
+
+[publication_reviews."2026-10-22-prune"]
+rounds = 1
+failed_rounds = 0
+status = "clean"
+review_task = "node:delegated-task:command%3Amcp%3A49f81138-4a0c-430d-9999-a16cfa23253d%3Adelegate-task%3Adriver-20261022-curator-prune-publish-r1"
+
+[monthly_reviews."2026-10-22"]
+status = "complete; prune merged"
+scored = 117
+retained = 106
+recommended_removals = 11
+nonrepo_entries_checked = 34
+confirmed_dead_resource_links = 0
+apps_bar = 8
+ai_bar = 6
+interop_bar = 6
+ui_bar = 5
+fullstack_bar = 5
+review_task = "node:delegated-task:command%3Amcp%3A49f81138-4a0c-430d-9999-a16cfa23253d%3Adelegate-task%3Adriver-20261022-monthly-rubric-review-r1"
+
+[monthly_scores."2026-10-22"."alchemy-run/alchemy"]
+section = "fullstack"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 1, substance 3, health 2, signal 2. Foldkit appears in deployable examples rather than the infrastructure engine: AWS and Cloudflare SPA/SSR/SSG manifests and Runtime entry points are present. The working Alchemy site and multiple host/rendering targets provide useful deployment coverage."
+
+[monthly_scores."2026-10-22"."rjdellecese/confect"]
+section = "fullstack"
+score = 9
+bar = 5
+recommendation = "retain"
+reason = "9 = depth 2, substance 3, health 2, signal 2. The @confect/foldkit package declares Foldkit and implements native Commands, paginated queries and client services. Convex bindings are a distinct backend approach from Zero or HTTP/RPC starters; confect.dev loads."
+
+[monthly_scores."2026-10-22"."nolangc/foldkit-alchemy-starter"]
+section = "fullstack"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. frontend/package.json and entry/main implement Foldkit chat with auth; README documents a CLI offering chat or todos, Neon or PlanetScale, BetterAuth and Tauri. Hosted chat loads. The selectable scaffold and chat provide broader coverage than verified-todo."
+
+[monthly_scores."2026-10-22"."lloydrichards/stack-effect"]
+section = "fullstack"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. A concrete client-foldkit template declares Foldkit and boots its Runtime. The scaffold catalog, CLI and composable module approach differ from a fixed application starter; the documentation site loads."
+
+[monthly_scores."2026-10-22"."elianiva/nook"]
+section = "fullstack"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. apps/frontend declares and boots Foldkit, with deck/review application source. README now describes an offline Anki/FSRS spaced-repetition PWA, not a generic monorepo template. The hostname reaches Cloudflare Access; public authenticated functionality was not tested."
+
+[monthly_scores."2026-10-22"."mwarger/foldkit-convex-clerk-lab"]
+section = "fullstack"
+score = 9
+bar = 5
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Root Foldkit dependency and src entry/main/view establish the camp-registration reference UI. The Convex/Clerk/Confect lab has concrete backend code and a documented architecture distinct from generic Convex bindings; deployment or users were not independently verified."
+
+[monthly_scores."2026-10-22"."potti1234/zero-foldkit"]
+section = "fullstack"
+score = 6
+bar = 5
+recommendation = "retain"
+reason = "6 = depth 2, substance 2, health 1, signal 1. packages/zero-foldkit implements a substantial ManagedResource/Subscription bridge and apps/zbugs boots a Foldkit UI. Zero synchronization is distinct from Convex. README is only a heading, and package publication or working hosted use was not verified."
+
+[monthly_scores."2026-10-22"."nolangc/verified-todo"]
+section = "fullstack"
+score = 6
+bar = 5
+recommendation = "remove"
+reason = "6 = depth 2, substance 1, health 2, signal 1. frontend main implements authenticated todo operations and virtualization, with backend/database/deployment code. README describes the same Cloudflare, Alchemy, Neon/Hyperdrive, BetterAuth and optional Tauri approach offered by foldkit-alchemy-starter. No independent deployed use was found; duplicate review recommends the higher-scoring scaffold."
+
+[monthly_scores."2026-10-22"."just-be-dev/cafe-stack"]
+section = "fullstack"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 3, substance 2, health 2, signal 1. The root depends on Foldkit and src/ui boots a counter, backed by a health API and two Worker deployment. Useful runnable starter, but its UI/domain is intentionally trivial. Single-package mise/Bun scaffold and HTTP/observability wiring differ from cafe-template's RPC monorepo and yatainc's Nix single-Worker setup."
+
+[monthly_scores."2026-10-22"."yatainc/cafe-stack"]
+section = "fullstack"
+score = 7
+bar = 5
+recommendation = "retain"
+reason = "7 = depth 3, substance 2, health 2, signal 0. Root Foldkit dependency and src entry/main establish the SPA starter. README documents one Cloudflare Worker, Nix, Vite+, portless, localization and optional stack pieces. The small demo is starter-level; toolchain and single-Worker architecture distinguish it from the other CAFE starters."
+
+[monthly_scores."2026-10-22"."elianiva/foldcn"]
+section = "ui"
+score = 9
+bar = 5
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. The registry and web app depend on Foldkit/UI; registry components and Runtime source implement the copy-in components described in the README. The live registry loads. Preserve alongside generated design-contract ports and creaseui's multiple styling renderers."
+
+[monthly_scores."2026-10-22"."bjacobso/foldworks"]
+section = "ui"
+score = 9
+bar = 5
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Multiple UI, data-grid, editor and form-builder packages declare Foldkit and contain substantive component code. foldworks.dev loads. StyleX tokens plus higher-level controlled workbenches distinguish it from copy-in shadcn registries."
+
+[monthly_scores."2026-10-22"."boozedog/foldstylex"]
+section = "ui"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. packages/foldkit and kitchen-sink declare Foldkit/UI and implement named Html helpers; sidebar demo boots the Runtime. Shadcn-inspired named StyleX composition differs from foldstryx's Astryx visual system and Foldworks' higher-level workbenches."
+
+[monthly_scores."2026-10-22"."boozedog/foldstryx"]
+section = "ui"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. Foldkit adapter, docs and kitchen-sink packages declare Foldkit; component and docs views use it. Working documentation site and Astryx tokens/visual language distinguish this from foldstylex despite shared architecture."
+
+[monthly_scores."2026-10-22"."oleksandr-antonenko/foldkit-extras"]
+section = "ui"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. All three component packages declare Foldkit and contain real view/interaction implementations. Scheduler, command palette and side navigation are delivered as Submodels with host-owned data; README provides installation and check commands. External adoption remains a README claim."
+
+[monthly_scores."2026-10-22"."peterje/foldui"]
+section = "ui"
+score = 2
+bar = 5
+recommendation = "remove"
+reason = "2 = depth 0, substance 0, health 2, signal 0. Both complete non-vendored manifests have no Foldkit dependency; README and routes/index.tsx show an Alchemy/TanStack React one-page counter. A full non-vendored source scan finds no Foldkit imports. The listed Foldkit registry description is unsupported by the current tree."
+
+[monthly_scores."2026-10-22"."birbprophet/shadcn-ui-foldkit"]
+section = "ui"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 3, substance 2, health 2, signal 1. Root Foldkit dependency and src/generated/accordion.ts provide actual HtmlBuilder output. The deterministic pinned Base UI compiler-generated port is substantive and differs from copy-in registries or slot-design data. README explicitly says browser, accessibility and pixel certification are pending; no adoption is verified."
+
+[monthly_scores."2026-10-22"."birbprophet/untitled-ui-foldkit"]
+section = "ui"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 3, substance 2, health 2, signal 1. Root Foldkit peer/runtime dependency and generated base/application/marketing sources establish a Foldkit component library. Untitled UI is a distinct visual language. Catalog and test totals are README claims, not independently executed validation or adoption evidence."
+
+[monthly_scores."2026-10-22"."birbprophet/boneyard-foldkit"]
+section = "ui"
+score = 7
+bar = 5
+recommendation = "retain"
+reason = "7 = depth 3, substance 2, health 1, signal 1. Root Foldkit dependency and src/view.ts implement responsive skeleton/overlay views, with registry and CSS logic. This is a useful original port, not a GitHub fork. README endpoint returns 404 and no working docs or hosted use was established."
+
+[monthly_scores."2026-10-22"."mentalgear/foldkit-shadcn"]
+section = "ui"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. design-layer declares Foldkit/UI and boots a real view demo. The project extracts upstream slot contracts as generated data instead of shipping behavioral components, a distinct approach from Foldcn, creaseui and the Base UI compiler port. Its parity/test totals were not rerun."
+
+[monthly_scores."2026-10-22"."opsydyn/fold-kit-experiments"]
+section = "ui"
+score = 7
+bar = 5
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 2, signal 0. The visualization package and runnable demos declare Foldkit and implement chart views; the repo also contains Astro and declarative Three integrations. Chart primitives without D3 are distinct from styling kits and full 3D engines. Publication is described in README; no download counts are inferred."
+
+[monthly_scores."2026-10-22"."potti1234/foldkit-lucide-icons"]
+section = "ui"
+score = 9
+bar = 5
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. The package declares Foldkit as a peer and src/icons.ts implements tree-shakeable icon functions using Lucide SVG data. Its runtime SVG-data adapter and per-icon size/color/stroke/label API differ from skoshx's pre-generated inert multi-family views."
+
+[monthly_scores."2026-10-22"."skoshx/foldkit-icons"]
+section = "ui"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root peer dependency and generated per-family icon exports provide inert Foldkit views; the website also boots Foldkit. Multi-family static generation with a className-only API differs from the Lucide-specific SVG-data adapter. Vendored upstream icon sources were excluded from integration evidence."
+
+[monthly_scores."2026-10-22"."djgrant/classy"]
+section = "ui"
+score = 7
+bar = 5
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 2, signal 0. packages/foldkit declares Foldkit and implements typed element factories and class merging in classy.js. Its package README supplies installation and usage. It is a CSS-class factory adapter, distinct from atomic CSS compilers, visual component kits and generated slot contracts."
+
+[monthly_scores."2026-10-22"."potti1234/creaseui"]
+section = "ui"
+score = 9
+bar = 5
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Root Foldkit/UI dependencies and source Runtime/components implement the showcase; creaseui.com loads. Tailwind and StyleX sites plus individual registry components and Pleat integration differentiate its distribution/styling approach from Foldcn's Tailwind registry."
+
+[monthly_scores."2026-10-22"."manzanita-research/pleat"]
+section = "ui"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. packages/foldkit declares Foldkit and contains renderer/CSS adapters, alongside the Effect atomic-style algebra and a real site. pleat.manzanita.dev loads. Algebraic atomic compilation and SSR CSS collection differ from StyleX helpers or class factories."
+
+[monthly_scores."2026-10-22"."planetaryescape/foldkit-mde"]
+section = "ui"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. Both editor and playground declare Foldkit; editor/view.ts and playground/main implement visual/raw Markdown editing. README documents a runnable playground and IndexedDB storage. Editor/document/persistence code is substantial and distinct; intended gbfm consumption is not treated as established adoption."
+
+[monthly_scores."2026-10-22"."doeixd/foldkit-plus"]
+section = "ai"
+score = 8
+bar = 6
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. Own agent, WebMCP, MCP and A2A packages declare Foldkit, with original source and runnable multi-feature applications. The working site documents a family of state-machine extensions. Upstream-like example copies alone were not used as proof of original integration."
+
+[monthly_scores."2026-10-22"."deracs/effect-webmcp"]
+section = "ai"
+score = 6
+bar = 6
+recommendation = "retain"
+reason = "6 = depth 1, substance 3, health 2, signal 0. Only the examples/foldkit counter uses Foldkit, and it registers tools through a scoped Subscription and native Runtime. The main Effect WebMCP library is framework-independent and substantive; its reusable API plus React example differs from Foldkit-specific agent bridges."
+
+[monthly_scores."2026-10-22"."dallenpyrah/creasekit"]
+section = "ai"
+score = 8
+bar = 6
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root dependency, Runtime entry and native inspector/feedback source show an actual Foldkit UI. README documents the authenticated local MCP bridge and Vite integration; its live landing site loads. Local MCP/Model context differentiates it from Foldmark's exported annotation reports."
+
+[monthly_scores."2026-10-22"."tao-io/foldcase"]
+section = "ai"
+score = 7
+bar = 6
+recommendation = "retain"
+reason = "7 = depth 1, substance 3, health 2, signal 1. The main product is a headless showcase/CLI/MCP catalog; Foldkit UI is confined to docs/site and counter/tasks demonstrations. Those dependencies and Runtime sources are real. Original catalog/report/coverage implementation is substantive and distinct. Docs hostname fails DNS; documented local setup earns the documentation health point."
+
+[monthly_scores."2026-10-22"."tao-io/foldkit-design"]
+section = "ai"
+score = 6
+bar = 6
+recommendation = "retain"
+reason = "6 = depth 1, substance 2, health 2, signal 1. The original design workflow includes a real Foldkit mount HTML starter and pinned template dependencies; the HTML imports Foldkit/UI and boots components. Most content is authored design instructions/tokens, with a small control demo rather than a substantial app. It is not a scraped skill copy."
+
+[monthly_scores."2026-10-22"."mpsuesser/scraped-docs-foldkit"]
+section = "ai"
+score = 2
+bar = 6
+recommendation = "remove"
+reason = "2 = depth 0, substance 0, health 1, signal 1. The complete tree consists of copied Foldkit documentation Markdown, with no package manifests or runtime source. README returns 404. This fits the rubric's copied-docs and depth-zero fast rejection, irrespective of automated recent pushes."
+
+[monthly_scores."2026-10-22"."just-be-dev/foldmark"]
+section = "ai"
+score = 9
+bar = 6
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Root Foldkit dependency, src/view.ts and demo/main show the native feedback widget and runtime-backed playground. README documents mounting, Shadow DOM lifecycle, context and Markdown/JSON report export. It differs from Creasekit's authenticated live MCP bridge; npm publication is explicitly absent."
+
+[monthly_scores."2026-10-22"."birbprophet/webmcpifier"]
+section = "ai"
+score = 8
+bar = 6
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. apps/studio declares Foldkit and implements Runtime, update and a substantive authoring view. The bounded WebMCP compiler/studio has a different audience from coding-agent feedback widgets. Advertised www site fails DNS; local usage is documented, and deployed workflow claims were not independently verified."
+
+[monthly_scores."2026-10-22"."rodygosset/react-foldkit"]
+section = "interop"
+score = 7
+bar = 6
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 2, signal 0. packages/react-foldkit declares the official Foldkit runtime and supplies application/devtools adapters; apps/web contains actual React examples using the shared Model/Message update architecture. This is an original React renderer integration, not a GitHub fork or an unused naming collision."
+
+[monthly_scores."2026-10-22"."birbprophet/react-foldkit-converter"]
+section = "interop"
+score = 5
+bar = 6
+recommendation = "remove"
+reason = "5 = depth 0, substance 2, health 2, signal 1. The complete manifests have no Foldkit dependency and the non-vendored source is a command-line compiler/generator. Foldkit import text in generator.ts is generated source, not a mounted UI. Substantial original conversion tooling, but no Foldkit application/package UI meets the rubric's depth requirement."
+
+[monthly_scores."2026-10-22"."birbprophet/storybook-renderer-foldkit"]
+section = "interop"
+score = 9
+bar = 6
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Root Foldkit dependency and src/mount.ts actually create/embed the Foldkit Runtime per story. A renderer for standard Storybook differs from Openstory's separate component-browser/MCP host. Git installation and lifecycle contracts are documented; test assertions were not rerun."
+
+[monthly_scores."2026-10-22"."aniket-508/foldocs"]
+section = "interop"
+score = 9
+bar = 6
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Core documentation UI and site packages declare Foldkit; packages/foldocs/src/index.ts and packages/ui/layout.ts implement real navigation/runtime views. Live docs load. Framework-level documentation generation is distinct from copied Markdown. Cached metadata resolves the repository to tarkaworks/foldocs; listed alias works."
+
+[monthly_scores."2026-10-22"."crutchcorn/causeeffect"]
+section = "interop"
+score = 7
+bar = 6
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 2, signal 0. packages/foldkit-jsx declares Foldkit and implements HtmlBuilder/Submodel JSX bridging; an example boots the Runtime. Generator-aware JSX is distinct from React runtime adapters and deterministic React conversion. Website redirects to the working GitHub repository; no independent adoption is asserted."
+
+[monthly_scores."2026-10-22"."potti1234/wide-effect"]
+section = "interop"
+score = 5
+bar = 6
+recommendation = "remove"
+reason = "5 = depth 0, substance 2, health 2, signal 1. The Foldkit package contains Command correlation, diagnostics, tracing callbacks and DevTools timeline readers. A full source scan finds no HtmlBuilder view or mounted UI; examples demonstrate telemetry, not an application renderer. This is original integration tooling, but falls under the rubric's depth-zero tooling exclusion."
+
+[monthly_scores."2026-10-22"."manzanita-research/foldkit-native"]
+section = "interop"
+score = 9
+bar = 6
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. packages/foldkit-gpuix declares Foldkit and implements a substantial DOM/host bridge to native GPUI; UI packages and demos use it. Desktop GPUI/Wayland targets differ from the Expo/Fabric iOS/Android experiment. README qualifications and platform claims were not executed on this host."
+
+[monthly_scores."2026-10-22"."giovannilondero/foldkit-native"]
+section = "interop"
+score = 6
+bar = 6
+recommendation = "retain"
+reason = "6 = depth 2, substance 2, health 2, signal 0. packages/foldkit-native and apps/spike use the workspace Foldkit platform seam, and mount.ts/register.ts implement real Fabric rendering. This repository is not a GitHub fork; its dependency on a separate Foldkit fork is disclosed. Native mobile targets/approach differ from GPUI; README calls it disposable/unpublished and no real adoption was found."
+
+[monthly_scores."2026-10-22"."manzanita-research/foldkit-dials"]
+section = "interop"
+score = 9
+bar = 6
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Own foldkit-dials package and demo declare Foldkit; bezier editor and controls implement native Messages and views. Working demo site and Schema-to-Message live controls provide a concrete UI use, distinct from general styling and native renderers."
+
+[monthly_scores."2026-10-22"."filipfalcon/lightocean"]
+section = "interop"
+score = 8
+bar = 6
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. Original libraries/foldkit and applications/editor/playground/website contain Foldkit dependencies, Runtime bootstraps, Sessions and views. The current repository brands itself EgoNitida and contains the actual Foldkit engine/editor integration; distinguish it from egonitida/egonitida's dependency-free simulation-core tree and from narrower declarative scene bindings."
+
+[monthly_scores."2026-10-22"."saiashirwad/foldkit-explore"]
+section = "interop"
+score = 8
+bar = 6
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root Foldkit dependency and src/lab Runtime entry render actual program state-space exploration. Source and README separate pure transitions, environment choices and nonexecuted Commands. Interactive reachable-state enumeration is a distinct tool from static tests/showcase catalogs."
+
+[monthly_scores."2026-10-22"."egonitida/egonitida"]
+section = "interop"
+score = 4
+bar = 6
+recommendation = "remove"
+reason = "4 = depth 0, substance 2, health 2, signal 0. All seven non-vendored manifests and the full 28-source-file scan show no Foldkit dependency or imports. Current code is an Effect simulation core, CLI/scaffolding and design tokens, despite README branding mentioning Foldkit. It is the same EgoNitida idea/author as lightocean, with weaker demonstrated Foldkit relevance; fast rejection applies."
+
+[monthly_scores."2026-10-22"."toshiki-higa/vite-plugin-foldkit-routes"]
+section = "interop"
+score = 5
+bar = 6
+recommendation = "retain"
+reason = "5 = depth 1, substance 2, health 2, signal 0. Plugin/runtime generation code is substantive and the examples/basic manifest and Runtime entry render actual Home/About routes. Foldkit UI is in the example; the unpublished plugin is a file-routing code generator, rather than a primary app UI. No other listed entry supplies this file-routing approach."
+
+[monthly_scores."2026-10-22"."effect-ts/slopcop"]
+section = "apps"
+score = 9
+bar = 8
+recommendation = "retain"
+reason = "9 = depth 2, substance 3, health 2, signal 2. apps/web and packages/ui declare Foldkit; Runtime/main and prompt editor render the actual triage interface. Pull-request policy/triage differs from Janitor's label automation. Effect-TS ownership supplies the rubric's community-organization signal."
+
+[monthly_scores."2026-10-22"."imax153/twitch-integrations"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. apps/web declares Foldkit and main/view implement the broadcaster page with chat-command editing and connection control. Twitch/Spotify integrations solve a distinct streaming use case; setup and credential documentation are concrete, without asserting an independently tested deployment."
+
+[monthly_scores."2026-10-22"."filipfalcon/skoreova"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. Foldkit appears in actual landing-page, platform and studio app manifests and Runtime source. Working public soccer statistics site and domain/data/visualization source are substantive and distinct. README says proprietary/source-available, so the published 'open source applications' category wording needs attention independently of scoring."
+
+[monthly_scores."2026-10-22"."syahrulbhudif/dearly"]
+section = "apps"
+score = 7
+bar = 8
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/web declares Foldkit and routes its actual diary/calendar/canvas application. The extensive source and deployment guide support a substantive diary product. Public hostname reaches Cloudflare Access; authenticated behavior and adoption remain unverified."
+
+[monthly_scores."2026-10-22"."tomrford/vscope"]
+section = "apps"
+score = 7
+bar = 8
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 2, signal 0. packages/ui declares Foldkit and a substantial main view implements serial-device screens, activity and controls. CLI/serial capture and setup docs establish an original oscilloscope product, distinct from network, telemetry or trading dashboards."
+
+[monthly_scores."2026-10-22"."mwarger/corefour"]
+section = "apps"
+score = 9
+bar = 8
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Root dependency and src/app Runtime/views implement game-poster composition. Live site loads and source contains IGDB/share/export domain features, distinct from games themselves or generic design galleries."
+
+[monthly_scores."2026-10-22"."solcik/agent-grilling"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root dependency and src/ui entry/view implement a localhost question inbox with real server/CLI contracts. Human answers to agent question batches are a concrete, distinct use case from execution consoles or code review."
+
+[monthly_scores."2026-10-22"."arijit-gogoi/web-forth"]
+section = "apps"
+score = 7
+bar = 8
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 2, signal 0. packages/client declares Foldkit and Runtime/main provide a browser editor/REPL over the separate Forth engine. Live site loads. The threaded VM and language tooling distinguish this from Forma's typed Lisp workbench."
+
+[monthly_scores."2026-10-22"."fellz/booking_widget_effect"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root Foldkit dependency, main/entry and domain/services/views implement a booking widget. The live page loads. It is an authored Vue-to-Foldkit architecture comparison with date validation, typed services and tests, rather than a GitHub fork or a bug reproduction."
+
+[monthly_scores."2026-10-22"."dearlordylord/pathfinder-armor-puzzle-solver"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. apps/frontend declares Foldkit and Runtime/view render a real solver over a separate search library. Working site and game-specific solver/formal-model source provide a distinct puzzle use case, not a copied framework demo."
+
+[monthly_scores."2026-10-22"."jordangarrison/tic-tac-toe-4-in-a-row"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root Foldkit dependency and entry/main/view implement an 8x8 scoring game with undo and shared domain rules. Working site and game/API/Nix source are more than the basic 3x3 tic-tac-toe demo, with a distinct ruleset."
+
+[monthly_scores."2026-10-22"."roottool/retort"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root dependency, Runtime and SVG view implement the Alchemy infrastructure graph. Live site loads. Reading deployment state and rendering the stack serving the viewer is a concrete distinct application of Foldkit."
+
+[monthly_scores."2026-10-22"."tao-io/foldkit-gallery"]
+section = "apps"
+score = 9
+bar = 8
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Root Foldkit/UI dependencies and router plus component Submodel/views implement a substantive interactive gallery. README documents the standalone app and Foldcase Showcases. Its executable state catalog/testing audience differs from plain component styling registries and official prose docs."
+
+[monthly_scores."2026-10-22"."erlangxk/foldkit-learn"]
+section = "apps"
+score = 4
+bar = 8
+recommendation = "remove"
+reason = "4 = depth 2, substance 1, health 1, signal 0. The single learnN1 app declares Foldkit and implements Snake update/view code. It is a learning exercise with no README or working site established. It adds no demonstrated architecture/audience distinction over the official game examples; real-user/product evidence is absent."
+
+[monthly_scores."2026-10-22"."mpsuesser/dojo"]
+section = "apps"
+score = 7
+bar = 8
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 2, signal 0. packages/app declares Foldkit and substantive sketch/interview routing and update code. dojo.bingo loads. README distinguishes working sketch/voice-interview flows from unfinished room shells; the elicitation/drawing audience differs from code review or generic chat tools."
+
+[monthly_scores."2026-10-22"."julia-script/effect-inspect"]
+section = "apps"
+score = 9
+bar = 8
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Root Foldkit dependency and app/src Runtime/main implement the inspector UI alongside collector/CLI code. README documents trace capture and flame charts with concrete run commands. Effect span-performance inspection differs from infrastructure graphs and agent-trace search."
+
+[monthly_scores."2026-10-22"."effect-ts/cafe"]
+section = "apps"
+score = 9
+bar = 8
+recommendation = "retain"
+reason = "9 = depth 2, substance 3, health 2, signal 2. packages/frontend declares Foldkit and implements an actual chat UI with connect, prompts and messages. Backend/Cloudflare and infrastructure tests are present. Official Effect organization, educational chat architecture and real infrastructure testing distinguish it from production team chat and generic scaffold counters."
+
+[monthly_scores."2026-10-22"."elianiva/lutra"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. packages/frontend declares Foldkit and Runtime/editor views implement a real color-grading UI over separate WebGPU/RAW processing. Live site loads. Local film simulation and layered photo editing are distinct from the WGSL VJ/shader studio."
+
+[monthly_scores."2026-10-22"."chr33s/git"]
+section = "apps"
+score = 9
+bar = 8
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Root Foldkit dependency and src/ui app/main implement the browser forge over a substantive Git core/CLI/server. Working site and Git-native signed collaboration source differ from a VS Code history viewer. Pre-1.0 warning is preserved; protocol claims were not integration-tested."
+
+[monthly_scores."2026-10-22"."bjacobso/triplex"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. packages/dashboard declares Foldkit and boots a substantive database explorer; the main database and VitePress docs are separate. Live documentation and temporal/audit storage source establish a concrete distinct database/control-plane use."
+
+[monthly_scores."2026-10-22"."nolangc/parcel"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. Despite starter text in the README, actual frontend main/inbox views, Gmail client, sync machine and search implement an email client with Foldkit. parcelmail.dev loads. The current code provides a distinct application, rather than another generic todo starter."
+
+[monthly_scores."2026-10-22"."ricardocasares/keiso"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root Foldkit dependency and substantial main/view implement shader editing, AI generation, MIDI/microphone controls and WebGPU rendering. Live VJ-studio site loads; it differs from Lutra's image-grading workflow and static artwork."
+
+[monthly_scores."2026-10-22"."boozedog/smoovdeck"]
+section = "apps"
+score = 6
+bar = 8
+recommendation = "remove"
+reason = "6 = depth 2, substance 1, health 2, signal 1. packages/ui declares Foldkit and boots a small workspace-by-stage board styled with Foldstryx. README explicitly says agents are not wired; main.ts only updates the board. Deno Desktop/CEF is a distinct stack, but current functionality does not establish a useful agent-control product or nontrivial execution UI."
+
+[monthly_scores."2026-10-22"."hokia-labs/stream"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root Foldkit dependency and substantial main/view code implement requirements graph, branch review and agent-run UI. Requirement/artifact graph ownership and engineering audience differ from task outlines or chat consoles. README boundaries around simulation and external integrations were not treated as completed production integrations."
+
+[monthly_scores."2026-10-22"."pkallos/wan-monitor"]
+section = "apps"
+score = 7
+bar = 8
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/web declares Foldkit and auth/dashboard views implement the monitoring UI. Ping/speed-test/QuestDB and Docker source/documentation establish a real network monitoring product, distinct from embedded serial scopes and software tracing."
+
+[monthly_scores."2026-10-22"."johnschoeman/outsider-ui"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root dependency and actual game/main code implement the Outsider browser game with persistence. README supplies local run/check commands. The domain rules are distinct from the listed puzzle, snake and scoring-board games; no public deployment was verified."
+
+[monthly_scores."2026-10-22"."louislec/music-theory-lessons"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root Foldkit dependency, routing and lesson/note-trainer source implement music education rather than a generated counter. The live site loads as Solfege, offsetting the generic starter README. The music-learning audience is distinct from chord-chart writing."
+
+[monthly_scores."2026-10-22"."jigargosar/simply-gtd"]
+section = "apps"
+score = 4
+bar = 8
+recommendation = "remove"
+reason = "4 = depth 3, substance 0, health 1, signal 0. index.html boots the generated counter in src/main.ts. A separate preview has seeded task rows and only filter/collapse Messages, with no task creation, completion or persistence. Generic README does not explain the claimed GTD app. Current product/substance/distinction claims are unsupported."
+
+[monthly_scores."2026-10-22"."matthieusz/party-planner"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root dependency and frontend Runtime/main implement venue-operations identity/session UI; backend, migrations and auth are substantive. README now frames this as Venue Operations with management/kitchen/service shells. Full venue/party-management feature completion is not established; authentication-backed domain foundation differs from other listed apps."
+
+[monthly_scores."2026-10-22"."planetaryescape/invoicing"]
+section = "apps"
+score = 7
+bar = 8
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 1, signal 1. web/package.json declares Foldkit and real entry/main/invoice views implement invoice forms, line items and loading/retry. Backend services and PDF/invoice templates are substantial and distinct. Root README is generic Bun-init text with an unrelated run command; no working site or adequate project run guide was verified."
+
+[monthly_scores."2026-10-22"."sulthonuladib/abogoboga"]
+section = "apps"
+score = 7
+bar = 8
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/folding-plane declares Foldkit and entry/view/detail source implement the actual market-data control plane. Separate crawler/API/domain code is substantive. Cryptocurrency coverage and exchange operations are distinct from observability and network dashboards; run-time arbitrage claims were not inferred from the description."
+
+[monthly_scores."2026-10-22"."sunwrobert/beautiful-mermaid-viewer"]
+section = "apps"
+score = 7
+bar = 8
+recommendation = "retain"
+reason = "7 = depth 3, substance 3, health 1, signal 0. Root dependency and Runtime/main implement editing, sharing and zoom controls. Live Mermaid Viewer loads, with codec/diagram integration source beyond a counter. Text-diagram authoring differs from infra-state visualization or drawing galleries."
+
+[monthly_scores."2026-10-22"."manzanita-research/language-galaxy"]
+section = "apps"
+score = 9
+bar = 8
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Root dependency and Runtime plus view/content/domain code implement the functional-language family explorer. Working site and original catalog/navigation/WebGPU integration establish a distinct educational application."
+
+[monthly_scores."2026-10-22"."nigelthorne/foldkit-demo"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 3, substance 2, health 2, signal 1. Root dependency and entry/main/view implement a shared counter over Durable Objects/WebSockets. Hosted Little wins page loads. Domain is counter-level, but server-authoritative durable session synchronization and uncertainty handling teach a different architecture from the minimal counter and chat examples."
+
+[monthly_scores."2026-10-22"."nigelthorne/stack_manager_website"]
+section = "apps"
+score = 7
+bar = 8
+recommendation = "retain"
+reason = "7 = depth 1, substance 3, health 2, signal 1. Root dependency and server/browser entries implement a Foldkit product site with an interactive workflow demonstration, not the Stack Manager engine. Live site loads. SSR/hydration, no-JavaScript navigation and local workflow-demo source provide substantive distinct landing-site architecture."
+
+[monthly_scores."2026-10-22"."acoyfellow/hark"]
+section = "apps"
+score = 9
+bar = 8
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Root dependency and client Runtime/main implement the voice UI; agent, memory, container and MCP integration source are present. Working site and voice-first interaction differ from text coding-agent consoles. Cloudflare-account and durability claims were not end-to-end tested."
+
+[monthly_scores."2026-10-22"."acoyfellow/skin"]
+section = "apps"
+score = 9
+bar = 8
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Root/body Foldkit dependencies and body browser entry implement the mutable app UI alongside kernel/version/build/rollback machinery. Live site loads. Self-rewriting application plus protected kernel is a distinct architecture from a persistent voice assistant or ordinary chat console."
+
+[monthly_scores."2026-10-22"."egorkarimov/mediterranean-hill-town"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root dependency, server entry and substantial main view implement Foldkit SSR/hydration around procedural Three artwork with controls. Live artwork loads. Its authored world/interaction and SSR integration differ from general-purpose 3D bindings or engine packages."
+
+[monthly_scores."2026-10-22"."mapletechlabs/maple"]
+section = "apps"
+score = 9
+bar = 8
+recommendation = "retain"
+reason = "9 = depth 2, substance 3, health 2, signal 2. apps/local-ui declares Foldkit and actual Runtime/main/view implement Maple Local; a broader web/package also carries Foldkit dependencies. Source and working product site establish a substantive observability platform. Do not imply the entire main product UI is Foldkit."
+
+[monthly_scores."2026-10-22"."mapletechlabs/hazel"]
+section = "apps"
+score = 9
+bar = 8
+recommendation = "retain"
+reason = "9 = depth 2, substance 3, health 2, signal 2. apps/web-foldkit declares Foldkit and substantial entry/main/app view implement a parallel chat client. The primary README describes React; it does not negate the actual separate Foldkit client. Working site and local-first team-chat stack differ from the educational CAFE chat."
+
+[monthly_scores."2026-10-22"."joelhooks/potion-calendar"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. apps/web declares Foldkit and substantial calendar/client entries and view source implement the UI. Multi-Google-account calendar, Worker/D1/Durable Object and in-process fake setup are substantive and distinct. README screenshot is explicitly a fake-data development build; live Google connectivity was not verified."
+
+[monthly_scores."2026-10-22"."effect-ts/janitor"]
+section = "apps"
+score = 9
+bar = 8
+recommendation = "retain"
+reason = "9 = depth 2, substance 3, health 2, signal 2. apps/web declares Foldkit and substantial main/navigation source implement labeling-policy and sync UI. Effect organization ownership plus real API/backend/configuration source support the bot's distinct label-management use, separate from SlopCop's PR triage policies."
+
+[monthly_scores."2026-10-22"."leonitousconforti/tinyburg"]
+section = "apps"
+score = 6
+bar = 8
+recommendation = "remove"
+reason = "6 = depth 2, substance 3, health 1, signal 0. Multiple actual app manifests, including authproxy/shared-ui/social-circles, declare Foldkit; shared-ui components contain actual view code. Tiny Tower/game APIs and auth clients are distinct and substantial. Root README lacks run instructions and tinyburg.app fails TLS; no documentation health point is awarded."
+
+[monthly_scores."2026-10-22"."bjacobso/schematics"]
+section = "apps"
+score = 7
+bar = 8
+recommendation = "retain"
+reason = "7 = depth 1, substance 3, health 2, signal 1. The playground manifest declares Foldkit, but full source inspection locates its actual Runtime/views in landing/demos.ts. The main PlaygroundApp and IDE are React/MUI. Original schema/control-plane implementation and working public site are substantive; describe Foldkit as landing simulations, not the playground editor."
+
+[monthly_scores."2026-10-22"."bjacobso/forma"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. apps/workbench and packages/workbench declare Foldkit; real workbench view uses Foldworks and typed Messages. The docs site is separate React. Typed Lisp compiler plus structural outliner/workbench differ from browser Forth and from generic agent outlines; research maturity is explicit."
+
+[monthly_scores."2026-10-22"."gjermundgaraba/clankerauth"]
+section = "apps"
+score = 7
+bar = 8
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/web declares Foldkit and entry/main/view implement access/setup UI alongside a substantive self-hosted OAuth server. Node/SQLite/Better Auth deployment and single-owner OAuth/MCP audience are distinct from general app starters or trading clients."
+
+[monthly_scores."2026-10-22"."levinbaenninger/echo"]
+section = "apps"
+score = 4
+bar = 8
+recommendation = "remove"
+reason = "4 = depth 2, substance 0, health 2, signal 0. The complete current API and UI implement task CRUD over RPC/Postgres, with title Echo - Tasks. Source scan found no disposable HTTP-endpoint or request-inspection feature from the published description. A basic todo list adds no demonstrated distinct use over listed todo/architecture examples; root setup remains documented."
+
+[monthly_scores."2026-10-22"."eknowles/coordkit"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root dependency and src/app/map views implement the coordinate converter and MapLibre interaction. Working live app plus coordinate/domain/PWA source provide a concrete distinct geospatial application."
+
+[monthly_scores."2026-10-22"."guidefari/gbfm"]
+section = "apps"
+score = 7
+bar = 8
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/www declares Foldkit and substantial view/player/page modules implement the music archive UI. The public goosebumps.fm page loads. Older React/SST prose in README is not used to override the current Foldkit source; curated playback/archive differs from music-theory learning and chord writing."
+
+[monthly_scores."2026-10-22"."laroccacharly/humi"]
+section = "apps"
+score = 8
+bar = 8
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root dependency and src/ui Runtime/main/view implement temperature/humidity charting; BLE logging, SQLite and SwitchBot control source are present. Hardware/setup instructions support a distinct real environmental-monitoring product, different from WAN or embedded serial scopes."
+
+[monthly_scores."2026-10-22"."aurelienbobenrieth/agentlint"]
+section = "ai"
+score = 9
+bar = 6
+recommendation = "retain"
+reason = "9 = depth 2, substance 3, health 2, signal 2. apps/review declares Foldkit and boots the human review queue. Deterministic code-shape rules and committed judgment exceptions are a different approach from Hapsland's semantic real-time classifier; package/setup evidence is in README, without assuming adoption from stars."
+
+[monthly_scores."2026-10-22"."dearlordylord/hapsland"]
+section = "ai"
+score = 9
+bar = 6
+recommendation = "retain"
+reason = "9 = depth 2, substance 3, health 2, signal 2. packages/agent-flow-viz declares Foldkit and has real production-flow and simulation views. Live site loads. Semantic review during agent execution differs from agentlint's deterministic repository gate, and both warrant separate entries."
+
+[monthly_scores."2026-10-22"."acoyfellow/coil"]
+section = "ai"
+score = 9
+bar = 6
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Root dependency and client Runtime/update implement the agent console. A thread owns a Durable Object and Cloudflare Container; the live site loads. Container-based coding execution differs from pi-cf's personal one-Worker assistant and Saku's configurable remote hands."
+
+[monthly_scores."2026-10-22"."acoyfellow/tardigrade"]
+section = "ai"
+score = 9
+bar = 6
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Root Foldkit dependency and client Runtime/ManagedResource source implement a UI for a durable agent reference app. The narrower recovery/reference audience and worker/socket architecture differ from Coil's per-thread containers. No claim of production deployment is inferred."
+
+[monthly_scores."2026-10-22"."bjacobso/threadvm"]
+section = "ai"
+score = 8
+bar = 6
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. apps/outline declares Foldkit and boots an outline client with real view/attention modules. Git-versioned outline intent and local tmux/worktree execution differ from chat-first cloud agent consoles. README distinguishes the field-notes demo from the local harness."
+
+[monthly_scores."2026-10-22"."in-time-tec/rika"]
+section = "ai"
+score = 8
+bar = 6
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. apps/web declares Foldkit and its client entry/main render durable coding-agent state. The larger CLI/TUI/web system has concrete run/install documentation. Durable turns and hosted identity distinguish its audience/stack from simple Pi chat consoles; README operational claims were not end-to-end tested."
+
+[monthly_scores."2026-10-22"."in-time-tec/generalist"]
+section = "ai"
+score = 7
+bar = 6
+recommendation = "retain"
+reason = "7 = depth 1, substance 3, health 2, signal 1. Foldkit dependency and hydration/view code live in docs, not in the durable agent engine. The documented original Effect agent runtime is substantive, with optional recovery storage. Its docs-only Foldkit role is retained explicitly rather than represented as a Foldkit application UI."
+
+[monthly_scores."2026-10-22"."just-be-dev/traces"]
+section = "ai"
+score = 9
+bar = 6
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Root Foldkit dependency and src/ui Runtime/main pair implement the agent-trace frontend, with nontrivial ingestion/search API source. The public site loads; author describes a single-tenant prototype. Trace collection/search differs from semantic code review and repeatable automation tooling."
+
+[monthly_scores."2026-10-22"."just-be-dev/automations"]
+section = "ai"
+score = 9
+bar = 6
+recommendation = "retain"
+reason = "9 = depth 3, substance 3, health 2, signal 1. Root dependency and src/ui routing/assistant views implement a substantive automation studio alongside workflow/permissions code. Conversational workflow authoring and approval tasks differ from agent chat consoles. Public URL currently serves a generic Just Be title, so the documented demonstration is not treated as independently proven production use."
+
+[monthly_scores."2026-10-22"."elianiva/saku"]
+section = "ai"
+score = 8
+bar = 6
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. packages/frontend declares Foldkit and boots a real routed console with thread rail. Pi threads are Durable Objects with local/remote execution environments, distinct from pi-cf's single-Worker personal assistant and Coil's container model. README explicitly identifies incomplete sandbox work."
+
+[monthly_scores."2026-10-22"."mshubitidze/pi-cf"]
+section = "ai"
+score = 8
+bar = 6
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root Foldkit dependency and src/ui entry/main/view implement conversations, shared memory and agent interaction. One Cloudflare Worker plus a SQLite Durable Object, ChatGPT subscription login and Pi Durable form a concrete personal-assistant stack distinct from coding workspace systems."
+
+[monthly_scores."2026-10-22"."nicksuomi/heron"]
+section = "ai"
+score = 6
+bar = 6
+recommendation = "retain"
+reason = "6 = depth 1, substance 3, health 2, signal 0. The Foldkit dependency and Runtime/views live in site; the GitLab review bot is a separate command-line/server implementation. The site loads. Self-hosted GitLab review, model sessions and verdict control are substantive, but a Foldkit review dashboard was not found."
+
+[monthly_scores."2026-10-22"."qdhenry/site-discovery"]
+section = "ai"
+score = 8
+bar = 6
+recommendation = "retain"
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root Foldkit dependency and a substantial src/app.ts/runtime entry implement a local capture/analyze/review CMS workflow. Service and persistence code are present. Cloudflare Browser Run/AI Gateway and human-approved CMS mapping are distinct from generic agent chat or feedback tools; live capture was not executed."
+
+[monthly_scores."2026-10-22"."millionco/openstory"]
+section = "interop"
+score = 8
+bar = 6
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. The package has a real foldkit/renderer.ts that imports Foldkit dynamically, resolves programs and mounts the Runtime. The shell is React. A separate multi-framework component browser with MCP differs from a renderer plugin for Storybook itself; no claim that the shell uses Foldkit is made."
+
+[monthly_scores."2026-10-22"."openagentsinc/three-effect"]
+section = "interop"
+score = 7
+bar = 6
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 2, signal 0. packages/foldkit declares Foldkit and implements a CustomElement/rendering adapter with resource-scoped Three scenes. Published package structure and runnable examples are present. Narrow composable scene bindings differ from EgoNitida's game-engine/editor and opsydyn's declarative model reconciler."
+
+[monthly_scores."2026-10-22"."astahmer/jj-plus"]
+section = "interop"
+score = 7
+bar = 6
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 2, signal 0. Root dependency and webview/src/entry.ts boot a real Foldkit element; extensive history/diff webview source coexists with a separate Solid webview. VS Code/Jujutsu history is a distinct editor audience. README Marketplace availability is a claim, not a separately verified install."
+
+[monthly_scores."2026-10-22"."kondaurovdev/procdeck"]
+section = "interop"
+score = 7
+bar = 6
+recommendation = "retain"
+reason = "7 = depth 2, substance 3, health 2, signal 0. ui/package.json declares Foldkit and entry/view/commands implement the process dashboard. The original runner, terminal, port and network-inspection source is substantive. Browser monitoring of a local dev stack differs from JJ history or agent-workspace orchestration."
+
+[monthly_scores."2026-10-22"."joelhooks/rat-stack"]
+section = "fullstack"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 1, substance 3, health 2, signal 2. apps/web declares Foldkit and the actual client/entry hydrates the documentation reader; features/app.ts implements native reader/search views. Full source scan confirms integration beyond vendored dependencies. Current Foldkit UI is the scaffold's docs/reader, not evidence of a separate production product UI. The contract-to-CLI/HTTP/MCP scaffold and infrastructure are substantive and distinct."
+
+[monthly_scores."2026-10-22"."elianiva/cafe-template"]
+section = "fullstack"
+score = 8
+bar = 5
+recommendation = "retain"
+reason = "8 = depth 2, substance 3, health 2, signal 1. apps/web and examples/reference declare Foldkit and supply Runtime entry points. Separate Website/API Workers, a shared RPC contract and a Query-to-RPC reference form a substantive starter architecture, distinct from a single-package health-API scaffold."
+
+[decisions."nolangc/verified-todo"]
+decision = "removed"
+score = 6
+section = "fullstack"
+bar = 5
+reason = "6 = depth 2, substance 1, health 2, signal 1. frontend main implements authenticated todo operations and virtualization, with backend/database/deployment code. README describes the same Cloudflare, Alchemy, Neon/Hyperdrive, BetterAuth and optional Tauri approach offered by foldkit-alchemy-starter. No independent deployed use was found; duplicate review recommends the higher-scoring scaffold. Removal: Duplicate scaffold of NolanGC/foldkit-alchemy-starter (8), with weaker score 6; see duplicate_removals."
+decided = "2026-10-22"
+
+[decisions."peterje/foldui"]
+decision = "removed"
+score = 2
+section = "ui"
+bar = 5
+reason = "2 = depth 0, substance 0, health 2, signal 0. Both complete non-vendored manifests have no Foldkit dependency; README and routes/index.tsx show an Alchemy/TanStack React one-page counter. A full non-vendored source scan finds no Foldkit imports. The listed Foldkit registry description is unsupported by the current tree. Removal: score 2 <= bar 5 - 2 (3); Depth-zero fast rejection: complete current manifests/source implement only a React counter; no Foldkit integration."
+decided = "2026-10-22"
+
+[decisions."mpsuesser/scraped-docs-foldkit"]
+decision = "removed"
+score = 2
+section = "ai"
+bar = 6
+reason = "2 = depth 0, substance 0, health 1, signal 1. The complete tree consists of copied Foldkit documentation Markdown, with no package manifests or runtime source. README returns 404. This fits the rubric's copied-docs and depth-zero fast rejection, irrespective of automated recent pushes. Removal: score 2 <= bar 6 - 2 (4); Copied-documentation and depth-zero fast rejection: Markdown mirror without a Foldkit UI or original application."
+decided = "2026-10-22"
+
+[decisions."birbprophet/react-foldkit-converter"]
+decision = "removed"
+score = 5
+section = "interop"
+bar = 6
+reason = "5 = depth 0, substance 2, health 2, signal 1. The complete manifests have no Foldkit dependency and the non-vendored source is a command-line compiler/generator. Foldkit import text in generator.ts is generated source, not a mounted UI. Substantial original conversion tooling, but no Foldkit application/package UI meets the rubric's depth requirement. Removal: Depth-zero tooling fast rejection: CLI source generator, with Foldkit import strings emitted into output rather than a real runtime UI."
+decided = "2026-10-22"
+
+[decisions."potti1234/wide-effect"]
+decision = "removed"
+score = 5
+section = "interop"
+bar = 6
+reason = "5 = depth 0, substance 2, health 2, signal 1. The Foldkit package contains Command correlation, diagnostics, tracing callbacks and DevTools timeline readers. A full source scan finds no HtmlBuilder view or mounted UI; examples demonstrate telemetry, not an application renderer. This is original integration tooling, but falls under the rubric's depth-zero tooling exclusion. Removal: Depth-zero tooling fast rejection: tracing/diagnostics adapter without a Foldkit-rendered UI."
+decided = "2026-10-22"
+
+[decisions."egonitida/egonitida"]
+decision = "removed"
+score = 4
+section = "interop"
+bar = 6
+reason = "4 = depth 0, substance 2, health 2, signal 0. All seven non-vendored manifests and the full 28-source-file scan show no Foldkit dependency or imports. Current code is an Effect simulation core, CLI/scaffolding and design tokens, despite README branding mentioning Foldkit. It is the same EgoNitida idea/author as lightocean, with weaker demonstrated Foldkit relevance; fast rejection applies. Removal: score 4 <= bar 6 - 2 (4); Depth-zero fast rejection: complete current non-vendored manifests and source contain no Foldkit integration; branding alone is not evidence."
+decided = "2026-10-22"
+
+[decisions."erlangxk/foldkit-learn"]
+decision = "removed"
+score = 4
+section = "apps"
+bar = 8
+reason = "4 = depth 2, substance 1, health 1, signal 0. The single learnN1 app declares Foldkit and implements Snake update/view code. It is a learning exercise with no README or working site established. It adds no demonstrated architecture/audience distinction over the official game examples; real-user/product evidence is absent. Removal: score 4 <= bar 8 - 2 (6)"
+decided = "2026-10-22"
+
+[decisions."boozedog/smoovdeck"]
+decision = "removed"
+score = 6
+section = "apps"
+bar = 8
+reason = "6 = depth 2, substance 1, health 2, signal 1. packages/ui declares Foldkit and boots a small workspace-by-stage board styled with Foldstryx. README explicitly says agents are not wired; main.ts only updates the board. Deno Desktop/CEF is a distinct stack, but current functionality does not establish a useful agent-control product or nontrivial execution UI. Removal: score 6 <= bar 8 - 2 (6)"
+decided = "2026-10-22"
+
+[decisions."jigargosar/simply-gtd"]
+decision = "removed"
+score = 4
+section = "apps"
+bar = 8
+reason = "4 = depth 3, substance 0, health 1, signal 0. index.html boots the generated counter in src/main.ts. A separate preview has seeded task rows and only filter/collapse Messages, with no task creation, completion or persistence. Generic README does not explain the claimed GTD app. Current product/substance/distinction claims are unsupported. Removal: score 4 <= bar 8 - 2 (6)"
+decided = "2026-10-22"
+
+[decisions."leonitousconforti/tinyburg"]
+decision = "removed"
+score = 6
+section = "apps"
+bar = 8
+reason = "6 = depth 2, substance 3, health 1, signal 0. Multiple actual app manifests, including authproxy/shared-ui/social-circles, declare Foldkit; shared-ui components contain actual view code. Tiny Tower/game APIs and auth clients are distinct and substantial. Root README lacks run instructions and tinyburg.app fails TLS; no documentation health point is awarded. Removal: score 6 <= bar 8 - 2 (6)"
+decided = "2026-10-22"
+
+[decisions."levinbaenninger/echo"]
+decision = "removed"
+score = 4
+section = "apps"
+bar = 8
+reason = "4 = depth 2, substance 0, health 2, signal 0. The complete current API and UI implement task CRUD over RPC/Postgres, with title Echo - Tasks. Source scan found no disposable HTTP-endpoint or request-inspection feature from the published description. A basic todo list adds no demonstrated distinct use over listed todo/architecture examples; root setup remains documented. Removal: score 4 <= bar 8 - 2 (6)"
+decided = "2026-10-22"
+
+[prepush_reviews."2026-10-22-prune"]
+rounds = 1
+status = "clean"
+head = "9b331047b7edbea9aeccf81f8353cf6a9a1feb22"
+review_task = "node:delegated-task:command%3Amcp%3A49f81138-4a0c-430d-9999-a16cfa23253d%3Adelegate-task%3Adriver-20261022-curator-prune-prepush-r1"
+
+[publications."2026-10-22-prune"]
+pull_request = "https://github.com/foldhub/awesome-foldkit/pull/9"
+merged = true
+merge_commit = "f6a7fe8e4d9775f02c5f09061261b202e4ae77d8"
+decision = "Decided autonomously: prune and squash-merge because monthly source review, final-content build, publication review, and pre-push review passed."
