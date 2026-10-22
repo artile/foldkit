@@ -1,5 +1,5 @@
 # maintainer-issue-claim state. decision: skip | watch | no-claim | awaiting-approval | claimed
-last_poll = "2026-10-22T20:16:26Z"
+last_poll = "2026-10-22T22:16:31Z"
 
 # Deferred bug candidates (2-per-run limit). Next run takes them smallest first.
 
