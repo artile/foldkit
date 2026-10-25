@@ -1,0 +1,5 @@
+src/repro.ts(184,16): error TS2589: Type instantiation is excessively deep and possibly infinite.
+src/repro.ts(184,16): error TS5114: Instantiations of type 'PolicyChannels' appear infinitely circular.
+src/repro.ts(184,16): error TS5115: Instantiations of the following types appear infinitely circular: 'PolicyChannels', 'ResolveCompositionOutput'.
+src/repro.ts(190,59): error TS18046: 'child' is of type 'unknown'.
+

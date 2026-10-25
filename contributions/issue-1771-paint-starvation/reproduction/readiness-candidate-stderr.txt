@@ -1,0 +1,11 @@
+[foldkit] Application crash: Error: forced catch-up defect
+    at FailedPulse (file:///home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1771-paint-starvation/reproduction/readiness-checks.mjs:301:19)
+    at Function.match (file:///home/om/TAO/Tools/foldkit-worktrees/validation-1771/node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Schema.js:3161:14)
+    at update (file:///home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1771-paint-starvation/reproduction/readiness-checks.mjs:288:17)
+    at file:///home/om/TAO/Tools/foldkit-worktrees/validation-1771/packages/foldkit/dist/runtime/runtime.js:258:102
+    at measureSlowPhase (file:///home/om/TAO/Tools/foldkit-worktrees/validation-1771/packages/foldkit/dist/runtime/slowPhase.js:46:17)
+    at processMessagePlain (file:///home/om/TAO/Tools/foldkit-worktrees/validation-1771/packages/foldkit/dist/runtime/runtime.js:258:62)
+    at processMessage (file:///home/om/TAO/Tools/foldkit-worktrees/validation-1771/packages/foldkit/dist/runtime/runtime.js:168:44)
+    at drainQueuedPrefix (file:///home/om/TAO/Tools/foldkit-worktrees/validation-1771/packages/foldkit/dist/runtime/messageQueue.js:137:17)
+    at renderFramePlain (file:///home/om/TAO/Tools/foldkit-worktrees/validation-1771/packages/foldkit/dist/runtime/renderer.js:433:13)
+    at runFrame (file:///home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1771-paint-starvation/reproduction/readiness-checks.mjs:91:5)

@@ -1,0 +1,26 @@
+{"burnMs":0,"isReentrant":true,"samples":[],"finalDom":24}
+{"burnMs":6,"isReentrant":true,"samples":[{"model":1,"dom":0},{"model":2,"dom":0},{"model":3,"dom":0},{"model":4,"dom":0},{"model":5,"dom":0},{"model":6,"dom":0},{"model":7,"dom":0},{"model":8,"dom":0},{"model":9,"dom":0},{"model":10,"dom":0},{"model":11,"dom":0},{"model":12,"dom":0},{"model":13,"dom":0},{"model":14,"dom":0},{"model":15,"dom":0},{"model":16,"dom":0},{"model":17,"dom":0},{"model":18,"dom":0},{"model":19,"dom":0},{"model":20,"dom":0},{"model":21,"dom":0},{"model":22,"dom":0},{"model":23,"dom":0}],"finalDom":24}
+{"burnMs":6,"isReentrant":false,"samples":[{"model":1,"dom":0},{"model":2,"dom":0},{"model":3,"dom":0},{"model":4,"dom":0},{"model":5,"dom":0},{"model":6,"dom":0},{"model":7,"dom":0},{"model":8,"dom":0},{"model":9,"dom":0},{"model":10,"dom":0},{"model":11,"dom":0},{"model":12,"dom":0},{"model":13,"dom":0},{"model":14,"dom":0},{"model":15,"dom":0},{"model":16,"dom":0},{"model":17,"dom":0},{"model":18,"dom":0},{"model":19,"dom":0},{"model":20,"dom":0},{"model":21,"dom":0},{"model":22,"dom":0},{"model":23,"dom":0}],"finalDom":24}
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: the DOM must make progress before a 24-turn producer stops
++ actual - expected
+
++ [
++   'reentrant',
++   'external'
++ ]
+- []
+
+    at file:///home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1771-paint-starvation/reproduction/producer-progress.mjs:138:10 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [ 'reentrant', 'external' ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.22.3

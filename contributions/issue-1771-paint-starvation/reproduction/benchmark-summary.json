@@ -1,0 +1,22 @@
+{
+  "queue": {
+    "baseMedianMs": 49.4897049999563,
+    "candidateMedianMs": 49.59078999992926,
+    "candidateToBaseRatio": 1.0020425460198852
+  },
+  "burst": {
+    "baseMedianMs": 83.31440399994608,
+    "candidateMedianMs": 83.64324200002011,
+    "candidateToBaseRatio": 1.0039469525590585
+  },
+  "commits": {
+    "baseMedianMs": 13.037067499943078,
+    "candidateMedianMs": 13.541742999921553,
+    "candidateToBaseRatio": 1.038710814374527
+  },
+  "sustained": {
+    "baseMedianMs": 22.05065250012558,
+    "candidateMedianMs": 26.6716234999476,
+    "candidateToBaseRatio": 1.209561644481754
+  }
+}

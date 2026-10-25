@@ -1,0 +1,70 @@
+{
+  "baseline": "b702a5efbb74bebc056b798b414ddb923a82fbd5",
+  "foldkit": "0.169.0",
+  "node": "v22.22.3",
+  "platform": "linux",
+  "architecture": "arm64",
+  "compiler": "Version 7.0.2",
+  "packageExports": [
+    ".",
+    "./asyncData",
+    "./brand",
+    "./calendar",
+    "./canvas",
+    "./command",
+    "./customElement",
+    "./dom",
+    "./experimental",
+    "./experimental/machine",
+    "./experimental/query",
+    "./experimental/server",
+    "./html",
+    "./http",
+    "./managedResource",
+    "./message",
+    "./mount",
+    "./navigation",
+    "./port",
+    "./render",
+    "./route",
+    "./runtime",
+    "./scene",
+    "./story",
+    "./model-preservation",
+    "./fieldValidation",
+    "./file",
+    "./schema",
+    "./struct",
+    "./submodel",
+    "./subscription",
+    "./test",
+    "./test/vitest",
+    "./update",
+    "./url",
+    "./devtools-protocol",
+    "./devtools-host"
+  ],
+  "results": {
+    "supported-api": {
+      "status": 0,
+      "signal": null,
+      "output": ""
+    },
+    "preview-api": {
+      "status": 1,
+      "signal": null,
+      "output": "preview-api.ts(1,10): error TS2305: Module '\"foldkit\"' has no exported member 'Block'.\npreview-api.ts(5,13): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\n"
+    },
+    "control": {
+      "status": 1,
+      "signal": null,
+      "output": "src/control.ts(2,10): error TS2305: Module '\"foldkit\"' has no exported member 'Block'.\nsrc/control.ts(15,42): error TS7006: Parameter 'model' implicitly has an 'any' type.\nsrc/control.ts(15,49): error TS7006: Parameter 'message' implicitly has an 'any' type.\nsrc/control.ts(92,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/control.ts(98,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/control.ts(104,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/control.ts(110,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/control.ts(116,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/control.ts(122,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/control.ts(128,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/control.ts(134,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/control.ts(140,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/control.ts(146,40): error TS7006: Parameter 'model' implicitly has an 'any' type.\nsrc/control.ts(152,59): error TS18046: 'child' is of type 'unknown'.\n"
+    },
+    "repro": {
+      "status": 1,
+      "signal": null,
+      "output": "src/repro.ts(2,10): error TS2305: Module '\"foldkit\"' has no exported member 'Block'.\nsrc/repro.ts(15,42): error TS7006: Parameter 'model' implicitly has an 'any' type.\nsrc/repro.ts(15,49): error TS7006: Parameter 'message' implicitly has an 'any' type.\nsrc/repro.ts(110,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/repro.ts(116,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/repro.ts(122,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/repro.ts(128,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/repro.ts(134,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/repro.ts(140,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/repro.ts(146,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/repro.ts(152,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/repro.ts(158,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/repro.ts(164,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/repro.ts(170,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/repro.ts(176,26): error TS2339: Property 'combineSteps' does not exist on type 'typeof import(\"/home/om/TAO/Tools/foldkit-worktrees/issue-1772-policy-type-depth/packages/foldkit/dist/update/public\")'.\nsrc/repro.ts(184,40): error TS7006: Parameter 'model' implicitly has an 'any' type.\nsrc/repro.ts(190,59): error TS18046: 'child' is of type 'unknown'.\n"
+    }
+  },
+  "outcome": "NOT_REPRODUCED_ON_UPSTREAM_MAIN: Blocks API is unavailable; these failures do not reproduce policy type depth"
+}

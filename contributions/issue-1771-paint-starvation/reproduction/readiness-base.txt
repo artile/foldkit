@@ -1,0 +1,20 @@
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+1 !== 2
+
+    at file:///home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1771-paint-starvation/reproduction/readiness-checks.mjs:375:16
+    at async check (file:///home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1771-paint-starvation/reproduction/readiness-checks.mjs:98:3)
+    at async file:///home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1771-paint-starvation/reproduction/readiness-checks.mjs:360:3 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 2,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.22.3
