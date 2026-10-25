@@ -707,7 +707,12 @@ type ValidatorRequirements<Definition> = Definition extends {
 
 type RequirementsOf<Fields> = ValidatorRequirements<Fields[keyof Fields]>
 
-type SubmitEffectFor<SubmitEffect, A, E> = SubmitEffect &
+/** The submission Effect type, accepted only when its success and error types
+ * fit the Form's `data` and `error` Schemas.
+ *
+ * @experimental Ships from `foldkit/experimental/form`; expect breaking changes while the API settles.
+ */
+export type SubmitEffectFor<SubmitEffect, A, E> = SubmitEffect &
   ([Effect.Success<NoInfer<SubmitEffect>>] extends [NoInfer<A>]
     ? unknown
     : never) &

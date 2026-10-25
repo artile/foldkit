@@ -1,4 +1,5 @@
 export { define, field } from './form.js'
+export { FieldKind, fromSchema } from './fromSchema.js'
 export type {
   Submission,
   ExactFieldErrors,
@@ -18,3 +19,9 @@ export type {
   ValidationTrigger,
   Values,
 } from './form.js'
+export type {
+  InputSchema,
+  InputSchemas,
+  Payload,
+  SchemaFormDefinition,
+} from './fromSchema.js'
