@@ -1,6 +1,8 @@
 export { define, field } from './form.js'
 export type {
   Submission,
+  ExactFieldErrors,
+  FieldErrors,
   FieldInput,
   FieldSchemas,
   FieldSchema,

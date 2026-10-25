@@ -26,7 +26,6 @@ Use Form for a flat set of fields. Each field holds one value: a scalar, or an i
 
 - Nested field paths, or per-element state inside an array field
 - Validation that depends on more than one field
-- Field errors returned by the server
 - Debouncing or cancelling async field checks
 
 Use [Field Validation](/core/field-validation) directly when the application needs a different field lifecycle.
@@ -109,6 +108,19 @@ When a validation Command's result completes the checks, folding it is what retu
 Folding the `Submit` result moves the submission to `Succeeded` with the typed data or `Failed` with the typed error. Read it with `submission(model)` and match it with `form.Submission.match`.
 
 While the submission is `Validating` or `Submitting`, another submit does nothing. Editing a field while `Validating` cancels the attempt. Editing a field while `Submitting` doesn't: the `Submit` Command already captured the values it sends. Editing after `Succeeded` or `Failed` returns the submission to `Idle`.
+
+### Show Submission Errors on Fields
+
+A server can reject a submission because of one field, for example an email that is already registered. `submit.toFieldErrors` takes the typed error and returns a message for each field it concerns. Form shows each message as that field's error, next to the input that caused it. Here `signUp` is an application function that returns an Effect, which fails with `SignupError`:
+
+::Snippet{name="formFieldErrors" label="Submission errors mapped to fields"}
+
+- The submission is `Failed` with the typed error whatever `toFieldErrors` returns. For an error that concerns no field, return `{}` and render the error from the submission.
+- A field keeps its mapped error until its value changes. A blur without a change keeps the error.
+- The next submit checks the field again and sends its value, so the server decides again.
+- `toFieldErrors` is available only when `submit.error` is present. TypeScript rejects a key that is not a field name.
+
+A message applies to a field only while it holds the value that was sent. If the person changed the field while the submission was pending, the field keeps the state of its new value.
 
 ### Stale Results
 
