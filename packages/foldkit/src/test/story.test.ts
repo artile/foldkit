@@ -1,7 +1,10 @@
-import { Array } from 'effect'
+import { Array, Effect, Layer, Schema, Stream } from 'effect'
 import { describe, expect, expectTypeOf, test } from 'vitest'
 
+import * as Block from '../block/public.js'
 import * as Interruptible from '../command/interruptible/index.js'
+import { defineMessageUnion } from '../message/index.js'
+import { modifyFields } from '../struct/index.js'
 import {
   Message as CounterMessage,
   type Model as CounterModel,
@@ -33,7 +36,75 @@ import {
   initialModel as initialUploadsModel,
   update as uploadsUpdate,
 } from './apps/uploads.js'
+import * as Scene from './scene.js'
 import * as Story from './story.js'
+
+// FEED BLOCK
+
+const FeedModel = Schema.Struct({ cursor: Schema.Number })
+const FeedMessage = defineMessageUnion({
+  ReceivedEntry: { seq: Schema.Number },
+  ClosedFeed: {},
+  CompletedAcknowledgeEntry: {},
+})
+const FeedDefinition = Block.makeDefinition('StoryFeed', {
+  Model: FeedModel,
+  Message: FeedMessage,
+})
+const AcknowledgeEntry = FeedDefinition.makeCommand('AcknowledgeEntry', {
+  args: { seq: Schema.Number },
+  messages: [FeedMessage.CompletedAcknowledgeEntry],
+  handler: function* () {
+    return () => Effect.succeed(FeedMessage.CompletedAcknowledgeEntry())
+  },
+})
+const feedSubscriptions = FeedDefinition.makeSubscriptions(entry => ({
+  entries: entry('Entries', {
+    messages: [FeedMessage.ReceivedEntry],
+    handler: function* () {
+      return () => Stream.never
+    },
+  }),
+}))
+const FeedComposition = FeedDefinition.makeComposition()
+const prepareFeedBlock = () =>
+  FeedComposition.prepareBlock({
+    init: FeedComposition.makeInit(() => ({ model: { cursor: 0 } })),
+    update: FeedComposition.makeUpdate((model, message) =>
+      FeedMessage.match(message, {
+        ReceivedEntry: ({ seq }) => ({
+          model: modifyFields(model, { cursor: () => seq }),
+          commands: [AcknowledgeEntry({ seq })],
+        }),
+        ClosedFeed: () => ({ model }),
+        CompletedAcknowledgeEntry: () => ({ model }),
+      }),
+    ),
+    subscriptions: feedSubscriptions,
+    EffectsLayer: Layer.merge(
+      AcknowledgeEntry.layer,
+      feedSubscriptions.entries.layer,
+    ),
+  })
+const FeedBlock: Block.FromAssemblyWithoutViewOrOutMessage<
+  typeof FeedModel,
+  typeof prepareFeedBlock
+> = Block.assemble(prepareFeedBlock)
+
+const BoardModel = Schema.Struct({ feed: FeedBlock.Model })
+const BoardDefinition = Block.makeDefinition('StoryBoard', {
+  Model: BoardModel,
+  Message: Schema.Never,
+})
+const FeedBinding = BoardDefinition.makeBinding(FeedBlock, { field: 'feed' })
+const BoardComposition = BoardDefinition.makeComposition({
+  bindings: [FeedBinding],
+})
+const boardUpdate = BoardComposition.makeUpdate()
+const boardSubscriptions = Story.Subscription.from(
+  Scene.subscriptions(BoardComposition),
+)
+const initialBoard = BoardModel.make({ feed: { cursor: 0 } })
 
 // TEST
 
@@ -1042,5 +1113,172 @@ describe('type safety', () => {
       DraftsMessage.SucceededSaveDraft({ revision: 0 }),
     )
     expectTypeOf(resolver).toBeFunction()
+  })
+})
+
+describe('messageWith', () => {
+  test('computes the Message from the Model the story holds', () => {
+    Story.story(
+      update,
+      Story.given({ count: 0, log: [] }),
+      Story.message(CounterMessage.ClickedIncrement()),
+      Story.message(CounterMessage.ClickedIncrement()),
+      Story.messageWith((model: CounterModel) =>
+        CounterMessage.ClickedFetchById({ id: model.count }),
+      ),
+      Story.Command.expectExact(FetchCountById({ id: 2 })),
+      Story.Command.resolve(
+        FetchCountById,
+        CounterMessage.SucceededFetchCount({ count: 7 }),
+      ),
+      Story.model(model => {
+        expect(model.count).toBe(7)
+      }),
+    )
+  })
+
+  test('throws while a Command from a previous step is unresolved', () => {
+    expect(() =>
+      Story.story(
+        update,
+        Story.given({ count: 0, log: [] }),
+        Story.message(CounterMessage.ClickedFetch()),
+        Story.messageWith(() => {
+          throw new Error('messageWith ran before the unresolved Command check')
+        }),
+        Story.Command.resolve(
+          FetchCount,
+          CounterMessage.SucceededFetchCount({ count: 1 }),
+        ),
+      ),
+    ).toThrow('I found unresolved Commands when you sent a new Message')
+  })
+
+  test('requires the Message to belong to the tested update', () => {
+    expectTypeOf(() =>
+      Story.story(
+        update,
+        Story.given({ count: 0, log: [] }),
+        // @ts-expect-error SubmittedForm is not a Counter Message
+        Story.messageWith(() => FormChildJsChildMessage.SubmittedForm()),
+      ),
+    ).toBeFunction()
+  })
+})
+
+describe('Subscription', () => {
+  test('emits a child Block Subscription Message through its generated delivery', () => {
+    Story.story(
+      boardUpdate,
+      Story.given(initialBoard),
+      boardSubscriptions.emit(
+        feedSubscriptions.entries,
+        FeedMessage.ReceivedEntry({ seq: 3 }),
+      ),
+      Story.model(model => {
+        expect(model.feed.cursor).toBe(3)
+      }),
+      Story.Command.resolve(
+        AcknowledgeEntry,
+        FeedMessage.CompletedAcknowledgeEntry(),
+      ),
+    )
+  })
+
+  test('rejects a Message the entry does not declare', () => {
+    expect(() =>
+      Story.story(
+        boardUpdate,
+        Story.given(initialBoard),
+        boardSubscriptions.emit(
+          feedSubscriptions.entries,
+          // @ts-expect-error ClosedFeed is not declared by the Entries Subscription
+          FeedMessage.ClosedFeed(),
+        ),
+      ),
+    ).toThrow(
+      'Story.Subscription.emit received a Message that is not declared by the selected Subscription',
+    )
+  })
+
+  test('emits a root entry of a completed Block', () => {
+    const feedEmitter = Story.Subscription.from(FeedBlock.subscriptions)
+    Story.story(
+      FeedBlock.update,
+      Story.given(FeedBlock.init().model),
+      feedEmitter.emit(
+        FeedBlock.subscriptions.entries,
+        FeedMessage.ReceivedEntry({ seq: 2 }),
+      ),
+      Story.Command.resolve(
+        AcknowledgeEntry,
+        FeedMessage.CompletedAcknowledgeEntry(),
+      ),
+      Story.model(model => {
+        expect(model.cursor).toBe(2)
+      }),
+    )
+  })
+
+  test('runs emit and messageWith inside a reusable steps group', () => {
+    const receiveEntry = (seq: number) =>
+      Story.steps(
+        boardSubscriptions.emit(
+          feedSubscriptions.entries,
+          FeedMessage.ReceivedEntry({ seq }),
+        ),
+        Story.Command.resolve(
+          AcknowledgeEntry,
+          FeedMessage.CompletedAcknowledgeEntry(),
+        ),
+      )
+    Story.story(
+      boardUpdate,
+      Story.given(initialBoard),
+      receiveEntry(1),
+      receiveEntry(2),
+      Story.model(model => {
+        expect(model.feed.cursor).toBe(2)
+      }),
+    )
+  })
+
+  test('requires the entry to be registered and the record to match the tested update', () => {
+    const feedEmitter = Story.Subscription.from(FeedBlock.subscriptions)
+    expectTypeOf(() => {
+      boardSubscriptions.emit(
+        // @ts-expect-error A Story of the board accepts only its registered entries
+        { messages: [FeedMessage.ReceivedEntry] },
+        FeedMessage.ReceivedEntry({ seq: 1 }),
+      )
+      Story.story(
+        update,
+        Story.given({ count: 0, log: [] }),
+        // @ts-expect-error The feed record emits Feed Messages, not Counter Messages
+        feedEmitter.emit(
+          FeedBlock.subscriptions.entries,
+          FeedMessage.ReceivedEntry({ seq: 1 }),
+        ),
+      )
+    }).toBeFunction()
+  })
+
+  test('throws while a Command is unresolved', () => {
+    expect(() =>
+      Story.story(
+        boardUpdate,
+        Story.given(initialBoard),
+        boardSubscriptions.emit(
+          feedSubscriptions.entries,
+          FeedMessage.ReceivedEntry({ seq: 3 }),
+        ),
+        boardSubscriptions.emit(
+          feedSubscriptions.entries,
+          FeedMessage.ReceivedEntry({ seq: 4 }),
+        ),
+      ),
+    ).toThrow(
+      'I found unresolved Commands when a Subscription emitted a new Message',
+    )
   })
 })

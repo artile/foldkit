@@ -8,7 +8,6 @@ import {
   Option,
   Predicate,
   Schema,
-  type Stream,
   String,
   pipe,
 } from 'effect'
@@ -21,9 +20,6 @@ import {
   aggregateChildren,
 } from '../block/binding.js'
 import { LocalMountsTypeId, isComposition } from '../block/definition.js'
-import { identityOf } from '../block/identity.js'
-import { isScopedEntry } from '../block/scope.js'
-import type { Scoped } from '../block/scope.js'
 import { kebabToPascal } from '../customElement/index.js'
 import type { CustomElementSpec, EventSchema } from '../customElement/index.js'
 import { serializedStylePropertyName } from '../domReflection.js'
@@ -57,7 +53,6 @@ import {
   type MessageDeclaration as SubscriptionMessageDeclaration,
   aggregate as aggregateSubscriptions,
   __messageDeclarations as subscriptionMessageDeclarations,
-  __messageMappers as subscriptionMessageMappers,
 } from '../subscription/subscription.js'
 import { tagNameFromSelector } from '../tagName.js'
 import type { VNode } from '../vdom.js'
@@ -99,7 +94,9 @@ import {
   resolveAllInternal,
   resolveByMatcher,
   resolveMountByMatcher,
+  resolveSubscriptionMessage,
 } from './internal.js'
+import type { SubscriptionEmissionSource } from './internal.js'
 import type { Locator, LocatorAll } from './query.js'
 import {
   accessibleDescription,
@@ -324,25 +321,6 @@ type TestMountRequirements =
   | BindingRequirement<string, TestBindingDefinition, Schema.Top>
 
 type TestHtmlBuilder<Message> = HtmlBuilder<Message, TestMountRequirements>
-
-type UnscopedSubscriptionRequirements<Requirements> =
-  Requirements extends Scoped<any, infer Contract> ? Contract : Requirements
-
-type SubscriptionEmissionSource<Entry> =
-  Entry extends Readonly<{
-    dependenciesToStream: (
-      ...args: ReadonlyArray<any>
-    ) => Stream.Stream<any, never, infer Requirements>
-  }>
-    ?
-        | RuntimeSubscription<any, any, any, Requirements>
-        | RuntimeSubscription<
-            any,
-            any,
-            any,
-            UnscopedSubscriptionRequirements<Requirements>
-          >
-    : never
 
 /** A single step in a scene: a `given` step, typed Message or OutMessage step,
  *  or scene simulation transform. */
@@ -849,88 +827,6 @@ const applyExternalMessages = <Model, Message, OutMessage>(
   return Array.reduce(messages, simulation, applyMessageWithoutBoundaryChecks)
 }
 
-const applySubscriptionMappers = (
-  declaration: SubscriptionMessageDeclaration,
-  message: unknown,
-): unknown =>
-  Array.reduce(
-    declaration.messageMappers,
-    message,
-    (current, toParentMessage) => toParentMessage(current),
-  )
-
-const resolveSubscriptionMessage = (
-  declarations: ReadonlyArray<SubscriptionMessageDeclaration>,
-  entry: unknown,
-  message: unknown,
-): unknown => {
-  const exactDeclarations = Array.filter(
-    declarations,
-    declaration => declaration.entry === entry,
-  )
-  const sourceDeclarations = Array.isArrayNonEmpty(exactDeclarations)
-    ? exactDeclarations
-    : Array.filter(declarations, declaration => {
-        if (!Predicate.isObject(entry)) {
-          return false
-        }
-        const expected = identityOf(entry)
-        const actual = identityOf(declaration.entry)
-        if (expected === undefined || actual?.token !== expected.token) {
-          return false
-        }
-        const sourceMappers = subscriptionMessageMappers(entry)
-        if (
-          !sourceMappers.every(
-            (mapper, index) =>
-              Option.getOrUndefined(
-                Array.get(declaration.messageMappers, index),
-              ) === mapper,
-          )
-        ) {
-          return false
-        }
-        const name = Reflect.get(entry, 'name')
-        const declarationName = Reflect.get(declaration.entry, 'name')
-        return (
-          !isScopedEntry(entry) ||
-          declarationName === name ||
-          (Predicate.isString(name) &&
-            Predicate.isString(declarationName) &&
-            declarationName.endsWith(`/${name}`))
-        )
-      })
-  const matchingDeclarations = Array.filter(sourceDeclarations, declaration =>
-    Array.some(declaration.schemas, schema => Schema.is(schema)(message)),
-  )
-
-  return Array.matchLeft(matchingDeclarations, {
-    onEmpty: () => {
-      throw new Error(
-        'Scene.Subscription.emit received a Message that is not declared by the selected Subscription:\n\n' +
-          `    ${JSON.stringify(message)}`,
-      )
-    },
-    onNonEmpty: (declaration, remainingDeclarations) => {
-      if (Array.isArrayNonEmpty(remainingDeclarations)) {
-        const entryKeys = pipe(
-          matchingDeclarations,
-          Array.map(({ entryKey }) => entryKey),
-          Array.join(', '),
-        )
-
-        throw new Error(
-          'Scene.Subscription.emit selected a Subscription entry ' +
-            `registered under multiple keys: ${entryKeys}.\n\n` +
-            'Select the bound Subscription entry for the intended child placement.',
-        )
-      }
-
-      return applySubscriptionMappers(declaration, message)
-    },
-  })
-}
-
 const applySubscriptionMessage = <Model, Message, OutMessage>(
   simulation: SceneSimulation<Model, Message, OutMessage>,
   step: SubscriptionMessageStep<unknown, unknown>,
@@ -942,6 +838,7 @@ const applySubscriptionMessage = <Model, Message, OutMessage>(
 
   /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions */
   const message = resolveSubscriptionMessage(
+    'Scene.Subscription.emit',
     internal.subscriptionDeclarations,
     step.entry,
     step.message,

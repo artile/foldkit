@@ -1,9 +1,11 @@
 import { Array } from 'effect'
 import {
   Command,
+  Subscription,
   expectOutMessage,
   given,
   message,
+  messageWith,
   model,
   steps,
   story,
@@ -14,6 +16,13 @@ given(model)
 
 // Send a Message. Commands stay pending.
 message(ClickedSubmit())
+
+// Send a Message built from the current Model.
+messageWith(model => ReceivedPage({ generation: model.generation, page }))
+
+// Emit a Message from a registered Subscription. A child Block's entry takes
+// its raw child Message.
+Subscription.from(subscriptions).emit(subscriptions.clockTicks, Ticked())
 
 // Group a reusable sequence without erasing its step types.
 steps(given(initialModel), message(ClickedSubmit()))

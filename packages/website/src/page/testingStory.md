@@ -12,7 +12,8 @@ The entire test is one `story` call. Start from a Model, send a Message, resolve
 
 Import the steps you need from `foldkit/story`.
 
-- Top-level steps start the test, group reusable setup, send Messages, and inspect results: `story`, `steps`, `given`, `message`, `model`, `expectOutMessage`, and `expectNoOutMessage`.
+- Top-level steps start the test, group reusable setup, send Messages, and inspect results: `story`, `steps`, `given`, `message`, `messageWith`, `model`, `expectOutMessage`, and `expectNoOutMessage`.
+- The `Subscription` namespace sends Messages that a registered Subscription would emit: `Subscription.from(subscriptions)` returns an emitter with `emit(entry, message)`.
 - The `Command` namespace handles pending Commands: `resolve`, `resolveAll`, `resolveAllExact`, `expectHas`, `expectExact`, and `expectNone`.
 
 Use named imports when the file contains only Story tests. If a file contains both Story and Scene tests, import the namespaces from `foldkit` so `Story.given` and `Scene.given` stay distinct.
@@ -70,6 +71,28 @@ When resolving a Command from a [child Block](/core/block), pass the child's res
 ### UI Component Test Helpers
 
 Before writing resolvers for an `@foldkit/ui` component, check the completed component's `test` namespace for lifecycle helpers. These helpers preserve the component instance's Command identity while resolving its internal transitions. For example, the [Toast test helper](/ui/toast#testing) handles the animation and timer Commands for a newly shown toast that auto-dismisses.
+
+## Messages Built From the Model
+
+Use `messageWith(model => message)` when a Message carries a value that update stored in the Model, such as a request generation, a stream session, or a generated id. Story calls the function with the current Model when the step runs, so the test reads the value instead of repeating it:
+
+::Snippet{name="testingStoryMessageWith" label="Building a Message from the current Model"}
+
+`messageWith` follows the same rules as `message`: it throws while a Command from an earlier step is unresolved, before it calls the function, and the Message must belong to the tested update. Inside a `steps` group, annotate the parameter (`messageWith((model: Model) => ...)`), because the group has no update to infer the Model from.
+
+## Subscription Messages
+
+`Subscription.from(subscriptions)` returns an emitter for one registered Subscription record. Its `emit(entry, message)` creates a step that feeds a Message the entry declares through update, as if the Subscription had emitted it. Story does not start the Subscription's Stream or evaluate its `modelToDependencies`.
+
+Pass the same record a [Scene](/testing/scene#subscriptions) registers: `Scene.subscriptions(Composition, localSubscriptions?)` for a Composition with child Blocks, or a completed Block's `.subscriptions`. For a child Block's entry, pass the child's raw Message. Story applies the generated delivery recorded in the record, so the test does not construct the parent envelope:
+
+::Snippet{name="testingStorySubscription" label="Emitting Subscription Messages in a Story"}
+
+The entry must be registered in the record, or be the child entry a registered entry was lifted from. `emit` throws when:
+
+- the entry does not declare the Message, or the record does not register the entry;
+- the entry is registered under several keys, for example one child Block bound twice; pass the bound entry for the intended placement;
+- a Command from an earlier step is still unresolved.
 
 ## Reusable Step Groups
 
