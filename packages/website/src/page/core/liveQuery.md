@@ -91,8 +91,6 @@ The parent calls these operations in response to its own Messages. Each operatio
 
 | Operation        | Result                                                                                                                                            |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Operation        | Result                                                                                                                                            |
-| ---------------- | ------                                                                                                                                            |
 | `requestWatch`   | Adds the feed. Without a snapshot, its data is `Loading` and its Stream starts with no cursor.                                                    |
 | `requestUnwatch` | Removes the feed and its retained state.                                                                                                          |
 | `requestPause`   | Stops every feed Stream and marks each streaming feed `Offline`. LiveQuery keeps the data and cursors. A feed with no data yet returns to `Idle`. |
