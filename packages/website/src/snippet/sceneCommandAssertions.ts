@@ -32,6 +32,10 @@ Command.expectHas(FetchWeather({ zipCode: '90210' }))
 // Negative assertion. Useful before a transition that should produce no Commands.
 Command.expectNone()
 
+// Still running. Lets a Subscription event or another interaction arrive
+// before the result; the scene must still resolve the Command.
+Command.keepPending(SubmitOrder)
+
 // Block Command. When the Command lives in a child component, resolve it
 // with the child's raw result Message. resolve replays the Command's own
 // mapMessages wrapping automatically, so you never restate the lift.

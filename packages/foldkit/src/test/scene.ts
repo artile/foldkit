@@ -94,6 +94,7 @@ import {
   formatMatcher,
   formatMountList,
   formatMountMatcher,
+  keepCommandPending,
   mountMatches,
   resolveAllExactInternal,
   resolveAllInternal,
@@ -1288,8 +1289,8 @@ const resolveAllCommands =
 
 /** Resolves listed Commands with their result Messages, cascading through any
  *  Commands the results produce. Every resolver must match one dispatch in
- *  this call, and no actual Commands may remain unresolved. Supplied resolvers
- *  do not carry forward. */
+ *  this call, and no actual Commands other than kept ones may remain
+ *  unresolved. Supplied resolvers do not carry forward. */
 const resolveAllExactCommands =
   <Matchers extends ReadonlyArray<ResolvableCommandMatcher>>(
     ...resolvers: { [K in keyof Matchers]: Resolver<Matchers[K]> }
@@ -1726,6 +1727,26 @@ const emitCustomElementEvent =
     )
   }
 
+/** Marks a pending Command as still running, so later Messages can arrive
+ *  before its result. Use it when the test covers that order, such as a
+ *  Subscription event that arrives before a request's reply. The Command
+ *  stays exempt for every later Message until it is resolved. The matcher
+ *  must select exactly one pending Command that is not kept yet, and the
+ *  test must still resolve it before the scene ends. */
+const keepPendingCommandStep =
+  (matcher: CommandMatcher) =>
+  <Model, Message, OutMessage = undefined>(
+    simulation: SceneSimulation<Model, Message, OutMessage>,
+  ): SceneSimulation<Model, Message, OutMessage> => {
+    const internal = toInternal(simulation)
+
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions */
+    return {
+      ...internal,
+      commands: keepCommandPending(internal.commands, matcher),
+    } as SceneSimulation<Model, Message, OutMessage>
+  }
+
 /** Steps that operate on the pending Commands of a scene simulation.
  *  Destructure as `const { Command } = Scene` for concise call sites. */
 export const Command = {
@@ -1738,7 +1759,8 @@ export const Command = {
    *  any leftovers sharing its Definition or Instance shape (latest wins). */
   resolveAll: resolveAllCommands,
   /** Resolves listed Commands and throws unless every resolver matches one
-   *  dispatch and no actual Commands remain unresolved. Entries apply only to
+   *  dispatch and no actual Commands other than kept ones remain unresolved.
+   *  Entries apply only to
    *  this call and never carry forward. */
   resolveAllExact: resolveAllExactCommands,
   /** Asserts that every given Command is among the pending Commands. */
@@ -1747,6 +1769,10 @@ export const Command = {
   expectExact: expectExactCommandsStep,
   /** Asserts that there are no pending Commands. */
   expectNone: expectNoCommandsStep,
+  /** Marks one pending Command as still running, so later Messages can
+   *  arrive before its result. It must still be resolved before the
+   *  scene ends. */
+  keepPending: keepPendingCommandStep,
 } as const
 
 /** Steps that operate on the pending Mounts of a scene simulation.

@@ -1,7 +1,11 @@
-import { Array } from 'effect'
+import { Array, Effect, Schema } from 'effect'
 import { describe, expect, expectTypeOf, test } from 'vitest'
 
+import * as Command from '../command/index.js'
 import * as Interruptible from '../command/interruptible/index.js'
+import { defineMessageUnion } from '../message/index.js'
+import { modifyFields } from '../struct/index.js'
+import * as Update from '../update/index.js'
 import {
   Message as CounterMessage,
   type Model as CounterModel,
@@ -34,6 +38,55 @@ import {
   update as uploadsUpdate,
 } from './apps/uploads.js'
 import * as Story from './story.js'
+
+// NOTE EDITOR
+
+const NoteModel = Schema.Struct({
+  text: Schema.String,
+  savedText: Schema.String,
+})
+type NoteModel = typeof NoteModel.Type
+
+const NoteMessage = defineMessageUnion({
+  ClickedSave: {},
+  UpdatedText: { text: Schema.String },
+  SucceededSaveNote: { text: Schema.String },
+  CompletedLogSave: {},
+})
+type NoteMessage = typeof NoteMessage.Type
+
+const SaveNote = Command.define('SaveNote', {
+  args: { text: Schema.String },
+  messages: [NoteMessage.SucceededSaveNote],
+  handler: function* () {
+    return ({ text }) => Effect.succeed(NoteMessage.SucceededSaveNote({ text }))
+  },
+})
+
+const LogSave = Command.define('LogSave', {
+  messages: [NoteMessage.CompletedLogSave],
+  handler: function* () {
+    return () => Effect.as(Effect.log('Saving'), NoteMessage.CompletedLogSave())
+  },
+})
+
+const noteUpdate = Update.define((model: NoteModel, message: NoteMessage) =>
+  NoteMessage.match(message, {
+    ClickedSave: () => ({
+      model,
+      commands: [SaveNote({ text: model.text }), LogSave()],
+    }),
+    UpdatedText: ({ text }) => ({
+      model: modifyFields(model, { text: () => text }),
+    }),
+    SucceededSaveNote: ({ text }) => ({
+      model: modifyFields(model, { savedText: () => text }),
+    }),
+    CompletedLogSave: () => ({ model }),
+  }),
+)
+
+const initialNote = NoteModel.make({ text: 'Draft', savedText: '' })
 
 // TEST
 
@@ -1042,5 +1095,136 @@ describe('type safety', () => {
       DraftsMessage.SucceededSaveDraft({ revision: 0 }),
     )
     expectTypeOf(resolver).toBeFunction()
+  })
+})
+
+describe('Command.keepPending', () => {
+  test('a kept Command stays pending while later Messages arrive', () => {
+    Story.story(
+      noteUpdate,
+      Story.given(initialNote),
+      Story.message(NoteMessage.ClickedSave()),
+      Story.Command.resolve(LogSave, NoteMessage.CompletedLogSave()),
+      Story.Command.keepPending(SaveNote),
+      Story.message(NoteMessage.UpdatedText({ text: 'Draft, edited' })),
+      Story.Command.resolve(
+        SaveNote({ text: 'Draft' }),
+        NoteMessage.SucceededSaveNote({ text: 'Draft' }),
+      ),
+      Story.model(model => {
+        expect(model).toEqual({ text: 'Draft, edited', savedText: 'Draft' })
+      }),
+    )
+  })
+
+  test('an unmarked pending Command still blocks the next Message', () => {
+    expect(() =>
+      Story.story(
+        noteUpdate,
+        Story.given(initialNote),
+        Story.message(NoteMessage.ClickedSave()),
+        Story.Command.keepPending(SaveNote),
+        Story.message(NoteMessage.UpdatedText({ text: 'Draft, edited' })),
+      ),
+    ).toThrow(
+      /I found unresolved Commands when you sent a new Message:\n\n {4}LogSave\n/,
+    )
+  })
+
+  test('a kept Command left pending at the end of the story throws', () => {
+    expect(() =>
+      Story.story(
+        noteUpdate,
+        Story.given(initialNote),
+        Story.message(NoteMessage.ClickedSave()),
+        Story.Command.resolve(LogSave, NoteMessage.CompletedLogSave()),
+        Story.Command.keepPending(SaveNote),
+      ),
+    ).toThrow('I found Commands without resolvers')
+  })
+
+  test('keeping a Command that is not pending throws', () => {
+    expect(() =>
+      Story.story(
+        noteUpdate,
+        Story.given(initialNote),
+        Story.Command.keepPending(SaveNote),
+      ),
+    ).toThrow(
+      'I tried to keep "SaveNote" pending but no matching pending Command that is not already kept was found.',
+    )
+  })
+
+  test('a kept Command stays exempt for every later Message and is still visible to Command steps', () => {
+    Story.story(
+      noteUpdate,
+      Story.given(initialNote),
+      Story.message(NoteMessage.ClickedSave()),
+      Story.Command.resolve(LogSave, NoteMessage.CompletedLogSave()),
+      Story.Command.keepPending(SaveNote),
+      Story.message(NoteMessage.UpdatedText({ text: 'Draft, edited' })),
+      Story.message(NoteMessage.UpdatedText({ text: 'Draft, edited twice' })),
+      Story.Command.expectExact(SaveNote({ text: 'Draft' })),
+      Story.Command.resolveAllExact([
+        SaveNote,
+        NoteMessage.SucceededSaveNote({ text: 'Draft' }),
+      ]),
+      Story.model(model => {
+        expect(model).toEqual({
+          text: 'Draft, edited twice',
+          savedText: 'Draft',
+        })
+      }),
+    )
+  })
+
+  test('a second invocation can be kept while the first one is kept', () => {
+    Story.story(
+      noteUpdate,
+      Story.given(initialNote),
+      Story.message(NoteMessage.ClickedSave()),
+      Story.Command.resolve(LogSave, NoteMessage.CompletedLogSave()),
+      Story.Command.keepPending(SaveNote),
+      Story.message(NoteMessage.UpdatedText({ text: 'Draft, edited' })),
+      Story.message(NoteMessage.ClickedSave()),
+      Story.Command.resolve(LogSave, NoteMessage.CompletedLogSave()),
+      Story.Command.keepPending(SaveNote),
+      Story.message(NoteMessage.UpdatedText({ text: 'Final' })),
+      Story.Command.resolve(
+        SaveNote({ text: 'Draft, edited' }),
+        NoteMessage.SucceededSaveNote({ text: 'Draft, edited' }),
+      ),
+      Story.Command.resolve(
+        SaveNote({ text: 'Draft' }),
+        NoteMessage.SucceededSaveNote({ text: 'Draft' }),
+      ),
+      Story.model(model => {
+        expect(model).toEqual({ text: 'Final', savedText: 'Draft' })
+      }),
+    )
+  })
+
+  test('keeping by Definition requires one unkept match', () => {
+    expect(() =>
+      Story.story(
+        update,
+        Story.given({ count: 0, log: [] }),
+        Story.message(CounterMessage.StartedTwoFetchesById()),
+        Story.Command.keepPending(FetchCountById),
+      ),
+    ).toThrow(
+      'I tried to keep "FetchCountById" pending but multiple pending Commands match.',
+    )
+  })
+
+  test('the unresolved Command error names keepPending', () => {
+    expect(() =>
+      Story.story(
+        noteUpdate,
+        Story.given(initialNote),
+        Story.message(NoteMessage.ClickedSave()),
+        Story.message(NoteMessage.UpdatedText({ text: 'Draft, edited' })),
+      ),
+    ).toThrow('mark it with\nCommand.keepPending(Definition | instance)')
   })
 })

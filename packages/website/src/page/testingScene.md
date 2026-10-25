@@ -194,21 +194,22 @@ When update returns Commands, Scene keeps them pending until the test supplies t
 - Resolving a Command feeds its result Message through `update`; new Commands produced by that update join the pending list.
 - `Command.resolveAll` walks cascades within the batch. If resolving Command A produces Command B and B’s resolver is in the same call, B resolves without a separate step.
 - `Command.resolveAllExact` walks the same cascades while requiring every listed resolver to match within that call and every actual Command to be resolved.
-- Interactions throw if there are unresolved Commands when they try to dispatch a Message.
+- Interactions throw if there are unresolved Commands when they try to dispatch a Message. `Command.keepPending` exempts one pending Command that the test declares still running. Interruptible Commands and Interrupt Commands are exempt without it.
 - `scene` throws at the end if any Command remains unresolved.
 
 ### Resolve and Inspect Commands
 
 ::Snippet{name="sceneCommandAssertions" label="Command assertions"}
 
-| Step                                                 | Effect                                                                                                                                                                                                                                          |
-| ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Command.resolve(Def, ResultMessage)`                | Resolves the first pending Command from the given Definition by feeding `ResultMessage` through update. For a child Block Command, pass the child’s raw result Message; resolve replays the Command’s own `mapMessages` wrapping automatically. |
-| `Command.resolveAll([Def, ResultMessage], ...)`      | Resolves a batch of pending Commands, walking cascades. Each entry resolves exactly one matching dispatch in declaration order and unmatched entries carry forward; compose with Array.makeBy for N identical responses.                        |
-| `Command.resolveAllExact([Def, ResultMessage], ...)` | Resolves a batch and throws unless every listed resolver matches within the call and no actual Commands remain unresolved. Repeated Definition entries consume repeated dispatches in declaration order.                                        |
-| `Command.expectExact(A, B)`                          | The pending Commands are exactly A and B (order-independent).                                                                                                                                                                                   |
-| `Command.expectHas(A)`                               | A is among the pending Commands (subset check).                                                                                                                                                                                                 |
-| `Command.expectNone()`                               | There are no pending Commands.                                                                                                                                                                                                                  |
+| Step                                                 | Effect                                                                                                                                                                                                                                                  |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Command.resolve(Def, ResultMessage)`                | Resolves the first pending Command from the given Definition by feeding `ResultMessage` through update. For a child Block Command, pass the child’s raw result Message; resolve replays the Command’s own `mapMessages` wrapping automatically.         |
+| `Command.resolveAll([Def, ResultMessage], ...)`      | Resolves a batch of pending Commands, walking cascades. Each entry resolves exactly one matching dispatch in declaration order and unmatched entries carry forward; compose with Array.makeBy for N identical responses.                                |
+| `Command.resolveAllExact([Def, ResultMessage], ...)` | Resolves a batch and throws unless every listed resolver matches within the call and no actual Commands remain unresolved, apart from Commands marked with `keepPending`. Repeated Definition entries consume repeated dispatches in declaration order. |
+| `Command.expectExact(A, B)`                          | The pending Commands are exactly A and B (order-independent).                                                                                                                                                                                           |
+| `Command.expectHas(A)`                               | A is among the pending Commands (subset check).                                                                                                                                                                                                         |
+| `Command.expectNone()`                               | There are no pending Commands.                                                                                                                                                                                                                          |
+| `Command.keepPending(Def)`                           | Declares that the one matching pending Command is still running, so later interactions and Subscription Messages can arrive before its result. The scene must still resolve it. `resolveAllExact` does not require it in the same call.                 |
 
 ### Match Command Names and Arguments
 
@@ -257,7 +258,7 @@ For a lifted Subscription, pass the child Message. Scene replays the entry's gen
 
 `emit` supplies an output from the registered Subscription graph; it does not evaluate `modelToDependencies` against the current Model. This allows a test to represent an event that was already queued when its Subscription became inactive.
 
-Use `emit` for a Subscription-origin fact. If the same Message can come from a button or another DOM interaction, use that interaction when testing the DOM-origin path. The interaction verifies the handler wiring that `emit` would skip. `emit` throws while Commands, Mounts, or unacknowledged unmounts are pending.
+Use `emit` for a Subscription-origin fact. If the same Message can come from a button or another DOM interaction, use that interaction when testing the DOM-origin path. The interaction verifies the handler wiring that `emit` would skip. `emit` throws while Commands, Mounts, or unacknowledged unmounts are pending. To emit a Subscription event that arrives before a request's reply, mark the request with `Command.keepPending` first.
 
 ## Managed Resources
 

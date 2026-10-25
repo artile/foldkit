@@ -13,7 +13,7 @@ The entire test is one `story` call. Start from a Model, send a Message, resolve
 Import the steps you need from `foldkit/story`.
 
 - Top-level steps start the test, group reusable setup, send Messages, and inspect results: `story`, `steps`, `given`, `message`, `model`, `expectOutMessage`, and `expectNoOutMessage`.
-- The `Command` namespace handles pending Commands: `resolve`, `resolveAll`, `resolveAllExact`, `expectHas`, `expectExact`, and `expectNone`.
+- The `Command` namespace handles pending Commands: `resolve`, `resolveAll`, `resolveAllExact`, `expectHas`, `expectExact`, `expectNone`, and `keepPending`.
 
 Use named imports when the file contains only Story tests. If a file contains both Story and Scene tests, import the namespaces from `foldkit` so `Story.given` and `Scene.given` stay distinct.
 
@@ -56,12 +56,27 @@ Unused resolvers can match later dispatches. A new resolver replaces any leftove
 :::
 
 :::Info{label="Exact resolution"}
-Use `resolveAllExact` when the resolver list is also a claim about which Commands were dispatched. It walks cascades like `resolveAll`, but every listed entry must match one dispatch within that call and no actual Command may remain unresolved. Repeated entries sharing a Definition consume repeated dispatches in declaration order. Supplied resolvers never carry forward.
+Use `resolveAllExact` when the resolver list is also a claim about which Commands were dispatched. It walks cascades like `resolveAll`, but every listed entry must match one dispatch within that call and no actual Command may remain unresolved, apart from Commands marked with `keepPending`. Repeated entries sharing a Definition consume repeated dispatches in declaration order. Supplied resolvers never carry forward.
 :::
 
 :::Info{label="Unresolved Commands"}
-`message` throws if there are pending Commands from a previous step. Resolve all Commands before sending the next Message. `story` throws at the end if any Commands remain unresolved. Every Command your update function produces must be accounted for.
+`message` throws if there are pending Commands from a previous step. Resolve all Commands before sending the next Message, unless the test declares that a Command is still running; see [Send Messages While a Command Is Pending](#send-messages-while-a-command-is-pending). `story` throws at the end if any Commands remain unresolved. Every Command your update function produces must be accounted for.
 :::
+
+### Send Messages While a Command Is Pending
+
+`Command.keepPending` declares that a pending Command is still running. Later `message` steps then run even though that Command is unresolved, and the story still requires its result before it ends.
+
+Use it when the test covers a fact that arrives while the work is in flight. The Runtime dispatches each Message as it arrives, so update must handle that order. For example:
+
+- A live order feed reports a new order before the submit request returns its reply.
+- A user keeps typing while a save is in flight.
+
+::Snippet{name="testingKeepPendingCommand" label="Event before the request reply"}
+
+The matcher must select exactly one pending Command that is not kept yet. Pass an instance when several invocations of one Definition are pending. Other pending Commands still stop the next Message. A kept Command stays exempt for every later Message until a resolve step supplies its result, and `Command.resolveAllExact` does not require it to be resolved in the same call. To test the reply arriving first, resolve the Command before sending the feed Message.
+
+Interruptible Commands and Interrupt Commands can stay pending without this step. A story sends the Message that interrupts a keyed Command, or more input, while that work is still in flight.
 
 ### Resolve Child Commands
 

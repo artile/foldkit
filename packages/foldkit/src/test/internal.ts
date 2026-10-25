@@ -35,7 +35,10 @@ import {
  *  such Commands may stay pending across Messages (they model long-running
  *  work). `interruptsKey` is present on Interrupt Commands: resolving one
  *  drops every pending Command holding that key, mirroring the runtime
- *  guarantee that an interrupted Command's result Message never dispatches. */
+ *  guarantee that an interrupted Command's result Message never dispatches.
+ *
+ *  `isKeptPending` is set by a `Command.keepPending` step: the test declared
+ *  that the Command is still running when later Messages arrive. */
 export type AnyCommand = Readonly<{
   /** @internal Exact source identity preserved through composition. */
   [InvocationIdentityTypeId]?: DefinitionIdentity | undefined
@@ -45,6 +48,7 @@ export type AnyCommand = Readonly<{
   args?: Record<string, unknown>
   key?: string
   interruptsKey?: string
+  isKeptPending?: true
   messageMappers?: ReadonlyArray<(message: unknown) => unknown>
 }>
 
@@ -478,7 +482,9 @@ export const resolveAllExactInternal = <Model, Message, OutMessage>(
     )
   }
 
-  assertAllCommandsResolved(current.commands)
+  assertAllCommandsResolved(
+    Array.filter(current.commands, command => command.isKeptPending !== true),
+  )
 
   return current
 }
@@ -621,12 +627,13 @@ const formatChildBlockCommandHint = (
     : ''
 
 /** Throws when trying to send a message with unresolved Commands. Keyed
- *  Commands (built with an interruptible `Command.define`) and Interrupt
- *  Commands are exempt: they model in-flight async work that legitimately
- *  stays pending while later Messages arrive, so a story can dispatch the
- *  Message that interrupts a keyed Command, or keep typing while a
- *  cancellation is in flight. They must still be resolved by the end of the
- *  test. */
+ *  Commands (built with an interruptible `Command.define`), Interrupt
+ *  Commands, and Commands marked by `Command.keepPending` are exempt: they
+ *  model in-flight async work that legitimately stays pending while later
+ *  Messages arrive, so a story can dispatch the Message that interrupts a
+ *  keyed Command, deliver an event that arrives before a request's reply, or
+ *  keep typing while a cancellation is in flight. They must still be
+ *  resolved by the end of the test. */
 export const assertNoUnresolvedCommands = (
   commands: ReadonlyArray<AnyCommand>,
   context: string,
@@ -635,17 +642,57 @@ export const assertNoUnresolvedCommands = (
     commands,
     command =>
       Predicate.isUndefined(command.key) &&
-      Predicate.isUndefined(command.interruptsKey),
+      Predicate.isUndefined(command.interruptsKey) &&
+      command.isKeptPending !== true,
   )
   if (Array.isReadonlyArrayNonEmpty(unresolvable)) {
     throw new Error(
       `I found unresolved Commands ${context}:\n\n${formatCommandList(unresolvable)}\n\n` +
         'Resolve all Commands before sending the next Message.\n' +
         'Use resolve(Definition | instance, ResultMessage) for each one,\n' +
-        'or resolveAll(...resolvers) to resolve them all at once.' +
+        'or resolveAll(...resolvers) to resolve them all at once.\n\n' +
+        'If a Command is still running when this Message arrives, such as a\n' +
+        'request whose reply comes after a Subscription event, mark it with\n' +
+        'Command.keepPending(Definition | instance) before sending the Message.' +
         formatChildBlockCommandHint(unresolvable),
     )
   }
+}
+
+/** Marks the one pending Command that matches `matcher` and is not kept yet
+ *  as allowed to stay pending while later Messages arrive. Throws when no
+ *  such Command or more than one matches. The marked Command must still be
+ *  resolved before the test ends. */
+export const keepCommandPending = (
+  commands: ReadonlyArray<AnyCommand>,
+  matcher: CommandMatcher,
+): ReadonlyArray<AnyCommand> => {
+  const isCandidate = (command: AnyCommand): boolean =>
+    command.isKeptPending !== true && commandMatches(matcher, command)
+  const candidates = Array.filter(commands, isCandidate)
+
+  if (Array.isReadonlyArrayEmpty(candidates)) {
+    throw new Error(
+      `I tried to keep "${formatMatcher(matcher)}" pending but no matching pending Command that is not already kept was found.\n\n` +
+        `Pending Commands:\n${formatCommandList(commands)}\n\n` +
+        'Make sure the previous Message produced this Command.',
+    )
+  }
+
+  if (candidates.length > 1) {
+    const disambiguationAdvice = isBindingCommandMatcher(matcher)
+      ? 'Include the missing ancestor Binding and keyed occurrence in the component test fixture.'
+      : 'To disambiguate, pass a Command instance with specific args.'
+    throw new Error(
+      `I tried to keep "${formatMatcher(matcher)}" pending but multiple pending Commands match.\n\n` +
+        `Matches:\n${formatCommandList(candidates)}\n\n` +
+        disambiguationAdvice,
+    )
+  }
+
+  return Array.map(commands, command =>
+    isCandidate(command) ? { ...command, isKeptPending: true } : command,
+  )
 }
 
 /** Throws when Commands remain at the end of a test. */

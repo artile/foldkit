@@ -1,6 +1,17 @@
-import { Array, Equivalence, Number, Option, Schema, pipe } from 'effect'
+import {
+  Array,
+  Effect,
+  Equivalence,
+  Layer,
+  Number,
+  Option,
+  Schema,
+  Stream,
+  pipe,
+} from 'effect'
 import { describe, expect, expectTypeOf, test, vi } from 'vitest'
 
+import * as Block from '../block/public.js'
 import * as CustomElement from '../customElement/index.js'
 import { defineView } from '../html/block.js'
 import {
@@ -180,6 +191,110 @@ import {
   textContent,
 } from './query.js'
 import * as Scene from './scene.js'
+
+// TICKET
+
+const TicketModel = Schema.Struct({ log: Schema.Array(Schema.String) })
+const TicketMessage = defineMessageUnion({
+  ClickedSubmit: {},
+  ReceivedConfirmation: { ticketId: Schema.String },
+  CompletedSubmitTicket: { ticketId: Schema.String },
+})
+const TicketDefinition = Block.makeDefinition('Ticket', {
+  Model: TicketModel,
+  Message: TicketMessage,
+})
+const SubmitTicket = TicketDefinition.makeCommand('SubmitTicket', {
+  args: { ticketId: Schema.String },
+  messages: [TicketMessage.CompletedSubmitTicket],
+  handler: function* () {
+    return ({ ticketId }) =>
+      Effect.succeed(TicketMessage.CompletedSubmitTicket({ ticketId }))
+  },
+})
+const ticketSubscriptions = TicketDefinition.makeSubscriptions(entry => ({
+  confirmations: entry('Confirmations', {
+    messages: [TicketMessage.ReceivedConfirmation],
+    handler: function* () {
+      return () => Stream.never
+    },
+  }),
+}))
+const appendToLog =
+  (line: string) =>
+  (log: ReadonlyArray<string>): ReadonlyArray<string> =>
+    Array.append(log, line)
+const TicketComposition = TicketDefinition.makeComposition()
+const prepare = () =>
+  TicketComposition.prepareBlock({
+    init: TicketComposition.makeInit(() => ({ model: { log: [] } })),
+    update: TicketComposition.makeUpdate((model, message) =>
+      TicketMessage.match(message, {
+        ClickedSubmit: () => ({
+          model: modifyFields(model, { log: appendToLog('submitted') }),
+          commands: [SubmitTicket({ ticketId: 'ticket-1' })],
+        }),
+        ReceivedConfirmation: ({ ticketId }) => ({
+          model: modifyFields(model, {
+            log: appendToLog(`confirmed ${ticketId}`),
+          }),
+        }),
+        CompletedSubmitTicket: ({ ticketId }) => ({
+          model: modifyFields(model, {
+            log: appendToLog(`acknowledged ${ticketId}`),
+          }),
+        }),
+      }),
+    ),
+    view: TicketComposition.makeView((model, h) =>
+      h.section(
+        [],
+        [
+          h.button([h.OnClick(TicketMessage.ClickedSubmit())], ['Submit']),
+          h.output([], [Array.join(model.log, ', ')]),
+        ],
+      ),
+    ),
+    subscriptions: ticketSubscriptions,
+    EffectsLayer: Layer.merge(
+      SubmitTicket.layer,
+      ticketSubscriptions.confirmations.layer,
+    ),
+  })
+const TicketBlock: Block.FromAssemblyWithView<
+  typeof TicketModel,
+  typeof prepare
+> = Block.assemble(prepare)
+
+const PageModel = Schema.Struct({ ticket: TicketBlock.Model })
+const PageDefinition = Block.makeDefinition('Page', {
+  Model: PageModel,
+  Message: Schema.Never,
+})
+const TicketBinding = PageDefinition.makeBinding(TicketBlock, {
+  field: 'ticket',
+})
+const PageComposition = PageDefinition.makeComposition({
+  bindings: [TicketBinding],
+})
+const pageUpdate = PageComposition.makeUpdate()
+const pageView = PageComposition.makeView((model, h) =>
+  h.main(
+    [],
+    [
+      h.block(
+        TicketBinding.embedView({ slotId: 'ticket', model: model.ticket }),
+      ),
+    ],
+  ),
+)
+const initialPage = PageModel.make({ ticket: { log: [] } })
+
+const pageScene = {
+  update: pageUpdate,
+  view: pageView,
+  subscriptions: Scene.subscriptions(PageComposition),
+}
 
 // TEST
 
@@ -7403,6 +7518,70 @@ describe('expectHandled and expectIgnored', () => {
       Scene.Command.expectNone(),
       Scene.expect(Scene.selector('.commits')).toHaveText('0'),
       Scene.expectIgnored(),
+    )
+  })
+})
+
+describe('Command.keepPending', () => {
+  test('a kept child Block Command stays pending while its Subscription event arrives first', () => {
+    Scene.scene(
+      pageScene,
+      Scene.given(initialPage),
+      Scene.click(Scene.role('button', { name: 'Submit' })),
+      Scene.Command.keepPending(SubmitTicket),
+      Scene.Subscription.emit(
+        ticketSubscriptions.confirmations,
+        TicketMessage.ReceivedConfirmation({ ticketId: 'ticket-1' }),
+      ),
+      Scene.expect(Scene.text('submitted, confirmed ticket-1')).toExist(),
+      Scene.Command.resolve(
+        SubmitTicket,
+        TicketMessage.CompletedSubmitTicket({ ticketId: 'ticket-1' }),
+      ),
+      Scene.expect(
+        Scene.text('submitted, confirmed ticket-1, acknowledged ticket-1'),
+      ).toExist(),
+    )
+  })
+
+  test('a kept Command lets a later interaction dispatch', () => {
+    Scene.scene(
+      pageScene,
+      Scene.given(initialPage),
+      Scene.click(Scene.role('button', { name: 'Submit' })),
+      Scene.Command.keepPending(SubmitTicket),
+      Scene.click(Scene.role('button', { name: 'Submit' })),
+      Scene.Command.resolveAll(
+        [
+          SubmitTicket,
+          TicketMessage.CompletedSubmitTicket({ ticketId: 'ticket-1' }),
+        ],
+        [
+          SubmitTicket,
+          TicketMessage.CompletedSubmitTicket({ ticketId: 'ticket-1' }),
+        ],
+      ),
+      Scene.expect(
+        Scene.text(
+          'submitted, submitted, acknowledged ticket-1, acknowledged ticket-1',
+        ),
+      ).toExist(),
+    )
+  })
+
+  test('an unmarked child Block Command blocks the Subscription event', () => {
+    expect(() =>
+      Scene.scene(
+        pageScene,
+        Scene.given(initialPage),
+        Scene.click(Scene.role('button', { name: 'Submit' })),
+        Scene.Subscription.emit(
+          ticketSubscriptions.confirmations,
+          TicketMessage.ReceivedConfirmation({ ticketId: 'ticket-1' }),
+        ),
+      ),
+    ).toThrow(
+      'I found unresolved Commands when a Subscription emitted a new Message',
     )
   })
 })

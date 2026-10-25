@@ -63,6 +63,9 @@ Command.expectExact(FetchWeather({ zipCode: '90210' }), SaveBoard)
 // Assert no Commands were produced.
 Command.expectNone()
 
+// Keep a Command pending while later Messages arrive. Resolve it later.
+Command.keepPending(SubmitOrder)
+
 // Assert on the OutMessage.
 expectOutMessage(SucceededLogin({ session }))
 
