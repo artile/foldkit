@@ -349,7 +349,7 @@ describe('lazy composition', () => {
       const json = Schema.encodeUnknownSync(Schema.toCodecJson(Model))(
         app.model(),
       )
-      expect(Schema.decodeUnknownSync(Schema.toCodecJson(Model))(json)).toEqual(
+      expect(Schema.decodeSync(Schema.toCodecJson(Model))(json)).toEqual(
         app.model(),
       )
       expect(json).not.toContain('function')
