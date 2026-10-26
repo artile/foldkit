@@ -1,3 +1,4 @@
+import { Array, Option, String, pipe } from 'effect'
 import { readFileSync } from 'node:fs'
 
 import { expect, test } from '@playwright/test'
@@ -16,12 +17,20 @@ const staticFiles = (
   visited = new Set<string>(),
 ): ReadonlySet<string> => {
   const chunk = manifest[entry]
-  if (chunk === undefined)
+  if (chunk === undefined) {
     throw new Error(`Missing emitted manifest entry: ${entry}`)
-  if (visited.has(chunk.file)) return visited
+  }
+
+  if (visited.has(chunk.file)) {
+    return visited
+  }
+
   visited.add(chunk.file)
-  for (const dependency of chunk.imports ?? [])
+
+  for (const dependency of chunk.imports ?? []) {
     staticFiles(manifest, dependency, visited)
+  }
+
   return visited
 }
 
@@ -69,8 +78,10 @@ test.describe('routing example', () => {
       ),
     )
     const reports = manifest['src/lazy/reports.ts']
-    if (reports === undefined)
+    if (reports === undefined) {
       throw new Error('Reports is missing from the production manifest')
+    }
+
     expect(reports.isDynamicEntry).toBe(true)
     const initial = staticFiles(manifest, 'lazy.html')
     expect(initial.has(reports.file)).toBe(false)
@@ -87,18 +98,26 @@ test.describe('routing example', () => {
       chunk.modules.map(id => id.replaceAll('\\', '/')),
     )
     const foldkitRoots = new Set(
-      ids.flatMap(id => {
-        const match = id.match(
-          /^(.*(?:packages\/foldkit|node_modules\/foldkit))\/(?:src|dist)\//,
-        )
-        return match?.[1] === undefined ? [] : [match[1]]
-      }),
+      ids.flatMap(id =>
+        pipe(
+          id,
+          String.match(
+            /^(.*(?:packages\/foldkit|node_modules\/foldkit))\/(?:src|dist)\//,
+          ),
+          Option.flatMap(Array.get(1)),
+          Option.toArray,
+        ),
+      ),
     )
     const effectRoots = new Set(
-      ids.flatMap(id => {
-        const match = id.match(/^(.*\/node_modules\/effect)\/(?:src|dist)\//)
-        return match?.[1] === undefined ? [] : [match[1]]
-      }),
+      ids.flatMap(id =>
+        pipe(
+          id,
+          String.match(/^(.*\/node_modules\/effect)\/(?:src|dist)\//),
+          Option.flatMap(Array.get(1)),
+          Option.toArray,
+        ),
+      ),
     )
     expect(foldkitRoots.size).toBe(1)
     expect(effectRoots.size).toBe(1)
