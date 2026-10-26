@@ -1,5 +1,5 @@
 # maintainer-awesome-curator state. See skills/maintainer-awesome-curator/SKILL.md.
-last_issue_update = "2026-10-22T12:36:50Z"
+last_issue_update = "2026-10-26T14:09:14Z"
 last_review = "2026-10-22"
 queue = []               # "owner/name" entries from maintainer-ecosystem-miner
 
@@ -1510,3 +1510,155 @@ pull_request = "https://github.com/foldhub/awesome-foldkit/pull/9"
 merged = true
 merge_commit = "f6a7fe8e4d9775f02c5f09061261b202e4ae77d8"
 decision = "Decided autonomously: prune and squash-merge because monthly source review, final-content build, publication review, and pre-push review passed."
+
+[decisions."edmundmiller/edmundmiller.dev"]
+decision = "add"
+score = 8
+section = "apps"
+bar = 8
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root manifest and src/app/entry.ts hydrate the Foldkit site; view, search and chart modules implement the personal publication site. README documents its Markdown-to-Foldkit compilation, prerendering and Pagefind pipeline, distinct from the listed photography portfolio and static guide. Browser loaded the public bio, articles and chart; interactive search was not exercised."
+decided = "2026-10-26"
+
+[decisions."planetaryescape/gbfm"]
+decision = "listed"
+score = 8
+section = "apps"
+bar = 8
+reason = "8 = depth 2, substance 3, health 2, signal 1. apps/www declares Foldkit and view.ts implements music archive and player UI. GitHub resolves the listed guidefari/gbfm to this same repository id 516160416; update the listed repository name rather than add a duplicate. Recent push and documented local setup satisfy health. The author also owns listed invoicing. HTTP site fetch returned 403; playback was not tested."
+decided = "2026-10-26"
+
+[decisions."hugo/thisishugo.com"]
+decision = "reject"
+score = 6
+section = "apps"
+bar = 8
+reason = "6 = depth 3, substance 1, health 2, signal 0. Manifest and client entry hydrate a real Foldkit personal site. Home is a short biography with GitHub/email links and a copy-email toast; the working site adds no distinct substantial application over the personal sites listed. README is only Hello?; live HTTP fetch succeeded. Score is two below bar 8."
+decided = "2026-10-26"
+
+[decisions."uripont/msf-case-desk"]
+decision = "watch"
+score = 7
+section = "apps"
+bar = 8
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/web declares Foldkit and main/view implement a synthetic ethics-case triage prototype, with domain rules and tests. A public course prototype and distinctive case-assessment audience satisfy substance; README explains setup and limits. Public site responds 200. Score is one below bar 8; no operational use with real case data is claimed."
+decided = "2026-10-26"
+revisit = "2026-11-25"
+
+[decisions."filipfalcon/czechhergame"]
+decision = "reject"
+score = 4
+section = "apps"
+bar = 8
+reason = "4 = depth 2, substance 0, health 1, signal 1. applications/platform declares Foldkit preview packages, but application.ts renders only a server-rendered counter persisted in a cookie. README contains licensing text without setup. The soccer product described by the repository name is not implemented in the current UI. Author owns listed skoreova. Score is four below bar 8."
+decided = "2026-10-26"
+
+[decisions."joelhooks/halter"]
+decision = "reject"
+score = 6
+section = "apps"
+bar = 8
+reason = "6 = depth 1, substance 2, health 2, signal 1. Foldkit mounts the campaign-editor mock in src/ws; README explicitly calls the language a sketch with invented data and no production use. Original fact-log language and checking code add substance; README documents setup and tests. The live fetch returned 403. Author owns listed rat-stack. Score is two below bar 8; no real campaign operation was established."
+decided = "2026-10-26"
+
+[decisions."grmkris/hack-meridian-2026"]
+decision = "add"
+score = 7
+section = "ai"
+bar = 6
+reason = "7 = depth 2, substance 3, health 2, signal 0. apps/web declares Foldkit and main.ts plus card/main.ts implement the Nod wallet UI and embedded MCP cards. Stellar allowance, passkey and payment code make a distinct agent-payment application rather than a generic chat console. README gives setup and architecture; browser loaded the public Nod landing page. No account was created and no payment or security claim was tested."
+decided = "2026-10-26"
+
+[decisions."ChindanaiNaKub/olmo"]
+decision = "reject"
+score = 6
+section = "apps"
+bar = 8
+reason = "6 = depth 2, substance 2, health 2, signal 0. apps/game declares Foldkit, entry runs its application, and game/view.ts plus update.ts implement a canvas sandbox with block placement, mining, inventory and sockets. This is substantive and distinct from the listed games; README documents local stack setup. No public deployment or independent user use was established. Score is two below bar 8."
+decided = "2026-10-26"
+
+[decisions."skyturtleio/echo-sync"]
+decision = "reject"
+score = 0
+section = "interop"
+bar = 5
+reason = "Fast rejection: depth 0. src/foldkit/index.ts adapts sync streams to Commands and Subscriptions; examples/foldkit/app.ts is explicitly a typecheck-only consumer. The demonstrated Foldkit integration has no mounted Foldkit UI; sync tooling alone does not meet this rubric."
+decided = "2026-10-26"
+
+[decisions."michielryvers/retro"]
+decision = "add"
+score = 8
+section = "apps"
+bar = 8
+reason = "8 = depth 3, substance 3, health 2, signal 0. Root Foldkit dependency and packages/web/main.ts boot App.ts, which implements team retrospective rooms, private notes, grouping, votes and action items. Durable Object room infrastructure and facilitator workflow differ from the listed planning and collaboration apps. README documents setup; browser loaded the live room-creation form. No room was created and multi-user behavior was not exercised."
+decided = "2026-10-26"
+
+[decisions."sittiponghaus/luminary-os"]
+decision = "reject"
+score = 5
+section = "apps"
+bar = 8
+reason = "5 = depth 3, substance 0, health 2, signal 0. Root manifest declares Foldkit and app/src/entry.ts boots app/src/main.ts, whose Model and view are a counter with increment, decrement and reset. README documents setup for the planned wedding-operations platform; current UI does not implement wedding operations. Score is three below bar 8."
+decided = "2026-10-26"
+
+[decisions."kattsushi/foldkit-blocks-policy-repro"]
+decision = "reject"
+score = 0
+section = "interop"
+bar = 5
+reason = "Fast rejection: bug reproduction repository. README and two source fixtures isolate the Blocks reciprocal-policy type-depth failure; this is test evidence rather than a reusable UI or application."
+decided = "2026-10-26"
+
+[decisions."MapleTechLabs/maple-ui-parity"]
+decision = "reject"
+score = 0
+section = "interop"
+bar = 5
+reason = "Fast rejection: depth 0 and test repository. README identifies an extracted archived migration test harness that imports Maple workspace packages and cannot build independently; it is not a Foldkit application UI."
+decided = "2026-10-26"
+
+[decisions."nawed-clueso/rome"]
+decision = "reject"
+score = 0
+section = "ai"
+bar = 6
+reason = "Fast rejection: derivative of T3 Code with Foldkit in vendored .repos sources. README identifies the personal T3 Code/Ardia fork; collected application manifests do not declare Foldkit. The coding/browser shell is not a Foldkit UI."
+decided = "2026-10-26"
+
+[decisions."rhino-labs/web-framework-comparison"]
+decision = "add"
+score = 7
+section = "compare"
+bar = 5
+reason = "7 = depth 2, substance 3, health 2, signal 0. GitHub redirects radar owner rhino88 to rhino-labs. apps/foldkit declares Foldkit and main/view implement the same content site as four comparison framework apps. A production-build Playwright benchmark, widget implementations and checked-in results provide a distinct runnable comparison. README documents methodology and reproduction. Benchmark numbers were not independently rerun."
+decided = "2026-10-26"
+
+[decisions."@plana-solutions/agent-interface"]
+decision = "add"
+score = 7
+section = "ui"
+bar = 5
+reason = "7 = depth 2, substance 3, health 2, signal 0. Public npm 0.4.0 includes 221 source files, Foldkit peers, defineAgentInterface in src/client/program.ts and native views in src/features/view.ts. Published reusable OpenUI/AG-UI chat and generative UI rendering differ from general component kits. README documents standalone and Submodel setup. The advertised GitHub repository returns 404, so list the inspectable npm package without that repository link; packaged source was inspected but consumer tests were not run."
+decided = "2026-10-26"
+
+[publication_reviews."2026-10-26-candidates"]
+rounds = 2
+failed_rounds = 1
+status = "clean; round 1 build condition resolved in round 2"
+review_task = "node:delegated-task:command%3Amcp%3Aa388fffb-bea4-4cb3-bf59-df0036003fd3%3Adelegate-task%3Adriver-20261026-1400-curator-publish-r2"
+
+[prepush_reviews."2026-10-26-additions"]
+rounds = 1
+status = "clean"
+review_task = "node:delegated-task:command%3Amcp%3Aa388fffb-bea4-4cb3-bf59-df0036003fd3%3Adelegate-task%3Adriver-20261026-1400-curator-prepush-r1"
+
+head = "151c256778ebe3dde837d2902ff358ad9372a9db"
+reviewed_blob = "58cd23e8ebefc9c4c7003a57368e1cd623a19564"
+
+[publications."2026-10-26-additions"]
+pull_request = "https://github.com/foldhub/awesome-foldkit/pull/11"
+merged = true
+merge_commit = "9a4acb99fb7f3fd46257f657e34ef698691e26f7"
+radar = "https://github.com/foldhub/awesome-foldkit/issues/10"
+priority = "P3"
+priority_source = "estimate"
+decision = "Decided autonomously: publish and squash-merge because section rubric, final-content build, exact publication review and pre-push review passed."
