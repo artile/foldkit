@@ -1,0 +1,13 @@
+$ vitest run src/tabs/index.test.ts src/combobox/single.test.ts src/combobox/multi.test.ts
+
+ RUN  v5.0.2 /home/om/TAO/Tools/foldkit-worktrees/issue-1723-keyboard-previous/packages/ui
+
+
+ Test Files  3 passed (3)
+      Tests  184 passed (184)
+   Start at  22:08:22
+   Duration  1.61s (transform 55%, import 18%, environment 12%, setup 9%, tests 6%)
+
+  Transform  transforming modules took 2.16s · 55% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns

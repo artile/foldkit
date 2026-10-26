@@ -1,0 +1,4 @@
+PASS state "analysis: in progress" is a known state
+PASS returned state matches status.md
+PASS artifact directory holds only defined entries
+PASS evaluation/ holds only round-N directories

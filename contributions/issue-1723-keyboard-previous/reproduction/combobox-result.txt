@@ -1,0 +1,29 @@
+After focus: isOpen=true, maybeActiveItemIndex=None
+{"actualActiveIndex":2,"expectedActiveIndex":3,"ariaActiveDescendant":"test-item-2"}
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: ArrowUp after openOnFocus must activate Date, the last enabled item
+
+2 !== 3
+
+    at file:///home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1723-keyboard-previous/reproduction/combobox.mjs:39:12
+    at file:///home/om/TAO/Tools/foldkit-worktrees/issue-1723-keyboard-previous/packages/foldkit/dist/test/scene.js:840:5
+    at applySceneStep (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1723-keyboard-previous/packages/foldkit/dist/test/scene.js:856:16)
+    at file:///home/om/TAO/Tools/foldkit-worktrees/issue-1723-keyboard-previous/packages/foldkit/dist/test/scene.js:869:24
+    at file:///home/om/TAO/Tools/foldkit-worktrees/issue-1723-keyboard-previous/node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Array.js:3191:99
+    at Array.reduce (<anonymous>)
+    at file:///home/om/TAO/Tools/foldkit-worktrees/issue-1723-keyboard-previous/node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Array.js:3191:79
+    at Module.<anonymous> (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1723-keyboard-previous/node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Function.js:87:18)
+    at runSteps (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1723-keyboard-previous/packages/foldkit/dist/test/scene.js:862:7)
+    at Module.scene (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1723-keyboard-previous/packages/foldkit/dist/test/scene.js:1524:20) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 2,
+  expected: 3,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.22.3
