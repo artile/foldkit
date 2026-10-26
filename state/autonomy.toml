@@ -15,7 +15,7 @@ awesome_foldkit_pull_requests = 2   # curator: one add, one prune
 [counts]
 day = "2026-10-26"
 pull_requests_opened = 0
-issue_comments = 0
+issue_comments = 6
 review_replies = 0
 issues_opened = 0
 discussions_opened = 0

@@ -1,7 +1,7 @@
 # Issue status checked against a pinned upstream main commit.
 
 [issues.904]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Published packages retain incompatible Node floors; root has a stricter range. Linked fix PR #1550 is open."
@@ -16,7 +16,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.842]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Website TypeScript excludes snippets and no API-surface drift check was found."
@@ -31,7 +31,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.1041]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Resolved"
 finding = "Adoption seeds current DOM state, removes stale client-unowned server state, and records development mismatch signatures. All 90 hydration tests pass."
@@ -41,13 +41,16 @@ title = "Reconcile and diagnose stale element state during hydration"
 priority = "P1"
 priority_source = "label"
 issue_updated_at = "2026-08-30T23:33:34Z"
-comment_status = "review_clean"
+comment_status = "published"
 publish_review_rounds = 2
 publish_review_failures = 1
 draft_comment = "This is resolved on `main` at [b702a5efb](https://github.com/foldkit/foldkit/commit/b702a5efbb74bebc056b798b414ddb923a82fbd5). [`seedAdoptedState`](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/foldkit/src/hydrate.ts#L390) records existing attributes, classes, and styles so the client patch can remove stale server state, while preserving undeclared custom-element state. The [regression test](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/foldkit/src/hydrate.test.ts#L2342) checks removal of a stale class, data attribute, href, and inline style; all 90 hydration tests pass at this commit. This issue can be closed."
+comment_url = "https://github.com/foldkit/foldkit/issues/1041#issuecomment-6411311522"
+published_class = "Resolved"
+published_at = "2026-10-26T08:13:32.495769+00:00"
 
 [issues.827]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Bridge dispatch has no acceptance result; excluded history indices remain predictions. Linked fix PR #1552 is open."
@@ -62,7 +65,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.796]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "inlineCode emits one code element with no segmented search aliases; Pagefind wrapper does not detect degraded matches."
@@ -77,7 +80,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.798]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Snippet exclusion persists in TypeScript, lint via website/src, and Knip. No per-snippet compilation gate."
@@ -92,7 +95,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.691]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Slider navigation Messages carry render-time value; Combobox close paths carry restingInputValue."
@@ -107,7 +110,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.1245]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Public MountAction retains executable field f."
@@ -122,7 +125,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.1182]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Scene release TSDoc explicitly documents the missing Some-to-Some re-acquisition step."
@@ -137,7 +140,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.1194]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "CustomElement decodes declared details, but generic public typed CustomEvent definition and Scene emission boundary are absent."
@@ -152,7 +155,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.1181]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Entry and EntryBuilder erase acquisition errors to unknown, including onAcquireError."
@@ -167,7 +170,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.1153]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Command definitions and args overloads remain Schema.Struct.Fields-generic."
@@ -182,7 +185,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.1067]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Resolved"
 finding = "The issue accepts a documentation alternative. The guide and snippet explicitly teach closing over current parent context for each dispatch and distinguish context from child notification."
@@ -192,13 +195,16 @@ title = "update: foldChild has no slot for per-dispatch parent context, so page 
 priority = "P2"
 priority_source = "label"
 issue_updated_at = "2026-08-30T23:33:53Z"
-comment_status = "review_clean"
+comment_status = "published"
 publish_review_rounds = 1
 publish_review_failures = 0
 draft_comment = "The documentation alternative is implemented in [#1104](https://github.com/foldkit/foldkit/pull/1104). The [Submodel guide](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/website/src/page/core/submodel.md#L226) explains passing current parent state through the child update's third `context` argument, and its [source example](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/website/src/snippet/submodelParentStateInUpdate.ts#L37) closes over `currentUser` when constructing `Update.foldChild`, then calls `foldSettings(model.currentUser)(model, message)` for each dispatch. It also distinguishes reading context from notifying a child through an `inform*` helper. This satisfies the documented-closure alternative in the issue, so it can be closed."
+comment_url = "https://github.com/foldkit/foldkit/issues/1067#issuecomment-6411312109"
+published_class = "Resolved"
+published_at = "2026-10-26T08:13:34.769059+00:00"
 
 [issues.1028]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Partly resolved"
 finding = "Hydration signals ownership by removing data-foldkit-build, documented in #1364. No uniform fresh-boot success marker."
@@ -208,13 +214,16 @@ title = "Stamp a boot success signal for template watchdogs"
 priority = "P2"
 priority_source = "label"
 issue_updated_at = "2026-08-30T23:33:54Z"
-comment_status = "review_clean"
+comment_status = "published"
 publish_review_rounds = 1
 publish_review_failures = 0
 draft_comment = "The hydration half has a documented signal in [#1364](https://github.com/foldkit/foldkit/pull/1364): the [server-rendering guide](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/website/src/page/core/serverRendering.md#L200) defines removal of `data-foldkit-build` as the signal that the client runtime owns the page; a refused handoff retains the stamp and adds `data-foldkit-refused`. A watchdog can use that contract for a server-rendered page. A shared boot-success signal covering fresh `Runtime.run` applications and bundles that never execute is not provided, so that broader part remains open."
+comment_url = "https://github.com/foldkit/foldkit/issues/1028#issuecomment-6411312962"
+published_class = "Partly resolved"
+published_at = "2026-10-26T08:13:37.681244+00:00"
 
 [issues.1026]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "HTTP and Resources docs do not show a shared HttpApiClient contract as a resource plus server domain Schemas in client Model states."
@@ -229,7 +238,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.1025]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Mount guide lacks the requested CodeMirror recipe combining lazy import, acquisition, release, and failure Message."
@@ -244,7 +253,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.1024]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "UI public module inventory has no responsive Sidebar Submodel."
@@ -259,7 +268,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.1022]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Partly resolved"
 finding = "Experimental Query #1425 owns request identity and ignores stale completions, including after reset. All 42 Query tests pass. AsyncData itself has no request identity; adoption/audit proposal remains separate."
@@ -269,13 +278,16 @@ title = "asyncData: slopcop hand-rolled every loading union plus a requestId sta
 priority = "P2"
 priority_source = "label"
 issue_updated_at = "2026-08-30T23:33:58Z"
-comment_status = "review_clean"
+comment_status = "published"
 publish_review_rounds = 2
 publish_review_failures = 1
 draft_comment = "The request-identity part is addressed by experimental Query in [#1425](https://github.com/foldkit/foldkit/pull/1425). [Query](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/website/src/page/core/query.md#L17) owns the fetch Command, completion Message, `AsyncData` state, and protection against late responses; its [reset regression](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/foldkit/src/experimental/query/query.test.ts#L308) verifies that an earlier completion is ignored after reset and a new fetch. `AsyncData` itself does not track request identity, and the adoption/audit guidance proposed in the first part of this issue remains separate work."
+comment_url = "https://github.com/foldkit/foldkit/issues/1022#issuecomment-6411313679"
+published_class = "Partly resolved"
+published_at = "2026-10-26T08:13:40.151202+00:00"
 
 [issues.1021]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Skill assumes repos/foldkit then appends a repository-root special case; ordered agent-reference resolution is absent."
@@ -290,7 +302,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.1016]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Docs explicitly exclude makeElement and embed hydration. Linked implementation PR #1650 is open."
@@ -305,7 +317,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.973]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Partly resolved"
 finding = "Rule require-fold-for-child-update-result covers namespaced child-return Model copies when matching fold wiring exists. Direct imports, aliases, and files without that wiring are excluded. Targeted rule tests pass."
@@ -315,13 +327,16 @@ title = "oxlint-plugin: flag hand-rolled Got* folds where Update.foldChild fits"
 priority = "P2"
 priority_source = "label"
 issue_updated_at = "2026-08-30T23:34:02Z"
-comment_status = "review_clean"
+comment_status = "published"
 publish_review_rounds = 1
 publish_review_failures = 0
 draft_comment = "A narrower version landed in [#1394](https://github.com/foldkit/foldkit/pull/1394), with keyed-fold recognition added in [#1608](https://github.com/foldkit/foldkit/pull/1608). [`foldkit/require-fold-for-child-update-result`](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/oxlint-plugin-foldkit/src/rules/require-fold-for-child-update-result.ts#L475) flags a namespaced child update/helper result whose Model is manually copied into the matching parent field when that file establishes the field through a child fold. It recommends `Update.foldChild`, `Update.foldChildAt`, or `Update.foldChildStep`. Direct imports, aliases, and files without matching fold wiring are outside its coverage, so this is partial enforcement rather than a general check of hand-written `Got*` handlers."
+comment_url = "https://github.com/foldkit/foldkit/issues/973#issuecomment-6411314358"
+published_class = "Partly resolved"
+published_at = "2026-10-26T08:13:42.594536+00:00"
 
 [issues.979]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Scene can emit Subscription Messages but has no expectActive/expectInactive entry assertions."
@@ -336,7 +351,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.917]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Public resolve overloads require a branded Definition or an instance with effect; broader implementation signature is not a public overload."
@@ -351,7 +366,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.894]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Partly resolved"
 finding = "Issue body already records #896 fixing HMR flags resolution. Explicit Resources type-argument limitation and lack of startup-error view persist; no new progress to publish."
@@ -367,7 +382,7 @@ publish_review_failures = 0
 draft_comment = "The HMR flags-resolution part is fixed by [#896](https://github.com/foldkit/foldkit/pull/896), as the issue body records. The [Resources guide](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/website/src/page/core/resources.md) qualifies its requirement check to inferred Resources, and startup failures before a Model exists have no dedicated application view hook. Those two parts remain open."
 
 [issues.862]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "UI Markdown pages repeat OutMessage and animation prose. Island registry has no shared-prose include or duplicate-prose consistency gate."
@@ -382,7 +397,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.892]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Partly resolved"
 finding = "Decision-time time/randomness rule #1234 and imported child Message enforcement #1394 exist. Effect runners, parent-union checks, and broader impure browser calls are not covered by those rules. Targeted rule tests pass."
@@ -392,13 +407,16 @@ title = "Four lint rules the anti-patterns guide implies but the plugin does not
 priority = "P2"
 priority_source = "label"
 issue_updated_at = "2026-08-30T23:34:07Z"
-comment_status = "review_clean"
+comment_status = "published"
 publish_review_rounds = 1
 publish_review_failures = 0
 draft_comment = "Two parts have landed: [#1234](https://github.com/foldkit/foldkit/pull/1234) added [`no-impure-call-at-decision-time`](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/oxlint-plugin-foldkit/src/rules/no-impure-call-at-decision-time.ts#L818) for direct time/randomness reads outside recognized deferred callbacks, and [#1394](https://github.com/foldkit/foldkit/pull/1394) extended [`no-child-message-construction-in-root`](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/oxlint-plugin-foldkit/src/rules/no-child-message-construction-in-root.ts) to resolve imported child Message constructors. The [registered rules](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/oxlint-plugin-foldkit/src/index.ts#L43) do not include an Effect-runner prohibition or a child-Message-in-parent-union check; the decision-time rule also does not cover the proposed `fetch`, storage, or generic DOM-access checks. Those parts remain open."
+comment_url = "https://github.com/foldkit/foldkit/issues/892#issuecomment-6411315009"
+published_class = "Partly resolved"
+published_at = "2026-10-26T08:13:45.156832+00:00"
 
 [issues.856]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "UI pages retain local ViewInputs aliases; Slots does not export a shared RenderInputs contract."
@@ -413,7 +431,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.855]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Snippet barrel has grown to 608 lines; Markdown snippet registry resolves via globs independently."
@@ -428,7 +446,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.857]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Keyboard tables contain ordinary inline-code keys, and island registry has no Kbd island."
@@ -443,7 +461,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.853]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "check:dead-code excludes exports from its include set; Knip ignores website snippets."
@@ -458,7 +476,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.841]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Popover Scene fixture uses test-button/test-panel-container keys as selectors."
@@ -473,7 +491,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.826]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "MCP server hardcodes version 0.1.0; requested example-payload, navigation, multi-path, and dispatch-diff APIs were not found."
@@ -488,7 +506,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.810]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Partly resolved"
 finding = "React comparison describes concrete architecture and home names Effect learning curve. Why Foldkit retains the cited impossibility and universal claims; shared limitations section absent."
@@ -504,7 +522,7 @@ publish_review_failures = 0
 draft_comment = "Further positioning edits landed in [#1104](https://github.com/foldkit/foldkit/pull/1104): the [React comparison](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/website/src/page/reactComparison.md) describes the concrete update/Command boundary without the cited frame-time claim, and the [home page](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/website/src/page/home/content.ts#L275) explicitly names Effect as part of the learning curve. The former manifesto is now [Why Foldkit](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/website/src/page/whyFoldkit.md), which retains the claims about opaque organization being impossible, other TypeScript frameworks, and frontend architecture being solved. The requested shared limitations section and those claims remain open."
 
 [issues.805]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Partly resolved"
 finding = "React frame-timing claim removed. Performance page presents newer medians but lacks a raw-batch link, explicit discussion of last-place unoptimized result, and benchmark-idiom caveat."
@@ -520,7 +538,7 @@ publish_review_failures = 0
 draft_comment = "The frame-timing claim has been removed from the [React comparison](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/website/src/page/reactComparison.md). The [performance page](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/website/src/page/performance.md#L43) now describes a newer fifteen-run batch using Chromium 152.0.7977.65, but the page does not link its raw results, explicitly discuss the unoptimized Foldkit row finishing last, or name the benchmark implementation's departures from the application idioms. Those three parts remain open."
 
 [issues.758]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "All eight named index.ts files retain implementations, totaling 7944 lines."
@@ -535,7 +553,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.808]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Partly resolved"
 finding = "Counter snippet exports Message union. Overlay still enables default slow instrumentation; bg-cream and missing personal-blog scaffold entry persist. Main reported warning behavior is unresolved."
@@ -551,7 +569,7 @@ publish_review_failures = 0
 draft_comment = "The [counter application snippet](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/website/src/snippet/counter.ts#L19) now exports its Message union, making the constructors available through that namespace. The reported overlay self-measurement remains: [`makeElement`](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/devtools/src/overlay.ts#L2915) disables DevTools and Model freezing but does not set `slow: false`. The [separate view snippet](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/website/src/snippet/counterView.ts#L41) also retains `bg-cream`, and `personal-blog` is absent from the [scaffolder's example values](https://github.com/foldkit/foldkit/blob/b702a5efbb74bebc056b798b414ddb923a82fbd5/packages/create-foldkit-app/src/examples.ts). The main slow-warning issue remains open."
 
 [issues.761]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Public Attribute representation exposes tagged variants; opacity implementation PR #1607 is open."
@@ -566,7 +584,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.754]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Fork README records upstream deltas but no sync procedure; no notification workflow or pristine snabbdom subtree."
@@ -581,7 +599,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.799]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "ClickedDemoIncrement handler changes shared generation without an isResetting guard."
@@ -596,7 +614,7 @@ publish_review_rounds = 0
 publish_review_failures = 0
 
 [issues.711]
-checked_at = "2026-10-26T08:10:01Z"
+checked_at = "2026-10-26T08:13:45Z"
 pinned_commit = "b702a5efbb74bebc056b798b414ddb923a82fbd5"
 class = "Open"
 finding = "Transition remains a plain readonly TypeScript shape with constructors and matchers, without a Schema constructor."
