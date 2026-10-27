@@ -1,6 +1,6 @@
 # Design: a Foldkit adapter for Domain
 
-Status: draft, reviewed by a two-member committee (2026-10-27), not published. Target: `alchemy-run/alchemy`, as a small design PR before any code. `packages/domain/docs/` exists only in draft #2583, so the maintainer may move this file.
+Status: proposal. No code yet. "PR sequence" lists the code PRs that would follow.
 
 ## The problem
 
@@ -23,7 +23,7 @@ The two halves meet only at the Api client, and each app writes the bridge by ha
 
 The guides also teach patterns that Foldkit's own conventions reject: `null` for absence instead of `Option`, `Succeeded` and `Failed` with no Command name, `GotBalance` for a Subscription fact (`Got*` is for child Submodel results), and `{ ...model }` instead of `modifyFields`.
 
-A throwaway proof of concept with real production aggregates (Foldkit canary of foldkit/foldkit#1655, Domain beta.84, `Domain.InMemory` in the browser, 51 tests) moved this glue into helpers: about 25 lines per command down to 1, and about 130 lines per live feed down to about 15.
+A proof of concept against production aggregates (Foldkit canary of foldkit/foldkit#1655, Domain beta.84, `Domain.InMemory` in the browser, 51 tests) cut each command's glue to one line and each live feed's to about 15 lines.
 
 ## What Domain already gives
 
@@ -36,7 +36,7 @@ All on `main` since 2026-10-27:
 | State with its cursor | `watch(key)` gives `Read.Snapshot<S>` = `{ state, cursor }` on every change | alchemy#2579 |
 | A log that resumes and marks the end of history | `events(key, { after? })` gives `View.Entry` (output event, `state` after it, `envelope`) and `Read.CaughtUp { cursor }` | alchemy#2579 |
 | State and cursor from one read | `snapshot(key, { atLeast? })` gives `Read.Snapshot<S>`; typed `ConsistencyTimeout` | alchemy#2567 |
-| Correlation on the wire | `Aggregate.Envelope` is a Schema with `commandId` and `correlationId`; every View output envelope carries the source `commandId` | alchemy#2565 |
+| Correlation on the wire | `Aggregate.Envelope` is a Schema with `commandId` and `correlationId`; a View output envelope carries the source `commandId` (see Open questions, 3) | alchemy#2565 |
 | The aggregate's rules on the client | `Aggregate.predict`, `View.evolve` | alchemy#2568 |
 
 The adapter in this design needs no new Domain primitive.
@@ -70,7 +70,7 @@ foldkit-plus Phase 6 plans its own Domain adapter for its Remote layer. That is 
 
 ## Foldkit versions
 
-The adapter targets Foldkit `main`, where `Command.define` takes `execute`. On the Blocks branch (`codex/layers-and-submodels`, foldkit/foldkit#1655), `Command.define` forbids `execute`, takes a `handler` Layer, and checks construction requirements (`packages/foldkit/src/command/index.ts` at `f3be22cfe`, lines 24 to 26 and 391 to 418). A declaration fixture is pinned to both SHAs. A handler-Layer variant follows once #1655 merges.
+The adapter targets Foldkit `main`, where `Command.define` takes `execute`. On the Blocks branch (`codex/layers-and-submodels`, foldkit/foldkit#1655), `Command.define` forbids `execute`, takes a `handler` Layer, and checks construction requirements (`packages/foldkit/src/command/index.ts` at `f3be22cfe`, lines 25 to 27 and 391 to 418). A declaration fixture is pinned to `f3be22cfe` on the Blocks branch and to a SHA on `main`. A handler-Layer variant follows once #1655 merges.
 
 ## The adapter
 
@@ -176,7 +176,7 @@ Each PR is under about 500 lines of source, with its own tests.
 
 - **The adapter in Foldkit.** Foldkit would depend on Domain, and every Domain client change would need a Foldkit release.
 - **The adapter in foldkit-plus.** It ties Domain users to a contract layer that does not exist yet.
-- **One PR with design, adapter, guides, and example.** The Domain maintainer reshaped each of the last six merged Domain PRs. One large PR multiplies that cost.
+- **One PR with design, adapter, guides, and example.** One large PR makes each requested change cost more.
 - **`View.evolve` over `events` entries.** A type mismatch: `evolve` takes source events, entries are output events with the state already applied.
 - **State from `events`.** Some state changes emit no event.
 - **A `Pending` that confirms when the count of entries with a `commandId` reaches the predicted count.** The two counts measure different things.
