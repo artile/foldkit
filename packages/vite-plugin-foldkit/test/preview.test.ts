@@ -28,6 +28,8 @@ const files = {
   'docs/getting-started/index.html': NESTED,
   'café guide/index.html': 'Unicode route',
   'release.v1/index.html': 'Dotted route',
+  'indexed/index': 'Extensionless index',
+  'indexed/index.html': 'HTML index',
   'flat.html': 'Flat document',
   'flat/index.html': 'Directory document',
   download: 'Exact file',
@@ -110,6 +112,7 @@ const startPreview = async (
     ...config,
     plugins: [...(config.plugins ?? plugins), observer],
     preview: {
+      ...config.preview,
       host: '127.0.0.1',
       port: 0,
       strictPort: true,
@@ -165,6 +168,27 @@ describe('prerendered preview directory indexes', () => {
           url: path.replace(/(\?|$)/, '/index.html$1'),
           originalUrl: path,
         }),
+      )
+    },
+  )
+
+  it.each(['/about', '^/about\\?source=probe$'])(
+    'preserves proxy requests matching %s',
+    async context => {
+      const { send } = await startPreview({
+        preview: {
+          proxy: {
+            [context]: {
+              bypass(request, response) {
+                response?.end(request.url)
+                return '/'
+              },
+            },
+          },
+        },
+      })
+      expect((await send('/about?source=probe')).body).toBe(
+        '/about?source=probe',
       )
     },
   )
@@ -236,6 +260,7 @@ describe('prerendered preview directory indexes', () => {
       '/': HOME,
       '/about/': ABOUT,
       '/about/index.html': ABOUT,
+      '/indexed': 'Extensionless index',
       '/flat': 'Flat document',
       '/download': 'Exact file',
       '/asset.js': files['asset.js'],

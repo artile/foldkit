@@ -54,6 +54,7 @@ const rewriteDirectoryIndex = (
     !isContained(root, file) ||
     file.endsWith('.html') ||
     statSync(file, { throwIfNoEntry: false })?.isFile() ||
+    statSync(resolve(file, 'index'), { throwIfNoEntry: false })?.isFile() ||
     existsSync(`${file}.html`)
   ) {
     return
@@ -75,7 +76,15 @@ export const installPrerenderPreview = (server: PreviewServer): void => {
   const root = resolve(server.config.root, client.build.outDir)
   server.middlewares.use((request, _response, next) => {
     try {
-      rewriteDirectoryIndex(request, root, server.config.base)
+      if (
+        !Object.keys(server.config.preview.proxy ?? {}).some(context =>
+          context.startsWith('^')
+            ? new RegExp(context).test(request.url ?? '')
+            : request.url?.startsWith(context),
+        )
+      ) {
+        rewriteDirectoryIndex(request, root, server.config.base)
+      }
     } catch {
       next()
       return
