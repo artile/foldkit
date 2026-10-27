@@ -5,6 +5,6 @@ description: Old name of the CAFE Maintainer friction miner cycle. Use when the 
 
 # maintainer-own-apps
 
-`maintainer-friction-miner` replaced this cycle. The macair T3 schedule still calls `$maintainer-own-apps`, so this skill stays as a redirect.
+`maintainer-friction-miner` replaced this cycle. The schedule in `cycles/own-apps.toml` calls `$maintainer-own-apps`, so this skill stays as a redirect.
 
-Read `/home/om/TAO/Tools/foldkit/.maintainer/skills/maintainer-friction-miner/SKILL.md` and run that skill now, with the same inputs, and follow it to its end, including "End of every run" in `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md`. Write the digest under `digests/friction-miner/`, not `digests/own-apps/`.
+Read `/Users/tao/Tools/foldkit/.maintainer/skills/maintainer-friction-miner/SKILL.md` and run that skill now, with the same inputs, and follow it to its end, including "End of every run" in `/Users/tao/Tools/foldkit/.maintainer/AGENTS.md`. Write the digest under `digests/friction-miner/`, not `digests/own-apps/`.

@@ -2,7 +2,9 @@
 name = "effect-orm"
 upstream = "MapleTechLabs/effect-orm"
 fork = "artile/effect-orm"
-path = "/home/om/TAO/Tools/effect-orm"
+push_remote = "origin"
+path = "/Users/tao/Tools/effect-orm"
+worktrees = "/Users/tao/Tools/effect-orm.wt"
 mode = "pr"
 merge_method = "merge"                # squash | merge | rebase; how upstream merges pull requests
 default_branch = "main"

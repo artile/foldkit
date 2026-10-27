@@ -1,8 +1,9 @@
 # Registry entry. Format: designs/cafe-maintainer.md, "Registry".
-# Issue-only: no fork, no pull requests.
+# Issue-only: no fork, no pull requests. Read-only study clone; `origin` and
+# `upstream` both point to MapleTechLabs/maple.
 name = "maple"
 upstream = "MapleTechLabs/maple"
-path = "/home/om/TAO/Tools/maple"
+path = "/Users/tao/Repos/maple"
 mode = "issue"
 default_branch = "main"
 # v* tags release the Maple app. The npm SDKs have their own @maple-dev/<name>@<version> tags.

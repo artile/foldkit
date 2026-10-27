@@ -1,6 +1,6 @@
 # Triage
 
-Run the three checks in order for each new signal. Stop at the first one that gives an outcome. Keep every command and its output under `/home/om/maintainer-runs/friction-miner-<UTC stamp>/<entry id>/`; the digest and the issue cite them.
+Run the three checks in order for each new signal. Stop at the first one that gives an outcome. Keep every command and its output under `/Users/tao/Tools/maintainer-runs/friction-miner-<UTC stamp>/<entry id>/`; the digest and the issue cite them.
 
 ## 1. Owner layer
 
@@ -27,7 +27,7 @@ An open issue or PR with the same root cause gives outcome `duplicate`. A merged
 
 ## 3. Reproduce on HEAD
 
-In the clone at the repo's `path`, run `git fetch upstream <default_branch>`. Add a detached worktree at `upstream/<default_branch>` under `/home/om/TAO/Tools/<name>-worktrees/friction-<topic>` (Foldkit: `foldkit-worktrees`). Run the reproduction against that build and against the app's installed version.
+In the clone at the repo's `path`, run `git fetch upstream <default_branch>`. Add a detached worktree at `upstream/<default_branch>` at `<worktree root>/cafe-friction-<topic>`, with the worktree root from "Clones and worktrees" in `AGENTS.md`. Run the reproduction against that build and against the app's installed version.
 
 | Installed version | HEAD | Outcome |
 |---|---|---|

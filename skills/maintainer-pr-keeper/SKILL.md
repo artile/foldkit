@@ -5,11 +5,11 @@ description: Daily CAFE Maintainer cycle that keeps Taras's open pull requests m
 
 # maintainer-pr-keeper
 
-Keep every open pull request by `artile` in a state its maintainers can merge. Read `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md` first.
+Keep every open pull request by `artile` in a state its maintainers can merge. Read `/Users/tao/Tools/foldkit/.maintainer/AGENTS.md` first.
 
 ## 1. Collect
 
-The repositories are the files in `/home/om/TAO/Tools/foldkit/.maintainer/repos/` with `mode = "maintain"` or `mode = "pr"`. For each one, read `upstream`, `fork`, `path`, and `default_branch`, then:
+The repositories are the files in `/Users/tao/Tools/foldkit/.maintainer/repos/` with `mode = "maintain"` or `mode = "pr"`. For each one, read `upstream`, `fork`, `push_remote`, `path`, `worktrees`, and `default_branch`, then:
 
 ```sh
 gh pr list -R <upstream> --author artile --state open --limit 100 \
@@ -36,8 +36,8 @@ Skip any pull request that a contribution under `.maintainer/contributions/` hol
 
 ### Rebase
 
-1. Remote: `artile` when `headRepositoryOwner` is `artile`. In `foldkit` only, `origin` when it is `tao-io`.
-2. A missing clone at the repository's `path` goes into the digest with "run `bin/setup-repos.sh`"; skip that repository for this run. Use the existing worktree for the branch (`git -C <path> worktree list`), or add one at `<worktree root>/<slug>` when a contribution owns the pull request, else at `<worktree root>/pr-<n>` (see "Clones and worktrees" in `AGENTS.md`) and set it up as "Workspace" in `skills/maintainer-contribution/SKILL.md` says. In it, `gh pr checkout <n> -R <upstream>`.
+1. Remote: the repository's `push_remote` when `headRepositoryOwner` is `artile`. With any other head owner, do not rebase; list it in the digest.
+2. A missing clone at the repository's `path` goes into the digest with "run `bin/setup-repos.sh`"; skip that repository for this run. Use the worktree recorded for the pull request: the owning contribution's recorded worktree, or `worktree` in its `state/pr-keeper.toml` entry (see "Clones and worktrees" in `AGENTS.md`). Without one, add `<worktree root>/cafe-<slug>` when a contribution owns the pull request, else `<worktree root>/cafe-pr-<n>` (see "Clones and worktrees" in `AGENTS.md`), record it, and set it up as "Workspace" in `skills/maintainer-contribution/SKILL.md` says. When `git -C <path> worktree list` shows `<headRefName>` checked out in any other worktree, Taras is working on it: skip the pull request and list it in the digest. In the worktree, `gh pr checkout <n> -R <upstream>`.
 3. `git fetch upstream <default_branch> && git fetch <remote> <headRefName>`. Note `<sha> = git rev-parse FETCH_HEAD`, then `git checkout -B <headRefName> FETCH_HEAD`. Run the commit-author check from the table on `upstream/<default_branch>..FETCH_HEAD`.
 4. `git rebase upstream/<default_branch>`. When a conflict needs a judgment call about behavior, run `git rebase --abort` and put it in the digest.
 5. Run the checks for the touched packages. For `foldkit`: `pnpm -F <package> typecheck`, `pnpm -F <package> test`, and `pnpm lint:ci`. For another repository: the typecheck, test, and lint commands its `rules` files name.
@@ -46,9 +46,9 @@ Skip any pull request that a contribution under `.maintainer/contributions/` hol
 
 ## 3. Clean up
 
-- Archive CAFE Maintainer threads in T3 that are settled and older than 24 hours, including their subagent threads (`t3_thread_list` for the T3 project of `/home/om/TAO/Tools/foldkit`, then `t3_thread_organize` with `archive`). Leave a thread that holds an open question or a pull request still in review.
-- Remove worktrees under each worktree root whose contribution is `analysis: concluded` or `<stage>: abandoned`, or whose pull request is merged, and whose branch has no unpushed commits. Take the contribution lock first and skip the worktree when you cannot; release it after `git worktree remove`.
-- Remove T3 run worktrees under `/home/om/.t3-service/worktrees/foldkit/` whose branch starts with `t3/` and whose thread in this project is settled or older than 24 hours, when they have no uncommitted changes and no unpushed commits. Leave the worktree of any thread that is still running, and any worktree of another project.
+- Archive CAFE Maintainer threads in T3 that are settled and older than 24 hours, including their subagent threads (`t3_thread_list` for the T3 project of `/Users/tao/Tools/foldkit`, then `t3_thread_organize` with `archive`). Leave a thread that holds an open question or a pull request still in review.
+- Remove the worktrees that a cycle recorded (in a contribution's `status.md` or in `state/pr-keeper.toml`) whose contribution is `analysis: concluded` or `<stage>: abandoned`, or whose pull request is merged, and whose branch has no unpushed commits. Leave every other worktree under the worktree roots: Taras made it. Take the contribution lock first and skip the worktree when you cannot; release it after `git worktree remove`.
+- Remove T3 run worktrees under `/Users/admin/.t3/worktrees/foldkit/` whose branch starts with `t3/`, whose thread is a CAFE Maintainer cycle thread, and whose thread is settled or older than 24 hours, when they have no uncommitted changes and no unpushed commits. Leave the worktree of any thread that is still running, of Taras's own threads, and of another project.
 - Remove contribution locks whose `owner` time is older than 3 hours. Never remove a lock directory that has no `owner` file yet.
 
 ## 4. Report

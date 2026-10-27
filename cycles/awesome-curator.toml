@@ -4,4 +4,4 @@ skill = "maintainer-awesome-curator"
 # radar issue changed, the queue has entries, or the monthly review is due.
 # The radar itself runs in foldhub/awesome-foldkit Actions, Mondays 06:41 UTC.
 trigger = "driver"
-prompt = "Run the $maintainer-awesome-curator skill for CAFE Maintainer. Read /home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md first."
+prompt = "Run the $maintainer-awesome-curator skill for CAFE Maintainer. Read /Users/tao/Tools/foldkit/.maintainer/AGENTS.md first."

@@ -1,4 +1,4 @@
 id = "release-radar"
 skill = "maintainer-release-radar"
 schedule = { type = "fixed_time", timeOfDay = "08:00" }
-prompt = "Run the $maintainer-release-radar skill for CAFE Maintainer. Read /home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md first."
+prompt = "Run the $maintainer-release-radar skill for CAFE Maintainer. Read /Users/tao/Tools/foldkit/.maintainer/AGENTS.md first."

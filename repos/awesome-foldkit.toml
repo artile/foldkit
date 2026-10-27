@@ -2,7 +2,7 @@
 # Taras owns this repository, so it has no fork. Only maintainer-awesome-curator writes here.
 name = "awesome-foldkit"
 upstream = "foldhub/awesome-foldkit"
-path = "/home/om/TAO/Tools/awesome-foldkit"
+path = "/Users/tao/Tools/awesome-foldkit"
 mode = "curate"
 default_branch = "main"
 packages = []

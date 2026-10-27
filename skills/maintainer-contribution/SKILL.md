@@ -9,7 +9,7 @@ Guiding a contribution to an open-source GitHub project end to end spans three s
 
 ## Autonomous mode
 
-When `/home/om/TAO/Tools/foldkit/.maintainer/state/autonomy.toml` has `mode = "autonomous"`, you act as the contributor's proxy. Wherever this skill or a stage waits for the contributor (a decision, an approval of exact text, permission to push, promotion), decide through the gates in "Autonomy" in `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md` instead, relay the result to the stage as the contributor's reply, and record it in `status.md` as "decided autonomously". Respect the daily limits, the weekly limits of the contribution's repository, and `paused`: before each upstream write, check its key per "Daily limits" and "Weekly limits per repo" in `AGENTS.md`. Where a stage or template says a permission prompt confirms a write, the gate result is the confirmation; unattended runs get no prompt.
+When `/Users/tao/Tools/foldkit/.maintainer/state/autonomy.toml` has `mode = "autonomous"`, you act as the contributor's proxy. Wherever this skill or a stage waits for the contributor (a decision, an approval of exact text, permission to push, promotion), decide through the gates in "Autonomy" in `/Users/tao/Tools/foldkit/.maintainer/AGENTS.md` instead, relay the result to the stage as the contributor's reply, and record it in `status.md` as "decided autonomously". Respect the daily limits, the weekly limits of the contribution's repository, and `paused`: before each upstream write, check its key per "Daily limits" and "Weekly limits per repo" in `AGENTS.md`. Where a stage or template says a permission prompt confirms a write, the gate result is the confirmation; unattended runs get no prompt.
 
 In autonomous mode also:
 
@@ -31,15 +31,15 @@ All three stages run as fresh subagents, each guided by its own file under `stag
 
 ## Workspace
 
-This copy runs from the CAFE Maintainer worktree `/home/om/TAO/Tools/foldkit/.maintainer`. Read its `AGENTS.md` first; it overrides this file where they differ.
+This copy runs from the CAFE Maintainer worktree `/Users/tao/Tools/foldkit/.maintainer`. Read its `AGENTS.md` first; it overrides this file where they differ.
 
-Each contribution targets one repository of the registry: the `Repository:` line in `status.md` names it, and a missing line means `foldkit`. Read `upstream`, `fork`, `path`, `default_branch`, and `rules` from `/home/om/TAO/Tools/foldkit/.maintainer/repos/<repo>.toml`. Only `maintain` and `pr` repositories take contributions. In this skill, its stages, and its references, `<owner>/<repo>` is `upstream`, `<default>` is `default_branch`, the fork is `fork`, and `origin` is the `artile` remote.
+Each contribution targets one repository of the registry: the `Repository:` line in `status.md` names it, and a missing line means `foldkit`. Read `upstream`, `fork`, `push_remote`, `path`, `worktrees`, `default_branch`, and `rules` from `/Users/tao/Tools/foldkit/.maintainer/repos/<repo>.toml`. Only `maintain` and `pr` repositories take contributions. In this skill, its stages, and its references, `<owner>/<repo>` is `upstream`, `<default>` is `default_branch`, the fork is `fork`, and `origin` and "the push remote" mean the remote named by `push_remote`.
 
-- In the clone at `path`, the `upstream` remote tracks `upstream` and the `artile` remote tracks `fork`, a personal-account fork, so maintainers can push to pull request branches.
-- A slug names each contribution. Its worktree is `<worktree root>/<slug>`, with the worktree root from "Clones and worktrees" in `AGENTS.md`. Its artifact directory is `/home/om/TAO/Tools/foldkit/.maintainer/contributions/<slug>/`, which is tracked on the `maintainer` branch.
-- After `git worktree add`, install dependencies and link the skills in the new worktree. For `foldkit`: `pnpm install && bash scripts/cloud-session-setup.sh && bash /home/om/TAO/Tools/foldkit/.maintainer/bin/link-skills.sh`. For another repository: the install command its `rules` files or `README.md` give, then the same `link-skills.sh`.
+- In the clone at `path`, the `upstream` remote tracks `upstream` and the `push_remote` remote tracks `fork`, a personal-account fork, so maintainers can push to pull request branches. Taras works in that clone by hand: per "Hard rules" in `AGENTS.md`, only fetch and add or remove worktrees there.
+- A slug names each contribution. Its worktree is the recorded worktree per "Clones and worktrees" in `AGENTS.md`; a new one goes to `<worktree root>/cafe-<slug>` and is recorded in a step. Its artifact directory is `/Users/tao/Tools/foldkit/.maintainer/contributions/<slug>/`, which is tracked on the `maintainer` branch.
+- After `git worktree add`, install dependencies and link the skills in the new worktree. For `foldkit`: `pnpm install && bash scripts/cloud-session-setup.sh && bash /Users/tao/Tools/foldkit/.maintainer/bin/link-skills.sh`. For another repository: the install command its `rules` files or `README.md` give, then the same `link-skills.sh`.
 
-On entry, confirm on GitHub that `fork` is a fork of `upstream` with Actions disabled. Before each stage starts, fetch both remotes; then reuse the worktree of the contribution as is if it already exists, or otherwise create one detached at `upstream/<default>`. If the clone or either remote is missing, or anything else fails, flag the problem for the contributor rather than work around it.
+On entry, confirm on GitHub that `fork` is a fork of `upstream` with Actions disabled. Before each stage starts, fetch both remotes; then reuse the recorded worktree of the contribution as is if it exists, or otherwise create one detached at `upstream/<default>`. When the contribution's branch exists only on the push remote, create it in that worktree from `<push remote>/<branch>`. When the branch is checked out in a worktree that is not the recorded one, Taras is working on it: skip the contribution and record it in the digest. If the clone or either remote is missing, or anything else fails, flag the problem for the contributor rather than work around it.
 
 ## Entry
 

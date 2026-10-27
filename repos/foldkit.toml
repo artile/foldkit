@@ -1,10 +1,11 @@
 # Registry entry. Format: designs/cafe-maintainer.md, "Registry".
 name = "foldkit"
 upstream = "foldkit/foldkit"
-# Legacy: remote `origin` is tao-io/foldkit. Use it only for pull requests
-# whose head is already there; open new ones from the fork. See AGENTS.md.
 fork = "artile/foldkit"
-path = "/home/om/TAO/Tools/foldkit"
+# Remotes `artile` and `origin` both point to the fork; cycles push through `artile`.
+push_remote = "artile"
+path = "/Users/tao/Tools/foldkit"
+worktrees = "/Users/tao/Tools/foldkit-worktrees"
 mode = "maintain"
 merge_method = "squash"                # squash | merge | rebase; how upstream merges pull requests
 default_branch = "main"

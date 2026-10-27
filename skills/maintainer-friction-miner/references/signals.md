@@ -1,6 +1,6 @@
 # Signals
 
-A signal is a line in a web app that shows the app works around a registry package. The registry packages are the union of `packages` in every `repos/*.toml`. Read each app at its committed `HEAD` with `git grep -n`, so build output and `node_modules` stay out. Run every command through `ssh macmax`.
+A signal is a line in a web app that shows the app works around a registry package. The registry packages are the union of `packages` in every `repos/*.toml`. Read each app at its committed `HEAD` with `git grep -n`, so build output and `node_modules` stay out. The apps are local, so run each command against the app path directly.
 
 | Kind | Find it | Counts when |
 |---|---|---|

@@ -29,7 +29,7 @@ Add this to each web app's `AGENTS.md` so agents there write entries:
 When a library (foldkit, effect, alchemy, effect-orm, maple) forces a workaround, a cast, or a copy of its code, append one `[[entry]]` table to `friction.toml` at the app root: `date` (UTC, YYYY-MM-DD), `package` (npm name), `what` (the observed behavior, naming the API), `where` (file:line of the workaround), `by = "agent"`, and optionally `expected` and `workaround`. Append only.
 ```
 
-The miner runs on macair and the apps on macmax, so the line carries the whole format instead of a path.
+Agents in the app do not read the Maintainer worktree, so the line carries the whole format instead of a path.
 
 ## How the miner uses an entry
 

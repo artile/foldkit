@@ -2,7 +2,9 @@
 name = "alchemy"
 upstream = "alchemy-run/alchemy"
 fork = "artile/alchemy"
-path = "/home/om/TAO/Tools/alchemy"
+push_remote = "origin"
+path = "/Users/tao/Tools/alchemy"
+worktrees = "/Users/tao/Tools/alchemy-wt"
 mode = "pr"
 merge_method = "squash"                # squash | merge | rebase; how upstream merges pull requests
 default_branch = "main"

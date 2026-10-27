@@ -1,4 +1,4 @@
-I request your permission to push `<branch>` to `artile` (`<fork>`).
+I request your permission to push `<branch>` to `<push remote>` (`<fork>`).
 
 Commits to push:
 

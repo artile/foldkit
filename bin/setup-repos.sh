@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Clone every registry repo (repos/*.toml) that is missing on this host, add its
-# remotes, and create its worktrees directory. Safe to run again: existing clones
-# keep their remotes and URLs; only missing remotes are added. Never pushes and
-# never creates forks.
-# Usage: setup-repos.sh [--dry-run] [repos dir]   (default: repos/ beside bin/)
+# missing remotes, and create its worktree root. Safe to run again: existing
+# clones keep their remotes and URLs. A remote is not added when another remote
+# of the clone already has the same URL. Never pushes and never creates forks.
+# Usage: bash setup-repos.sh [--dry-run] [repos dir]   (default: repos/ beside bin/)
 set -euo pipefail
 
 dry_run=0
@@ -27,16 +27,46 @@ github_url() {
   printf 'https://github.com/%s.git' "$1"
 }
 
+# Reduce a GitHub URL to "owner/name" in lower case, so that the https and ssh
+# forms, with or without ".git", compare equal.
+normalize_url() {
+  local url="$1"
+  url="${url%/}"
+  url="${url%.git}"
+  url="${url#git@github.com:}"
+  url="${url#ssh://git@github.com/}"
+  url="${url#https://github.com/}"
+  url="${url#http://github.com/}"
+  printf '%s' "$url" | tr '[:upper:]' '[:lower:]'
+}
+
+# Print the name of the first remote of $1 whose URL matches $2, if any.
+remote_with_url() {
+  local path="$1" wanted remote
+  wanted="$(normalize_url "$2")"
+  for remote in $(git -C "$path" remote); do
+    if [ "$(normalize_url "$(git -C "$path" remote get-url "$remote")")" = "$wanted" ]; then
+      printf '%s' "$remote"
+      return
+    fi
+  done
+}
+
 ensure_remote() {
-  local path="$1" remote="$2" repo="$3" current
+  local path="$1" remote="$2" repo="$3" current other
   if [ "$dry_run" = 1 ] && [ ! -d "$path" ]; then
     printf '+ git -C %s remote add %s %s\n' "$path" "$remote" "$(github_url "$repo")"
   elif current="$(git -C "$path" remote get-url "$remote" 2>/dev/null)"; then
-    if [ "$current" != "$(github_url "$repo")" ]; then
+    if [ "$(normalize_url "$current")" != "$(normalize_url "$repo")" ]; then
       echo "note: $path remote $remote is $current, expected $(github_url "$repo"); left as is"
     fi
   else
-    run git -C "$path" remote add "$remote" "$(github_url "$repo")"
+    other="$(remote_with_url "$path" "$repo")"
+    if [ -n "$other" ]; then
+      echo "note: $path has $repo as remote $other; remote $remote not added"
+    else
+      run git -C "$path" remote add "$remote" "$(github_url "$repo")"
+    fi
   fi
 }
 
@@ -58,22 +88,23 @@ if [ "${#files[@]}" = 0 ]; then
   exit 1
 fi
 
-# One line per file: name, upstream, fork, path, clone, mode, split by the unit
-# separator (a tab would merge an empty field with its neighbor).
+# One line per file, fields split by the unit separator (a tab would merge an
+# empty field with its neighbor).
 python3 -I -c '
 import sys, tomllib
+keys = ("name", "upstream", "fork", "path", "clone", "mode", "push_remote", "worktrees")
 for file in sys.argv[1:]:
     with open(file, "rb") as handle:
         repo = tomllib.load(handle)
-    fields = [repo.get(key, "") for key in ("name", "upstream", "fork", "path", "clone", "mode")]
+    fields = [repo.get(key, "") for key in keys]
     if not (fields[0] and fields[1] and fields[3]):
         sys.exit(f"{file}: name, upstream, and path are required")
     print("\x1f".join(fields))
 ' "${files[@]}" |
-while IFS=$'\x1f' read -r name upstream fork path clone mode; do
+while IFS=$'\x1f' read -r name upstream fork path clone mode push_remote worktrees; do
   echo "== $name ($upstream)"
 
-  # A curate repo belongs to Taras: its remote is origin and it has no worktrees.
+  # A curate repo belongs to Taras: its source remote is origin.
   upstream_remote=upstream
   if [ "$mode" = curate ]; then
     upstream_remote=origin
@@ -105,12 +136,14 @@ while IFS=$'\x1f' read -r name upstream fork path clone mode; do
     ensure_remote "$path" "$upstream_remote" "$upstream"
   fi
   if [ -n "$fork" ]; then
-    ensure_remote "$path" "${fork%%/*}" "$fork"
+    ensure_remote "$path" "${push_remote:-${fork%%/*}}" "$fork"
     check_fork "$fork" "$upstream"
   fi
 
-  worktrees="$(dirname "$path")/$name-worktrees"
-  if [ "$mode" != curate ] && [ ! -d "$worktrees" ]; then
-    run mkdir -p "$worktrees"
+  worktree_root="${worktrees:-$(dirname "$path")/$name-worktrees}"
+  if [ -d "$worktree_root" ]; then
+    echo "exists: $worktree_root"
+  else
+    run mkdir -p "$worktree_root"
   fi
 done

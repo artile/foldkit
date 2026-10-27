@@ -15,7 +15,7 @@ Foldkit Maintainer becomes CAFE Maintainer. It keeps everything it does for Fold
 | effect | `Effect-TS/effect` | none | `issue` | Stream B: issues only |
 | maple | `MapleTechLabs/maple` | none | `issue` | Stream B: issues only |
 
-Kept as is, to avoid breaking the live T3 schedules on macair: the branch name `maintainer`, the mount path `.maintainer/`, and the skill ids `maintainer-*`. Only the project name and prose change. Moving to a repository of its own is a later step.
+Kept as is, so the T3 schedules and skill links need no change: the branch name `maintainer`, the mount path `.maintainer/`, and the skill ids `maintainer-*`. Only the project name and prose change. Moving to a repository of its own is a later step.
 
 ## Three streams
 
@@ -31,7 +31,9 @@ One file per repo: `repos/<name>.toml`.
 name = "effect-orm"
 upstream = "MapleTechLabs/effect-orm"
 fork = "artile/effect-orm"        # omit for issue-only repos
-path = "/home/om/TAO/Tools/effect-orm"
+push_remote = "origin"             # remote that tracks fork; default: the fork owner
+path = "/Users/tao/Tools/effect-orm"   # main checkout; Taras works here too
+worktrees = "/Users/tao/Tools/effect-orm.wt"   # worktree root; default: <parent of path>/<name>-worktrees
 mode = "pr"                        # maintain | curate | pr | issue
 merge_method = "merge"             # squash | merge | rebase; pr and maintain repos only
 default_branch = "main"
@@ -47,7 +49,7 @@ pull_requests_opened = 2
 
 Effect and maple: `clone = "blobless"` (`git clone --filter=blob:none`), `issues_opened = 1` per week, no fork.
 
-Every clone: `main` (the default branch) mirrors `upstream`; never commit on it. Each contribution gets a worktree at `/home/om/TAO/Tools/<name>-worktrees/<slug>` (foldkit keeps `foldkit-worktrees`). Stream B reproduces on `upstream/<default_branch>` HEAD; stream C reads release tags.
+Every clone at `path` is a main checkout that Taras also uses by hand. A cycle only fetches there, adds and removes its own worktrees, and reads. Each contribution gets a worktree at `<worktree root>/cafe-<slug>`; the `cafe-` prefix keeps it apart from Taras's worktrees in the same root. Stream B reproduces on `upstream/<default_branch>` HEAD; stream C reads release tags.
 
 ## Apps
 
@@ -68,7 +70,7 @@ Per signal: triage the layer (the repro must use only that library; if it reprod
 
 ## Stream C details
 
-Daily. For each registry repo with `packages`: list release tags newer than `state/releases.toml`. For each web app that depends on one of the packages, find the installed version (lockfile, via `ssh macmax`), read the changelog and diff between the installed version and the release, and classify:
+Daily. For each registry repo with `packages`: list release tags newer than `state/releases.toml`. For each web app that depends on one of the packages, find the installed version (from the app's lockfile), read the changelog and diff between the installed version and the release, and classify:
 
 | Class | Meaning | Output |
 | --- | --- | --- |
@@ -84,4 +86,4 @@ Stream C also watches bridges: alchemy#2700 depends on `foldkit`. A new `foldkit
 
 ## Effect source in Codex runs
 
-The `effect-ts` skill asks for `.vendor/effect`. In upstream checkouts, never create it. Use `node_modules/effect`; for full source, `/home/om/TAO/Tools/foldkit/repos/effect` is a read-only copy pinned to an Effect tag. Every task brief to a Codex child says so in its first line.
+The `effect-ts` skill asks for `.vendor/effect`. In upstream checkouts, never create it. Use `node_modules/effect`; for full source, `/Users/tao/Tools/foldkit/repos/effect` is a read-only copy pinned to an Effect tag. Every task brief to a Codex child says so in its first line.

@@ -1,4 +1,4 @@
-Effect source: use `node_modules/effect`, or for full source the read-only copy at `/home/om/TAO/Tools/foldkit/repos/effect`; never create `.vendor/effect` in an upstream checkout.
+Effect source: use `node_modules/effect`, or for full source the read-only copy at `/Users/tao/Tools/foldkit/repos/effect`; never create `.vendor/effect` in an upstream checkout.
 
 I am your orchestrator. You run the <analysis, implementation, or evaluation, for the stage to start> stage; follow your stage file, `stages/<that stage>.md`, for this contribution:
 

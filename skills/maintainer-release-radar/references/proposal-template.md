@@ -26,11 +26,11 @@ The `summary` is one or two sentences: what the release changed, and what to do 
 
 Only for an app with `allow_pr = true`, and only for `open` proposals.
 
-1. The apps live on macmax; branch from a clone on macair. Read the remote with `ssh macmax git -C <app path> remote get-url origin`. Clone it to `/home/om/TAO/Tools/apps/<app>` when missing, else `git fetch origin`.
-2. Branch `radar/<topic>` from `origin/<default branch>`. Make the change the proposal names, nothing more. Update the dependency to the release when the change needs it.
+1. The app's own git repository is the clone: the apps are local, so there is no separate clone directory. Taras works in it by hand, so per "Hard rules" in `AGENTS.md`, only fetch and add or remove worktrees there. Run `git -C <app path> fetch origin`.
+2. Add a worktree for the branch: `git -C <app path> worktree add -b radar/<topic> /Users/tao/Tools/maintainer-runs/radar/<app>/<topic> origin/<default branch>`. Work only in it. Make the change the proposal names, nothing more. Update the dependency to the release when the change needs it.
 3. Run the app's typecheck and tests. Commit with `--author="Taras Kornichuk <dread9ko@gmail.com>"`, no co-author trailer.
 4. Push gate from "Autonomy" in `AGENTS.md`: one fresh-context subagent on the run's own model reviews `git diff origin/<default branch>...HEAD` against the app's `AGENTS.md`, when it has one. Push only after a clean review; at most 3 rounds, per "Reviews".
-5. Check `paused`, `pushes`, and `pull_requests_opened`. Push to `origin`, then `gh pr create --draft` with the body below. Never merge it.
+5. Check `paused`, `pushes`, and `pull_requests_opened`. Push to `origin`, then `gh pr create --draft` with the body below. Never merge it. Then remove the worktree with `git -C <app path> worktree remove <worktree>`.
 6. Set `state = "pr-opened"` and `pull_request_url`.
 
 Pull request body:

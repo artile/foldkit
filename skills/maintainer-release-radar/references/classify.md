@@ -2,7 +2,7 @@
 
 ## Installed version
 
-The app's lockfile is at the root of its git repository: `ssh macmax git -C <app path> rev-parse --show-toplevel`. Read the version for the app's own importer, not the first match.
+The app's lockfile is at the root of its git repository: `git -C <app path> rev-parse --show-toplevel`. Read the version for the app's own importer, not the first match.
 
 | Lockfile | Where the version is |
 |---|---|
@@ -24,7 +24,7 @@ In the clone, between the installed tag and the new tag:
 ## App usage
 
 ```sh
-ssh macmax git -C <app path> grep -n -E "from ['\"]<package>(/[^'\"]*)?['\"]"
+git -C <app path> grep -n -E "from ['\"]<package>(/[^'\"]*)?['\"]"
 ```
 
 List the imported names per file, then grep the call sites of each name. A change that touches no imported name is `other`.

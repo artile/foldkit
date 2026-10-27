@@ -1,8 +1,9 @@
 # Registry entry. Format: designs/cafe-maintainer.md, "Registry".
-# Issue-only: no fork, no pull requests.
+# Issue-only: no fork, no pull requests. Read-only study clone; `origin` and
+# `upstream` both point to Effect-TS/effect.
 name = "effect"
 upstream = "Effect-TS/effect"
-path = "/home/om/TAO/Tools/effect"
+path = "/Users/tao/Repos/effect"
 mode = "issue"
 default_branch = "main"
 # Each package has its own <name>@<version> tag; this glob matches the core package.

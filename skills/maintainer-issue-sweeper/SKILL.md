@@ -5,11 +5,11 @@ description: Weekly CAFE Maintainer cycle that checks open foldkit/foldkit issue
 
 # maintainer-issue-sweeper
 
-Find open issues on `foldkit/foldkit` that `main` already resolves, fully or in part, and draft a short comment for each one. Read `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md` first. This cycle includes issues opened by `devinjameson`: telling the maintainer that their issue is done saves them time.
+Find open issues on `foldkit/foldkit` that `main` already resolves, fully or in part, and draft a short comment for each one. Read `/Users/tao/Tools/foldkit/.maintainer/AGENTS.md` first. This cycle includes issues opened by `devinjameson`: telling the maintainer that their issue is done saves them time.
 
 ## 1. Pick the batch
 
-- `git -C /home/om/TAO/Tools/foldkit fetch upstream main`. Pin the run to that commit.
+- `git -C /Users/tao/Tools/foldkit fetch upstream main`. Pin the run to that commit.
 - `gh issue list -R foldkit/foldkit --state open --limit 300 --json number,title,author,createdAt,updatedAt,labels,comments`.
 - Skip issues listed in `state/sweeper.toml` with a `checked_at` newer than their `updatedAt`.
 - Check at most 40 issues per run, oldest `updatedAt` first.
@@ -20,7 +20,7 @@ Read the issue and its comments. Then look for the fix:
 
 - `git log upstream/main --since=<issue createdAt> --oneline -i --grep=<key terms>`.
 - `gh pr list -R foldkit/foldkit --state merged --search "<key terms>"`, and pull requests that link the issue.
-- Read the current code the issue names. Where a behavior claim can be tested quickly, run the smallest test or script that shows it, in a scratch worktree from `upstream/main`.
+- Read the current code the issue names. Where a behavior claim can be tested quickly, run the smallest test or script that shows it, in a scratch worktree from `upstream/main` under the Foldkit worktree root, named with the `cafe-` prefix per "Clones and worktrees" in `AGENTS.md`. Remove it before the run ends.
 
 Classify:
 

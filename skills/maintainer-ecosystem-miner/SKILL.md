@@ -5,11 +5,11 @@ description: Weekly CAFE Maintainer cycle that reads public projects built with 
 
 # maintainer-ecosystem-miner
 
-Learn from code other people write with Foldkit. A workaround in someone's app is often a Foldkit bug or a missing API. Read `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md` first.
+Learn from code other people write with Foldkit. A workaround in someone's app is often a Foldkit bug or a missing API. Read `/Users/tao/Tools/foldkit/.maintainer/AGENTS.md` first.
 
 ## 1. Find projects
 
-- The list in `foldhub/awesome-foldkit`: `/home/om/TAO/Tools/awesome-foldkit/data/projects.toml` after `git -C /home/om/TAO/Tools/awesome-foldkit pull --ff-only`.
+- The list in `foldhub/awesome-foldkit`: `git -C /Users/tao/Tools/awesome-foldkit fetch origin main`, then `git -C /Users/tao/Tools/awesome-foldkit show origin/main:data/projects.toml`.
 - GitHub code search: `gh search code "from 'foldkit'" --language TypeScript --limit 100 --json repository,path` and `gh search code "\"foldkit\":" --filename package.json --limit 100 --json repository`.
 - Drop forks of `foldkit/foldkit`, the repositories in `state/apps.toml` (Taras's own apps), and archived repositories.
 - Merge with `state/ecosystem.toml`. Each repository has `last_commit_seen`. Read only repositories with new commits since then. At most 15 per run, most recently pushed first.
