@@ -172,26 +172,26 @@ describe('prerendered preview directory indexes', () => {
     },
   )
 
-  it.each(['/about', '^/about\\?source=probe$'])(
-    'preserves proxy requests matching %s',
-    async context => {
-      const { send } = await startPreview({
-        preview: {
-          proxy: {
-            [context]: {
-              bypass(request, response) {
-                response?.end(request.url)
-                return '/'
-              },
+  it.each([
+    ['/about', '/about?source=probe'],
+    ['^/about\\?source=probe$', '/about?source=probe'],
+    ['/about/index', HOME],
+    ['^/about/index\\.html\\?source=probe$', HOME],
+  ])('preserves proxy matching for %s', async (context, expected) => {
+    const { send } = await startPreview({
+      preview: {
+        proxy: {
+          [context]: {
+            bypass(request, response) {
+              response?.end(request.url)
+              return '/'
             },
           },
         },
-      })
-      expect((await send('/about?source=probe')).body).toBe(
-        '/about?source=probe',
-      )
-    },
-  )
+      },
+    })
+    expect((await send('/about?source=probe')).body).toBe(expected)
+  })
 
   it('selects the same document for HEAD and GET', async () => {
     const { send } = await startPreview()

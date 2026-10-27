@@ -9,11 +9,14 @@ const rewriteDirectoryIndex = (
   request: Connect.IncomingMessage,
   root: string,
   base: string,
+  isProxied: (url: string) => boolean,
 ): void => {
   const { method, headers, url } = request
   if (
     (method !== 'GET' && method !== 'HEAD') ||
     url === undefined ||
+    isProxied(url) ||
+    isProxied(url.replace(/(\?|$)/, '/index.html$1')) ||
     !(
       headers.accept === undefined ||
       headers.accept === '' ||
@@ -74,20 +77,18 @@ export const installPrerenderPreview = (server: PreviewServer): void => {
   }
 
   const root = resolve(server.config.root, client.build.outDir)
+  const isProxied = (url: string): boolean =>
+    Object.keys(server.config.preview.proxy ?? {}).some(context =>
+      context.startsWith('^')
+        ? new RegExp(context).test(url)
+        : url.startsWith(context),
+    )
+
   server.middlewares.use((request, _response, next) => {
     try {
-      if (
-        !Object.keys(server.config.preview.proxy ?? {}).some(context =>
-          context.startsWith('^')
-            ? new RegExp(context).test(request.url ?? '')
-            : request.url?.startsWith(context),
-        )
-      ) {
-        rewriteDirectoryIndex(request, root, server.config.base)
-      }
+      rewriteDirectoryIndex(request, root, server.config.base, isProxied)
     } catch {
-      next()
-      return
+      return next()
     }
 
     next()
