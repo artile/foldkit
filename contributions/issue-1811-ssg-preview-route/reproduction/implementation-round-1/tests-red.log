@@ -1,0 +1,200 @@
+
+ RUN  v4.1.11 /home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit
+
+ ❯ test/preview.test.ts (22 tests | 17 failed) 472ms
+     × serves the initial document at /about without a redirect 72ms
+     × serves the initial document at /about?source=probe without a redirect 16ms
+     × serves the initial document at /docs/getting-started without a redirect 15ms
+     × serves the initial document at /docs/getting-started?source=probe without a redirect 14ms
+     × serves the initial document at /caf%C3%A9%20guide without a redirect 16ms
+     × serves the initial document at /release.v1 without a redirect 12ms
+     × selects the same document for HEAD and GET 15ms
+     × accepts HTML navigation with Accept undefined 17ms
+     × accepts HTML navigation with Accept  39ms
+     × accepts HTML navigation with Accept */* 10ms
+     × respects base /app/ and its mount boundary 10ms
+     × respects base https://example.test/app/ and its mount boundary 11ms
+     × uses the resolved relative output instead of the default 14ms
+     × uses the resolved absolute output instead of the default 13ms
+     × uses the resolved client environment output instead of the default 11ms
+     × resolves routes through the composed plugin without server output 14ms
+     × passes malformed and escaping targets unchanged and handles a later valid request 24ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 17 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > serves the initial document at /about without a redirect
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > serves the initial document at /about?source=probe without a redirect
+AssertionError: expected '<title>Home</title><h1>Home</h1>' to be '<title>About</title><h1>Generated Abo…' // Object.is equality
+
+Expected: "<title>About</title><h1>Generated About page</h1>"
+Received: "<title>Home</title><h1>Home</h1>"
+
+ ❯ test/preview.test.ts:88:27
+     86|     const response = await send(path)
+     87|     expect(response.status).toBe(200)
+     88|     expect(response.body).toBe(expected)
+       |                           ^
+     89|     expect(response.headers.location).toBeUndefined()
+     90|     expect(Array.last(observed)).toEqual(Option.some({ url: path.repla…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/17]⎯
+
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > serves the initial document at /docs/getting-started without a redirect
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > serves the initial document at /docs/getting-started?source=probe without a redirect
+AssertionError: expected '<title>Home</title><h1>Home</h1>' to be '<title>Getting started</title>' // Object.is equality
+
+Expected: "<title>Getting started</title>"
+Received: "<title>Home</title><h1>Home</h1>"
+
+ ❯ test/preview.test.ts:88:27
+     86|     const response = await send(path)
+     87|     expect(response.status).toBe(200)
+     88|     expect(response.body).toBe(expected)
+       |                           ^
+     89|     expect(response.headers.location).toBeUndefined()
+     90|     expect(Array.last(observed)).toEqual(Option.some({ url: path.repla…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/17]⎯
+
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > serves the initial document at /caf%C3%A9%20guide without a redirect
+AssertionError: expected '<title>Home</title><h1>Home</h1>' to be 'Unicode route' // Object.is equality
+
+Expected: "Unicode route"
+Received: "<title>Home</title><h1>Home</h1>"
+
+ ❯ test/preview.test.ts:88:27
+     86|     const response = await send(path)
+     87|     expect(response.status).toBe(200)
+     88|     expect(response.body).toBe(expected)
+       |                           ^
+     89|     expect(response.headers.location).toBeUndefined()
+     90|     expect(Array.last(observed)).toEqual(Option.some({ url: path.repla…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/17]⎯
+
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > serves the initial document at /release.v1 without a redirect
+AssertionError: expected '<title>Home</title><h1>Home</h1>' to be 'Dotted route' // Object.is equality
+
+Expected: "Dotted route"
+Received: "<title>Home</title><h1>Home</h1>"
+
+ ❯ test/preview.test.ts:88:27
+     86|     const response = await send(path)
+     87|     expect(response.status).toBe(200)
+     88|     expect(response.body).toBe(expected)
+       |                           ^
+     89|     expect(response.headers.location).toBeUndefined()
+     90|     expect(Array.last(observed)).toEqual(Option.some({ url: path.repla…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/17]⎯
+
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > selects the same document for HEAD and GET
+AssertionError: expected '<title>Home</title><h1>Home</h1>' to be '<title>About</title><h1>Generated Abo…' // Object.is equality
+
+Expected: "<title>About</title><h1>Generated About page</h1>"
+Received: "<title>Home</title><h1>Home</h1>"
+
+ ❯ test/preview.test.ts:98:22
+     96|     const get = await send('/about')
+     97|     expect(head.status).toBe(200)
+     98|     expect(get.body).toBe(ABOUT)
+       |                      ^
+     99|     expect(head.body).toBe('')
+    100|     expect(head.headers['content-type']).toContain('text/html')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/17]⎯
+
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > accepts HTML navigation with Accept undefined
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > accepts HTML navigation with Accept 
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > accepts HTML navigation with Accept */*
+AssertionError: expected '<title>Home</title><h1>Home</h1>' to be '<title>Getting started</title>' // Object.is equality
+
+Expected: "<title>Getting started</title>"
+Received: "<title>Home</title><h1>Home</h1>"
+
+ ❯ test/preview.test.ts:107:103
+    105|   it.each([undefined, '', '*/*'])('accepts HTML navigation with Accept…
+    106|     const { send } = await startPreview()
+    107|     expect((await send('/docs/getting-started', 'GET', accept === unde…
+       |                                                                                                       ^
+    108|   })
+    109|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/17]⎯
+
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > respects base /app/ and its mount boundary
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > respects base https://example.test/app/ and its mount boundary
+AssertionError: expected '<title>Home</title><h1>Home</h1>' to be '<title>About</title><h1>Generated Abo…' // Object.is equality
+
+Expected: "<title>About</title><h1>Generated About page</h1>"
+Received: "<title>Home</title><h1>Home</h1>"
+
+ ❯ test/preview.test.ts:113:37
+    111|     const { send, observed } = await startPreview({ base })
+    112|     const path = '/app/about?source=probe'
+    113|     expect((await send(path)).body).toBe(ABOUT)
+       |                                     ^
+    114|     expect(Array.last(observed)).toEqual(Option.some({ url: '/app/abou…
+    115|     for (const outside of ['/application/about', '/about', '/app']) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/17]⎯
+
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > uses the resolved relative output instead of the default
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > uses the resolved absolute output instead of the default
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > uses the resolved client environment output instead of the default
+AssertionError: expected '<title>Home</title><h1>Home</h1>' to be '<title>About</title><h1>Generated Abo…' // Object.is equality
+
+Expected: "<title>About</title><h1>Generated About page</h1>"
+Received: "<title>Home</title><h1>Home</h1>"
+
+ ❯ test/preview.test.ts:128:41
+    126|     const { send, server } = await startPreview(config)
+    127|     expect(server.config.environments.client.build.outDir).toBe(outDir)
+    128|     expect((await send('/about')).body).toBe(ABOUT)
+       |                                         ^
+    129|   })
+    130|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/17]⎯
+
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > resolves routes through the composed plugin without server output
+AssertionError: expected '<title>Home</title><h1>Home</h1>' to be '<title>About</title><h1>Generated Abo…' // Object.is equality
+
+Expected: "<title>About</title><h1>Generated About page</h1>"
+Received: "<title>Home</title><h1>Home</h1>"
+
+ ❯ test/preview.test.ts:169:41
+    167|   it('resolves routes through the composed plugin without server outpu…
+    168|     const { send, root } = await startPreview({}, true)
+    169|     expect((await send('/about')).body).toBe(ABOUT)
+       |                                         ^
+    170|     await expect(readFile(resolve(root, 'dist/server/fetch.js'))).reje…
+    171|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/17]⎯
+
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > passes malformed and escaping targets unchanged and handles a later valid request
+AssertionError: expected '<title>Home</title><h1>Home</h1>' to be '<title>About</title><h1>Generated Abo…' // Object.is equality
+
+Expected: "<title>About</title><h1>Generated About page</h1>"
+Received: "<title>Home</title><h1>Home</h1>"
+
+ ❯ test/preview.test.ts:184:41
+    182|       expect(Option.getOrThrow(Array.last(observed)).url).toBe(path)
+    183|     }
+    184|     expect((await send('/about')).body).toBe(ABOUT)
+       |                                         ^
+    185|   })
+    186| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/17]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  17 failed | 5 passed (22)
+   Start at  20:21:18
+   Duration  1.61s (transform 581ms, setup 0ms, import 1.02s, tests 472ms, environment 0ms)
+
+undefined
+/home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit:
+[ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL] Command failed with exit code 1: vitest run test/preview.test.ts

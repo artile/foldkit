@@ -1,0 +1,4 @@
+Command: ['pnpm', 'exec', 'oxlint', '--disable-nested-config', 'packages/vite-plugin-foldkit/src/build.ts', 'packages/vite-plugin-foldkit/src/preview.ts', 'packages/vite-plugin-foldkit/test/preview.test.ts', 'packages/vite-plugin-foldkit/test/fixtures/preview/entry.server.ts']
+UTC: 2026-10-27T18:44:13.721481+00:00
+
+Exit code: 0

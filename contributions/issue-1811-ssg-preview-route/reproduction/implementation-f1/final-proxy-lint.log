@@ -1,0 +1,5 @@
+Command: ['pnpm', 'exec', 'oxlint', '--disable-nested-config', 'packages/vite-plugin-foldkit/src/preview.ts', 'packages/vite-plugin-foldkit/test/preview.test.ts']
+UTC: 2026-10-27T18:59:20.551981+00:00
+No files found to lint. Please check your paths and ignore patterns.
+
+Exit code: 1

@@ -1,0 +1,39 @@
+Command: ['pnpm', '--filter', '@foldkit/vite-plugin', 'exec', 'vitest', 'run', 'test/preview.test.ts', '-t', 'proxy matching']
+UTC: 2026-10-27T18:58:49.844761+00:00
+
+ RUN  v4.1.11 /home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit
+
+ ❯ test/preview.test.ts (26 tests | 2 failed | 22 skipped) 108ms
+     × preserves proxy matching for /about/index 16ms
+     × preserves proxy matching for ^/about/index\.html\?source=probe$ 11ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > preserves proxy matching for /about/index
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > preserves proxy matching for ^/about/index\.html\?source=probe$
+AssertionError: expected '/about/index.html?source=probe' to be '<title>Home</title><h1>Home</h1>' // Object.is equality
+
+Expected: "<title>Home</title><h1>Home</h1>"
+Received: "/about/index.html?source=probe"
+
+ ❯ test/preview.test.ts:193:54
+    191|       },
+    192|     })
+    193|     expect((await send('/about?source=probe')).body).toBe(expected)
+       |                                                      ^
+    194|   })
+    195|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 2 passed | 22 skipped (26)
+   Start at  20:58:50
+   Duration  1.38s (transform 655ms, setup 0ms, import 1.12s, tests 108ms, environment 0ms)
+
+undefined
+/home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit:
+[ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL] Command failed with exit code 1: vitest run test/preview.test.ts -t 'proxy matching'
+
+Exit code: 1

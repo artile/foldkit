@@ -1,0 +1,5 @@
+Command: ['pnpm', 'exec', 'oxfmt', 'packages/vite-plugin-foldkit/src/preview.ts', 'packages/vite-plugin-foldkit/test/preview.test.ts']
+UTC: 2026-10-27T18:59:08.394536+00:00
+Finished in 2ms on 2 files using 8 threads.
+
+Exit code: 0

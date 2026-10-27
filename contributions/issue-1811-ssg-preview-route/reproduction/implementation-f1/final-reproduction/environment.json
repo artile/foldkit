@@ -1,0 +1,25 @@
+{
+  "commit": "8b9c9fe00b754ea0a4e0745af91da5bddbe7bb9d",
+  "node": "v22.22.3",
+  "platform": "linux",
+  "architecture": "arm64",
+  "worktree": "/home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route",
+  "dependencies": {
+    "vite": {
+      "version": "8.3.1",
+      "manifest": "/home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/package.json"
+    },
+    "effect": {
+      "version": "4.0.0",
+      "manifest": "/home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/effect@4.0.0/node_modules/effect/package.json"
+    },
+    "foldkit": {
+      "version": "0.169.0",
+      "manifest": "/home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/foldkit/package.json"
+    },
+    "@foldkit/vite-plugin": {
+      "version": "0.28.0",
+      "manifest": "/home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit/package.json"
+    }
+  }
+}

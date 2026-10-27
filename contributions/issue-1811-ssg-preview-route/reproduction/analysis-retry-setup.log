@@ -1,0 +1,33 @@
+[setup] reconciling node_modules with pnpm-lock.yaml
+Scope: all 53 workspace projects
+Already up to date
+Done in 61ms using pnpm v11.8.0
+[setup] building prerequisite packages (missing or stale dist/): -F foldkit -F @foldkit/node -F @foldkit/markdown -F @foldkit/ui -F @foldkit/devtools -F @foldkit/vite-plugin -F @foldkit/oxlint-plugin -F @typing-game/shared
+Scope: 8 of 53 workspace projects
+packages/foldkit build$ pnpm run clean && tsc -b tsconfig.build.json
+packages/oxlint-plugin-foldkit build$ pnpm run clean && rolldown -c rolldown.config.ts && tsc -b tsconfig.build.json && node scripts/generate-presets.mjs
+packages/typing-game/shared build$ tsc
+packages/typing-game/shared build: Done
+packages/foldkit build: $ rimraf dist *.tsbuildinfo
+packages/oxlint-plugin-foldkit build: $ rimraf dist recommended.json all.json *.tsbuildinfo
+packages/oxlint-plugin-foldkit build: <DIR>/index.js  chunk │ size: 561.31 kB
+packages/oxlint-plugin-foldkit build: ✔ rolldown v1.2.11 Finished in 118.43 ms
+packages/oxlint-plugin-foldkit build: Done
+packages/foldkit build: Done
+packages/node build$ pnpm run clean && tsc -b tsconfig.build.json
+packages/markdown build$ pnpm run clean && tsc -b tsconfig.build.json
+packages/vite-plugin-foldkit build$ pnpm run clean && tsc -b
+packages/markdown build: $ rimraf dist *.tsbuildinfo
+packages/vite-plugin-foldkit build: $ rimraf dist *.tsbuildinfo
+packages/node build: $ rimraf dist *.tsbuildinfo
+packages/vite-plugin-foldkit build: Done
+packages/markdown build: Done
+packages/node build: Done
+packages/ui build$ pnpm run clean && tsc -b tsconfig.build.json && node scripts/brand-dist.mjs
+packages/ui build: $ rimraf dist *.tsbuildinfo
+packages/ui build: brand-dist(@foldkit/ui): branded 49 files, skipped 38
+packages/ui build: Done
+packages/devtools build$ pnpm run clean && tsc -b tsconfig.build.json && node scripts/brand-dist.mjs
+packages/devtools build: $ rimraf dist *.tsbuildinfo
+packages/devtools build: brand-dist(@foldkit/devtools): branded 2 files, skipped 2
+packages/devtools build: Done

@@ -1,0 +1,9 @@
+
+ RUN  v4.1.11 /home/om/TAO/Tools/foldkit-worktrees/analysis-issue-1811-retry/packages/vite-plugin-foldkit
+
+
+ Test Files  1 passed (1)
+      Tests  22 passed (22)
+   Start at  20:35:26
+   Duration  1.89s (transform 736ms, setup 0ms, import 1.04s, tests 745ms, environment 0ms)
+

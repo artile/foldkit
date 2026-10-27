@@ -1,0 +1,14 @@
+Command: ['pnpm', '--filter', '@foldkit/vite-plugin', 'test']
+UTC: 2026-10-27T18:42:24.995643+00:00
+$ vitest run
+
+ RUN  v4.1.11 /home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit
+
+
+ Test Files  18 passed (18)
+      Tests  352 passed | 4 skipped (356)
+   Start at  20:42:25
+   Duration  17.77s (transform 9.99s, setup 0ms, import 15.49s, tests 61.81s, environment 360ms)
+
+
+Exit code: 0

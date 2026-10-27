@@ -1,0 +1,11 @@
+{
+  "head": "2f21134aab09aea336baba57b4acdd3fd6f288b8",
+  "base": "b702a5efbb74bebc056b798b414ddb923a82fbd5",
+  "files": {
+    ".changeset/ssg-preview-directory-index.md": "49a12510c57ab80fa35a4b382f680b795a1bbf2170dff713e271026b81b020a2",
+    "packages/vite-plugin-foldkit/src/build.ts": "f089877b51cbe7144e9b03b58d30aa6bf576cb6aac480f87f8243037bdf659e7",
+    "packages/vite-plugin-foldkit/src/preview.ts": "218a4e6cd788835d670f21539ca0bad65f88fed369e6006a965cff1524654ba8",
+    "packages/vite-plugin-foldkit/test/fixtures/preview/entry.server.ts": "6e30499b703aec7adfc571832095c94eea8ef2855c8e1bbaa2ae1e7811cc6aad",
+    "packages/vite-plugin-foldkit/test/preview.test.ts": "f5fa4e5546865f9984e7b2caa74524d19e0f5b128c912ff903c8b3a627100f84"
+  }
+}

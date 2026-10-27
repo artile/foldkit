@@ -1,0 +1,14 @@
+Command: ['pnpm', '--filter', 'foldkit', '--filter', '@foldkit/vite-plugin', '--filter', 'create-foldkit-app', 'build']
+UTC: 2026-10-27T18:42:50.802429+00:00
+Scope: 3 of 53 workspace projects
+packages/foldkit build$ pnpm run clean && tsc -b tsconfig.build.json
+packages/create-foldkit-app build$ pnpm run clean && tsc -b tsconfig.build.json && node scripts/build-templates.mjs
+packages/create-foldkit-app build: $ rimraf dist *.tsbuildinfo
+packages/foldkit build: $ rimraf dist *.tsbuildinfo
+packages/create-foldkit-app build: Done
+packages/foldkit build: Done
+packages/vite-plugin-foldkit build$ pnpm run clean && tsc -b
+packages/vite-plugin-foldkit build: $ rimraf dist *.tsbuildinfo
+packages/vite-plugin-foldkit build: Done
+
+Exit code: 0

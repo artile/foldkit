@@ -1,0 +1,90 @@
+[
+  {
+    "method": "GET",
+    "path": "/",
+    "status": 200,
+    "location": null,
+    "title": "Home | Foldkit App",
+    "heading": "Statically generated home",
+    "isAbout": false,
+    "isHome": true
+  },
+  {
+    "method": "GET",
+    "path": "/about",
+    "status": 200,
+    "location": null,
+    "title": "About | Foldkit App",
+    "heading": "Statically generated about page",
+    "isAbout": true,
+    "isHome": false
+  },
+  {
+    "method": "GET",
+    "path": "/about/",
+    "status": 200,
+    "location": null,
+    "title": "About | Foldkit App",
+    "heading": "Statically generated about page",
+    "isAbout": true,
+    "isHome": false
+  },
+  {
+    "method": "GET",
+    "path": "/about/index.html",
+    "status": 200,
+    "location": null,
+    "title": "About | Foldkit App",
+    "heading": "Statically generated about page",
+    "isAbout": true,
+    "isHome": false
+  },
+  {
+    "method": "GET",
+    "path": "/about?source=probe",
+    "status": 200,
+    "location": null,
+    "title": "About | Foldkit App",
+    "heading": "Statically generated about page",
+    "isAbout": true,
+    "isHome": false
+  },
+  {
+    "method": "GET",
+    "path": "/about/?source=probe",
+    "status": 200,
+    "location": null,
+    "title": "About | Foldkit App",
+    "heading": "Statically generated about page",
+    "isAbout": true,
+    "isHome": false
+  },
+  {
+    "method": "GET",
+    "path": "/missing",
+    "status": 200,
+    "location": null,
+    "title": "Home | Foldkit App",
+    "heading": "Statically generated home",
+    "isAbout": false,
+    "isHome": true
+  },
+  {
+    "method": "GET",
+    "path": "/about.html",
+    "status": 200,
+    "location": null,
+    "title": "Home | Foldkit App",
+    "heading": "Statically generated home",
+    "isAbout": false,
+    "isHome": true
+  },
+  {
+    "method": "HEAD",
+    "path": "/about",
+    "status": 200,
+    "location": null,
+    "contentLength": "892",
+    "body": ""
+  }
+]

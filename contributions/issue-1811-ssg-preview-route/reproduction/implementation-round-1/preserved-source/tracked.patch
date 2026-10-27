@@ -1,0 +1,98 @@
+diff --git c/packages/vite-plugin-foldkit/src/build.ts w/packages/vite-plugin-foldkit/src/build.ts
+index bfcd6982e..662afff3f 100644
+--- c/packages/vite-plugin-foldkit/src/build.ts
++++ w/packages/vite-plugin-foldkit/src/build.ts
+@@ -17,6 +17,8 @@ import type {
+   ViteBuilder,
+ } from 'vite'
+ 
++import { installPrerenderPreview } from './preview.js'
++
+ /** How a build materializes the URLs a server entry can render. */
+ export type FoldkitPrerenderOptions = Readonly<{
+   /**
+@@ -624,7 +626,11 @@ export const foldkitBuild = (
+ 
+   return {
+     name: 'foldkit:build',
+-    apply: 'build',
++    apply: (_config, { command, isPreview }) =>
++      command === 'build' || (isPreview === true && prerender !== undefined),
++    ...(prerender === undefined
++      ? {}
++      : { configurePreviewServer: installPrerenderPreview }),
+     sharedDuringBuild: true,
+     api: {
+       serverEntry,
+@@ -709,10 +715,14 @@ export const foldkitBuild = (
+         )
+       },
+     },
+-    config: userConfig => {
++    config: (userConfig, { isPreview }) => {
+       const client: EnvironmentOptions = {
+         build: {
+-          outDir: clientOutDir,
++          outDir: isPreview
++            ? (userConfig.environments?.['client']?.build?.outDir ??
++              userConfig.build?.outDir ??
++              clientOutDir)
++            : clientOutDir,
+           rolldownOptions: { input: { [CLIENT_CHUNK_NAME]: CLIENT_MODULE_ID } },
+         },
+       }
+diff --git c/scripts/check-scaffold-server-rendering.ts w/scripts/check-scaffold-server-rendering.ts
+index 0ee548dc6..16c76e464 100644
+--- c/scripts/check-scaffold-server-rendering.ts
++++ w/scripts/check-scaffold-server-rendering.ts
+@@ -1078,6 +1078,50 @@ const checkSsg = async (
+   )
+   try {
+     await fetchServedPage(host, origin)
++    for (const path of [
++      '/about',
++      '/about?source=probe',
++      '/about/',
++      '/about/index.html',
++    ]) {
++      const response = await fetch(`${origin}${path}`, {
++        redirect: 'manual',
++        headers: { accept: 'text/html' },
++      })
++      const html = await response.text()
++      assertScaffold(
++        response.status === 200 && !response.headers.has('location'),
++        `SSG preview redirected or failed at ${path}`,
++      )
++      assertScaffold(
++        html === about,
++        `SSG preview did not serve the generated About document at ${path}`,
++      )
++      assertScaffold(
++        html.includes('About | Foldkit App') &&
++          html.includes('Statically generated about page') &&
++          !html.includes('Statically generated home'),
++        `SSG preview served the wrong initial HTML at ${path}`,
++      )
++    }
++    const root = await fetch(origin)
++    assertScaffold(
++      (await root.text()) === home,
++      'SSG preview did not serve the generated Home document',
++    )
++    const head = await fetch(`${origin}/about`, {
++      method: 'HEAD',
++      redirect: 'manual',
++    })
++    assertScaffold(
++      head.status === 200 &&
++        !head.headers.has('location') &&
++        head.headers.get('content-type')?.includes('text/html') === true &&
++        head.headers.get('content-length') ===
++          String(Buffer.byteLength(about)) &&
++        (await head.text()) === '',
++      'SSG preview HEAD did not select the About document',
++    )
+     await checkSsgInBrowser(browser, origin)
+   } finally {
+     await stopHost(host)

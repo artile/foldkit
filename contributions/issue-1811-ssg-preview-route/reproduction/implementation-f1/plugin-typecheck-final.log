@@ -1,0 +1,9 @@
+Command: ['pnpm', '--filter', '@foldkit/vite-plugin', 'typecheck']
+UTC: 2026-10-27T18:52:17.801839+00:00
+$ tsc -b --noEmit && tsc -p tsconfig.test.json
+test/preview.test.ts(183,17): error TS18048: 'response' is possibly 'undefined'.
+/home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit:
+[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] @foldkit/vite-plugin@0.28.0 typecheck: `tsc -b --noEmit && tsc -p tsconfig.test.json`
+Exit status 1
+
+Exit code: 1

@@ -1,0 +1,327 @@
+Command: ['pnpm', '--filter', '@foldkit/vite-plugin', 'test']
+UTC: 2026-10-27T18:59:08.942593+00:00
+$ vitest run
+
+ RUN  v4.1.11 /home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit
+
+stderr | test/build.test.ts > completed build metadata > shares config-file captures with sharedConfigBuild=false
+src/index.ts (34:7) [33m[UNRESOLVED_IMPORT] [0mCould not resolve 'foldkit/devtools-protocol' in src/index.ts
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/index.ts:34:8 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m34 │[0m [38;5;249m}[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m'foldkit/devtools-protocol'
+ [38;5;240m   │[0m        ─────────────┬─────────────  
+ [38;5;240m   │[0m                     ╰─────────────── Module not found, treating it as an external dependency
+[38;5;246m────╯[0m
+
+
+stderr | test/build.test.ts > completed build metadata > shares config-file captures with sharedConfigBuild=false
+src/index.ts (39:7) [33m[UNRESOLVED_IMPORT] [0mCould not resolve 'foldkit/model-preservation' in src/index.ts
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/index.ts:39:8 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m39 │[0m [38;5;249m}[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m'foldkit/model-preservation'
+ [38;5;240m   │[0m        ──────────────┬─────────────  
+ [38;5;240m   │[0m                      ╰─────────────── Module not found, treating it as an external dependency
+[38;5;246m────╯[0m
+
+
+stderr | test/build.test.ts > completed build metadata > shares config-file captures with sharedConfigBuild=false
+src/relayRegistry.ts (18:7) [33m[UNRESOLVED_IMPORT] [0mCould not resolve 'foldkit/devtools-protocol' in src/relayRegistry.ts
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/relayRegistry.ts:18:8 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m18 │[0m [38;5;249m}[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m'foldkit/devtools-protocol'
+ [38;5;240m   │[0m        ─────────────┬─────────────  
+ [38;5;240m   │[0m                     ╰─────────────── Module not found, treating it as an external dependency
+[38;5;246m────╯[0m
+
+
+stderr | test/build.test.ts > completed build metadata > shares config-file captures with sharedConfigBuild=false
+src/ssr.ts (2:24) [33m[UNRESOLVED_IMPORT] [0mCould not resolve 'foldkit/experimental/server' in src/ssr.ts
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/ssr.ts:2:25 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249m*[0m[38;5;249m [0m[38;5;249ma[0m[38;5;249ms[0m[38;5;249m [0m[38;5;249mS[0m[38;5;249me[0m[38;5;249mr[0m[38;5;249mv[0m[38;5;249me[0m[38;5;249mr[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m'foldkit/experimental/server'
+ [38;5;240m  │[0m                         ──────────────┬──────────────  
+ [38;5;240m  │[0m                                       ╰──────────────── Module not found, treating it as an external dependency
+[38;5;246m───╯[0m
+
+
+stderr | test/build.test.ts > completed build metadata > shares config-file captures with sharedConfigBuild=false
+failed to load config from /home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit/test/fixtures/build-config/vite.config.ts
+
+stderr | test/build.test.ts > completed build metadata > shares config-file captures with sharedConfigBuild=true
+src/index.ts (34:7) [33m[UNRESOLVED_IMPORT] [0mCould not resolve 'foldkit/devtools-protocol' in src/index.ts
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/index.ts:34:8 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m34 │[0m [38;5;249m}[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m'foldkit/devtools-protocol'
+ [38;5;240m   │[0m        ─────────────┬─────────────  
+ [38;5;240m   │[0m                     ╰─────────────── Module not found, treating it as an external dependency
+[38;5;246m────╯[0m
+
+
+stderr | test/build.test.ts > completed build metadata > shares config-file captures with sharedConfigBuild=true
+src/index.ts (39:7) [33m[UNRESOLVED_IMPORT] [0mCould not resolve 'foldkit/model-preservation' in src/index.ts
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/index.ts:39:8 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m39 │[0m [38;5;249m}[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m'foldkit/model-preservation'
+ [38;5;240m   │[0m        ──────────────┬─────────────  
+ [38;5;240m   │[0m                      ╰─────────────── Module not found, treating it as an external dependency
+[38;5;246m────╯[0m
+
+
+stderr | test/build.test.ts > completed build metadata > shares config-file captures with sharedConfigBuild=true
+src/relayRegistry.ts (18:7) [33m[UNRESOLVED_IMPORT] [0mCould not resolve 'foldkit/devtools-protocol' in src/relayRegistry.ts
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/relayRegistry.ts:18:8 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m18 │[0m [38;5;249m}[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m'foldkit/devtools-protocol'
+ [38;5;240m   │[0m        ─────────────┬─────────────  
+ [38;5;240m   │[0m                     ╰─────────────── Module not found, treating it as an external dependency
+[38;5;246m────╯[0m
+
+
+stderr | test/build.test.ts > completed build metadata > shares config-file captures with sharedConfigBuild=true
+src/ssr.ts (2:24) [33m[UNRESOLVED_IMPORT] [0mCould not resolve 'foldkit/experimental/server' in src/ssr.ts
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/ssr.ts:2:25 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249m*[0m[38;5;249m [0m[38;5;249ma[0m[38;5;249ms[0m[38;5;249m [0m[38;5;249mS[0m[38;5;249me[0m[38;5;249mr[0m[38;5;249mv[0m[38;5;249me[0m[38;5;249mr[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m'foldkit/experimental/server'
+ [38;5;240m  │[0m                         ──────────────┬──────────────  
+ [38;5;240m  │[0m                                       ╰──────────────── Module not found, treating it as an external dependency
+[38;5;246m───╯[0m
+
+
+stderr | test/build.test.ts > completed build metadata > shares config-file captures with sharedConfigBuild=true
+failed to load config from /home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit/test/fixtures/build-config/vite.config.ts
+
+ ❯ test/build.test.ts (75 tests | 8 failed) 13056ms
+     × reports the emitted nested hashed entry filename 35ms
+     × shares config-file captures with sharedConfigBuild=false 94ms
+     × shares config-file captures with sharedConfigBuild=true 62ms
+     × invalidates completed metadata while rebuilding and replaces the snapshot 62ms
+     × invalidates metadata when only the server rebuilds 63ms
+     × refuses a retained root document when a rebuild stops prerendering it 92ms
+     × discards completed metadata when a rebuild fails 61ms
+     × cannot reuse captures from another plugin with the same output layout 48ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/build.test.ts > completed build metadata > reports the emitted nested hashed entry filename
+Error: Build failed with 1 error:
+
+Error: [vite]: Rolldown failed to resolve import "foldkit/experimental/server" from " virtual:foldkit/fetch".
+This is most likely unintended because it can break your application at runtime.
+If you do want to externalize this module explicitly add it to
+`build.rolldownOptions.external`
+    at viteLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34538:57)
+    at onRollupLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34571:7)
+    at onLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34334:4)
+    at file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:48:26
+    at logger (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:39:3)
+ ❯ viteLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34538:57
+ ❯ onRollupLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34571:7
+ ❯ onLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34334:4
+ ❯ ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:48:26
+ ❯ logger ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:39:3
+ ❯ aggregateBindingErrorsIntoJsError ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/error-C7pxws0W.mjs:48:18
+ ❯ unwrapBindingResult ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/error-C7pxws0W.mjs:18:128
+ ❯ RolldownBuild.#build ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/rolldown-CgWItHdG.mjs:133:34
+ ❯ buildEnvironment ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34445:66
+ ❯ Object.build ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34866:19
+ ❯ Object.buildApp src/build.ts:753:17
+    751|               buildApp: async (builder: ViteBuilder): Promise<void> =>…
+    752|                 await builder.build(environmentNamed(builder, 'client'…
+    753|                 await builder.build(environmentNamed(builder, 'ssr'))
+       |                 ^
+    754|               },
+    755|             },
+ ❯ Object.buildApp ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34858:6
+ ❯ test/build.test.ts:1422:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  test/build.test.ts > completed build metadata > shares config-file captures with sharedConfigBuild=false
+Error: Cannot find module '/home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit/node_modules/foldkit/dist/devTools/public.js' imported from /home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit/node_modules/.vite-temp/vite.config.ts.timestamp-1793127563076-26bd33c08f82c.mjs
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  test/build.test.ts > completed build metadata > shares config-file captures with sharedConfigBuild=true
+Error: Cannot find module '/home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit/node_modules/foldkit/dist/devTools/public.js' imported from /home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit/node_modules/.vite-temp/vite.config.ts.timestamp-1793127563145-0544ffe430237.mjs
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  test/build.test.ts > completed build metadata > invalidates completed metadata while rebuilding and replaces the snapshot
+Error: Build failed with 1 error:
+
+Error: [vite]: Rolldown failed to resolve import "foldkit/experimental/server" from " virtual:foldkit/fetch".
+This is most likely unintended because it can break your application at runtime.
+If you do want to externalize this module explicitly add it to
+`build.rolldownOptions.external`
+    at viteLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34538:57)
+    at onRollupLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34571:7)
+    at onLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34334:4)
+    at file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:48:26
+    at logger (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:39:3)
+ ❯ viteLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34538:57
+ ❯ onRollupLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34571:7
+ ❯ onLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34334:4
+ ❯ ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:48:26
+ ❯ logger ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:39:3
+ ❯ aggregateBindingErrorsIntoJsError ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/error-C7pxws0W.mjs:48:18
+ ❯ unwrapBindingResult ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/error-C7pxws0W.mjs:18:128
+ ❯ RolldownBuild.#build ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/rolldown-CgWItHdG.mjs:133:34
+ ❯ buildEnvironment ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34445:66
+ ❯ Object.build ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34866:19
+ ❯ Object.buildApp src/build.ts:753:17
+    751|               buildApp: async (builder: ViteBuilder): Promise<void> =>…
+    752|                 await builder.build(environmentNamed(builder, 'client'…
+    753|                 await builder.build(environmentNamed(builder, 'ssr'))
+       |                 ^
+    754|               },
+    755|             },
+ ❯ Object.buildApp ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34858:6
+ ❯ test/build.test.ts:1495:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  test/build.test.ts > completed build metadata > invalidates metadata when only the server rebuilds
+Error: Build failed with 1 error:
+
+Error: [vite]: Rolldown failed to resolve import "foldkit/experimental/server" from " virtual:foldkit/fetch".
+This is most likely unintended because it can break your application at runtime.
+If you do want to externalize this module explicitly add it to
+`build.rolldownOptions.external`
+    at viteLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34538:57)
+    at onRollupLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34571:7)
+    at onLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34334:4)
+    at file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:48:26
+    at logger (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:39:3)
+ ❯ viteLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34538:57
+ ❯ onRollupLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34571:7
+ ❯ onLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34334:4
+ ❯ ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:48:26
+ ❯ logger ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:39:3
+ ❯ aggregateBindingErrorsIntoJsError ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/error-C7pxws0W.mjs:48:18
+ ❯ unwrapBindingResult ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/error-C7pxws0W.mjs:18:128
+ ❯ RolldownBuild.#build ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/rolldown-CgWItHdG.mjs:133:34
+ ❯ buildEnvironment ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34445:66
+ ❯ Object.build ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34866:19
+ ❯ Object.buildApp src/build.ts:753:17
+    751|               buildApp: async (builder: ViteBuilder): Promise<void> =>…
+    752|                 await builder.build(environmentNamed(builder, 'client'…
+    753|                 await builder.build(environmentNamed(builder, 'ssr'))
+       |                 ^
+    754|               },
+    755|             },
+ ❯ Object.buildApp ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34858:6
+ ❯ test/build.test.ts:1509:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  test/build.test.ts > completed build metadata > refuses a retained root document when a rebuild stops prerendering it
+Error: Build failed with 1 error:
+
+Error: [vite]: Rolldown failed to resolve import "foldkit/experimental/server" from " virtual:foldkit/fetch".
+This is most likely unintended because it can break your application at runtime.
+If you do want to externalize this module explicitly add it to
+`build.rolldownOptions.external`
+    at viteLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34538:57)
+    at onRollupLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34571:7)
+    at onLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34334:4)
+    at file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:48:26
+    at logger (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:39:3)
+ ❯ viteLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34538:57
+ ❯ onRollupLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34571:7
+ ❯ onLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34334:4
+ ❯ ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:48:26
+ ❯ logger ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:39:3
+ ❯ aggregateBindingErrorsIntoJsError ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/error-C7pxws0W.mjs:48:18
+ ❯ unwrapBindingResult ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/error-C7pxws0W.mjs:18:128
+ ❯ RolldownBuild.#build ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/rolldown-CgWItHdG.mjs:133:34
+ ❯ buildEnvironment ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34445:66
+ ❯ Object.build ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34866:19
+ ❯ Object.buildApp src/build.ts:753:17
+    751|               buildApp: async (builder: ViteBuilder): Promise<void> =>…
+    752|                 await builder.build(environmentNamed(builder, 'client'…
+    753|                 await builder.build(environmentNamed(builder, 'ssr'))
+       |                 ^
+    754|               },
+    755|             },
+ ❯ Object.buildApp ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34858:6
+ ❯ test/build.test.ts:1534:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  test/build.test.ts > completed build metadata > discards completed metadata when a rebuild fails
+Error: Build failed with 1 error:
+
+Error: [vite]: Rolldown failed to resolve import "foldkit/experimental/server" from " virtual:foldkit/fetch".
+This is most likely unintended because it can break your application at runtime.
+If you do want to externalize this module explicitly add it to
+`build.rolldownOptions.external`
+    at viteLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34538:57)
+    at onRollupLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34571:7)
+    at onLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34334:4)
+    at file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:48:26
+    at logger (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:39:3)
+ ❯ viteLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34538:57
+ ❯ onRollupLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34571:7
+ ❯ onLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34334:4
+ ❯ ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:48:26
+ ❯ logger ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:39:3
+ ❯ aggregateBindingErrorsIntoJsError ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/error-C7pxws0W.mjs:48:18
+ ❯ unwrapBindingResult ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/error-C7pxws0W.mjs:18:128
+ ❯ RolldownBuild.#build ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/rolldown-CgWItHdG.mjs:133:34
+ ❯ buildEnvironment ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34445:66
+ ❯ Object.build ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34866:19
+ ❯ Object.buildApp src/build.ts:753:17
+    751|               buildApp: async (builder: ViteBuilder): Promise<void> =>…
+    752|                 await builder.build(environmentNamed(builder, 'client'…
+    753|                 await builder.build(environmentNamed(builder, 'ssr'))
+       |                 ^
+    754|               },
+    755|             },
+ ❯ Object.buildApp ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34858:6
+ ❯ test/build.test.ts:1562:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  test/build.test.ts > completed build metadata > cannot reuse captures from another plugin with the same output layout
+Error: Build failed with 1 error:
+
+Error: [vite]: Rolldown failed to resolve import "foldkit/experimental/server" from " virtual:foldkit/fetch".
+This is most likely unintended because it can break your application at runtime.
+If you do want to externalize this module explicitly add it to
+`build.rolldownOptions.external`
+    at viteLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34538:57)
+    at onRollupLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34571:7)
+    at onLog (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34334:4)
+    at file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:48:26
+    at logger (file:///home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:39:3)
+ ❯ viteLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34538:57
+ ❯ onRollupLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34571:7
+ ❯ onLog ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34334:4
+ ❯ ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:48:26
+ ❯ logger ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/create-bundler-option-YGKfBl_D.mjs:39:3
+ ❯ aggregateBindingErrorsIntoJsError ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/error-C7pxws0W.mjs:48:18
+ ❯ unwrapBindingResult ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/error-C7pxws0W.mjs:18:128
+ ❯ RolldownBuild.#build ../../node_modules/.pnpm/rolldown@1.2.11/node_modules/rolldown/dist/shared/rolldown-CgWItHdG.mjs:133:34
+ ❯ buildEnvironment ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34445:66
+ ❯ Object.build ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34866:19
+ ❯ Object.buildApp src/build.ts:753:17
+    751|               buildApp: async (builder: ViteBuilder): Promise<void> =>…
+    752|                 await builder.build(environmentNamed(builder, 'client'…
+    753|                 await builder.build(environmentNamed(builder, 'ssr'))
+       |                 ^
+    754|               },
+    755|             },
+ ❯ Object.buildApp ../../node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:34858:6
+ ❯ test/build.test.ts:1578:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  1 failed | 17 passed (18)
+      Tests  8 failed | 348 passed | 4 skipped (360)
+   Start at  20:59:09
+   Duration  14.10s (transform 6.71s, setup 0ms, import 13.32s, tests 55.84s, environment 199ms)
+
+/home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit:
+[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] @foldkit/vite-plugin@0.28.0 test: `vitest run`
+Exit status 1
+
+Exit code: 1

@@ -1,0 +1,1239 @@
+Command: ['pnpm', 'test:scripts']
+UTC: 2026-10-27T18:43:20.317018+00:00
+$ bash scripts/run-script-tests.sh
+TAP version 13
+# Subtest: rejects changed package source omitted from the exact release commit
+ok 1 - rejects changed package source omitted from the exact release commit
+  ---
+  duration_ms: 211.458921
+  type: 'test'
+  ...
+# Subtest: accepts changed package source versioned by the exact release commit
+ok 2 - accepts changed package source versioned by the exact release commit
+  ---
+  duration_ms: 193.621598
+  type: 'test'
+  ...
+# Subtest: rejects a package version bump inherited from an earlier commit
+ok 3 - rejects a package version bump inherited from an earlier commit
+  ---
+  duration_ms: 177.181597
+  type: 'test'
+  ...
+# Subtest: rejects an existing current-version tag at a different commit
+ok 4 - rejects an existing current-version tag at a different commit
+  ---
+  duration_ms: 201.637981
+  type: 'test'
+  ...
+# Subtest: accepts an existing current-version tag at the exact release commit
+ok 5 - accepts an existing current-version tag at the exact release commit
+  ---
+  duration_ms: 159.64251
+  type: 'test'
+  ...
+# Subtest: matching current tags do not hide unpublished shared inputs
+ok 6 - matching current tags do not hide unpublished shared inputs
+  ---
+  duration_ms: 171.394552
+  type: 'test'
+  ...
+# Subtest: rejects changed shared package inputs without a website package bump
+ok 7 - rejects changed shared package inputs without a website package bump
+  ---
+  duration_ms: 169.940062
+  type: 'test'
+  ...
+# Subtest: allows changed shared package inputs when no package release is attempted
+ok 8 - allows changed shared package inputs when no package release is attempted
+  ---
+  duration_ms: 127.610938
+  type: 'test'
+  ...
+# Subtest: rejects changed shared package inputs with only one website package bump
+ok 9 - rejects changed shared package inputs with only one website package bump
+  ---
+  duration_ms: 162.65978
+  type: 'test'
+  ...
+# Subtest: accepts changed shared package inputs when every website package is bumped
+ok 10 - accepts changed shared package inputs when every website package is bumped
+  ---
+  duration_ms: 163.022309
+  type: 'test'
+  ...
+# Subtest: required workflows check main and integration pull requests and merge groups
+ok 11 - required workflows check main and integration pull requests and merge groups
+  ---
+  duration_ms: 0.816554
+  type: 'test'
+  ...
+# Subtest: changeset status receives trusted pull request context
+ok 12 - changeset status receives trusted pull request context
+  ---
+  duration_ms: 0.209992
+  type: 'test'
+  ...
+# Subtest: trusted Version Packages pull requests verify their release commit inputs
+ok 13 - trusted Version Packages pull requests verify their release commit inputs
+  ---
+  duration_ms: 0.160036
+  type: 'test'
+  ...
+# Subtest: the packed SSR consumer runs its critical browser matrix in CI
+ok 14 - the packed SSR consumer runs its critical browser matrix in CI
+  ---
+  duration_ms: 0.093288
+  type: 'test'
+  ...
+# Subtest: the website scope runs unit tests and typechecking
+ok 15 - the website scope runs unit tests and typechecking
+  ---
+  duration_ms: 0.110329
+  type: 'test'
+  ...
+# Subtest: peer floor changes run the packed-manifest check before release
+ok 16 - peer floor changes run the packed-manifest check before release
+  ---
+  duration_ms: 0.103288
+  type: 'test'
+  ...
+# Subtest: stable publication verifies website package inputs before upload
+ok 17 - stable publication verifies website package inputs before upload
+  ---
+  duration_ms: 0.154786
+  type: 'test'
+  ...
+# Subtest: browser-backed scaffold checks install Chromium exactly once
+ok 18 - browser-backed scaffold checks install Chromium exactly once
+  ---
+  duration_ms: 0.074123
+  type: 'test'
+  ...
+# Subtest: the deployed playground and Monaco workers share an embedder policy
+ok 19 - the deployed playground and Monaco workers share an embedder policy
+  ---
+  duration_ms: 2.718695
+  type: 'test'
+  ...
+# Subtest: share images stay embeddable from other origins
+ok 20 - share images stay embeddable from other origins
+  ---
+  duration_ms: 0.632977
+  type: 'test'
+  ...
+# Subtest: unknown paths return a real 404 in the format the client asked for
+ok 21 - unknown paths return a real 404 in the format the client asked for
+  ---
+  duration_ms: 0.508691
+  type: 'test'
+  ...
+# Subtest: the content API answers unknown paths with a problem document
+ok 22 - the content API answers unknown paths with a problem document
+  ---
+  duration_ms: 0.281781
+  type: 'test'
+  ...
+# Subtest: unknown API versions do not claim to be v1
+ok 23 - unknown API versions do not claim to be v1
+  ---
+  duration_ms: 0.111788
+  type: 'test'
+  ...
+# Subtest: the content API rejects write methods with 405 and an Allow header
+ok 24 - the content API rejects write methods with 405 and an Allow header
+  ---
+  duration_ms: 0.134995
+  type: 'test'
+  ...
+# Subtest: content API responses expose the headers agents are told to read
+ok 25 - content API responses expose the headers agents are told to read
+  ---
+  duration_ms: 0.205618
+  type: 'test'
+  ...
+# Subtest: the machine-readable documents are readable cross-origin too
+ok 26 - the machine-readable documents are readable cross-origin too
+  ---
+  duration_ms: 0.258866
+  type: 'test'
+  ...
+# Subtest: the documentation page answers write methods the way the API does
+ok 27 - the documentation page answers write methods the way the API does
+  ---
+  duration_ms: 0.346821
+  type: 'test'
+  ...
+# Subtest: the preflight carries the same policy headers as every other response
+ok 28 - the preflight carries the same policy headers as every other response
+  ---
+  duration_ms: 0.376486
+  type: 'test'
+  ...
+# Subtest: content API responses are readable cross-origin and name their version
+ok 29 - content API responses are readable cross-origin and name their version
+  ---
+  duration_ms: 0.261491
+  type: 'test'
+  ...
+# Subtest: the versioned base path serves the service index
+ok 30 - the versioned base path serves the service index
+  ---
+  duration_ms: 0.159911
+  type: 'test'
+  ...
+# Subtest: getPage carries nested page paths in a query parameter
+ok 31 - getPage carries nested page paths in a query parameter
+  ---
+  duration_ms: 0.609895
+  type: 'test'
+  ...
+# Subtest: getPageMarkdown carries nested page paths in a query parameter
+ok 32 - getPageMarkdown carries nested page paths in a query parameter
+  ---
+  duration_ms: 0.105788
+  type: 'test'
+  ...
+# Subtest: every response advertises the advisory rate limit policy
+ok 33 - every response advertises the advisory rate limit policy
+  ---
+  duration_ms: 0.27999
+  type: 'test'
+  ...
+# Subtest: markdown negotiation leaves the JSON-only content API alone
+ok 34 - markdown negotiation leaves the JSON-only content API alone
+  ---
+  duration_ms: 0.129745
+  type: 'test'
+  ...
+# Subtest: every 404 variant tells caches the response depends on Accept
+ok 35 - every 404 variant tells caches the response depends on Accept
+  ---
+  duration_ms: 0.299281
+  type: 'test'
+  ...
+# Subtest: Accept: text/markdown negotiates the markdown variant of a page
+ok 36 - Accept: text/markdown negotiates the markdown variant of a page
+  ---
+  duration_ms: 0.146369
+  type: 'test'
+  ...
+# Subtest: HTML page responses carry Vary: Accept so caches keep variants apart
+ok 37 - HTML page responses carry Vary: Accept so caches keep variants apart
+  ---
+  duration_ms: 0.115788
+  type: 'test'
+  ...
+# Subtest: pages without a markdown variant fall back to HTML instead of 404
+ok 38 - pages without a markdown variant fall back to HTML instead of 404
+  ---
+  duration_ms: 0.145995
+  type: 'test'
+  ...
+# Subtest: a nonexistent .md path answers a browser with HTML, not markdown
+ok 39 - a nonexistent .md path answers a browser with HTML, not markdown
+  ---
+  duration_ms: 0.108121
+  type: 'test'
+  ...
+# Subtest: /404 never answers 200, whatever format the client asks for
+ok 40 - /404 never answers 200, whatever format the client asks for
+  ---
+  duration_ms: 0.124787
+  type: 'test'
+  ...
+# Subtest: unknown playground slugs still load the shared editor shell
+ok 41 - unknown playground slugs still load the shared editor shell
+  ---
+  duration_ms: 0.085705
+  type: 'test'
+  ...
+# Subtest: the developer portal path redirects to the AI overview
+ok 42 - the developer portal path redirects to the AI overview
+  ---
+  duration_ms: 0.084247
+  type: 'test'
+  ...
+# Subtest: the old manifesto paths redirect to Why Foldkit
+ok 43 - the old manifesto paths redirect to Why Foldkit
+  ---
+  duration_ms: 0.135954
+  type: 'test'
+  ...
+# Subtest: the MCP manifest and OpenAPI description are served as JSON
+ok 44 - the MCP manifest and OpenAPI description are served as JSON
+  ---
+  duration_ms: 0.107163
+  type: 'test'
+  ...
+# Subtest: the homepage advertises the OpenAPI description in its Link header
+ok 45 - the homepage advertises the OpenAPI description in its Link header
+  ---
+  duration_ms: 0.086122
+  type: 'test'
+  ...
+# Subtest: the rate limit headers match what openapi.json documents
+ok 46 - the rate limit headers match what openapi.json documents
+  ---
+  duration_ms: 0.065039
+  type: 'test'
+  ...
+# Subtest: error rewrites name problem documents the content API publishes
+ok 47 - error rewrites name problem documents the content API publishes
+  ---
+  duration_ms: 0.088414
+  type: 'test'
+  ...
+# Subtest: the deploy workflow copies dotfiles like .well-known into the Vercel output
+ok 48 - the deploy workflow copies dotfiles like .well-known into the Vercel output
+  ---
+  duration_ms: 0.055665
+  type: 'test'
+  ...
+# Subtest: only the canary deployment blocks search indexing
+ok 49 - only the canary deployment blocks search indexing
+  ---
+  duration_ms: 0.100247
+  type: 'test'
+  ...
+# Subtest: production and canary call the shared deployment with separate projects
+ok 50 - production and canary call the shared deployment with separate projects
+  ---
+  duration_ms: 0.078038
+  type: 'test'
+  ...
+# Subtest: the canary hostname moves only after its staged deployment passes smoke tests
+ok 51 - the canary hostname moves only after its staged deployment passes smoke tests
+  ---
+  duration_ms: 0.104079
+  type: 'test'
+  ...
+# Subtest: production deployment requires the complete promoted npm snapshot
+ok 52 - production deployment requires the complete promoted npm snapshot
+  ---
+  duration_ms: 0.090038
+  type: 'test'
+  ...
+# Subtest: stable finalization deploys the exact published website commit
+ok 53 - stable finalization deploys the exact published website commit
+  ---
+  duration_ms: 0.195326
+  type: 'test'
+  ...
+# Subtest: the registry-backed SSG playground build runs only for production
+ok 54 - the registry-backed SSG playground build runs only for production
+  ---
+  duration_ms: 0.085622
+  type: 'test'
+  ...
+# Subtest: an explicit file list is used verbatim
+ok 55 - an explicit file list is used verbatim
+  ---
+  duration_ms: 1.263705
+  type: 'test'
+  ...
+# Subtest: an explicit file list wins over unresolvable revisions
+ok 56 - an explicit file list wins over unresolvable revisions
+  ---
+  duration_ms: 0.144703
+  type: 'test'
+  ...
+# Subtest: no revisions is an unknown diff
+ok 57 - no revisions is an unknown diff
+  ---
+  duration_ms: 0.079455
+  type: 'test'
+  ...
+# Subtest: a missing head revision is an unknown diff
+ok 58 - a missing head revision is an unknown diff
+  ---
+  duration_ms: 0.10858
+  type: 'test'
+  ...
+# Subtest: an all-zero base revision is an unknown diff
+ok 59 - an all-zero base revision is an unknown diff
+  ---
+  duration_ms: 0.075247
+  type: 'test'
+  ...
+# Subtest: an all-zero head revision is an unknown diff
+ok 60 - an all-zero head revision is an unknown diff
+  ---
+  duration_ms: 0.067164
+  type: 'test'
+  ...
+# Subtest: a failed git diff is an unknown diff rather than an empty one
+ok 61 - a failed git diff is an unknown diff rather than an empty one
+  ---
+  duration_ms: 2.568367
+  type: 'test'
+  ...
+# Subtest: a real revision range resolves the files it touched
+ok 62 - a real revision range resolves the files it touched
+  ---
+  duration_ms: 5.50393
+  type: 'test'
+  ...
+# Subtest: a diverged base does not leak its own commits into the diff
+ok 63 - a diverged base does not leak its own commits into the diff
+  ---
+  duration_ms: 57.27772
+  type: 'test'
+  ...
+# Subtest: changeset status decision for the generated release pull request
+ok 64 - changeset status decision for the generated release pull request
+  ---
+  duration_ms: 1.162292
+  type: 'test'
+  ...
+# Subtest: changeset status decision for an ordinary same-repository pull request
+ok 65 - changeset status decision for an ordinary same-repository pull request
+  ---
+  duration_ms: 0.355487
+  type: 'test'
+  ...
+# Subtest: changeset status decision for a same-named fork pull request
+ok 66 - changeset status decision for a same-named fork pull request
+  ---
+  duration_ms: 0.086414
+  type: 'test'
+  ...
+# Subtest: changeset status decision for an ordinary fork pull request
+ok 67 - changeset status decision for an ordinary fork pull request
+  ---
+  duration_ms: 0.060456
+  type: 'test'
+  ...
+# Subtest: changeset status decision for a case-variant same-repository pull request
+ok 68 - changeset status decision for a case-variant same-repository pull request
+  ---
+  duration_ms: 0.557938
+  type: 'test'
+  ...
+# Subtest: changeset status decision for a push event
+ok 69 - changeset status decision for a push event
+  ---
+  duration_ms: 0.063206
+  type: 'test'
+  ...
+# Subtest: a partial upload retries without republishing completed versions
+ok 70 - a partial upload retries without republishing completed versions
+  ---
+  duration_ms: 1.872267
+  type: 'test'
+  ...
+# Subtest: stable planning uploads only untagged or missing registry versions
+ok 71 - stable planning uploads only untagged or missing registry versions
+  ---
+  duration_ms: 0.27849
+  type: 'test'
+  ...
+# Subtest: a retry rejects an existing version with different bytes
+ok 72 - a retry rejects an existing version with different bytes
+  ---
+  duration_ms: 0.145411
+  type: 'test'
+  ...
+# Subtest: registry verification covers the complete internal dependency graph
+ok 73 - registry verification covers the complete internal dependency graph
+  ---
+  duration_ms: 6.088242
+  type: 'test'
+  ...
+# Subtest: registry verification derives internal package names from the release set
+ok 74 - registry verification derives internal package names from the release set
+  ---
+  duration_ms: 0.197493
+  type: 'test'
+  ...
+# Subtest: registry verification rejects any workspace dependency outside the public snapshot
+ok 75 - registry verification rejects any workspace dependency outside the public snapshot
+  ---
+  duration_ms: 0.258907
+  type: 'test'
+  ...
+# Subtest: an artifact mismatch stops before the first publication
+ok 76 - an artifact mismatch stops before the first publication
+  ---
+  duration_ms: 0.303073
+  type: 'test'
+  ...
+# Subtest: a missing packed dependency stops before the first publication
+ok 77 - a missing packed dependency stops before the first publication
+  ---
+  duration_ms: 0.172494
+  type: 'test'
+  ...
+# Subtest: packed artifacts preserve non-workspace dependency specs
+ok 78 - packed artifacts preserve non-workspace dependency specs
+  ---
+  duration_ms: 0.464233
+  type: 'test'
+  ...
+# Subtest: a weakened internal range stops before the first publication
+ok 79 - a weakened internal range stops before the first publication
+  ---
+  duration_ms: 0.530231
+  type: 'test'
+  ...
+# Subtest: packed artifacts use pnpm workspace protocol transformations
+ok 80 - packed artifacts use pnpm workspace protocol transformations
+  ---
+  duration_ms: 0.635686
+  type: 'test'
+  ...
+# Subtest: packed artifacts reject duplicate planned packages
+ok 81 - packed artifacts reject duplicate planned packages
+  ---
+  duration_ms: 0.265158
+  type: 'test'
+  ...
+# Subtest: canary versions and internal references are commit-addressed
+ok 82 - canary versions and internal references are commit-addressed
+  ---
+  duration_ms: 0.284865
+  type: 'test'
+  ...
+# Subtest: canary manifests resolve internal devDependencies before packing
+ok 83 - canary manifests resolve internal devDependencies before packing
+  ---
+  duration_ms: 0.202201
+  type: 'test'
+  ...
+# Subtest: packing manifests resolve workspace dependencies without reordering
+ok 84 - packing manifests resolve workspace dependencies without reordering
+  ---
+  duration_ms: 0.177036
+  type: 'test'
+  ...
+# Subtest: stable and canary manifests pack identically across workspace orders
+ok 85 - stable and canary manifests pack identically across workspace orders
+  ---
+  duration_ms: 1466.579873
+  type: 'test'
+  ...
+# Subtest: coherent upload builds workspace manifests and packs resolved manifests
+ok 86 - coherent upload builds workspace manifests and packs resolved manifests
+  ---
+  duration_ms: 10.728953
+  type: 'test'
+  ...
+# Subtest: coherent upload restores original manifests after build and pack failures
+ok 87 - coherent upload restores original manifests after build and pack failures
+  ---
+  duration_ms: 11.351306
+  type: 'test'
+  ...
+# Subtest: stable upload output does not use Changesets reserved tag protocol
+ok 88 - stable upload output does not use Changesets reserved tag protocol
+  ---
+  duration_ms: 0.332197
+  type: 'test'
+  ...
+# Subtest: registry verification requires exact internal canary references
+ok 89 - registry verification requires exact internal canary references
+  ---
+  duration_ms: 0.311323
+  type: 'test'
+  ...
+# Subtest: canary upload refuses a package name npm has never published
+ok 90 - canary upload refuses a package name npm has never published
+  ---
+  duration_ms: 0.258949
+  type: 'test'
+  ...
+# Subtest: partial tag promotion resumes idempotently
+ok 91 - partial tag promotion resumes idempotently
+  ---
+  duration_ms: 1.781937
+  type: 'test'
+  ...
+# Subtest: promotion keeps every intermediate latest snapshot compatible
+ok 92 - promotion keeps every intermediate latest snapshot compatible
+  ---
+  duration_ms: 18.101401
+  type: 'test'
+  ...
+# Subtest: promotion stops before changing tags when no compatible path exists
+ok 93 - promotion stops before changing tags when no compatible path exists
+  ---
+  duration_ms: 0.9258
+  type: 'test'
+  ...
+# Subtest: promotion refuses every backward tag before changing any tag
+ok 94 - promotion refuses every backward tag before changing any tag
+  ---
+  duration_ms: 0.873136
+  type: 'test'
+  ...
+# Subtest: promotion waits for each dependency-ordered tag to propagate
+ok 95 - promotion waits for each dependency-ordered tag to propagate
+  ---
+  duration_ms: 9.436999
+  type: 'test'
+  ...
+# Subtest: tag propagation verification fails after its bounded retries
+ok 96 - tag propagation verification fails after its bounded retries
+  ---
+  duration_ms: 0.730641
+  type: 'test'
+  ...
+# Subtest: promotion retries a transient registry read without repeating the tag change
+ok 97 - promotion retries a transient registry read without repeating the tag change
+  ---
+  duration_ms: 0.685767
+  type: 'test'
+  ...
+# Subtest: npm registry requests abort when a read never settles
+ok 98 - npm registry requests abort when a read never settles
+  ---
+  duration_ms: 1.876101
+  type: 'test'
+  ...
+# Subtest: npm tag changes share one OTP without exposing it in arguments
+ok 99 - npm tag changes share one OTP without exposing it in arguments
+  ---
+  duration_ms: 0.29449
+  type: 'test'
+  ...
+# Subtest: npm tag changes honor a supplied OTP without prompting
+ok 100 - npm tag changes honor a supplied OTP without prompting
+  ---
+  duration_ms: 0.108287
+  type: 'test'
+  ...
+# Subtest: GitHub Actions tag changes use npm OIDC without an OTP
+ok 101 - GitHub Actions tag changes use npm OIDC without an OTP
+  ---
+  duration_ms: 0.116788
+  type: 'test'
+  ...
+# Subtest: GitHub Actions tag changes require an OIDC token permission
+ok 102 - GitHub Actions tag changes require an OIDC token permission
+  ---
+  duration_ms: 0.07683
+  type: 'test'
+  ...
+# Subtest: interactive npm OTP input is not echoed
+ok 103 - interactive npm OTP input is not echoed
+  ---
+  duration_ms: 2.093134
+  type: 'test'
+  ...
+# Subtest: release promotion resolves an exact commit from a clean checkout
+ok 104 - release promotion resolves an exact commit from a clean checkout
+  ---
+  duration_ms: 0.309447
+  type: 'test'
+  ...
+# Subtest: stable promotion validates the release commit on current main
+ok 105 - stable promotion validates the release commit on current main
+  ---
+  duration_ms: 0.217659
+  type: 'test'
+  ...
+# Subtest: stable promotion starts only after verified release commit
+ok 106 - stable promotion starts only after verified release commit
+  ---
+  duration_ms: 0.233741
+  type: 'test'
+  ...
+# Subtest: release notes are the exact matching changelog section
+ok 107 - release notes are the exact matching changelog section
+  ---
+  duration_ms: 0.874844
+  type: 'test'
+  ...
+# Subtest: release packages come only from versions changed by the exact commit
+ok 108 - release packages come only from versions changed by the exact commit
+  ---
+  duration_ms: 0.740432
+  type: 'test'
+  ...
+# Subtest: release planning can skip commits with unchanged package versions
+ok 109 - release planning can skip commits with unchanged package versions
+  ---
+  duration_ms: 0.162328
+  type: 'test'
+  ...
+# Subtest: release package discovery rejects a different checked-out commit
+ok 110 - release package discovery rejects a different checked-out commit
+  ---
+  duration_ms: 0.100038
+  type: 'test'
+  ...
+# Subtest: partial tag and Release creation resumes without recreating completed work
+ok 111 - partial tag and Release creation resumes without recreating completed work
+  ---
+  duration_ms: 6.491353
+  type: 'test'
+  ...
+# Subtest: a conflicting tag stops the complete plan before any mutation
+ok 112 - a conflicting tag stops the complete plan before any mutation
+  ---
+  duration_ms: 0.160702
+  type: 'test'
+  ...
+# Subtest: conflicting Release metadata stops before any mutation
+ok 113 - conflicting Release metadata stops before any mutation
+  ---
+  duration_ms: 0.253075
+  type: 'test'
+  ...
+# Subtest: empty release notes stop the complete plan before any mutation
+ok 114 - empty release notes stop the complete plan before any mutation
+  ---
+  duration_ms: 0.122537
+  type: 'test'
+  ...
+# Subtest: new tags and Releases target the exact published commit
+ok 115 - new tags and Releases target the exact published commit
+  ---
+  duration_ms: 0.455526
+  type: 'test'
+  ...
+# Subtest: GitHub requests create lightweight tags and Releases at the exact commit
+ok 116 - GitHub requests create lightweight tags and Releases at the exact commit
+  ---
+  duration_ms: 0.510398
+  type: 'test'
+  ...
+# Subtest: matching tags and Releases are idempotent no-ops
+ok 117 - matching tags and Releases are idempotent no-ops
+  ---
+  duration_ms: 0.181702
+  type: 'test'
+  ...
+# Subtest: discovers the public release set from workspace manifests
+ok 118 - discovers the public release set from workspace manifests
+  ---
+  duration_ms: 1.945722
+  type: 'test'
+  ...
+# Subtest: rejects a coherent set that omits a public workspace package
+ok 119 - rejects a coherent set that omits a public workspace package
+  ---
+  duration_ms: 0.299031
+  type: 'test'
+  ...
+# Subtest: workspace discovery does not expose npm OTP values to pnpm
+ok 120 - workspace discovery does not expose npm OTP values to pnpm
+  ---
+  duration_ms: 0.718267
+  type: 'test'
+  ...
+# Subtest: emits every scope exactly once as a boolean
+ok 121 - emits every scope exactly once as a boolean
+  ---
+  duration_ms: 46.73476
+  type: 'test'
+  ...
+# Subtest: a documentation-only change selects nothing
+ok 122 - a documentation-only change selects nothing
+  ---
+  duration_ms: 23.917111
+  type: 'test'
+  ...
+# Subtest: a foldkit change reaches the website and the typing game
+ok 123 - a foldkit change reaches the website and the typing game
+  ---
+  duration_ms: 18.726045
+  type: 'test'
+  ...
+# Subtest: a markdown change reaches the website
+ok 124 - a markdown change reaches the website
+  ---
+  duration_ms: 36.485998
+  type: 'test'
+  ...
+# Subtest: an example or playground build change reaches the website
+ok 125 - an example or playground build change reaches the website
+  ---
+  duration_ms: 113.050911
+  type: 'test'
+  ...
+# Subtest: a create-foldkit-app change selects the smoke test
+ok 126 - a create-foldkit-app change selects the smoke test
+  ---
+  duration_ms: 18.495803
+  type: 'test'
+  ...
+# Subtest: an oxlint plugin change selects the smoke test
+ok 127 - an oxlint plugin change selects the smoke test
+  ---
+  duration_ms: 27.951801
+  type: 'test'
+  ...
+# Subtest: a foldkit change selects the packed consumer externalization gate
+ok 128 - a foldkit change selects the packed consumer externalization gate
+  ---
+  duration_ms: 67.539607
+  type: 'test'
+  ...
+# Subtest: a markdown change selects the packed consumer gate
+ok 129 - a markdown change selects the packed consumer gate
+  ---
+  duration_ms: 41.248539
+  type: 'test'
+  ...
+# Subtest: a website-only change leaves the packed consumer gate alone
+ok 130 - a website-only change leaves the packed consumer gate alone
+  ---
+  duration_ms: 45.194315
+  type: 'test'
+  ...
+# Subtest: browser-backed gate manifests select their consumers
+ok 131 - browser-backed gate manifests select their consumers
+  ---
+  duration_ms: 58.31985
+  type: 'test'
+  ...
+# Subtest: peer floor inputs select their packed-manifest gate
+ok 132 - peer floor inputs select their packed-manifest gate
+  ---
+  duration_ms: 236.312836
+  type: 'test'
+  ...
+# Subtest: a packed consumer fixture change selects only its focused gate
+ok 133 - a packed consumer fixture change selects only its focused gate
+  ---
+  duration_ms: 17.212807
+  type: 'test'
+  ...
+# Subtest: a scaffold or framework change selects the generated-app build gate
+ok 134 - a scaffold or framework change selects the generated-app build gate
+  ---
+  duration_ms: 421.361153
+  type: 'test'
+  ...
+# Subtest: an ssr host or framework change selects the host parity gate
+ok 135 - an ssr host or framework change selects the host parity gate
+  ---
+  duration_ms: 130.04981
+  type: 'test'
+  ...
+# Subtest: a host parity fixture change selects only its focused gate
+ok 136 - a host parity fixture change selects only its focused gate
+  ---
+  duration_ms: 37.507088
+  type: 'test'
+  ...
+# Subtest: a typing game change stays out of the website scope
+ok 137 - a typing game change stays out of the website scope
+  ---
+  duration_ms: 19.682678
+  type: 'test'
+  ...
+# Subtest: website deployment infrastructure selects the website scope
+ok 138 - website deployment infrastructure selects the website scope
+  ---
+  duration_ms: 145.842542
+  type: 'test'
+  ...
+# Subtest: a lockfile change selects everything, including the typing game
+ok 139 - a lockfile change selects everything, including the typing game
+  ---
+  duration_ms: 17.617584
+  type: 'test'
+  ...
+# Subtest: changing the planner forces the conservative fallback
+ok 140 - changing the planner forces the conservative fallback
+  ---
+  duration_ms: 18.167357
+  type: 'test'
+  ...
+# Subtest: changing the shared diff helper forces the conservative fallback
+ok 141 - changing the shared diff helper forces the conservative fallback
+  ---
+  duration_ms: 18.903038
+  type: 'test'
+  ...
+# Subtest: a workspace-wide change also selects every application scope
+ok 142 - a workspace-wide change also selects every application scope
+  ---
+  duration_ms: 55.358998
+  type: 'test'
+  ...
+# Subtest: an all-zero base revision selects everything
+ok 143 - an all-zero base revision selects everything
+  ---
+  duration_ms: 38.040361
+  type: 'test'
+  ...
+# Subtest: an unresolvable revision range selects everything
+ok 144 - an unresolvable revision range selects everything
+  ---
+  duration_ms: 20.308448
+  type: 'test'
+  ...
+# Subtest: a documentation-only change selects no examples
+ok 145 - a documentation-only change selects no examples
+  ---
+  duration_ms: 47.625354
+  type: 'test'
+  ...
+# Subtest: an example change selects only that example
+ok 146 - an example change selects only that example
+  ---
+  duration_ms: 24.689208
+  type: 'test'
+  ...
+# Subtest: a spec change selects only that example
+ok 147 - a spec change selects only that example
+  ---
+  duration_ms: 47.455068
+  type: 'test'
+  ...
+# Subtest: a Node adapter change selects only the SSR example
+ok 148 - a Node adapter change selects only the SSR example
+  ---
+  duration_ms: 48.857435
+  type: 'test'
+  ...
+# Subtest: a foldkit change selects every example
+ok 149 - a foldkit change selects every example
+  ---
+  duration_ms: 20.495982
+  type: 'test'
+  ...
+# Subtest: a markdown change selects every example
+ok 150 - a markdown change selects every example
+  ---
+  duration_ms: 19.618721
+  type: 'test'
+  ...
+# Subtest: an E2E harness change selects every example
+ok 151 - an E2E harness change selects every example
+  ---
+  duration_ms: 47.947093
+  type: 'test'
+  ...
+# Subtest: changing the shared diff helper selects every example
+ok 152 - changing the shared diff helper selects every example
+  ---
+  duration_ms: 28.822062
+  type: 'test'
+  ...
+# Subtest: an all-zero base revision selects every example
+ok 153 - an all-zero base revision selects every example
+  ---
+  duration_ms: 22.470287
+  type: 'test'
+  ...
+# Subtest: an unresolvable revision range selects every example
+ok 154 - an unresolvable revision range selects every example
+  ---
+  duration_ms: 47.865929
+  type: 'test'
+  ...
+# Subtest: shards stay bounded and cover each example exactly once
+ok 155 - shards stay bounded and cover each example exactly once
+  ---
+  duration_ms: 37.951738
+  type: 'test'
+  ...
+# Subtest: shard sizes stay within one example of each other
+ok 156 - shard sizes stay within one example of each other
+  ---
+  duration_ms: 41.575485
+  type: 'test'
+  ...
+# Subtest: fewer examples than the cap produce one shard each
+ok 157 - fewer examples than the cap produce one shard each
+  ---
+  duration_ms: 19.964959
+  type: 'test'
+  ...
+# Subtest: allows a website-only commit after the package set was released
+ok 158 - allows a website-only commit after the package set was released
+  ---
+  duration_ms: 181.015169
+  type: 'test'
+  ...
+# Subtest: allows test-only package changes after the package set was released
+ok 159 - allows test-only package changes after the package set was released
+  ---
+  duration_ms: 152.374893
+  type: 'test'
+  ...
+# Subtest: defers a website deploy while package source is unpublished
+ok 160 - defers a website deploy while package source is unpublished
+  ---
+  duration_ms: 168.375867
+  type: 'test'
+  ...
+# Subtest: defers a website deploy when a manifest version has no release tag
+ok 161 - defers a website deploy when a manifest version has no release tag
+  ---
+  duration_ms: 104.114728
+  type: 'test'
+  ...
+# Subtest: defers a website deploy when shared package inputs are unpublished
+ok 162 - defers a website deploy when shared package inputs are unpublished
+  ---
+  duration_ms: 110.906112
+  type: 'test'
+  ...
+# Subtest: refuses an older target after a newer website commit exists
+ok 163 - refuses an older target after a newer website commit exists
+  ---
+  duration_ms: 121.174207
+  type: 'test'
+  ...
+# Subtest: allows an exact historical release target during finalization
+ok 164 - allows an exact historical release target during finalization
+  ---
+  duration_ms: 144.37726
+  type: 'test'
+  ...
+# Subtest: the real versioner reproduces the missing coordination bump without preparation
+ok 165 - the real versioner reproduces the missing coordination bump without preparation
+  ---
+  duration_ms: 409.138961
+  type: 'test'
+  ...
+# Subtest: coordination patches preserve a requested minor release and satisfy the publication check
+ok 166 - coordination patches preserve a requested minor release and satisfy the publication check
+  ---
+  duration_ms: 324.875155
+  type: 'test'
+  ...
+# Subtest: unchanged shared inputs preserve a package-specific release plan
+ok 167 - unchanged shared inputs preserve a package-specific release plan
+  ---
+  duration_ms: 275.052462
+  type: 'test'
+  ...
+# Subtest: preparation includes working-tree shared input changes and is repeatable
+ok 168 - preparation includes working-tree shared input changes and is repeatable
+  ---
+  duration_ms: 119.021742
+  type: 'test'
+  ...
+# Subtest: missing release tags stop preparation before changing a changeset
+ok 169 - missing release tags stop preparation before changing a changeset
+  ---
+  duration_ms: 114.877597
+  type: 'test'
+  ...
+# Subtest: preparation includes a newly added shared configuration file
+ok 170 - preparation includes a newly added shared configuration file
+  ---
+  duration_ms: 108.006924
+  type: 'test'
+  ...
+# Subtest: preparation refuses to overwrite different changeset contents
+ok 171 - preparation refuses to overwrite different changeset contents
+  ---
+  duration_ms: 102.350791
+  type: 'test'
+  ...
+# Subtest: reverted shared changes remove only the unchanged generated changeset
+ok 172 - reverted shared changes remove only the unchanged generated changeset
+  ---
+  duration_ms: 123.160929
+  type: 'test'
+  ...
+# Subtest: a finalized coordinated release does not schedule the same bumps again
+ok 173 - a finalized coordinated release does not schedule the same bumps again
+  ---
+  duration_ms: 337.109058
+  type: 'test'
+  ...
+# Subtest: versioning-induced lockfile changes receive coordination bumps
+ok 174 - versioning-induced lockfile changes receive coordination bumps
+  ---
+  duration_ms: 2936.743362
+  type: 'test'
+  ...
+# Subtest: the coordinator keeps package-specific plans and is repeatable after finalization
+ok 175 - the coordinator keeps package-specific plans and is repeatable after finalization
+  ---
+  duration_ms: 3854.718453
+  type: 'test'
+  ...
+# Subtest: the coordinator rejects dirty files without changing them
+ok 176 - the coordinator rejects dirty files without changing them
+  ---
+  duration_ms: 250.697054
+  type: 'test'
+  ...
+# Subtest: the coordinator leaves a missing-tag checkout unchanged
+ok 177 - the coordinator leaves a missing-tag checkout unchanged
+  ---
+  duration_ms: 663.437303
+  type: 'test'
+  ...
+# Subtest: failed versioning restores consumed changesets and removes new release metadata
+ok 178 - failed versioning restores consumed changesets and removes new release metadata
+  ---
+  duration_ms: 1226.614866
+  type: 'test'
+  ...
+# Subtest: the coordinator refuses an unconsumed generated changeset
+ok 179 - the coordinator refuses an unconsumed generated changeset
+  ---
+  duration_ms: 1025.458028
+  type: 'test'
+  ...
+# Subtest: the coordinator reports and preserves changes outside release metadata
+ok 180 - the coordinator reports and preserves changes outside release metadata
+  ---
+  duration_ms: 1287.229712
+  type: 'test'
+  ...
+# Subtest: a failed coordinated retry restores the original release plan
+ok 181 - a failed coordinated retry restores the original release plan
+  ---
+  duration_ms: 2869.507148
+  type: 'test'
+  ...
+# Subtest: prerelease versioning preserves consumed changesets through coordination replanning
+ok 182 - prerelease versioning preserves consumed changesets through coordination replanning
+  ---
+  duration_ms: 2467.578317
+  type: 'test'
+  ...
+# Subtest: failed prerelease versioning restores existing nested changesets and removes only new copies
+ok 183 - failed prerelease versioning restores existing nested changesets and removes only new copies
+  ---
+  duration_ms: 1173.858626
+  type: 'test'
+  ...
+# Subtest: package changelogs credit pull request authors
+ok 184 - package changelogs credit pull request authors
+  ---
+  duration_ms: 0.928467
+  type: 'test'
+  ...
+# Subtest: version planning coordinates shared inputs using the complete release history
+ok 185 - version planning coordinates shared inputs using the complete release history
+  ---
+  duration_ms: 0.251907
+  type: 'test'
+  ...
+# Subtest: Changesets only versions packages and cannot parse publisher output
+ok 186 - Changesets only versions packages and cannot parse publisher output
+  ---
+  duration_ms: 0.376529
+  type: 'test'
+  ...
+# Subtest: stable promotion follows verified uploads and exposes the promoted commit
+ok 187 - stable promotion follows verified uploads and exposes the promoted commit
+  ---
+  duration_ms: 0.215909
+  type: 'test'
+  ...
+# Subtest: canaries publish from the trusted release workflow and use exact snapshots
+ok 188 - canaries publish from the trusted release workflow and use exact snapshots
+  ---
+  duration_ms: 0.183577
+  type: 'test'
+  ...
+# Subtest: website canaries deploy only after their package snapshot is verified
+ok 189 - website canaries deploy only after their package snapshot is verified
+  ---
+  duration_ms: 0.295573
+  type: 'test'
+  ...
+# Subtest: website deployment waits for a separately verified latest promotion
+ok 190 - website deployment waits for a separately verified latest promotion
+  ---
+  duration_ms: 0.36932
+  type: 'test'
+  ...
+# Subtest: promotion reports the exact verified release commit
+ok 191 - promotion reports the exact verified release commit
+  ---
+  duration_ms: 0.100538
+  type: 'test'
+  ...
+# Subtest: finalization accepts successful promotions and explicit recovery runs
+ok 192 - finalization accepts successful promotions and explicit recovery runs
+  ---
+  duration_ms: 2.041552
+  type: 'test'
+  ...
+# Subtest: SPA includes its local peers without installing the Node adapter
+ok 193 - SPA includes its local peers without installing the Node adapter
+  ---
+  duration_ms: 0.968133
+  type: 'test'
+  ...
+# Subtest: SSG includes its local peers without installing the Node adapter
+ok 194 - SSG includes its local peers without installing the Node adapter
+  ---
+  duration_ms: 0.180243
+  type: 'test'
+  ...
+# Subtest: SSR includes its declared Node adapter and UI packages
+ok 195 - SSR includes its declared Node adapter and UI packages
+  ---
+  duration_ms: 0.107538
+  type: 'test'
+  ...
+# Subtest: selects runtime dependencies when devDependencies are absent
+ok 196 - selects runtime dependencies when devDependencies are absent
+  ---
+  duration_ms: 0.086705
+  type: 'test'
+  ...
+# Subtest: selects tooling dependencies and their local peers when dependencies are absent
+ok 197 - selects tooling dependencies and their local peers when dependencies are absent
+  ---
+  duration_ms: 0.081206
+  type: 'test'
+  ...
+# Subtest: a manifest with no local dependencies selects no tarballs
+ok 198 - a manifest with no local dependencies selects no tarballs
+  ---
+  duration_ms: 0.08183
+  type: 'test'
+  ...
+# Subtest: a declared local dependency without a tarball fails before installation
+ok 199 - a declared local dependency without a tarball fails before installation
+  ---
+  duration_ms: 0.238158
+  type: 'test'
+  ...
+# Subtest: local peer cycles select each package once in snapshot order
+ok 200 - local peer cycles select each package once in snapshot order
+  ---
+  duration_ms: 0.075206
+  type: 'test'
+  ...
+# Subtest: adds truthful alignment notes to an empty generated changelog section
+ok 201 - adds truthful alignment notes to an empty generated changelog section
+  ---
+  duration_ms: 0.720141
+  type: 'test'
+  ...
+# Subtest: preserves package-specific generated notes
+ok 202 - preserves package-specific generated notes
+  ---
+  duration_ms: 0.091163
+  type: 'test'
+  ...
+# Subtest: adds alignment notes without changing older release sections
+ok 203 - adds alignment notes without changing older release sections
+  ---
+  duration_ms: 0.082164
+  type: 'test'
+  ...
+# Subtest: only updates public packages versioned by the current release
+ok 204 - only updates public packages versioned by the current release
+  ---
+  duration_ms: 2.690238
+  type: 'test'
+  ...
+1..204
+# tests 204
+# suites 0
+# pass 204
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 19921.706801
+
+Exit code: 0

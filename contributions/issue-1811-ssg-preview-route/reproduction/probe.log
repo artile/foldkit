@@ -1,0 +1,23 @@
+{"method":"GET","path":"/","status":200,"location":null,"title":"Home | Foldkit App","heading":"Statically generated home","isAbout":false,"isHome":true}
+{"method":"GET","path":"/about","status":200,"location":null,"title":"Home | Foldkit App","heading":"Statically generated home","isAbout":false,"isHome":true}
+{"method":"GET","path":"/about/","status":200,"location":null,"title":"About | Foldkit App","heading":"Statically generated about page","isAbout":true,"isHome":false}
+{"method":"GET","path":"/about/index.html","status":200,"location":null,"title":"About | Foldkit App","heading":"Statically generated about page","isAbout":true,"isHome":false}
+{"method":"GET","path":"/about?source=probe","status":200,"location":null,"title":"Home | Foldkit App","heading":"Statically generated home","isAbout":false,"isHome":true}
+{"method":"GET","path":"/about/?source=probe","status":200,"location":null,"title":"About | Foldkit App","heading":"Statically generated about page","isAbout":true,"isHome":false}
+{"method":"GET","path":"/missing","status":200,"location":null,"title":"Home | Foldkit App","heading":"Statically generated home","isAbout":false,"isHome":true}
+{"method":"GET","path":"/about.html","status":200,"location":null,"title":"Home | Foldkit App","heading":"Statically generated home","isAbout":false,"isHome":true}
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: GET /about must serve About HTML or redirect to /about/; received Home HTML
+    at file:///home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1811-ssg-preview-route/reproduction/reproduce.mjs:104:12 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v22.22.3

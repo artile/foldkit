@@ -1,0 +1,11 @@
+--- packages/vite-plugin-foldkit/src/preview.ts
++++ packages/vite-plugin-foldkit/src/preview.ts
+@@ -61,7 +61,7 @@
+ 
+   const index = realpathSync(resolve(file, 'index.html'))
+   if (isContained(realpathSync(root), index) && statSync(index).isFile()) {
+-    request.url = `${pathname}/index.html${url.slice(pathname.length)}`
++    request.url = url
+   }
+ }
+ 
