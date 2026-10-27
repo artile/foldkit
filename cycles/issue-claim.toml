@@ -1,5 +1,5 @@
 id = "issue-claim"
 skill = "maintainer-issue-claim"
 schedule = { type = "interval", everyMs = 7200000 }
-t3_scheduled_task_id = "scheduled-task:d47a4c94-f877-4b80-8728-c05a4c99981a"  # macmax T3
+t3_scheduled_task_id = "scheduled-task:7e482b32-bff6-4733-8572-0f10dd1ae6da"  # macmax T3, project CAFE Maintainer
 prompt = "Run the $maintainer-issue-claim skill for CAFE Maintainer. Read /Users/tao/Tools/foldkit/.maintainer/AGENTS.md first."

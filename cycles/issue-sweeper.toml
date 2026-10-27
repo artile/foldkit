@@ -1,5 +1,5 @@
 id = "issue-sweeper"
 skill = "maintainer-issue-sweeper"
 schedule = { type = "fixed_time", timeOfDay = "10:00", weekdays = [1] }
-t3_scheduled_task_id = "scheduled-task:fe08aa82-4d63-4b83-b68d-c6458793c045"  # macmax T3
+t3_scheduled_task_id = "scheduled-task:e932ce3a-c445-4104-9c1a-c7a4d390f9cb"  # macmax T3, project CAFE Maintainer
 prompt = "Run the $maintainer-issue-sweeper skill for CAFE Maintainer. Read /Users/tao/Tools/foldkit/.maintainer/AGENTS.md first."

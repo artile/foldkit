@@ -1,5 +1,5 @@
 id = "ecosystem-miner"
 skill = "maintainer-ecosystem-miner"
 schedule = { type = "fixed_time", timeOfDay = "10:00", weekdays = [3] }
-t3_scheduled_task_id = "scheduled-task:04ed49b5-1289-4d30-87bd-ba67acca03e3"  # macmax T3
+t3_scheduled_task_id = "scheduled-task:5fb5e13a-9b64-4617-998d-fb1f0ad63c40"  # macmax T3, project CAFE Maintainer
 prompt = "Run the $maintainer-ecosystem-miner skill for CAFE Maintainer. Read /Users/tao/Tools/foldkit/.maintainer/AGENTS.md first."
