@@ -1,4 +1,6 @@
-PASS state "analysis: in progress" is a known state
+PASS state "implementation: delivered round 1" is a known state
 PASS returned state matches status.md
 PASS artifact directory holds only defined entries
 PASS evaluation/ holds only round-N directories
+PASS assignment.md exists
+PASS 0 earlier evaluation round(s), as round 1 requires

@@ -182,9 +182,11 @@ reason = "External parent-owned scrolling reproduced at upstream/main b702a5efbb
 [issues.1723]
 priority = "P2"
 priority_source = "label"
-decision = "awaiting-approval"
+decision = "claimed"
 slug = "issue-1723-keyboard-previous"
-reason = "Previous-key navigation defect isolated from the feature requests and reproduced at upstream/main b702a5efbb74bebc056b798b414ddb923a82fbd5: helper and public Combobox focus-opening Scene fail; 184 existing tests pass. Implementation recommended with no API change; claim held because UTC issue_comments allowance is 6/6. No publication review or claim attempted."
+reason = "Draft PR #1803 delivered at f4f8b0bc54945f7d68f68b715dd82f6442bbae0d. Five regressions and full pre-push suite pass; full-range and exact-text reviews clean. Evaluation round 1 deferred: Plan passed, CI and 10 E2E shards in progress. Next driver retries evaluation."
+comment_url = "https://github.com/foldkit/foldkit/issues/1723#issuecomment-6430308902"
+pull_request_url = "https://github.com/foldkit/foldkit/pull/1803"
 
 # Skipped.
 
