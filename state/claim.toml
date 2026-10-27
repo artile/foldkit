@@ -1,5 +1,5 @@
 # maintainer-issue-claim state. decision: skip | watch | no-claim | awaiting-approval | claimed
-last_poll = "2026-10-27T14:00:19Z"
+last_poll = "2026-10-27T16:00:22Z"
 
 # Deferred bug candidates (2-per-run limit). Next run takes them smallest first.
 
@@ -7,7 +7,7 @@ last_poll = "2026-10-27T14:00:19Z"
 decision = "watch"
 priority = "P2"
 priority_source = "label"
-reason = "awaiting maintainer direction: accessible heading name versus description and label callback API; rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "awaiting maintainer direction: accessible heading name versus description and label callback API; rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1681]
 decision = "no-claim"
@@ -37,19 +37,19 @@ reason = "PR #1752 promoted to ready for review: evaluation round 2 scores 100/1
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "direction: who owns the size transition (inline style vs consumer class); rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "direction: who owns the size transition (inline style vs consumer class); rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1670]
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "direction: draggable input shape and mid-drag ActivatedKeyboardDrag policy; rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "direction: draggable input shape and mid-drag ActivatedKeyboardDrag policy; rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1635]
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "direction: dev Model preservation key (URL, tab); rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "direction: dev Model preservation key (URL, tab); rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1629]
 priority = "P2"
@@ -70,109 +70,109 @@ reason = "F1 promoted as PR #1807 at 89442de8e75961407d8463d722d51ea2c03e44ce: m
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "feature request: history state in pushUrl/replaceUrl; rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request: history state in pushUrl/replaceUrl; rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1683]
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "feature request: top-layer anchor support; rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request: top-layer anchor support; rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1686]
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "feature request: non-modal Dialog; rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request: non-modal Dialog; rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1687]
 priority = "P3"
 priority_source = "label"
 decision = "watch"
-reason = "feature request: Tooltip arrow; rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request: Tooltip arrow; rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1688]
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "feature request: anchor boundary options, depends on #1683; rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request: anchor boundary options, depends on #1683; rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1689]
 priority = "P3"
 priority_source = "label"
 decision = "watch"
-reason = "feature request: showModal opt-in; rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request: showModal opt-in; rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1690]
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "feature request: VirtualList row attributes; rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request: VirtualList row attributes; rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1710]
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "feature request: anchor CSS variables; rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request: anchor CSS variables; rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1712]
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1713]
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1714]
 priority = "P3"
 priority_source = "label"
 decision = "watch"
-reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1715]
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1716]
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1717]
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1718]
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1719]
 priority = "P2"
 priority_source = "label"
 decision = "watch"
-reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1720]
 priority = "P3"
 priority_source = "label"
 decision = "watch"
-reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1721]
 priority = "P3"
 priority_source = "label"
 decision = "watch"
-reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T14:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
+reason = "feature request (Makisuo UI batch); rechecked 2026-10-27T16:00Z: no comments or maintainer direction, unassigned, no referencing open PR"
 
 [issues.1722]
 priority = "P2"
@@ -338,3 +338,9 @@ decision = "skip"
 priority = "P1"
 priority_source = "estimate"
 reason = "opened by devinjameson; maintainer-owned plan excluded from claiming; P1 estimate for Schema-backed selection correctness and coordinated public UI API changes"
+
+[issues.1810]
+decision = "skip"
+priority = "P2"
+priority_source = "estimate"
+reason = "opened by devinjameson; maintainer-owned plan excluded from claiming; P2 estimate for preview migration diagnostics and the unconfirmed DevTools preservation failure path"
