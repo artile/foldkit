@@ -1,0 +1,262 @@
+{
+  "implementation-baseline-1-results": [
+    {
+      "page": "cold-cache-cold-page-1-renders-fetched-posts",
+      "content": false,
+      "http_errors": 54,
+      "reloads": 0,
+      "model_requests": 0,
+      "page_errors": 0
+    },
+    {
+      "page": "cold-cache-cold-page-2-renders-fetched-posts",
+      "content": false,
+      "http_errors": 1,
+      "reloads": 0,
+      "model_requests": 0,
+      "page_errors": 0
+    },
+    {
+      "page": "cold-cache-cold-page-3-renders-fetched-posts",
+      "content": true,
+      "http_errors": 2,
+      "reloads": 1,
+      "model_requests": 1,
+      "page_errors": 0
+    }
+  ],
+  "implementation-fixed-cold-1-results": [
+    {
+      "page": "local-startup-first-naviga-039f2-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-0a86e-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-f1b43-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    }
+  ],
+  "implementation-fixed-cold-2-results": [
+    {
+      "page": "local-startup-first-naviga-039f2-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-0a86e-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-f1b43-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    }
+  ],
+  "implementation-fixed-cold-3-results": [
+    {
+      "page": "local-startup-first-naviga-039f2-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-0a86e-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-f1b43-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    }
+  ],
+  "implementation-fixed-counter-results": [
+    {
+      "page": "local-startup-first-naviga-039f2-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-0a86e-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-f1b43-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    }
+  ],
+  "implementation-fixed-ui-showcase-results": [
+    {
+      "page": "local-startup-first-naviga-039f2-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-0a86e-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-f1b43-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    }
+  ],
+  "implementation-fixed-warm-results": [
+    {
+      "page": "local-startup-first-naviga-039f2-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-0a86e-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-f1b43-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    }
+  ],
+  "implementation-interrupted-results": [
+    {
+      "page": "local-startup-first-naviga-039f2-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-0a86e-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-f1b43-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    }
+  ],
+  "implementation-negative-1-results": [
+    {
+      "page": "local-startup-first-naviga-039f2-hout-optimizer-invalidation",
+      "content": false,
+      "http_errors": 1,
+      "reloads": 0,
+      "model_requests": 0,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-0a86e-hout-optimizer-invalidation",
+      "content": false,
+      "http_errors": 4,
+      "reloads": 0,
+      "model_requests": 0,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-f1b43-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 1,
+      "model_requests": 1,
+      "page_errors": 0
+    }
+  ],
+  "implementation-ownership2-post-teardown-results": [
+    {
+      "page": "local-startup-first-naviga-039f2-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-0a86e-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    },
+    {
+      "page": "local-startup-first-naviga-f1b43-hout-optimizer-invalidation",
+      "content": true,
+      "http_errors": 0,
+      "reloads": 0,
+      "model_requests": 1,
+      "page_errors": 0
+    }
+  ]
+}

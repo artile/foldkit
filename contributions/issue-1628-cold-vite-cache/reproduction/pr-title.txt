@@ -1,0 +1,1 @@
+fix: declare client dependencies before example startup

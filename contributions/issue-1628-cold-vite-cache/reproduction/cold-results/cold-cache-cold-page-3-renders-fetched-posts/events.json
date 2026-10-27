@@ -1,0 +1,135 @@
+[
+  {
+    "elapsedMs": 62.485321,
+    "kind": "navigation",
+    "data": "http://localhost:5180/"
+  },
+  {
+    "elapsedMs": 284.457539,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect.js?v=b8639968",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 284.54716200000007,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 284.724115,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect.js?v=b8639968",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 477.827541,
+    "kind": "console",
+    "data": {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    }
+  },
+  {
+    "elapsedMs": 479.78144299999997,
+    "kind": "websocket-created",
+    "data": "ws://localhost:5180/?token=UsH2AWWywhqm"
+  },
+  {
+    "elapsedMs": 495.42470000000014,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"connected\"}"
+  },
+  {
+    "elapsedMs": 495.53240500000004,
+    "kind": "console",
+    "data": {
+      "type": "debug",
+      "text": "[vite] connected."
+    }
+  },
+  {
+    "elapsedMs": 621.850343,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/@effect_platform-browser.js?v=248f896d\"]}"
+  },
+  {
+    "elapsedMs": 625.8342690000001,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/effect_Function.js?v=b8639968\"]}"
+  },
+  {
+    "elapsedMs": 700.8328130000001,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Function.js?v=b8639968",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 700.8541040000001,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 702.932919,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Function.js?v=b8639968",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 796.176769,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/parse5.js?v=a053e5fd\"]}"
+  },
+  {
+    "elapsedMs": 796.718379,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/effect_http.js?v=c10693a7\"]}"
+  },
+  {
+    "elapsedMs": 815.9917389999999,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/@floating-ui_dom.js?v=03642a36\"]}"
+  },
+  {
+    "elapsedMs": 884.7044220000001,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/effect.js?v=b8639968\"]}"
+  },
+  {
+    "elapsedMs": 895.6988970000001,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  },
+  {
+    "elapsedMs": 1226.5823880000003,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:restore-model\",\"data\":{\"id\":\"root\"}}"
+  },
+  {
+    "elapsedMs": 15770.547777,
+    "kind": "body",
+    "data": "\n    <div id=\"root\"></div>\n    <script type=\"module\" src=\"./src/entry.ts\"></script>\n  \n\n"
+  }
+]

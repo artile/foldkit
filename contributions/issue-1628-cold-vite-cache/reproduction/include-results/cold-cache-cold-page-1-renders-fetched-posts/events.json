@@ -1,0 +1,1760 @@
+[
+  {
+    "elapsedMs": 140.47719999999993,
+    "kind": "navigation",
+    "data": "http://localhost:5180/"
+  },
+  {
+    "elapsedMs": 598.2032149999999,
+    "kind": "console",
+    "data": {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    }
+  },
+  {
+    "elapsedMs": 599.3085990000001,
+    "kind": "websocket-created",
+    "data": "ws://localhost:5180/?token=POoW1A6xiEd2"
+  },
+  {
+    "elapsedMs": 624.354336,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"connected\"}"
+  },
+  {
+    "elapsedMs": 624.474499,
+    "kind": "console",
+    "data": {
+      "type": "debug",
+      "text": "[vite] connected."
+    }
+  },
+  {
+    "elapsedMs": 652.0537869999999,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/effect_http.js?v=5e638c85\"]}"
+  },
+  {
+    "elapsedMs": 663.903696,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Function.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 663.9623190000001,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 664.152647,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Function.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 693.6028399999999,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/effect_Function.js?v=5e638c85\"]}"
+  },
+  {
+    "elapsedMs": 715.3762539999999,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/@effect_platform-browser.js?v=5e638c85\"]}"
+  },
+  {
+    "elapsedMs": 843.8796329999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/rolldown-runtime-D7D4PA-g.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 843.899466,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 844.0139619999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/rolldown-runtime-D7D4PA-g.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 845.2421350000001,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Function-CZHtECbB.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 845.299134,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 846.2168989999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Function-CZHtECbB.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 846.6159710000001,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Hash-yDuZZP3c.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 846.6429279999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 846.718884,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Hash-yDuZZP3c.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 865.6365890000001,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Predicate.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 865.760877,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 866.9795499999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Predicate.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 867.023466,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Equal.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 867.0353819999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 867.0455069999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Equal.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 867.0780060000001,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/core-DXbVeYXn.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 867.0884219999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 867.175836,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/core-DXbVeYXn.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 868.66321,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/record-DLCayOg_.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 868.8154559999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 868.906245,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/record-DLCayOg_.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 869.1867779999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Context-B_7C-dr0.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 869.456521,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 869.471228,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Context-B_7C-dr0.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 869.5656419999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Combiner-DXgSi8Qy.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 869.574184,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 869.5894749999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Combiner-DXgSi8Qy.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 875.962208,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Reducer-syxJJjyH.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 876.2638659999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 876.2772819999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Reducer-syxJJjyH.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 876.322239,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Equivalence.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 876.330531,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 876.3386139999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Equivalence.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 876.4596519999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Order.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 876.467777,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 876.475818,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Order.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 877.6986579999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Option.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 877.7109079999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 877.720991,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Option.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 877.838112,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Duration.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 877.880319,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 877.888403,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Duration.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 878.556925,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/count-CiF6awOt.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 878.6145479999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 878.6484219999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/count-CiF6awOt.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 879.2588629999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Result.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 879.267696,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 880.427454,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Result.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 892.571646,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Array-Bfi7JVpD.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 892.584479,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 892.6408519999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Array-Bfi7JVpD.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 893.485536,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Record.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 893.5308269999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 893.539993,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Record.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 894.0589779999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect-DG6F6DyA.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 894.11981,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 894.1288089999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect-DG6F6DyA.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 894.363594,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Scheduler.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 894.4155509999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 894.424093,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Scheduler.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 894.535839,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Data.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 894.588754,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 894.6184199999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Data.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 894.7253340000001,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Exit.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 894.7584579999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 894.766583,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Exit.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 911.925505,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/parse5.js?v=190b15f6\"]}"
+  },
+  {
+    "elapsedMs": 914.0805260000001,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Layer-Db-7miFZ.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 915.1024550000001,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 915.1332040000001,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Layer-Db-7miFZ.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 915.2456169999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Scope.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 915.2639499999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 915.2816159999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Scope.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 915.351906,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Effect-BCfs8A01.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 915.369489,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 915.3860719999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Effect-BCfs8A01.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 915.825809,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Cause.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 915.846267,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 915.864516,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Cause.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 916.1732989999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Clock.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 916.19159,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 916.2094229999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Clock.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 918.3265700000001,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Number.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 918.339445,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 918.376402,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Number.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 919.9146910000001,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/@floating-ui_dom.js?v=822893be\"]}"
+  },
+  {
+    "elapsedMs": 930.0311499999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_String.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 930.4229300000001,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 933.0589369999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_String.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 933.119644,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Pull-BHCk_xUm.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 933.1331429999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 933.1411429999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Pull-BHCk_xUm.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 933.1728509999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/FiberSet-BhKRl7D7.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 933.1805169999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 933.1879749999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/FiberSet-BhKRl7D7.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 933.218974,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/FileSystem-CCBHY-6y.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 933.2265160000001,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 933.23589,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/FileSystem-CCBHY-6y.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 933.5237149999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Schema-BrhJM_AV.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 933.531799,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 933.5396319999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Schema-BrhJM_AV.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 933.569881,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Redacted-uU8WIUV_.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 933.577506,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 933.5849219999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Redacted-uU8WIUV_.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 933.6155049999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Fiber.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 933.8996209999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 933.907871,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Fiber.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 933.940203,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/MutableRef-6dgn50hS.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 933.947745,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 933.955161,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/MutableRef-6dgn50hS.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 933.985327,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Ref.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 933.9928269999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 934.0002020000001,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Ref.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 934.030284,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/ByteSize-DWmSz_Xf.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 934.0377010000001,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 935.996186,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/ByteSize-DWmSz_Xf.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 936.0513930000001,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Chunk-jf1CD3V4.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 936.2207629999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 936.229721,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Chunk-jf1CD3V4.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 936.264012,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/PubSub-Cs7fZcj5.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 936.2718859999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 936.279469,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/PubSub-Cs7fZcj5.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 941.1439959999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/MutableList-CaXbyOmY.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 941.945973,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 941.9587640000001,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/MutableList-CaXbyOmY.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 942.002638,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Queue.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 942.010596,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 942.0182619999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Queue.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 942.0495950000001,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Stream-pKDSPUcP.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 942.0571779999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 942.0650529999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Stream-pKDSPUcP.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 943.0438989999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/SchemaTransformation-dEw4Q259.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 943.053149,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 943.061566,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/SchemaTransformation-dEw4Q259.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 943.0922730000001,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_DateTime.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 943.0998559999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 943.107273,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_DateTime.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 943.1373970000001,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_HashMap.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 943.144897,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 943.152271,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_HashMap.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 943.3893059999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/HashSet-DJSz3_sR.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 943.4410549999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 943.4487210000001,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/HashSet-DJSz3_sR.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 944.9732190000001,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/effect.js?v=5e638c85\"]}"
+  },
+  {
+    "elapsedMs": 945.420373,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/SchemaIssue-CR3Ko0Q9.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 945.4993289999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 945.509203,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/SchemaIssue-CR3Ko0Q9.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 945.641158,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/SchemaAST-DsdYZ9bh.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 945.649033,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 945.6566569999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/SchemaAST-DsdYZ9bh.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 945.791945,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Struct.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 945.8415269999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 945.849235,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Struct.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 947.538353,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Path-CYmW0J0w.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 947.597351,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 947.607476,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Path-CYmW0J0w.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 951.016211,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Persistence-CUBmPIyk.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 951.3707430000001,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 952.211927,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Persistence-CUBmPIyk.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 952.329423,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Runtime.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 952.3535889999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 952.371422,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Runtime.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 952.4483369999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/LogLevel-PWuUOEbn.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 952.465836,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 952.482836,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/LogLevel-PWuUOEbn.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 953.059652,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/ErrorReporter-pWC8Az_k.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 953.083068,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 953.1020259999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/ErrorReporter-pWC8Az_k.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 953.574471,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Config-DTMALyZJ.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 953.5965540000001,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 953.615553,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Config-DTMALyZJ.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 954.5791089999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Boolean.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 954.6119829999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 954.7124379999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Boolean.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 958.7834039999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Logger.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 958.8229029999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 958.849902,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Logger.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 959.5230909999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Match-C4jIglws.js?v=1bdb4922",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 959.548465,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 959.56884,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/Match-C4jIglws.js?v=1bdb4922",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 961.462993,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_SubscriptionRef.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 961.4907010000001,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 961.512409,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_SubscriptionRef.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 978.3666729999999,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Types.js?v=5e638c85",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 978.3984219999999,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 978.4213799999999,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect_Types.js?v=5e638c85",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 1235.215894,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  },
+  {
+    "elapsedMs": 1393.1013429999998,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:restore-model\",\"data\":{\"id\":\"root\"}}"
+  },
+  {
+    "elapsedMs": 1428.057711,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:restore-model\",\"data\":{\"id\":\"root\"}}"
+  },
+  {
+    "elapsedMs": 16147.657050999998,
+    "kind": "body",
+    "data": "\n    <div id=\"root\"></div>\n    <script type=\"module\" src=\"./src/entry.ts\"></script>\n  \n\n"
+  }
+]

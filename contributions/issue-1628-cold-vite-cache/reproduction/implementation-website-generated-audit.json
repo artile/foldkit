@@ -1,0 +1,18 @@
+[
+  {
+    "path": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/website/src/generated/api.json",
+    "name": "foldkit",
+    "bytes": 7821502,
+    "sha256": "4fc0c07187ef5f07989d8228853a531b6244dde5db5abdc6a4535e12d9606fb1",
+    "children": 27,
+    "ignored": true
+  },
+  {
+    "path": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/website/src/generated/api-ui.json",
+    "name": "@foldkit/ui",
+    "bytes": 4213286,
+    "sha256": "e9f62dc56c2c959cd7fcc087e7a885beb3ec80788d1f3368aa8d58165297a894",
+    "children": 1,
+    "ignored": true
+  }
+]

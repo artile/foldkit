@@ -1,0 +1,140 @@
+[
+  {
+    "elapsedMs": 106.07740100000001,
+    "kind": "navigation",
+    "data": "http://localhost:5180/"
+  },
+  {
+    "elapsedMs": 192.5041980000001,
+    "kind": "console",
+    "data": {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    }
+  },
+  {
+    "elapsedMs": 213.07406000000003,
+    "kind": "websocket-created",
+    "data": "ws://localhost:5180/?token=qgpsy4h5cqQU"
+  },
+  {
+    "elapsedMs": 213.36142400000006,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"connected\"}"
+  },
+  {
+    "elapsedMs": 213.3957150000001,
+    "kind": "console",
+    "data": {
+      "type": "debug",
+      "text": "[vite] connected."
+    }
+  },
+  {
+    "elapsedMs": 213.40479800000003,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"full-reload\",\"path\":\"*\"}"
+  },
+  {
+    "elapsedMs": 306.328895,
+    "kind": "navigation",
+    "data": "http://localhost:5180/"
+  },
+  {
+    "elapsedMs": 435.07112199999995,
+    "kind": "console",
+    "data": {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    }
+  },
+  {
+    "elapsedMs": 444.890716,
+    "kind": "websocket-created",
+    "data": "ws://localhost:5180/?token=qgpsy4h5cqQU"
+  },
+  {
+    "elapsedMs": 448.82311200000015,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"connected\"}"
+  },
+  {
+    "elapsedMs": 448.9573570000001,
+    "kind": "console",
+    "data": {
+      "type": "debug",
+      "text": "[vite] connected."
+    }
+  },
+  {
+    "elapsedMs": 515.937166,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/clsx.js?v=0d7ed4e8\",\"/node_modules/.vite/deps/effect_persistence.js?v=65a3844b\",\"/node_modules/.vite/deps/@effect_platform-browser.js?v=faffe664\"]}"
+  },
+  {
+    "elapsedMs": 765.5615370000002,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/parse5.js?v=bbc7ffee\"]}"
+  },
+  {
+    "elapsedMs": 779.4673550000001,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/@floating-ui_dom.js?v=2c9acbc1\"]}"
+  },
+  {
+    "elapsedMs": 811.4167960000001,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/effect.js?v=cc9f76b0\"]}"
+  },
+  {
+    "elapsedMs": 1132.896921,
+    "kind": "websocket-sent",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:request-model\",\"data\":{\"id\":\"root\"}}"
+  },
+  {
+    "elapsedMs": 1164.1456790000002,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:restore-model\",\"data\":{\"id\":\"root\"}}"
+  },
+  {
+    "elapsedMs": 1164.1514700000002,
+    "kind": "websocket-sent",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:devTools:event\",\"data\":{\"maybeConnectionId\":\"mvq35k16-zq97b6vj\",\"event\":{\"_tag\":\"EventConnected\",\"runtime\":{\"connectionId\":\"mvq35k16-zq97b6vj\",\"url\":\"http://localhost:5180/\",\"title\":\"API Cache Query\"}}}}"
+  },
+  {
+    "elapsedMs": 1212.8136250000002,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  },
+  {
+    "elapsedMs": 1899.332469,
+    "kind": "console",
+    "data": {
+      "type": "warning",
+      "text": "[foldkit] Slow patch: 9.2ms (budget: 8ms), triggered by GotPostsMessage. Key mapped lists by stable ids, split large views, or memoize stable subtrees with createLazy. Set slow.thresholdOverrides to change budgets or pass slow: false to disable warnings. {_tag: Patch, model: Object, message: SomeImpl, durationMs: 9.200000017881393, thresholdMs: 8} {_tag: GotPostsMessage, message: Object}"
+    }
+  },
+  {
+    "elapsedMs": 1905.0098010000002,
+    "kind": "websocket-sent",
+    "data": "{\"type\":\"custom\",\"event\":\"vite:forward-console\",\"data\":{\"type\":\"log\",\"data\":{\"level\":\"warn\",\"message\":\"[foldkit] Slow patch: 9.2ms (budget: 8ms), triggered by GotPostsMessage. Key mapped lists by stable ids, split large views, or memoize stable subtrees with createLazy. Set slow.thresholdOverrides to change budgets or pass slow: false to disable warnings. {\\\"_tag\\\":\\\"Patch\\\",\\\"model\\\":{\\\"tabs\\\":{\\\"id\\\":\\\"api-cache-query-tabs\\\",\\\"maybeFocusedIndex\\\":{\\\"_id\\\":\\\"Option\\\",\\\"_tag\\\":\\\"None\\\"},\\\"activationMode\\\":\\\"Automatic\\\"},\\\"activeTab\\\":\\\"Posts\\\",\\\"posts\\\":{\\\"data\\\":{\\\"_tag\\\":\\\"Success\\\",\\\"data\\\":{\\\"posts\\\":[{\\\"id\\\":\\\"model-is-the-cache\\\",\\\"title\\\":\\\"The Model Is the Cache\\\",\\\"excerpt\\\":\\\"Why a single source of truth needs no query client.\\\"},{\\\"id\\\":\\\"stale-while-revalidate\\\",\\\"title\\\":\\\"Stale-While-Revalidate, Explained\\\",\\\"excerpt\\\":\\\"Show the old data while the new data loads.\\\"},{\\\"id\\\":\\\"query-keys-are-names\\\",\\\"title\\\":\\\"Query Keys Are Just Names\\\",\\\"excerpt\\\":\\\"A Model field per query replaces stringly-typed keys.\\\"},{\\\"id\\\":\\\"refresh-is-a-message\\\",\\\"title\\\":\\\"Refresh Is a Message\\\",\\\"excerpt\\\":\\\"Requesting newer data is a fact, not hidden framework policy.\\\"},{\\\"id\\\":\\\"unavailable-post\\\",\\\"title\\\":\\\"This Post Is Unavailable\\\",\\\"excerpt\\\":\\\"Open it to see the Failure and Retry states.\\\"}],\\\"fetchedAt\\\":1793069281913}},\\\"generation\\\":1},\\\"postDetails\\\":{\\\"generation\\\":0,\\\"entries\\\":{\\\"_id\\\":\\\"HashMap\\\",\\\"values\\\":[]}},\\\"maybeSelectedPostId\\\":{\\\"_id\\\":\\\"Option\\\",\\\"_tag\\\":\\\"None\\\"},\\\"stats\\\":{\\\"data\\\":{\\\"_tag\\\":\\\"Idle\\\"},\\\"generation\\\":0}},\\\"message\\\":{\\\"_id\\\":\\\"Option\\\",\\\"_tag\\\":\\\"Some\\\",\\\"value\\\":{\\\"_tag\\\":\\\"GotPostsMessage\\\",\\\"message\\\":{\\\"_tag\\\":\\\"CompletedFetch\\\",\\\"generation\\\":1,\\\"result\\\":{\\\"_id\\\":\\\"Result\\\",\\\"_tag\\\":\\\"Success\\\",\\\"value\\\":\\\"[Circular]\\\"}}}},\\\"durationMs\\\":9.200000017881393,\\\"thresholdMs\\\":8} {\\\"_tag\\\":\\\"GotPostsMessage\\\",\\\"message\\\":{\\\"_tag\\\":\\\"CompletedFetch\\\",\\\"generation\\\":1,\\\"result\\\":{\\\"_id\\\":\\\"Result\\\",\\\"_tag\\\":\\\"Success\\\",\\\"value\\\":{\\\"posts\\\":[{\\\"id\\\":\\\"model-is-the-cache\\\",\\\"title\\\":\\\"The Model Is the Cache\\\",\\\"excerpt\\\":\\\"Why a single source of truth needs no query client.\\\"},{\\\"id\\\":\\\"stale-while-revalidate\\\",\\\"title\\\":\\\"Stale-While-Revalidate, Explained\\\",\\\"excerpt\\\":\\\"Show the old data while the new data loads.\\\"},{\\\"id\\\":\\\"query-keys-are-names\\\",\\\"title\\\":\\\"Query Keys Are Just Names\\\",\\\"excerpt\\\":\\\"A Model field per query replaces stringly-typed keys.\\\"},{\\\"id\\\":\\\"refresh-is-a-message\\\",\\\"title\\\":\\\"Refresh Is a Message\\\",\\\"excerpt\\\":\\\"Requesting newer data is a fact, not hidden framework policy.\\\"},{\\\"id\\\":\\\"unavailable-post\\\",\\\"title\\\":\\\"This Post Is Unavailable\\\",\\\"excerpt\\\":\\\"Open it to see the Failure and Retry states.\\\"}],\\\"fetchedAt\\\":1793069281913}}}}\"}}}"
+  },
+  {
+    "elapsedMs": 2069.3353349999998,
+    "kind": "content-passed",
+    "data": "api-cache-query"
+  },
+  {
+    "elapsedMs": 2099.105106,
+    "kind": "websocket-sent",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:preserve-model\",\"data\":{\"id\":\"root\",\"model\":{\"tabs\":{\"id\":\"api-cache-query-tabs\",\"maybeFocusedIndex\":{\"_tag\":\"None\"},\"activationMode\":\"Automatic\"},\"activeTab\":\"Posts\",\"posts\":{\"data\":{\"_tag\":\"Success\",\"data\":{\"posts\":[{\"id\":\"model-is-the-cache\",\"title\":\"The Model Is the Cache\",\"excerpt\":\"Why a single source of truth needs no query client.\"},{\"id\":\"stale-while-revalidate\",\"title\":\"Stale-While-Revalidate, Explained\",\"excerpt\":\"Show the old data while the new data loads.\"},{\"id\":\"query-keys-are-names\",\"title\":\"Query Keys Are Just Names\",\"excerpt\":\"A Model field per query replaces stringly-typed keys.\"},{\"id\":\"refresh-is-a-message\",\"title\":\"Refresh Is a Message\",\"excerpt\":\"Requesting newer data is a fact, not hidden framework policy.\"},{\"id\":\"unavailable-post\",\"title\":\"This Post Is Unavailable\",\"excerpt\":\"Open it to see the Failure and Retry states.\"}],\"fetchedAt\":1793069281913}},\"generation\":1},\"postDetails\":{\"generation\":0,\"entries\":[]},\"maybeSelectedPostId\":{\"_tag\":\"None\"},\"stats\":{\"data\":{\"_tag\":\"Idle\"},\"generation\":0}},\"isReloadFlush\":false}}"
+  },
+  {
+    "elapsedMs": 2103.025419,
+    "kind": "body",
+    "data": "\n    <div class=\"min-h-screen bg-slate-100 flex justify-center p-6\"><div class=\"w-full max-w-2xl flex flex-col gap-6\"><header class=\"flex flex-col gap-1\"><h1 class=\"text-3xl font-bold text-slate-900\">API Cache</h1><p class=\"text-slate-600\">Query.define owns each fetch and its retained data. The parent decides when each Query should load or refresh.</p></header><div class=\"flex flex-col gap-6\"><div role=\"tablist\" aria-orientation=\"horizontal\" aria-label=\"API cache sections\" class=\"flex gap-2\"><button role=\"tab\" aria-selected=\"true\" aria-controls=\"api-cache-query-tabs-panel-0\" data-selected=\"\" class=\"px-4 py-2 rounded-lg bg-white text-slate-600 font-semibold hover:bg-slate-50 transition cursor-pointer data-[selected]:bg-indigo-600 data-[selected]:text-white data-[selected]:hover:bg-indigo-600\" id=\"api-cache-query-tabs-tab-0\" type=\"button\" tabindex=\"0\">Posts</button><button role=\"tab\" aria-selected=\"false\" class=\"px-4 py-2 rounded-lg bg-white text-slate-600 font-semibold hover:bg-slate-50 transition cursor-pointer data-[selected]:bg-indigo-600 data-[selected]:text-white data-[selected]:hover:bg-indigo-600\" id=\"api-cache-query-tabs-tab-1\" type=\"button\" tabindex=\"-1\">Stats</button></div><div role=\"tabpanel\" aria-labelledby=\"api-cache-query-tabs-tab-0\" data-selected=\"\" class=\"flex flex-col gap-4\" id=\"api-cache-query-tabs-panel-0\" tabindex=\"0\"><section class=\"flex flex-col gap-4\"><div class=\"flex flex-col gap-4\"><div class=\"flex items-center justify-between\"><h2 class=\"text-xl font-bold text-slate-800\">Posts</h2><button class=\"px-3 py-1.5 bg-white text-slate-700 text-sm font-semibold rounded-md shadow hover:bg-slate-50 transition cursor-pointer data-[disabled]:opacity-50 data-[disabled]:cursor-default data-[disabled]:hover:bg-white\" type=\"button\" tabindex=\"0\">Refresh</button></div><p class=\"text-sm text-slate-500\">Open a post, then go back. The detail stays in the Query. Opening it again reads that entry and does not fetch.</p><div class=\"flex flex-col gap-4\"><ul class=\"flex flex-col gap-2\"><li><button class=\"w-full text-left bg-white rounded-lg shadow px-4 py-3 hover:bg-slate-50 transition cursor-pointer flex items-center justify-between gap-4\" type=\"button\" tabindex=\"0\"><div><div class=\"font-semibold text-slate-800\">The Model Is the Cache</div><div class=\"text-sm text-slate-500\">Why a single source of truth needs no query client.</div></div></button></li><li><button class=\"w-full text-left bg-white rounded-lg shadow px-4 py-3 hover:bg-slate-50 transition cursor-pointer flex items-center justify-between gap-4\" type=\"button\" tabindex=\"0\"><div><div class=\"font-semibold text-slate-800\">Stale-While-Revalidate, Explained</div><div class=\"text-sm text-slate-500\">Show the old data while the new data loads.</div></div></button></li><li><button class=\"w-full text-left bg-white rounded-lg shadow px-4 py-3 hover:bg-slate-50 transition cursor-pointer flex items-center justify-between gap-4\" type=\"button\" tabindex=\"0\"><div><div class=\"font-semibold text-slate-800\">Query Keys Are Just Names</div><div class=\"text-sm text-slate-500\">A Model field per query replaces stringly-typed keys.</div></div></button></li><li><button class=\"w-full text-left bg-white rounded-lg shadow px-4 py-3 hover:bg-slate-50 transition cursor-pointer flex items-center justify-between gap-4\" type=\"button\" tabindex=\"0\"><div><div class=\"font-semibold text-slate-800\">Refresh Is a Message</div><div class=\"text-sm text-slate-500\">Requesting newer data is a fact, not hidden framework policy.</div></div></button></li><li><button class=\"w-full text-left bg-white rounded-lg shadow px-4 py-3 hover:bg-slate-50 transition cursor-pointer flex items-center justify-between gap-4\" type=\"button\" tabindex=\"0\"><div><div class=\"font-semibold text-slate-800\">This Post Is Unavailable</div><div class=\"text-sm text-slate-500\">Open it to see the Failure and Retry states.</div></div></button></li></ul></div></div></section></div></div></div></div>\n    <script type=\"module\" src=\"./src/entry.ts\"></script>\n  \n\n<div id=\"foldkit-devtools\" style=\"view-transition-name: foldkit-devtools;\"></div>"
+  }
+]

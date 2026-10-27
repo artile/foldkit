@@ -1,0 +1,76 @@
+[
+  {
+    "elapsedMs": 75.86800800000003,
+    "kind": "navigation",
+    "data": "http://localhost:5180/"
+  },
+  {
+    "elapsedMs": 181.2331690000001,
+    "kind": "console",
+    "data": {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    }
+  },
+  {
+    "elapsedMs": 181.77919000000009,
+    "kind": "websocket-created",
+    "data": "ws://localhost:5180/?token=CGAAZFV2I8G-"
+  },
+  {
+    "elapsedMs": 213.81728900000007,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"connected\"}"
+  },
+  {
+    "elapsedMs": 213.9312430000001,
+    "kind": "console",
+    "data": {
+      "type": "debug",
+      "text": "[vite] connected."
+    }
+  },
+  {
+    "elapsedMs": 888.1573090000002,
+    "kind": "websocket-sent",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:request-model\",\"data\":{\"id\":\"root\"}}"
+  },
+  {
+    "elapsedMs": 915.0103510000001,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:restore-model\",\"data\":{\"id\":\"root\"}}"
+  },
+  {
+    "elapsedMs": 915.0173090000001,
+    "kind": "websocket-sent",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:devTools:event\",\"data\":{\"maybeConnectionId\":\"mvq34hvp-xygy6cdt\",\"event\":{\"_tag\":\"EventConnected\",\"runtime\":{\"connectionId\":\"mvq34hvp-xygy6cdt\",\"url\":\"http://localhost:5180/\",\"title\":\"Counter\"}}}}"
+  },
+  {
+    "elapsedMs": 962.090764,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:restore-model\",\"data\":{\"id\":\"root\"}}"
+  },
+  {
+    "elapsedMs": 962.229343,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:restore-model\",\"data\":{\"id\":\"root\"}}"
+  },
+  {
+    "elapsedMs": 962.4150440000001,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  },
+  {
+    "elapsedMs": 1012.788669,
+    "kind": "content-passed",
+    "data": "counter"
+  },
+  {
+    "elapsedMs": 1017.4368710000001,
+    "kind": "body",
+    "data": "\n    <div class=\"min-h-screen bg-white flex flex-col items-center justify-center gap-6 p-6\"><p class=\"text-6xl font-bold text-gray-800\">1</p><div class=\"flex flex-wrap justify-center gap-4\"><button class=\"bg-black text-white hover:bg-gray-700 px-4 py-2 transition\" type=\"button\" tabindex=\"0\">-</button><button class=\"bg-black text-white hover:bg-gray-700 px-4 py-2 transition\" type=\"button\" tabindex=\"0\">Reset</button><button class=\"bg-black text-white hover:bg-gray-700 px-4 py-2 transition\" type=\"button\" tabindex=\"0\">+</button></div></div>\n    <script type=\"module\" src=\"./src/entry.ts\"></script>\n  \n\n<div id=\"foldkit-devtools\" style=\"view-transition-name: foldkit-devtools;\"></div>"
+  }
+]

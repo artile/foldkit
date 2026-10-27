@@ -1,0 +1,2746 @@
+{
+  "base": {
+    "aliases": [
+      {
+        "find": "foldkit/brand",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/dist/brand/public.js"
+      },
+      {
+        "find": "foldkit/asyncData",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/asyncData/public"
+      },
+      {
+        "find": "foldkit/calendar",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/calendar"
+      },
+      {
+        "find": "foldkit/canvas",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/canvas"
+      },
+      {
+        "find": "foldkit/command",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/command"
+      },
+      {
+        "find": "foldkit/customElement",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/customElement"
+      },
+      {
+        "find": "foldkit/devtools-host",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/devTools/host"
+      },
+      {
+        "find": "foldkit/dom",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/dom"
+      },
+      {
+        "find": "foldkit/experimental/machine",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/machine"
+      },
+      {
+        "find": "foldkit/experimental/query",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/query/public"
+      },
+      {
+        "find": "foldkit/experimental/server",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/server/public"
+      },
+      {
+        "find": "foldkit/experimental",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental"
+      },
+      {
+        "find": "foldkit/fieldValidation",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/fieldValidation"
+      },
+      {
+        "find": "foldkit/file",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/file"
+      },
+      {
+        "find": "foldkit/html",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/html"
+      },
+      {
+        "find": "foldkit/http",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/http"
+      },
+      {
+        "find": "foldkit/managedResource",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/managedResource"
+      },
+      {
+        "find": "foldkit/message",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/message"
+      },
+      {
+        "find": "foldkit/mount",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/mount"
+      },
+      {
+        "find": "foldkit/navigation",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/navigation"
+      },
+      {
+        "find": "foldkit/port",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/port"
+      },
+      {
+        "find": "foldkit/render",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/render"
+      },
+      {
+        "find": "foldkit/route",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/route"
+      },
+      {
+        "find": "foldkit/runtime",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/runtime"
+      },
+      {
+        "find": "foldkit/scene",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/scene"
+      },
+      {
+        "find": "foldkit/schema",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/schema"
+      },
+      {
+        "find": "foldkit/story",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/story"
+      },
+      {
+        "find": "foldkit/struct",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/struct"
+      },
+      {
+        "find": "foldkit/submodel",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/submodel/public"
+      },
+      {
+        "find": "foldkit/subscription",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/subscription/public"
+      },
+      {
+        "find": "foldkit/test/vitest",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/vitest"
+      },
+      {
+        "find": "foldkit/update",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/update/public"
+      },
+      {
+        "find": "foldkit/url",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/url"
+      },
+      {
+        "find": "@foldkit/ui/anchor",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/anchor/public"
+      },
+      {
+        "find": "@foldkit/ui/animation",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/animation/public"
+      },
+      {
+        "find": "@foldkit/ui/button",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/button/public"
+      },
+      {
+        "find": "@foldkit/ui/calendar",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/calendar/public"
+      },
+      {
+        "find": "@foldkit/ui/checkbox",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/checkbox/public"
+      },
+      {
+        "find": "@foldkit/ui/combobox",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/combobox/public"
+      },
+      {
+        "find": "@foldkit/ui/datePicker",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/datePicker/public"
+      },
+      {
+        "find": "@foldkit/ui/dialog",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/dialog/public"
+      },
+      {
+        "find": "@foldkit/ui/disclosure",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/disclosure/public"
+      },
+      {
+        "find": "@foldkit/ui/dragAndDrop",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/dragAndDrop/public"
+      },
+      {
+        "find": "@foldkit/ui/fieldset",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/fieldset/public"
+      },
+      {
+        "find": "@foldkit/ui/fileDrop",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/fileDrop/public"
+      },
+      {
+        "find": "@foldkit/ui/hoverIntent",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/hoverIntent/public"
+      },
+      {
+        "find": "@foldkit/ui/input",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/input/public"
+      },
+      {
+        "find": "@foldkit/ui/listbox",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/listbox/public"
+      },
+      {
+        "find": "@foldkit/ui/menu",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/menu/public"
+      },
+      {
+        "find": "@foldkit/ui/meter",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/meter/public"
+      },
+      {
+        "find": "@foldkit/ui/nav",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/nav/public"
+      },
+      {
+        "find": "@foldkit/ui/popover",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/popover/public"
+      },
+      {
+        "find": "@foldkit/ui/progress",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/progress/public"
+      },
+      {
+        "find": "@foldkit/ui/radioGroup",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/radioGroup/public"
+      },
+      {
+        "find": "@foldkit/ui/select",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/select/public"
+      },
+      {
+        "find": "@foldkit/ui/slider",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/slider/public"
+      },
+      {
+        "find": "@foldkit/ui/switch",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/switch/public"
+      },
+      {
+        "find": "@foldkit/ui/tabs",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/tabs/public"
+      },
+      {
+        "find": "@foldkit/ui/textarea",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/textarea/public"
+      },
+      {
+        "find": "@foldkit/ui/toast",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/toast/public"
+      },
+      {
+        "find": "@foldkit/ui/tooltip",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/tooltip/public"
+      },
+      {
+        "find": "@foldkit/ui/virtualList",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/virtualList/public"
+      },
+      {
+        "find": "@foldkit/ui",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/index"
+      },
+      {
+        "find": "@foldkit/markdown/vite",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/markdown/src/vite/public"
+      },
+      {
+        "find": "@foldkit/markdown",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/markdown/src/index"
+      },
+      {
+        "find": "@foldkit/devtools/vite",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/devtools/src/vite"
+      },
+      {
+        "find": "foldkit",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/index"
+      },
+      {
+        "find": {},
+        "replacement": "/@fs/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/client/env.mjs"
+      },
+      {
+        "find": {},
+        "replacement": "/@fs/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/client/client.mjs"
+      }
+    ],
+    "plugins": [
+      "vite:optimized-deps",
+      "vite:watch-package-data",
+      "vite:pre-alias",
+      "alias",
+      "@tailwindcss/vite:scan",
+      "@tailwindcss/vite:generate:serve",
+      "foldkit:build-token",
+      "vite:modulepreload-polyfill",
+      "vite:resolve-dev",
+      "vite:resolve-builtin:get-environment",
+      "vite:resolve-builtin",
+      "vite:html-inline-proxy",
+      "vite:css",
+      "builtin:oxc-runtime",
+      "vite:oxc",
+      "builtin:vite-json",
+      "vite:wasm-helper",
+      "vite:worker",
+      "vite:asset",
+      "vite:forward-console",
+      "foldkit:resolution",
+      "foldkit:verify-build-token",
+      "foldkit:view-identity",
+      "foldkit:devtools-overlay",
+      "foldkit",
+      "foldkit-ssr",
+      "vite:define",
+      "vite:css-post",
+      "vite:build-html",
+      "vite:worker-import-meta-url",
+      "vite:asset-import-meta-url",
+      "vite:dynamic-import-vars",
+      "vite:import-glob",
+      "vite:client-inject",
+      "vite:css-analysis",
+      "vite:import-analysis"
+    ],
+    "server": {
+      "port": 5173,
+      "fs": {
+        "strict": true,
+        "deny": [
+          ".env",
+          ".env.*",
+          "*.{crt,pem,key,p12,pfx,cer,der}",
+          ".npmrc",
+          ".yarnrc.yml",
+          "**/.git/**"
+        ],
+        "allow": [
+          "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache"
+        ]
+      }
+    },
+    "ssr": {
+      "target": "node",
+      "optimizeDeps": {
+        "esbuildOptions": {
+          "preserveSymlinks": false
+        },
+        "include": [],
+        "exclude": [
+          "foldkit"
+        ],
+        "needsInterop": [],
+        "rolldownOptions": {
+          "resolve": {
+            "symlinks": true
+          },
+          "output": {
+            "topLevelVar": true
+          }
+        },
+        "extensions": [],
+        "holdUntilCrawlEnd": true,
+        "force": false,
+        "ignoreOutdatedRequests": false,
+        "noDiscovery": true,
+        "rollupOptions": {
+          "resolve": {
+            "symlinks": true
+          },
+          "output": {
+            "topLevelVar": true
+          }
+        }
+      },
+      "noExternal": [
+        "foldkit",
+        "@foldkit/ui",
+        "@foldkit/devtools",
+        "@foldkit/vite-plugin",
+        "foldkit",
+        "@foldkit/ui",
+        "@foldkit/devtools",
+        "@foldkit/vite-plugin",
+        "foldkit",
+        "@foldkit/ui",
+        "@foldkit/devtools",
+        "@foldkit/vite-plugin"
+      ],
+      "external": [],
+      "resolve": {
+        "conditions": [
+          "module",
+          "node",
+          "development|production"
+        ],
+        "externalConditions": [
+          "node",
+          "module-sync"
+        ]
+      }
+    },
+    "environments": {
+      "client": {
+        "consumer": "client",
+        "resolve": {
+          "externalConditions": [
+            "node",
+            "module-sync"
+          ],
+          "extensions": [
+            ".mjs",
+            ".js",
+            ".mts",
+            ".ts",
+            ".jsx",
+            ".tsx",
+            ".json"
+          ],
+          "dedupe": [
+            "foldkit",
+            "@foldkit/devtools"
+          ],
+          "noExternal": [
+            "foldkit",
+            "@foldkit/ui",
+            "@foldkit/devtools",
+            "@foldkit/vite-plugin"
+          ],
+          "external": [],
+          "preserveSymlinks": false,
+          "tsconfigPaths": false,
+          "alias": [
+            {
+              "find": "foldkit/brand",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/dist/brand/public.js"
+            },
+            {
+              "find": "foldkit/asyncData",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/asyncData/public"
+            },
+            {
+              "find": "foldkit/calendar",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/calendar"
+            },
+            {
+              "find": "foldkit/canvas",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/canvas"
+            },
+            {
+              "find": "foldkit/command",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/command"
+            },
+            {
+              "find": "foldkit/customElement",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/customElement"
+            },
+            {
+              "find": "foldkit/devtools-host",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/devTools/host"
+            },
+            {
+              "find": "foldkit/dom",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/dom"
+            },
+            {
+              "find": "foldkit/experimental/machine",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/machine"
+            },
+            {
+              "find": "foldkit/experimental/query",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/query/public"
+            },
+            {
+              "find": "foldkit/experimental/server",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/server/public"
+            },
+            {
+              "find": "foldkit/experimental",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental"
+            },
+            {
+              "find": "foldkit/fieldValidation",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/fieldValidation"
+            },
+            {
+              "find": "foldkit/file",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/file"
+            },
+            {
+              "find": "foldkit/html",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/html"
+            },
+            {
+              "find": "foldkit/http",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/http"
+            },
+            {
+              "find": "foldkit/managedResource",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/managedResource"
+            },
+            {
+              "find": "foldkit/message",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/message"
+            },
+            {
+              "find": "foldkit/mount",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/mount"
+            },
+            {
+              "find": "foldkit/navigation",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/navigation"
+            },
+            {
+              "find": "foldkit/port",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/port"
+            },
+            {
+              "find": "foldkit/render",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/render"
+            },
+            {
+              "find": "foldkit/route",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/route"
+            },
+            {
+              "find": "foldkit/runtime",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/runtime"
+            },
+            {
+              "find": "foldkit/scene",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/scene"
+            },
+            {
+              "find": "foldkit/schema",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/schema"
+            },
+            {
+              "find": "foldkit/story",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/story"
+            },
+            {
+              "find": "foldkit/struct",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/struct"
+            },
+            {
+              "find": "foldkit/submodel",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/submodel/public"
+            },
+            {
+              "find": "foldkit/subscription",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/subscription/public"
+            },
+            {
+              "find": "foldkit/test/vitest",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/vitest"
+            },
+            {
+              "find": "foldkit/update",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/update/public"
+            },
+            {
+              "find": "foldkit/url",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/url"
+            },
+            {
+              "find": "@foldkit/ui/anchor",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/anchor/public"
+            },
+            {
+              "find": "@foldkit/ui/animation",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/animation/public"
+            },
+            {
+              "find": "@foldkit/ui/button",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/button/public"
+            },
+            {
+              "find": "@foldkit/ui/calendar",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/calendar/public"
+            },
+            {
+              "find": "@foldkit/ui/checkbox",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/checkbox/public"
+            },
+            {
+              "find": "@foldkit/ui/combobox",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/combobox/public"
+            },
+            {
+              "find": "@foldkit/ui/datePicker",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/datePicker/public"
+            },
+            {
+              "find": "@foldkit/ui/dialog",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/dialog/public"
+            },
+            {
+              "find": "@foldkit/ui/disclosure",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/disclosure/public"
+            },
+            {
+              "find": "@foldkit/ui/dragAndDrop",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/dragAndDrop/public"
+            },
+            {
+              "find": "@foldkit/ui/fieldset",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/fieldset/public"
+            },
+            {
+              "find": "@foldkit/ui/fileDrop",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/fileDrop/public"
+            },
+            {
+              "find": "@foldkit/ui/hoverIntent",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/hoverIntent/public"
+            },
+            {
+              "find": "@foldkit/ui/input",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/input/public"
+            },
+            {
+              "find": "@foldkit/ui/listbox",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/listbox/public"
+            },
+            {
+              "find": "@foldkit/ui/menu",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/menu/public"
+            },
+            {
+              "find": "@foldkit/ui/meter",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/meter/public"
+            },
+            {
+              "find": "@foldkit/ui/nav",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/nav/public"
+            },
+            {
+              "find": "@foldkit/ui/popover",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/popover/public"
+            },
+            {
+              "find": "@foldkit/ui/progress",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/progress/public"
+            },
+            {
+              "find": "@foldkit/ui/radioGroup",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/radioGroup/public"
+            },
+            {
+              "find": "@foldkit/ui/select",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/select/public"
+            },
+            {
+              "find": "@foldkit/ui/slider",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/slider/public"
+            },
+            {
+              "find": "@foldkit/ui/switch",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/switch/public"
+            },
+            {
+              "find": "@foldkit/ui/tabs",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/tabs/public"
+            },
+            {
+              "find": "@foldkit/ui/textarea",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/textarea/public"
+            },
+            {
+              "find": "@foldkit/ui/toast",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/toast/public"
+            },
+            {
+              "find": "@foldkit/ui/tooltip",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/tooltip/public"
+            },
+            {
+              "find": "@foldkit/ui/virtualList",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/virtualList/public"
+            },
+            {
+              "find": "@foldkit/ui",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/index"
+            },
+            {
+              "find": "@foldkit/markdown/vite",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/markdown/src/vite/public"
+            },
+            {
+              "find": "@foldkit/markdown",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/markdown/src/index"
+            },
+            {
+              "find": "@foldkit/devtools/vite",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/devtools/src/vite"
+            },
+            {
+              "find": "foldkit",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/index"
+            },
+            {
+              "find": {},
+              "replacement": "/@fs/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/client/env.mjs"
+            },
+            {
+              "find": {},
+              "replacement": "/@fs/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/client/client.mjs"
+            }
+          ],
+          "mainFields": [
+            "browser",
+            "module",
+            "jsnext:main",
+            "jsnext"
+          ],
+          "conditions": [
+            "module",
+            "browser",
+            "development|production"
+          ],
+          "builtins": []
+        },
+        "build": {
+          "target": [
+            "chrome111",
+            "edge111",
+            "firefox114",
+            "safari16.4",
+            "ios16.4"
+          ],
+          "polyfillModulePreload": true,
+          "modulePreload": {
+            "polyfill": true
+          },
+          "outDir": "dist",
+          "assetsDir": "assets",
+          "assetsInlineLimit": 4096,
+          "sourcemap": false,
+          "terserOptions": {},
+          "chunkImportMap": false,
+          "rolldownOptions": {
+            "platform": "browser"
+          },
+          "commonjsOptions": {
+            "include": [
+              {}
+            ],
+            "extensions": [
+              ".js",
+              ".cjs"
+            ]
+          },
+          "dynamicImportVarsOptions": {
+            "exclude": [
+              {}
+            ]
+          },
+          "write": true,
+          "emptyOutDir": null,
+          "copyPublicDir": true,
+          "license": false,
+          "manifest": false,
+          "lib": false,
+          "ssrManifest": false,
+          "ssrEmitAssets": false,
+          "reportCompressedSize": true,
+          "chunkSizeWarningLimit": 500,
+          "watch": null,
+          "cssCodeSplit": true,
+          "minify": "oxc",
+          "rollupOptions": {
+            "platform": "browser"
+          },
+          "ssr": false,
+          "emitAssets": true,
+          "cssTarget": [
+            "chrome111",
+            "edge111",
+            "firefox114",
+            "safari16.4",
+            "ios16.4"
+          ],
+          "cssMinify": true
+        },
+        "optimizeDeps": {
+          "include": [
+            "effect",
+            "effect/Array",
+            "effect/Boolean",
+            "effect/Cause",
+            "effect/Clock",
+            "effect/Context",
+            "effect/Data",
+            "effect/DateTime",
+            "effect/Duration",
+            "effect/Effect",
+            "effect/Equal",
+            "effect/Equivalence",
+            "effect/Exit",
+            "effect/Fiber",
+            "effect/Function",
+            "effect/Hash",
+            "effect/HashMap",
+            "effect/HashSet",
+            "effect/Layer",
+            "effect/Logger",
+            "effect/Match",
+            "effect/Number",
+            "effect/Option",
+            "effect/Order",
+            "effect/Predicate",
+            "effect/PubSub",
+            "effect/Queue",
+            "effect/Record",
+            "effect/Redacted",
+            "effect/Ref",
+            "effect/Result",
+            "effect/Runtime",
+            "effect/Scheduler",
+            "effect/Schema",
+            "effect/SchemaAST",
+            "effect/SchemaIssue",
+            "effect/SchemaTransformation",
+            "effect/Scope",
+            "effect/Stream",
+            "effect/String",
+            "effect/Struct",
+            "effect/SubscriptionRef",
+            "effect/Types"
+          ],
+          "exclude": [
+            "foldkit"
+          ],
+          "needsInterop": [],
+          "rolldownOptions": {
+            "resolve": {
+              "symlinks": true
+            },
+            "output": {
+              "topLevelVar": true
+            }
+          },
+          "extensions": [],
+          "holdUntilCrawlEnd": true,
+          "force": false,
+          "ignoreOutdatedRequests": false,
+          "noDiscovery": false,
+          "rollupOptions": {
+            "resolve": {
+              "symlinks": true
+            },
+            "output": {
+              "topLevelVar": true
+            }
+          },
+          "esbuildOptions": {
+            "preserveSymlinks": false
+          }
+        }
+      },
+      "ssr": {
+        "consumer": "server",
+        "resolve": {
+          "externalConditions": [
+            "node",
+            "module-sync"
+          ],
+          "extensions": [
+            ".mjs",
+            ".js",
+            ".mts",
+            ".ts",
+            ".jsx",
+            ".tsx",
+            ".json"
+          ],
+          "dedupe": [
+            "foldkit",
+            "@foldkit/devtools"
+          ],
+          "noExternal": [
+            "foldkit",
+            "@foldkit/ui",
+            "@foldkit/devtools",
+            "@foldkit/vite-plugin",
+            "foldkit",
+            "@foldkit/ui",
+            "@foldkit/devtools",
+            "@foldkit/vite-plugin",
+            "foldkit",
+            "@foldkit/ui",
+            "@foldkit/devtools",
+            "@foldkit/vite-plugin"
+          ],
+          "external": [],
+          "preserveSymlinks": false,
+          "tsconfigPaths": false,
+          "alias": [
+            {
+              "find": "foldkit/brand",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/dist/brand/public.js"
+            },
+            {
+              "find": "foldkit/asyncData",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/asyncData/public"
+            },
+            {
+              "find": "foldkit/calendar",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/calendar"
+            },
+            {
+              "find": "foldkit/canvas",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/canvas"
+            },
+            {
+              "find": "foldkit/command",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/command"
+            },
+            {
+              "find": "foldkit/customElement",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/customElement"
+            },
+            {
+              "find": "foldkit/devtools-host",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/devTools/host"
+            },
+            {
+              "find": "foldkit/dom",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/dom"
+            },
+            {
+              "find": "foldkit/experimental/machine",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/machine"
+            },
+            {
+              "find": "foldkit/experimental/query",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/query/public"
+            },
+            {
+              "find": "foldkit/experimental/server",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/server/public"
+            },
+            {
+              "find": "foldkit/experimental",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental"
+            },
+            {
+              "find": "foldkit/fieldValidation",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/fieldValidation"
+            },
+            {
+              "find": "foldkit/file",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/file"
+            },
+            {
+              "find": "foldkit/html",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/html"
+            },
+            {
+              "find": "foldkit/http",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/http"
+            },
+            {
+              "find": "foldkit/managedResource",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/managedResource"
+            },
+            {
+              "find": "foldkit/message",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/message"
+            },
+            {
+              "find": "foldkit/mount",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/mount"
+            },
+            {
+              "find": "foldkit/navigation",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/navigation"
+            },
+            {
+              "find": "foldkit/port",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/port"
+            },
+            {
+              "find": "foldkit/render",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/render"
+            },
+            {
+              "find": "foldkit/route",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/route"
+            },
+            {
+              "find": "foldkit/runtime",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/runtime"
+            },
+            {
+              "find": "foldkit/scene",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/scene"
+            },
+            {
+              "find": "foldkit/schema",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/schema"
+            },
+            {
+              "find": "foldkit/story",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/story"
+            },
+            {
+              "find": "foldkit/struct",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/struct"
+            },
+            {
+              "find": "foldkit/submodel",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/submodel/public"
+            },
+            {
+              "find": "foldkit/subscription",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/subscription/public"
+            },
+            {
+              "find": "foldkit/test/vitest",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/vitest"
+            },
+            {
+              "find": "foldkit/update",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/update/public"
+            },
+            {
+              "find": "foldkit/url",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/url"
+            },
+            {
+              "find": "@foldkit/ui/anchor",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/anchor/public"
+            },
+            {
+              "find": "@foldkit/ui/animation",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/animation/public"
+            },
+            {
+              "find": "@foldkit/ui/button",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/button/public"
+            },
+            {
+              "find": "@foldkit/ui/calendar",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/calendar/public"
+            },
+            {
+              "find": "@foldkit/ui/checkbox",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/checkbox/public"
+            },
+            {
+              "find": "@foldkit/ui/combobox",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/combobox/public"
+            },
+            {
+              "find": "@foldkit/ui/datePicker",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/datePicker/public"
+            },
+            {
+              "find": "@foldkit/ui/dialog",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/dialog/public"
+            },
+            {
+              "find": "@foldkit/ui/disclosure",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/disclosure/public"
+            },
+            {
+              "find": "@foldkit/ui/dragAndDrop",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/dragAndDrop/public"
+            },
+            {
+              "find": "@foldkit/ui/fieldset",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/fieldset/public"
+            },
+            {
+              "find": "@foldkit/ui/fileDrop",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/fileDrop/public"
+            },
+            {
+              "find": "@foldkit/ui/hoverIntent",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/hoverIntent/public"
+            },
+            {
+              "find": "@foldkit/ui/input",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/input/public"
+            },
+            {
+              "find": "@foldkit/ui/listbox",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/listbox/public"
+            },
+            {
+              "find": "@foldkit/ui/menu",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/menu/public"
+            },
+            {
+              "find": "@foldkit/ui/meter",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/meter/public"
+            },
+            {
+              "find": "@foldkit/ui/nav",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/nav/public"
+            },
+            {
+              "find": "@foldkit/ui/popover",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/popover/public"
+            },
+            {
+              "find": "@foldkit/ui/progress",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/progress/public"
+            },
+            {
+              "find": "@foldkit/ui/radioGroup",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/radioGroup/public"
+            },
+            {
+              "find": "@foldkit/ui/select",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/select/public"
+            },
+            {
+              "find": "@foldkit/ui/slider",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/slider/public"
+            },
+            {
+              "find": "@foldkit/ui/switch",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/switch/public"
+            },
+            {
+              "find": "@foldkit/ui/tabs",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/tabs/public"
+            },
+            {
+              "find": "@foldkit/ui/textarea",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/textarea/public"
+            },
+            {
+              "find": "@foldkit/ui/toast",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/toast/public"
+            },
+            {
+              "find": "@foldkit/ui/tooltip",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/tooltip/public"
+            },
+            {
+              "find": "@foldkit/ui/virtualList",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/virtualList/public"
+            },
+            {
+              "find": "@foldkit/ui",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/index"
+            },
+            {
+              "find": "@foldkit/markdown/vite",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/markdown/src/vite/public"
+            },
+            {
+              "find": "@foldkit/markdown",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/markdown/src/index"
+            },
+            {
+              "find": "@foldkit/devtools/vite",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/devtools/src/vite"
+            },
+            {
+              "find": "foldkit",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/index"
+            },
+            {
+              "find": {},
+              "replacement": "/@fs/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/client/env.mjs"
+            },
+            {
+              "find": {},
+              "replacement": "/@fs/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/client/client.mjs"
+            }
+          ],
+          "mainFields": [
+            "module",
+            "jsnext:main",
+            "jsnext"
+          ],
+          "conditions": [
+            "module",
+            "node",
+            "development|production"
+          ],
+          "builtins": [
+            "_http_agent",
+            "_http_client",
+            "_http_common",
+            "_http_incoming",
+            "_http_outgoing",
+            "_http_server",
+            "_stream_duplex",
+            "_stream_passthrough",
+            "_stream_readable",
+            "_stream_transform",
+            "_stream_wrap",
+            "_stream_writable",
+            "_tls_common",
+            "_tls_wrap",
+            "assert",
+            "assert/strict",
+            "async_hooks",
+            "buffer",
+            "child_process",
+            "cluster",
+            "console",
+            "constants",
+            "crypto",
+            "dgram",
+            "diagnostics_channel",
+            "dns",
+            "dns/promises",
+            "domain",
+            "events",
+            "fs",
+            "fs/promises",
+            "http",
+            "http2",
+            "https",
+            "inspector",
+            "inspector/promises",
+            "module",
+            "net",
+            "os",
+            "path",
+            "path/posix",
+            "path/win32",
+            "perf_hooks",
+            "process",
+            "punycode",
+            "querystring",
+            "readline",
+            "readline/promises",
+            "repl",
+            "stream",
+            "stream/consumers",
+            "stream/promises",
+            "stream/web",
+            "string_decoder",
+            "sys",
+            "timers",
+            "timers/promises",
+            "tls",
+            "trace_events",
+            "tty",
+            "url",
+            "util",
+            "util/types",
+            "v8",
+            "vm",
+            "wasi",
+            "worker_threads",
+            "zlib",
+            {},
+            {}
+          ]
+        },
+        "build": {
+          "target": [
+            "chrome111",
+            "edge111",
+            "firefox114",
+            "safari16.4",
+            "ios16.4"
+          ],
+          "polyfillModulePreload": true,
+          "modulePreload": {
+            "polyfill": true
+          },
+          "outDir": "dist",
+          "assetsDir": "assets",
+          "assetsInlineLimit": 4096,
+          "sourcemap": false,
+          "terserOptions": {},
+          "chunkImportMap": false,
+          "rolldownOptions": {
+            "platform": "node"
+          },
+          "commonjsOptions": {
+            "include": [
+              {}
+            ],
+            "extensions": [
+              ".js",
+              ".cjs"
+            ]
+          },
+          "dynamicImportVarsOptions": {
+            "exclude": [
+              {}
+            ]
+          },
+          "write": true,
+          "emptyOutDir": null,
+          "copyPublicDir": true,
+          "license": false,
+          "manifest": false,
+          "lib": false,
+          "ssrManifest": false,
+          "ssrEmitAssets": false,
+          "reportCompressedSize": true,
+          "chunkSizeWarningLimit": 500,
+          "watch": null,
+          "cssCodeSplit": true,
+          "minify": false,
+          "rollupOptions": {
+            "platform": "node"
+          },
+          "ssr": true,
+          "emitAssets": false,
+          "cssTarget": [
+            "chrome111",
+            "edge111",
+            "firefox114",
+            "safari16.4",
+            "ios16.4"
+          ],
+          "cssMinify": "lightningcss"
+        },
+        "optimizeDeps": {
+          "include": [],
+          "exclude": [
+            "foldkit"
+          ],
+          "needsInterop": [],
+          "rolldownOptions": {
+            "resolve": {
+              "symlinks": true
+            },
+            "output": {
+              "topLevelVar": true
+            }
+          },
+          "extensions": [],
+          "holdUntilCrawlEnd": true,
+          "force": false,
+          "ignoreOutdatedRequests": false,
+          "noDiscovery": true,
+          "rollupOptions": {
+            "resolve": {
+              "symlinks": true
+            },
+            "output": {
+              "topLevelVar": true
+            }
+          },
+          "esbuildOptions": {
+            "preserveSymlinks": false
+          }
+        }
+      }
+    }
+  },
+  "fixed": {
+    "aliases": [
+      {
+        "find": "foldkit/brand",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/dist/brand/public.js"
+      },
+      {
+        "find": "foldkit/asyncData",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/asyncData/public"
+      },
+      {
+        "find": "foldkit/calendar",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/calendar"
+      },
+      {
+        "find": "foldkit/canvas",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/canvas"
+      },
+      {
+        "find": "foldkit/command",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/command"
+      },
+      {
+        "find": "foldkit/customElement",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/customElement"
+      },
+      {
+        "find": "foldkit/devtools-host",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/devTools/host"
+      },
+      {
+        "find": "foldkit/dom",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/dom"
+      },
+      {
+        "find": "foldkit/experimental/machine",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/machine"
+      },
+      {
+        "find": "foldkit/experimental/query",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/query/public"
+      },
+      {
+        "find": "foldkit/experimental/server",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/server/public"
+      },
+      {
+        "find": "foldkit/experimental",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental"
+      },
+      {
+        "find": "foldkit/fieldValidation",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/fieldValidation"
+      },
+      {
+        "find": "foldkit/file",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/file"
+      },
+      {
+        "find": "foldkit/html",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/html"
+      },
+      {
+        "find": "foldkit/http",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/http"
+      },
+      {
+        "find": "foldkit/managedResource",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/managedResource"
+      },
+      {
+        "find": "foldkit/message",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/message"
+      },
+      {
+        "find": "foldkit/mount",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/mount"
+      },
+      {
+        "find": "foldkit/navigation",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/navigation"
+      },
+      {
+        "find": "foldkit/port",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/port"
+      },
+      {
+        "find": "foldkit/render",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/render"
+      },
+      {
+        "find": "foldkit/route",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/route"
+      },
+      {
+        "find": "foldkit/runtime",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/runtime"
+      },
+      {
+        "find": "foldkit/scene",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/scene"
+      },
+      {
+        "find": "foldkit/schema",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/schema"
+      },
+      {
+        "find": "foldkit/story",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/story"
+      },
+      {
+        "find": "foldkit/struct",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/struct"
+      },
+      {
+        "find": "foldkit/submodel",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/submodel/public"
+      },
+      {
+        "find": "foldkit/subscription",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/subscription/public"
+      },
+      {
+        "find": "foldkit/test/vitest",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/vitest"
+      },
+      {
+        "find": "foldkit/update",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/update/public"
+      },
+      {
+        "find": "foldkit/url",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/url"
+      },
+      {
+        "find": "@foldkit/ui/anchor",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/anchor/public"
+      },
+      {
+        "find": "@foldkit/ui/animation",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/animation/public"
+      },
+      {
+        "find": "@foldkit/ui/button",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/button/public"
+      },
+      {
+        "find": "@foldkit/ui/calendar",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/calendar/public"
+      },
+      {
+        "find": "@foldkit/ui/checkbox",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/checkbox/public"
+      },
+      {
+        "find": "@foldkit/ui/combobox",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/combobox/public"
+      },
+      {
+        "find": "@foldkit/ui/datePicker",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/datePicker/public"
+      },
+      {
+        "find": "@foldkit/ui/dialog",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/dialog/public"
+      },
+      {
+        "find": "@foldkit/ui/disclosure",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/disclosure/public"
+      },
+      {
+        "find": "@foldkit/ui/dragAndDrop",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/dragAndDrop/public"
+      },
+      {
+        "find": "@foldkit/ui/fieldset",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/fieldset/public"
+      },
+      {
+        "find": "@foldkit/ui/fileDrop",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/fileDrop/public"
+      },
+      {
+        "find": "@foldkit/ui/hoverIntent",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/hoverIntent/public"
+      },
+      {
+        "find": "@foldkit/ui/input",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/input/public"
+      },
+      {
+        "find": "@foldkit/ui/listbox",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/listbox/public"
+      },
+      {
+        "find": "@foldkit/ui/menu",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/menu/public"
+      },
+      {
+        "find": "@foldkit/ui/meter",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/meter/public"
+      },
+      {
+        "find": "@foldkit/ui/nav",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/nav/public"
+      },
+      {
+        "find": "@foldkit/ui/popover",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/popover/public"
+      },
+      {
+        "find": "@foldkit/ui/progress",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/progress/public"
+      },
+      {
+        "find": "@foldkit/ui/radioGroup",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/radioGroup/public"
+      },
+      {
+        "find": "@foldkit/ui/select",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/select/public"
+      },
+      {
+        "find": "@foldkit/ui/slider",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/slider/public"
+      },
+      {
+        "find": "@foldkit/ui/switch",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/switch/public"
+      },
+      {
+        "find": "@foldkit/ui/tabs",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/tabs/public"
+      },
+      {
+        "find": "@foldkit/ui/textarea",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/textarea/public"
+      },
+      {
+        "find": "@foldkit/ui/toast",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/toast/public"
+      },
+      {
+        "find": "@foldkit/ui/tooltip",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/tooltip/public"
+      },
+      {
+        "find": "@foldkit/ui/virtualList",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/virtualList/public"
+      },
+      {
+        "find": "@foldkit/ui",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/index"
+      },
+      {
+        "find": "@foldkit/markdown/vite",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/markdown/src/vite/public"
+      },
+      {
+        "find": "@foldkit/markdown",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/markdown/src/index"
+      },
+      {
+        "find": "@foldkit/devtools/vite",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/devtools/src/vite"
+      },
+      {
+        "find": "foldkit",
+        "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/index"
+      },
+      {
+        "find": {},
+        "replacement": "/@fs/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/client/env.mjs"
+      },
+      {
+        "find": {},
+        "replacement": "/@fs/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/client/client.mjs"
+      }
+    ],
+    "plugins": [
+      "vite:optimized-deps",
+      "vite:watch-package-data",
+      "vite:pre-alias",
+      "alias",
+      "@tailwindcss/vite:scan",
+      "@tailwindcss/vite:generate:serve",
+      "foldkit:build-token",
+      "vite:modulepreload-polyfill",
+      "vite:resolve-dev",
+      "vite:resolve-builtin:get-environment",
+      "vite:resolve-builtin",
+      "vite:html-inline-proxy",
+      "vite:css",
+      "builtin:oxc-runtime",
+      "vite:oxc",
+      "builtin:vite-json",
+      "vite:wasm-helper",
+      "vite:worker",
+      "vite:asset",
+      "vite:forward-console",
+      "foldkit:resolution",
+      "foldkit:verify-build-token",
+      "foldkit:view-identity",
+      "foldkit:devtools-overlay",
+      "foldkit",
+      "foldkit-ssr",
+      "vite:define",
+      "vite:css-post",
+      "vite:build-html",
+      "vite:worker-import-meta-url",
+      "vite:asset-import-meta-url",
+      "vite:dynamic-import-vars",
+      "vite:import-glob",
+      "vite:client-inject",
+      "vite:css-analysis",
+      "vite:import-analysis"
+    ],
+    "server": {
+      "port": 5173,
+      "fs": {
+        "strict": true,
+        "deny": [
+          ".env",
+          ".env.*",
+          "*.{crt,pem,key,p12,pfx,cer,der}",
+          ".npmrc",
+          ".yarnrc.yml",
+          "**/.git/**"
+        ],
+        "allow": [
+          "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache"
+        ]
+      }
+    },
+    "ssr": {
+      "target": "node",
+      "optimizeDeps": {
+        "esbuildOptions": {
+          "preserveSymlinks": false
+        },
+        "include": [],
+        "exclude": [
+          "foldkit"
+        ],
+        "needsInterop": [],
+        "rolldownOptions": {
+          "resolve": {
+            "symlinks": true
+          },
+          "output": {
+            "topLevelVar": true
+          }
+        },
+        "extensions": [],
+        "holdUntilCrawlEnd": true,
+        "force": false,
+        "ignoreOutdatedRequests": false,
+        "noDiscovery": true,
+        "rollupOptions": {
+          "resolve": {
+            "symlinks": true
+          },
+          "output": {
+            "topLevelVar": true
+          }
+        }
+      },
+      "noExternal": [
+        "foldkit",
+        "@foldkit/ui",
+        "@foldkit/devtools",
+        "@foldkit/vite-plugin",
+        "foldkit",
+        "@foldkit/ui",
+        "@foldkit/devtools",
+        "@foldkit/vite-plugin",
+        "foldkit",
+        "@foldkit/ui",
+        "@foldkit/devtools",
+        "@foldkit/vite-plugin"
+      ],
+      "external": [],
+      "resolve": {
+        "conditions": [
+          "module",
+          "node",
+          "development|production"
+        ],
+        "externalConditions": [
+          "node",
+          "module-sync"
+        ]
+      }
+    },
+    "environments": {
+      "client": {
+        "consumer": "client",
+        "resolve": {
+          "externalConditions": [
+            "node",
+            "module-sync"
+          ],
+          "extensions": [
+            ".mjs",
+            ".js",
+            ".mts",
+            ".ts",
+            ".jsx",
+            ".tsx",
+            ".json"
+          ],
+          "dedupe": [
+            "foldkit",
+            "@foldkit/devtools"
+          ],
+          "noExternal": [
+            "foldkit",
+            "@foldkit/ui",
+            "@foldkit/devtools",
+            "@foldkit/vite-plugin"
+          ],
+          "external": [],
+          "preserveSymlinks": false,
+          "tsconfigPaths": false,
+          "alias": [
+            {
+              "find": "foldkit/brand",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/dist/brand/public.js"
+            },
+            {
+              "find": "foldkit/asyncData",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/asyncData/public"
+            },
+            {
+              "find": "foldkit/calendar",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/calendar"
+            },
+            {
+              "find": "foldkit/canvas",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/canvas"
+            },
+            {
+              "find": "foldkit/command",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/command"
+            },
+            {
+              "find": "foldkit/customElement",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/customElement"
+            },
+            {
+              "find": "foldkit/devtools-host",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/devTools/host"
+            },
+            {
+              "find": "foldkit/dom",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/dom"
+            },
+            {
+              "find": "foldkit/experimental/machine",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/machine"
+            },
+            {
+              "find": "foldkit/experimental/query",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/query/public"
+            },
+            {
+              "find": "foldkit/experimental/server",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/server/public"
+            },
+            {
+              "find": "foldkit/experimental",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental"
+            },
+            {
+              "find": "foldkit/fieldValidation",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/fieldValidation"
+            },
+            {
+              "find": "foldkit/file",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/file"
+            },
+            {
+              "find": "foldkit/html",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/html"
+            },
+            {
+              "find": "foldkit/http",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/http"
+            },
+            {
+              "find": "foldkit/managedResource",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/managedResource"
+            },
+            {
+              "find": "foldkit/message",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/message"
+            },
+            {
+              "find": "foldkit/mount",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/mount"
+            },
+            {
+              "find": "foldkit/navigation",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/navigation"
+            },
+            {
+              "find": "foldkit/port",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/port"
+            },
+            {
+              "find": "foldkit/render",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/render"
+            },
+            {
+              "find": "foldkit/route",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/route"
+            },
+            {
+              "find": "foldkit/runtime",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/runtime"
+            },
+            {
+              "find": "foldkit/scene",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/scene"
+            },
+            {
+              "find": "foldkit/schema",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/schema"
+            },
+            {
+              "find": "foldkit/story",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/story"
+            },
+            {
+              "find": "foldkit/struct",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/struct"
+            },
+            {
+              "find": "foldkit/submodel",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/submodel/public"
+            },
+            {
+              "find": "foldkit/subscription",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/subscription/public"
+            },
+            {
+              "find": "foldkit/test/vitest",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/vitest"
+            },
+            {
+              "find": "foldkit/update",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/update/public"
+            },
+            {
+              "find": "foldkit/url",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/url"
+            },
+            {
+              "find": "@foldkit/ui/anchor",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/anchor/public"
+            },
+            {
+              "find": "@foldkit/ui/animation",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/animation/public"
+            },
+            {
+              "find": "@foldkit/ui/button",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/button/public"
+            },
+            {
+              "find": "@foldkit/ui/calendar",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/calendar/public"
+            },
+            {
+              "find": "@foldkit/ui/checkbox",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/checkbox/public"
+            },
+            {
+              "find": "@foldkit/ui/combobox",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/combobox/public"
+            },
+            {
+              "find": "@foldkit/ui/datePicker",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/datePicker/public"
+            },
+            {
+              "find": "@foldkit/ui/dialog",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/dialog/public"
+            },
+            {
+              "find": "@foldkit/ui/disclosure",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/disclosure/public"
+            },
+            {
+              "find": "@foldkit/ui/dragAndDrop",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/dragAndDrop/public"
+            },
+            {
+              "find": "@foldkit/ui/fieldset",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/fieldset/public"
+            },
+            {
+              "find": "@foldkit/ui/fileDrop",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/fileDrop/public"
+            },
+            {
+              "find": "@foldkit/ui/hoverIntent",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/hoverIntent/public"
+            },
+            {
+              "find": "@foldkit/ui/input",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/input/public"
+            },
+            {
+              "find": "@foldkit/ui/listbox",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/listbox/public"
+            },
+            {
+              "find": "@foldkit/ui/menu",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/menu/public"
+            },
+            {
+              "find": "@foldkit/ui/meter",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/meter/public"
+            },
+            {
+              "find": "@foldkit/ui/nav",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/nav/public"
+            },
+            {
+              "find": "@foldkit/ui/popover",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/popover/public"
+            },
+            {
+              "find": "@foldkit/ui/progress",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/progress/public"
+            },
+            {
+              "find": "@foldkit/ui/radioGroup",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/radioGroup/public"
+            },
+            {
+              "find": "@foldkit/ui/select",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/select/public"
+            },
+            {
+              "find": "@foldkit/ui/slider",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/slider/public"
+            },
+            {
+              "find": "@foldkit/ui/switch",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/switch/public"
+            },
+            {
+              "find": "@foldkit/ui/tabs",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/tabs/public"
+            },
+            {
+              "find": "@foldkit/ui/textarea",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/textarea/public"
+            },
+            {
+              "find": "@foldkit/ui/toast",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/toast/public"
+            },
+            {
+              "find": "@foldkit/ui/tooltip",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/tooltip/public"
+            },
+            {
+              "find": "@foldkit/ui/virtualList",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/virtualList/public"
+            },
+            {
+              "find": "@foldkit/ui",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/index"
+            },
+            {
+              "find": "@foldkit/markdown/vite",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/markdown/src/vite/public"
+            },
+            {
+              "find": "@foldkit/markdown",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/markdown/src/index"
+            },
+            {
+              "find": "@foldkit/devtools/vite",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/devtools/src/vite"
+            },
+            {
+              "find": "foldkit",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/index"
+            },
+            {
+              "find": {},
+              "replacement": "/@fs/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/client/env.mjs"
+            },
+            {
+              "find": {},
+              "replacement": "/@fs/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/client/client.mjs"
+            }
+          ],
+          "mainFields": [
+            "browser",
+            "module",
+            "jsnext:main",
+            "jsnext"
+          ],
+          "conditions": [
+            "module",
+            "browser",
+            "development|production"
+          ],
+          "builtins": []
+        },
+        "build": {
+          "target": [
+            "chrome111",
+            "edge111",
+            "firefox114",
+            "safari16.4",
+            "ios16.4"
+          ],
+          "polyfillModulePreload": true,
+          "modulePreload": {
+            "polyfill": true
+          },
+          "outDir": "dist",
+          "assetsDir": "assets",
+          "assetsInlineLimit": 4096,
+          "sourcemap": false,
+          "terserOptions": {},
+          "chunkImportMap": false,
+          "rolldownOptions": {
+            "platform": "browser"
+          },
+          "commonjsOptions": {
+            "include": [
+              {}
+            ],
+            "extensions": [
+              ".js",
+              ".cjs"
+            ]
+          },
+          "dynamicImportVarsOptions": {
+            "exclude": [
+              {}
+            ]
+          },
+          "write": true,
+          "emptyOutDir": null,
+          "copyPublicDir": true,
+          "license": false,
+          "manifest": false,
+          "lib": false,
+          "ssrManifest": false,
+          "ssrEmitAssets": false,
+          "reportCompressedSize": true,
+          "chunkSizeWarningLimit": 500,
+          "watch": null,
+          "cssCodeSplit": true,
+          "minify": "oxc",
+          "rollupOptions": {
+            "platform": "browser"
+          },
+          "ssr": false,
+          "emitAssets": true,
+          "cssTarget": [
+            "chrome111",
+            "edge111",
+            "firefox114",
+            "safari16.4",
+            "ios16.4"
+          ],
+          "cssMinify": true
+        },
+        "optimizeDeps": {
+          "include": [
+            "effect",
+            "effect/Array",
+            "effect/Boolean",
+            "effect/Cause",
+            "effect/Clock",
+            "effect/Context",
+            "effect/Data",
+            "effect/DateTime",
+            "effect/Duration",
+            "effect/Effect",
+            "effect/Equal",
+            "effect/Equivalence",
+            "effect/Exit",
+            "effect/Fiber",
+            "effect/Function",
+            "effect/Hash",
+            "effect/HashMap",
+            "effect/HashSet",
+            "effect/Layer",
+            "effect/Logger",
+            "effect/Match",
+            "effect/Number",
+            "effect/Option",
+            "effect/Order",
+            "effect/Predicate",
+            "effect/PubSub",
+            "effect/Queue",
+            "effect/Record",
+            "effect/Redacted",
+            "effect/Ref",
+            "effect/Result",
+            "effect/Runtime",
+            "effect/Scheduler",
+            "effect/Schema",
+            "effect/SchemaAST",
+            "effect/SchemaIssue",
+            "effect/SchemaTransformation",
+            "effect/Scope",
+            "effect/Stream",
+            "effect/String",
+            "effect/Struct",
+            "effect/SubscriptionRef",
+            "effect/Types"
+          ],
+          "exclude": [
+            "foldkit"
+          ],
+          "needsInterop": [],
+          "rolldownOptions": {
+            "resolve": {
+              "symlinks": true
+            },
+            "output": {
+              "topLevelVar": true
+            }
+          },
+          "extensions": [],
+          "holdUntilCrawlEnd": true,
+          "force": false,
+          "ignoreOutdatedRequests": false,
+          "noDiscovery": false,
+          "rollupOptions": {
+            "resolve": {
+              "symlinks": true
+            },
+            "output": {
+              "topLevelVar": true
+            }
+          },
+          "esbuildOptions": {
+            "preserveSymlinks": false
+          }
+        }
+      },
+      "ssr": {
+        "consumer": "server",
+        "resolve": {
+          "externalConditions": [
+            "node",
+            "module-sync"
+          ],
+          "extensions": [
+            ".mjs",
+            ".js",
+            ".mts",
+            ".ts",
+            ".jsx",
+            ".tsx",
+            ".json"
+          ],
+          "dedupe": [
+            "foldkit",
+            "@foldkit/devtools"
+          ],
+          "noExternal": [
+            "foldkit",
+            "@foldkit/ui",
+            "@foldkit/devtools",
+            "@foldkit/vite-plugin",
+            "foldkit",
+            "@foldkit/ui",
+            "@foldkit/devtools",
+            "@foldkit/vite-plugin",
+            "foldkit",
+            "@foldkit/ui",
+            "@foldkit/devtools",
+            "@foldkit/vite-plugin"
+          ],
+          "external": [],
+          "preserveSymlinks": false,
+          "tsconfigPaths": false,
+          "alias": [
+            {
+              "find": "foldkit/brand",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/dist/brand/public.js"
+            },
+            {
+              "find": "foldkit/asyncData",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/asyncData/public"
+            },
+            {
+              "find": "foldkit/calendar",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/calendar"
+            },
+            {
+              "find": "foldkit/canvas",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/canvas"
+            },
+            {
+              "find": "foldkit/command",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/command"
+            },
+            {
+              "find": "foldkit/customElement",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/customElement"
+            },
+            {
+              "find": "foldkit/devtools-host",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/devTools/host"
+            },
+            {
+              "find": "foldkit/dom",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/dom"
+            },
+            {
+              "find": "foldkit/experimental/machine",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/machine"
+            },
+            {
+              "find": "foldkit/experimental/query",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/query/public"
+            },
+            {
+              "find": "foldkit/experimental/server",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental/server/public"
+            },
+            {
+              "find": "foldkit/experimental",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/experimental"
+            },
+            {
+              "find": "foldkit/fieldValidation",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/fieldValidation"
+            },
+            {
+              "find": "foldkit/file",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/file"
+            },
+            {
+              "find": "foldkit/html",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/html"
+            },
+            {
+              "find": "foldkit/http",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/http"
+            },
+            {
+              "find": "foldkit/managedResource",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/managedResource"
+            },
+            {
+              "find": "foldkit/message",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/message"
+            },
+            {
+              "find": "foldkit/mount",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/mount"
+            },
+            {
+              "find": "foldkit/navigation",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/navigation"
+            },
+            {
+              "find": "foldkit/port",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/port"
+            },
+            {
+              "find": "foldkit/render",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/render"
+            },
+            {
+              "find": "foldkit/route",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/route"
+            },
+            {
+              "find": "foldkit/runtime",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/runtime"
+            },
+            {
+              "find": "foldkit/scene",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/scene"
+            },
+            {
+              "find": "foldkit/schema",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/schema"
+            },
+            {
+              "find": "foldkit/story",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/story"
+            },
+            {
+              "find": "foldkit/struct",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/struct"
+            },
+            {
+              "find": "foldkit/submodel",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/submodel/public"
+            },
+            {
+              "find": "foldkit/subscription",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/subscription/public"
+            },
+            {
+              "find": "foldkit/test/vitest",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/test/vitest"
+            },
+            {
+              "find": "foldkit/update",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/update/public"
+            },
+            {
+              "find": "foldkit/url",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/url"
+            },
+            {
+              "find": "@foldkit/ui/anchor",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/anchor/public"
+            },
+            {
+              "find": "@foldkit/ui/animation",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/animation/public"
+            },
+            {
+              "find": "@foldkit/ui/button",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/button/public"
+            },
+            {
+              "find": "@foldkit/ui/calendar",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/calendar/public"
+            },
+            {
+              "find": "@foldkit/ui/checkbox",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/checkbox/public"
+            },
+            {
+              "find": "@foldkit/ui/combobox",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/combobox/public"
+            },
+            {
+              "find": "@foldkit/ui/datePicker",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/datePicker/public"
+            },
+            {
+              "find": "@foldkit/ui/dialog",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/dialog/public"
+            },
+            {
+              "find": "@foldkit/ui/disclosure",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/disclosure/public"
+            },
+            {
+              "find": "@foldkit/ui/dragAndDrop",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/dragAndDrop/public"
+            },
+            {
+              "find": "@foldkit/ui/fieldset",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/fieldset/public"
+            },
+            {
+              "find": "@foldkit/ui/fileDrop",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/fileDrop/public"
+            },
+            {
+              "find": "@foldkit/ui/hoverIntent",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/hoverIntent/public"
+            },
+            {
+              "find": "@foldkit/ui/input",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/input/public"
+            },
+            {
+              "find": "@foldkit/ui/listbox",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/listbox/public"
+            },
+            {
+              "find": "@foldkit/ui/menu",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/menu/public"
+            },
+            {
+              "find": "@foldkit/ui/meter",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/meter/public"
+            },
+            {
+              "find": "@foldkit/ui/nav",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/nav/public"
+            },
+            {
+              "find": "@foldkit/ui/popover",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/popover/public"
+            },
+            {
+              "find": "@foldkit/ui/progress",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/progress/public"
+            },
+            {
+              "find": "@foldkit/ui/radioGroup",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/radioGroup/public"
+            },
+            {
+              "find": "@foldkit/ui/select",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/select/public"
+            },
+            {
+              "find": "@foldkit/ui/slider",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/slider/public"
+            },
+            {
+              "find": "@foldkit/ui/switch",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/switch/public"
+            },
+            {
+              "find": "@foldkit/ui/tabs",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/tabs/public"
+            },
+            {
+              "find": "@foldkit/ui/textarea",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/textarea/public"
+            },
+            {
+              "find": "@foldkit/ui/toast",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/toast/public"
+            },
+            {
+              "find": "@foldkit/ui/tooltip",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/tooltip/public"
+            },
+            {
+              "find": "@foldkit/ui/virtualList",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/virtualList/public"
+            },
+            {
+              "find": "@foldkit/ui",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/ui/src/index"
+            },
+            {
+              "find": "@foldkit/markdown/vite",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/markdown/src/vite/public"
+            },
+            {
+              "find": "@foldkit/markdown",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/markdown/src/index"
+            },
+            {
+              "find": "@foldkit/devtools/vite",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/devtools/src/vite"
+            },
+            {
+              "find": "foldkit",
+              "replacement": "/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/packages/foldkit/src/index"
+            },
+            {
+              "find": {},
+              "replacement": "/@fs/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/client/env.mjs"
+            },
+            {
+              "find": {},
+              "replacement": "/@fs/home/om/TAO/Tools/foldkit-worktrees/issue-1628-cold-vite-cache/node_modules/.pnpm/vite@8.3.1_@types+node@26.4.0_jiti@2.7.0_yaml@2.9.1/node_modules/vite/dist/client/client.mjs"
+            }
+          ],
+          "mainFields": [
+            "module",
+            "jsnext:main",
+            "jsnext"
+          ],
+          "conditions": [
+            "module",
+            "node",
+            "development|production"
+          ],
+          "builtins": [
+            "_http_agent",
+            "_http_client",
+            "_http_common",
+            "_http_incoming",
+            "_http_outgoing",
+            "_http_server",
+            "_stream_duplex",
+            "_stream_passthrough",
+            "_stream_readable",
+            "_stream_transform",
+            "_stream_wrap",
+            "_stream_writable",
+            "_tls_common",
+            "_tls_wrap",
+            "assert",
+            "assert/strict",
+            "async_hooks",
+            "buffer",
+            "child_process",
+            "cluster",
+            "console",
+            "constants",
+            "crypto",
+            "dgram",
+            "diagnostics_channel",
+            "dns",
+            "dns/promises",
+            "domain",
+            "events",
+            "fs",
+            "fs/promises",
+            "http",
+            "http2",
+            "https",
+            "inspector",
+            "inspector/promises",
+            "module",
+            "net",
+            "os",
+            "path",
+            "path/posix",
+            "path/win32",
+            "perf_hooks",
+            "process",
+            "punycode",
+            "querystring",
+            "readline",
+            "readline/promises",
+            "repl",
+            "stream",
+            "stream/consumers",
+            "stream/promises",
+            "stream/web",
+            "string_decoder",
+            "sys",
+            "timers",
+            "timers/promises",
+            "tls",
+            "trace_events",
+            "tty",
+            "url",
+            "util",
+            "util/types",
+            "v8",
+            "vm",
+            "wasi",
+            "worker_threads",
+            "zlib",
+            {},
+            {}
+          ]
+        },
+        "build": {
+          "target": [
+            "chrome111",
+            "edge111",
+            "firefox114",
+            "safari16.4",
+            "ios16.4"
+          ],
+          "polyfillModulePreload": true,
+          "modulePreload": {
+            "polyfill": true
+          },
+          "outDir": "dist",
+          "assetsDir": "assets",
+          "assetsInlineLimit": 4096,
+          "sourcemap": false,
+          "terserOptions": {},
+          "chunkImportMap": false,
+          "rolldownOptions": {
+            "platform": "node"
+          },
+          "commonjsOptions": {
+            "include": [
+              {}
+            ],
+            "extensions": [
+              ".js",
+              ".cjs"
+            ]
+          },
+          "dynamicImportVarsOptions": {
+            "exclude": [
+              {}
+            ]
+          },
+          "write": true,
+          "emptyOutDir": null,
+          "copyPublicDir": true,
+          "license": false,
+          "manifest": false,
+          "lib": false,
+          "ssrManifest": false,
+          "ssrEmitAssets": false,
+          "reportCompressedSize": true,
+          "chunkSizeWarningLimit": 500,
+          "watch": null,
+          "cssCodeSplit": true,
+          "minify": false,
+          "rollupOptions": {
+            "platform": "node"
+          },
+          "ssr": true,
+          "emitAssets": false,
+          "cssTarget": [
+            "chrome111",
+            "edge111",
+            "firefox114",
+            "safari16.4",
+            "ios16.4"
+          ],
+          "cssMinify": "lightningcss"
+        },
+        "optimizeDeps": {
+          "include": [],
+          "exclude": [
+            "foldkit"
+          ],
+          "needsInterop": [],
+          "rolldownOptions": {
+            "resolve": {
+              "symlinks": true
+            },
+            "output": {
+              "topLevelVar": true
+            }
+          },
+          "extensions": [],
+          "holdUntilCrawlEnd": true,
+          "force": false,
+          "ignoreOutdatedRequests": false,
+          "noDiscovery": true,
+          "rollupOptions": {
+            "resolve": {
+              "symlinks": true
+            },
+            "output": {
+              "topLevelVar": true
+            }
+          },
+          "esbuildOptions": {
+            "preserveSymlinks": false
+          }
+        }
+      }
+    }
+  },
+  "clientIncludes": [
+    "@effect/platform-browser",
+    "effect/http",
+    "effect/persistence",
+    "@foldkit/devtools > clsx",
+    "foldkit > parse5",
+    "effect",
+    "effect/Array",
+    "effect/Boolean",
+    "effect/Cause",
+    "effect/Clock",
+    "effect/Context",
+    "effect/Data",
+    "effect/DateTime",
+    "effect/Duration",
+    "effect/Effect",
+    "effect/Equal",
+    "effect/Equivalence",
+    "effect/Exit",
+    "effect/Fiber",
+    "effect/Function",
+    "effect/Hash",
+    "effect/HashMap",
+    "effect/HashSet",
+    "effect/Layer",
+    "effect/Logger",
+    "effect/Match",
+    "effect/Number",
+    "effect/Option",
+    "effect/Order",
+    "effect/Predicate",
+    "effect/PubSub",
+    "effect/Queue",
+    "effect/Record",
+    "effect/Redacted",
+    "effect/Ref",
+    "effect/Result",
+    "effect/Runtime",
+    "effect/Scheduler",
+    "effect/Schema",
+    "effect/SchemaAST",
+    "effect/SchemaIssue",
+    "effect/SchemaTransformation",
+    "effect/Scope",
+    "effect/Stream",
+    "effect/String",
+    "effect/Struct",
+    "effect/SubscriptionRef",
+    "effect/Types"
+  ]
+}

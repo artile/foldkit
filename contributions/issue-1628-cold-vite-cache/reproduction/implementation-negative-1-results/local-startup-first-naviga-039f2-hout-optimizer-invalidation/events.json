@@ -1,0 +1,98 @@
+[
+  {
+    "elapsedMs": 93.52411600000005,
+    "kind": "navigation",
+    "data": "http://localhost:5180/"
+  },
+  {
+    "elapsedMs": 448.39150299999994,
+    "kind": "http-error",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect.js?v=cc9f76b0",
+      "status": 504,
+      "statusText": "Outdated Optimize Dep"
+    }
+  },
+  {
+    "elapsedMs": 448.48066600000004,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep)"
+    }
+  },
+  {
+    "elapsedMs": 448.86506900000006,
+    "kind": "request-failed",
+    "data": {
+      "url": "http://localhost:5180/node_modules/.vite/deps/effect.js?v=cc9f76b0",
+      "failure": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  },
+  {
+    "elapsedMs": 544.3428210000001,
+    "kind": "console",
+    "data": {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    }
+  },
+  {
+    "elapsedMs": 548.7316999999999,
+    "kind": "websocket-created",
+    "data": "ws://localhost:5180/?token=qgpsy4h5cqQU"
+  },
+  {
+    "elapsedMs": 563.150499,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"connected\"}"
+  },
+  {
+    "elapsedMs": 563.268328,
+    "kind": "console",
+    "data": {
+      "type": "debug",
+      "text": "[vite] connected."
+    }
+  },
+  {
+    "elapsedMs": 624.8957100000001,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/clsx.js?v=0d7ed4e8\",\"/node_modules/.vite/deps/effect_persistence.js?v=65a3844b\",\"/node_modules/.vite/deps/@effect_platform-browser.js?v=faffe664\"]}"
+  },
+  {
+    "elapsedMs": 869.234444,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/parse5.js?v=bbc7ffee\"]}"
+  },
+  {
+    "elapsedMs": 887.36398,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/@floating-ui_dom.js?v=2c9acbc1\"]}"
+  },
+  {
+    "elapsedMs": 921.4516750000001,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"prune\",\"paths\":[\"/node_modules/.vite/deps/effect.js?v=cc9f76b0\"]}"
+  },
+  {
+    "elapsedMs": 1148.519632,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  },
+  {
+    "elapsedMs": 1242.33378,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:restore-model\",\"data\":{\"id\":\"root\"}}"
+  },
+  {
+    "elapsedMs": 16169.907532000001,
+    "kind": "body",
+    "data": "\n    <div id=\"root\"></div>\n    <script type=\"module\" src=\"./src/entry.ts\"></script>\n  \n\n"
+  }
+]

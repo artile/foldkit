@@ -1,0 +1,458 @@
+{
+  "hash": "0f5fcd5b",
+  "configHash": "d57d113b",
+  "lockfileHash": "cfd31508",
+  "browserHash": "c93bf0de",
+  "optimized": {
+    "@effect/platform-browser": {
+      "src": "../../../../../node_modules/.pnpm/@effect+platform-browser@4.0.0_effect@4.0.0/node_modules/@effect/platform-browser/dist/index.js",
+      "file": "@effect_platform-browser.js",
+      "fileHash": "92faa23e",
+      "needsInterop": false
+    },
+    "@floating-ui/dom": {
+      "src": "../../../../../node_modules/.pnpm/@floating-ui+dom@1.8.0/node_modules/@floating-ui/dom/dist/floating-ui.dom.mjs",
+      "file": "@floating-ui_dom.js",
+      "fileHash": "12c3b64f",
+      "needsInterop": false
+    },
+    "@foldkit/devtools > clsx": {
+      "src": "../../../../../node_modules/.pnpm/clsx@2.1.1/node_modules/clsx/dist/clsx.mjs",
+      "file": "@foldkit_devtools_n_clsx.js",
+      "fileHash": "2e487f44",
+      "needsInterop": false
+    },
+    "clsx": {
+      "src": "../../../../../node_modules/.pnpm/clsx@2.1.1/node_modules/clsx/dist/clsx.mjs",
+      "file": "clsx.js",
+      "fileHash": "db654e9e",
+      "needsInterop": false
+    },
+    "effect": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/index.js",
+      "file": "effect.js",
+      "fileHash": "a477a678",
+      "needsInterop": false
+    },
+    "effect/Array": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Array.js",
+      "file": "effect_Array.js",
+      "fileHash": "1ef3ca06",
+      "needsInterop": false
+    },
+    "effect/Boolean": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Boolean.js",
+      "file": "effect_Boolean.js",
+      "fileHash": "a9c20ffb",
+      "needsInterop": false
+    },
+    "effect/Cause": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Cause.js",
+      "file": "effect_Cause.js",
+      "fileHash": "c41b2989",
+      "needsInterop": false
+    },
+    "effect/Clock": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Clock.js",
+      "file": "effect_Clock.js",
+      "fileHash": "c7651982",
+      "needsInterop": false
+    },
+    "effect/Context": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Context.js",
+      "file": "effect_Context.js",
+      "fileHash": "0f447ff3",
+      "needsInterop": false
+    },
+    "effect/Data": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Data.js",
+      "file": "effect_Data.js",
+      "fileHash": "6340ec21",
+      "needsInterop": false
+    },
+    "effect/DateTime": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/DateTime.js",
+      "file": "effect_DateTime.js",
+      "fileHash": "a08b1846",
+      "needsInterop": false
+    },
+    "effect/Duration": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Duration.js",
+      "file": "effect_Duration.js",
+      "fileHash": "f18bc9ec",
+      "needsInterop": false
+    },
+    "effect/Effect": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Effect.js",
+      "file": "effect_Effect.js",
+      "fileHash": "5dd73c99",
+      "needsInterop": false
+    },
+    "effect/Equal": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Equal.js",
+      "file": "effect_Equal.js",
+      "fileHash": "d64e3634",
+      "needsInterop": false
+    },
+    "effect/Equivalence": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Equivalence.js",
+      "file": "effect_Equivalence.js",
+      "fileHash": "0b0577a7",
+      "needsInterop": false
+    },
+    "effect/Exit": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Exit.js",
+      "file": "effect_Exit.js",
+      "fileHash": "04e683c8",
+      "needsInterop": false
+    },
+    "effect/Fiber": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Fiber.js",
+      "file": "effect_Fiber.js",
+      "fileHash": "5a65a641",
+      "needsInterop": false
+    },
+    "effect/Function": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Function.js",
+      "file": "effect_Function.js",
+      "fileHash": "6215039a",
+      "needsInterop": false
+    },
+    "effect/Hash": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Hash.js",
+      "file": "effect_Hash.js",
+      "fileHash": "cb396f5a",
+      "needsInterop": false
+    },
+    "effect/HashMap": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/HashMap.js",
+      "file": "effect_HashMap.js",
+      "fileHash": "8b92e092",
+      "needsInterop": false
+    },
+    "effect/HashSet": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/HashSet.js",
+      "file": "effect_HashSet.js",
+      "fileHash": "d9ed11d1",
+      "needsInterop": false
+    },
+    "effect/Layer": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Layer.js",
+      "file": "effect_Layer.js",
+      "fileHash": "32d14802",
+      "needsInterop": false
+    },
+    "effect/Logger": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Logger.js",
+      "file": "effect_Logger.js",
+      "fileHash": "a260af58",
+      "needsInterop": false
+    },
+    "effect/Match": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Match.js",
+      "file": "effect_Match.js",
+      "fileHash": "08a7f27c",
+      "needsInterop": false
+    },
+    "effect/Number": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Number.js",
+      "file": "effect_Number.js",
+      "fileHash": "25411578",
+      "needsInterop": false
+    },
+    "effect/Option": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Option.js",
+      "file": "effect_Option.js",
+      "fileHash": "043171da",
+      "needsInterop": false
+    },
+    "effect/Order": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Order.js",
+      "file": "effect_Order.js",
+      "fileHash": "393cb66c",
+      "needsInterop": false
+    },
+    "effect/Predicate": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Predicate.js",
+      "file": "effect_Predicate.js",
+      "fileHash": "a9ae653e",
+      "needsInterop": false
+    },
+    "effect/PubSub": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/PubSub.js",
+      "file": "effect_PubSub.js",
+      "fileHash": "71488edd",
+      "needsInterop": false
+    },
+    "effect/Queue": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Queue.js",
+      "file": "effect_Queue.js",
+      "fileHash": "5bf4b270",
+      "needsInterop": false
+    },
+    "effect/Record": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Record.js",
+      "file": "effect_Record.js",
+      "fileHash": "a96752bd",
+      "needsInterop": false
+    },
+    "effect/Redacted": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Redacted.js",
+      "file": "effect_Redacted.js",
+      "fileHash": "8686e81b",
+      "needsInterop": false
+    },
+    "effect/Ref": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Ref.js",
+      "file": "effect_Ref.js",
+      "fileHash": "fa06c259",
+      "needsInterop": false
+    },
+    "effect/Result": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Result.js",
+      "file": "effect_Result.js",
+      "fileHash": "a5fcc53c",
+      "needsInterop": false
+    },
+    "effect/Runtime": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Runtime.js",
+      "file": "effect_Runtime.js",
+      "fileHash": "2d9b4503",
+      "needsInterop": false
+    },
+    "effect/Scheduler": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Scheduler.js",
+      "file": "effect_Scheduler.js",
+      "fileHash": "f4599f1f",
+      "needsInterop": false
+    },
+    "effect/Schema": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Schema.js",
+      "file": "effect_Schema.js",
+      "fileHash": "4886d336",
+      "needsInterop": false
+    },
+    "effect/SchemaAST": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/SchemaAST.js",
+      "file": "effect_SchemaAST.js",
+      "fileHash": "e3925b6a",
+      "needsInterop": false
+    },
+    "effect/SchemaIssue": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/SchemaIssue.js",
+      "file": "effect_SchemaIssue.js",
+      "fileHash": "0c4f93ac",
+      "needsInterop": false
+    },
+    "effect/SchemaTransformation": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/SchemaTransformation.js",
+      "file": "effect_SchemaTransformation.js",
+      "fileHash": "1c46f8a3",
+      "needsInterop": false
+    },
+    "effect/Scope": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Scope.js",
+      "file": "effect_Scope.js",
+      "fileHash": "5d7c7521",
+      "needsInterop": false
+    },
+    "effect/Stream": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Stream.js",
+      "file": "effect_Stream.js",
+      "fileHash": "5ad39665",
+      "needsInterop": false
+    },
+    "effect/String": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/String.js",
+      "file": "effect_String.js",
+      "fileHash": "c4dd9de0",
+      "needsInterop": false
+    },
+    "effect/Struct": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Struct.js",
+      "file": "effect_Struct.js",
+      "fileHash": "bffbffd2",
+      "needsInterop": false
+    },
+    "effect/SubscriptionRef": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/SubscriptionRef.js",
+      "file": "effect_SubscriptionRef.js",
+      "fileHash": "674376c6",
+      "needsInterop": false
+    },
+    "effect/Types": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/Types.js",
+      "file": "effect_Types.js",
+      "fileHash": "21b69442",
+      "needsInterop": false
+    },
+    "effect/http": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/http/index.js",
+      "file": "effect_http.js",
+      "fileHash": "65649b39",
+      "needsInterop": false
+    },
+    "effect/persistence": {
+      "src": "../../../../../node_modules/.pnpm/effect@4.0.0/node_modules/effect/dist/persistence/index.js",
+      "file": "effect_persistence.js",
+      "fileHash": "b5922d54",
+      "needsInterop": false
+    },
+    "foldkit > parse5": {
+      "src": "../../../../../node_modules/.pnpm/parse5@8.0.1/node_modules/parse5/dist/index.js",
+      "file": "foldkit_n_parse5.js",
+      "fileHash": "e49303d7",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "Array-BQzFaZPD": {
+      "file": "Array-BQzFaZPD.js",
+      "isDynamicEntry": false
+    },
+    "ByteSize-j4YYorrh": {
+      "file": "ByteSize-j4YYorrh.js",
+      "isDynamicEntry": false
+    },
+    "Chunk-BGrA5NAi": {
+      "file": "Chunk-BGrA5NAi.js",
+      "isDynamicEntry": false
+    },
+    "Combiner-C8_0VmXO": {
+      "file": "Combiner-C8_0VmXO.js",
+      "isDynamicEntry": false
+    },
+    "Config-DgmYoGg9": {
+      "file": "Config-DgmYoGg9.js",
+      "isDynamicEntry": false
+    },
+    "Context-B2a2TTcD": {
+      "file": "Context-B2a2TTcD.js",
+      "isDynamicEntry": false
+    },
+    "Effect-D0u8CExD": {
+      "file": "Effect-D0u8CExD.js",
+      "isDynamicEntry": false
+    },
+    "ErrorReporter-DnxmigBi": {
+      "file": "ErrorReporter-DnxmigBi.js",
+      "isDynamicEntry": false
+    },
+    "FiberSet-DI6UyYqi": {
+      "file": "FiberSet-DI6UyYqi.js",
+      "isDynamicEntry": false
+    },
+    "FileSystem-ts55hiYH": {
+      "file": "FileSystem-ts55hiYH.js",
+      "isDynamicEntry": false
+    },
+    "Function-BhSJ5cAx": {
+      "file": "Function-BhSJ5cAx.js",
+      "isDynamicEntry": false
+    },
+    "Hash-XUAu2MPE": {
+      "file": "Hash-XUAu2MPE.js",
+      "isDynamicEntry": false
+    },
+    "HashSet-4UyZ6GIx": {
+      "file": "HashSet-4UyZ6GIx.js",
+      "isDynamicEntry": false
+    },
+    "Layer-D_xD4YII": {
+      "file": "Layer-D_xD4YII.js",
+      "isDynamicEntry": false
+    },
+    "LogLevel-0C8HUc1T": {
+      "file": "LogLevel-0C8HUc1T.js",
+      "isDynamicEntry": false
+    },
+    "Match-DUq06c2a": {
+      "file": "Match-DUq06c2a.js",
+      "isDynamicEntry": false
+    },
+    "MutableList-DhtUJQFF": {
+      "file": "MutableList-DhtUJQFF.js",
+      "isDynamicEntry": false
+    },
+    "MutableRef-BH6FeSNY": {
+      "file": "MutableRef-BH6FeSNY.js",
+      "isDynamicEntry": false
+    },
+    "Path-BWkrQ8pa": {
+      "file": "Path-BWkrQ8pa.js",
+      "isDynamicEntry": false
+    },
+    "Persistence-BQAK_ydl": {
+      "file": "Persistence-BQAK_ydl.js",
+      "isDynamicEntry": false
+    },
+    "PubSub-DSuxexon": {
+      "file": "PubSub-DSuxexon.js",
+      "isDynamicEntry": false
+    },
+    "Pull-DDIoJCJ7": {
+      "file": "Pull-DDIoJCJ7.js",
+      "isDynamicEntry": false
+    },
+    "Redacted-wY2Alh8A": {
+      "file": "Redacted-wY2Alh8A.js",
+      "isDynamicEntry": false
+    },
+    "Reducer-uhNav2eZ": {
+      "file": "Reducer-uhNav2eZ.js",
+      "isDynamicEntry": false
+    },
+    "Schema-ppafzo73": {
+      "file": "Schema-ppafzo73.js",
+      "isDynamicEntry": false
+    },
+    "SchemaAST-1F_N73tf": {
+      "file": "SchemaAST-1F_N73tf.js",
+      "isDynamicEntry": false
+    },
+    "SchemaIssue-SM0AHZgE": {
+      "file": "SchemaIssue-SM0AHZgE.js",
+      "isDynamicEntry": false
+    },
+    "SchemaTransformation-CHm1YeFC": {
+      "file": "SchemaTransformation-CHm1YeFC.js",
+      "isDynamicEntry": false
+    },
+    "Socket-BxLl6qA6": {
+      "file": "Socket-BxLl6qA6.js",
+      "isDynamicEntry": false
+    },
+    "Stream-DN-8tizD": {
+      "file": "Stream-DN-8tizD.js",
+      "isDynamicEntry": false
+    },
+    "core-DSWvLrcP": {
+      "file": "core-DSWvLrcP.js",
+      "isDynamicEntry": false
+    },
+    "count-Dh7fI-8a": {
+      "file": "count-Dh7fI-8a.js",
+      "isDynamicEntry": false
+    },
+    "effect-CVJccJaH": {
+      "file": "effect-CVJccJaH.js",
+      "isDynamicEntry": false
+    },
+    "hashMap-qKA-1rM_": {
+      "file": "hashMap-qKA-1rM_.js",
+      "isDynamicEntry": false
+    },
+    "record-DT2BNbP2": {
+      "file": "record-DT2BNbP2.js",
+      "isDynamicEntry": false
+    },
+    "result-COyXd279": {
+      "file": "result-COyXd279.js",
+      "isDynamicEntry": false
+    },
+    "rolldown-runtime-D7D4PA-g": {
+      "file": "rolldown-runtime-D7D4PA-g.js",
+      "isDynamicEntry": false
+    }
+  }
+}

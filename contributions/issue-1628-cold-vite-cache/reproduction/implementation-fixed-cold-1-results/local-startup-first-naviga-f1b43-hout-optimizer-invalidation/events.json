@@ -1,0 +1,76 @@
+[
+  {
+    "elapsedMs": 103.75794299999995,
+    "kind": "navigation",
+    "data": "http://localhost:5180/"
+  },
+  {
+    "elapsedMs": 174.10184700000002,
+    "kind": "console",
+    "data": {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    }
+  },
+  {
+    "elapsedMs": 198.15469600000006,
+    "kind": "websocket-created",
+    "data": "ws://localhost:5180/?token=i54tQ5Vav772"
+  },
+  {
+    "elapsedMs": 224.638869,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"connected\"}"
+  },
+  {
+    "elapsedMs": 224.69782499999997,
+    "kind": "console",
+    "data": {
+      "type": "debug",
+      "text": "[vite] connected."
+    }
+  },
+  {
+    "elapsedMs": 909.2544120000001,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:restore-model\",\"data\":{\"id\":\"root\"}}"
+  },
+  {
+    "elapsedMs": 972.0118920000001,
+    "kind": "websocket-sent",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:request-model\",\"data\":{\"id\":\"root\"}}"
+  },
+  {
+    "elapsedMs": 1005.054237,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:restore-model\",\"data\":{\"id\":\"root\"}}"
+  },
+  {
+    "elapsedMs": 1005.0749030000001,
+    "kind": "websocket-sent",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:devTools:event\",\"data\":{\"maybeConnectionId\":\"mvq32z08-4jboqkxd\",\"event\":{\"_tag\":\"EventConnected\",\"runtime\":{\"connectionId\":\"mvq32z08-4jboqkxd\",\"url\":\"http://localhost:5180/\",\"title\":\"API Cache Query\"}}}}"
+  },
+  {
+    "elapsedMs": 1034.4446349999998,
+    "kind": "websocket-received",
+    "data": "{\"type\":\"custom\",\"event\":\"foldkit:restore-model\",\"data\":{\"id\":\"root\"}}"
+  },
+  {
+    "elapsedMs": 1035.280229,
+    "kind": "console",
+    "data": {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  },
+  {
+    "elapsedMs": 1873.732798,
+    "kind": "content-passed",
+    "data": "api-cache-query"
+  },
+  {
+    "elapsedMs": 1880.124809,
+    "kind": "body",
+    "data": "\n    <div class=\"min-h-screen bg-slate-100 flex justify-center p-6\"><div class=\"w-full max-w-2xl flex flex-col gap-6\"><header class=\"flex flex-col gap-1\"><h1 class=\"text-3xl font-bold text-slate-900\">API Cache</h1><p class=\"text-slate-600\">Query.define owns each fetch and its retained data. The parent decides when each Query should load or refresh.</p></header><div class=\"flex flex-col gap-6\"><div role=\"tablist\" aria-orientation=\"horizontal\" aria-label=\"API cache sections\" class=\"flex gap-2\"><button role=\"tab\" aria-selected=\"true\" aria-controls=\"api-cache-query-tabs-panel-0\" data-selected=\"\" class=\"px-4 py-2 rounded-lg bg-white text-slate-600 font-semibold hover:bg-slate-50 transition cursor-pointer data-[selected]:bg-indigo-600 data-[selected]:text-white data-[selected]:hover:bg-indigo-600\" id=\"api-cache-query-tabs-tab-0\" type=\"button\" tabindex=\"0\">Posts</button><button role=\"tab\" aria-selected=\"false\" class=\"px-4 py-2 rounded-lg bg-white text-slate-600 font-semibold hover:bg-slate-50 transition cursor-pointer data-[selected]:bg-indigo-600 data-[selected]:text-white data-[selected]:hover:bg-indigo-600\" id=\"api-cache-query-tabs-tab-1\" type=\"button\" tabindex=\"-1\">Stats</button></div><div role=\"tabpanel\" aria-labelledby=\"api-cache-query-tabs-tab-0\" data-selected=\"\" class=\"flex flex-col gap-4\" id=\"api-cache-query-tabs-panel-0\" tabindex=\"0\"><section class=\"flex flex-col gap-4\"><div class=\"flex flex-col gap-4\"><div class=\"flex items-center justify-between\"><h2 class=\"text-xl font-bold text-slate-800\">Posts</h2><button class=\"px-3 py-1.5 bg-white text-slate-700 text-sm font-semibold rounded-md shadow hover:bg-slate-50 transition cursor-pointer data-[disabled]:opacity-50 data-[disabled]:cursor-default data-[disabled]:hover:bg-white\" type=\"button\" tabindex=\"0\">Refresh</button></div><p class=\"text-sm text-slate-500\">Open a post, then go back. The detail stays in the Query. Opening it again reads that entry and does not fetch.</p><div class=\"flex flex-col gap-4\"><ul class=\"flex flex-col gap-2\"><li><button class=\"w-full text-left bg-white rounded-lg shadow px-4 py-3 hover:bg-slate-50 transition cursor-pointer flex items-center justify-between gap-4\" type=\"button\" tabindex=\"0\"><div><div class=\"font-semibold text-slate-800\">The Model Is the Cache</div><div class=\"text-sm text-slate-500\">Why a single source of truth needs no query client.</div></div></button></li><li><button class=\"w-full text-left bg-white rounded-lg shadow px-4 py-3 hover:bg-slate-50 transition cursor-pointer flex items-center justify-between gap-4\" type=\"button\" tabindex=\"0\"><div><div class=\"font-semibold text-slate-800\">Stale-While-Revalidate, Explained</div><div class=\"text-sm text-slate-500\">Show the old data while the new data loads.</div></div></button></li><li><button class=\"w-full text-left bg-white rounded-lg shadow px-4 py-3 hover:bg-slate-50 transition cursor-pointer flex items-center justify-between gap-4\" type=\"button\" tabindex=\"0\"><div><div class=\"font-semibold text-slate-800\">Query Keys Are Just Names</div><div class=\"text-sm text-slate-500\">A Model field per query replaces stringly-typed keys.</div></div></button></li><li><button class=\"w-full text-left bg-white rounded-lg shadow px-4 py-3 hover:bg-slate-50 transition cursor-pointer flex items-center justify-between gap-4\" type=\"button\" tabindex=\"0\"><div><div class=\"font-semibold text-slate-800\">Refresh Is a Message</div><div class=\"text-sm text-slate-500\">Requesting newer data is a fact, not hidden framework policy.</div></div></button></li><li><button class=\"w-full text-left bg-white rounded-lg shadow px-4 py-3 hover:bg-slate-50 transition cursor-pointer flex items-center justify-between gap-4\" type=\"button\" tabindex=\"0\"><div><div class=\"font-semibold text-slate-800\">This Post Is Unavailable</div><div class=\"text-sm text-slate-500\">Open it to see the Failure and Retry states.</div></div></button></li></ul></div></div></section></div></div></div></div>\n    <script type=\"module\" src=\"./src/entry.ts\"></script>\n  \n\n<div id=\"foldkit-devtools\" style=\"view-transition-name: foldkit-devtools;\"></div>"
+  }
+]

@@ -1,0 +1,1 @@
+{"name": "lifecycle-preparation-probe", "private": true, "scripts": {"preprobe": "node -e \"console.log('PREPROBE')\"", "probe": "node -e \"console.log('PROBE')\"", "postprobe": "node -e \"console.log('POSTPROBE')\""}}
