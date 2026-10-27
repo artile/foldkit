@@ -1,5 +1,6 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 type Check = Readonly<{ ok: boolean; message: string }>
 
@@ -19,6 +20,18 @@ const ROOT_ENTRIES = new Set([
   '.lock',
 ])
 
+const REGISTRY_DIRECTORY = join(
+  dirname(fileURLToPath(import.meta.url)),
+  '..',
+  '..',
+  '..',
+  'repos',
+)
+
+const DEFAULT_REPO = 'foldkit'
+
+const CONTRIBUTION_MODES = new Set(['maintain', 'pr'])
+
 const STATE_PATTERNS: ReadonlyArray<RegExp> = [
   /^analysis: in progress$/,
   /^analysis: assignment ready$/,
@@ -29,6 +42,7 @@ const STATE_PATTERNS: ReadonlyArray<RegExp> = [
   /^evaluation: promoted round [1-9]\d*$/,
   /^(analysis|implementation|evaluation): escalated$/,
   /^(analysis|implementation|evaluation): abandoned$/,
+  /^tracking: open$/,
 ]
 
 const pass = (message: string): Check => ({ ok: true, message })
@@ -42,6 +56,36 @@ const readState = (statusPath: string): string | undefined => {
     /^Contribution `[^`]+` is currently at `([^`]+)`\.$/m,
   )
   return match?.[1]?.trim()
+}
+
+const readRepo = (statusPath: string): string | undefined => {
+  const match = readFileSync(statusPath, 'utf8').match(
+    /^Repository: `([^`]+)`\.$/m,
+  )
+  return match?.[1]?.trim()
+}
+
+const readMode = (registryPath: string): string | undefined => {
+  const match = readFileSync(registryPath, 'utf8').match(
+    /^mode\s*=\s*"([^"]+)"/m,
+  )
+  return match?.[1]
+}
+
+const checkRepo = (statusPath: string): Check => {
+  const declared = readRepo(statusPath)
+  const repo = declared ?? DEFAULT_REPO
+  const source = declared === undefined ? ' (default, no Repository line)' : ''
+  const registryPath = join(REGISTRY_DIRECTORY, `${repo}.toml`)
+  if (!existsSync(registryPath)) {
+    return fail(`repository "${repo}"${source} has no repos/${repo}.toml`)
+  }
+  const mode = readMode(registryPath)
+  return mode !== undefined && CONTRIBUTION_MODES.has(mode)
+    ? pass(`repository "${repo}"${source} has mode "${mode}"`)
+    : fail(
+        `repository "${repo}"${source} has mode "${mode ?? 'none'}"; contributions need "maintain" or "pr"`,
+      )
 }
 
 const roundOf = (state: string): number | undefined => {
@@ -180,6 +224,7 @@ const run = (directory: string, returnedState: string | undefined): ReadonlyArra
   ]
   return [
     ...stateChecks,
+    checkRepo(statusPath),
     ...checkLayout(directory),
     ...(known ? checkState(directory, state) : []),
   ]

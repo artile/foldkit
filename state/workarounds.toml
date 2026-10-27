@@ -1,0 +1,26 @@
+# Workarounds in Taras's web apps and the upstream item that would let the app remove each one.
+# maintainer-friction-miner creates entries and sets candidate, duplicate, fixed, dropped, held, filed, removed.
+# maintainer-release-radar sets fixed (upstream fix merged) and released (a release ships the fix).
+# Entry id: "<app>/<file>/<topic>" in kebab-case. Match a signal by app, file, and match text; lines move.
+#
+# [items."citata-frontend/src-page-home-view-ts/popover-mount-key"]
+# app = "citata-frontend"
+# location = "src/page/home/view.ts:120"    # file:line at last_seen
+# signal = "cast"                           # patch | cast | copy | comment | pin | friction
+# match = "as unknown as Mount.Definition"  # the signal text, to find it again
+# repo = "foldkit"                          # owner repo in repos/*.toml, after triage
+# package = "foldkit"
+# installed = "0.79.1"                      # app's version of package at last_seen
+# state = "filed"                           # candidate | duplicate | filed | held | fixed | released | removed | dropped
+# priority = "P2"
+# priority_source = "estimate"              # label | estimate
+# upstream = ""                             # issue or pull request URL that covers it
+# slug = ""                                 # contribution slug, for pr and maintain repos
+# reproduction = ""                         # path of the reproduction and its output
+# pinned_commit = ""                        # upstream commit the reproduction ran on
+# fixed_by = ""                             # upstream commit that fixes it
+# fixed_in = ""                             # first release tag that contains fixed_by
+# gate_rounds = 0                           # publish gate rounds for issue-mode text
+# reason = ""                               # one line: why this state
+# first_seen = "2026-10-27"
+# last_seen = "2026-10-27"

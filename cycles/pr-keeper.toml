@@ -2,4 +2,4 @@ id = "pr-keeper"
 skill = "maintainer-pr-keeper"
 schedule = { type = "fixed_time", timeOfDay = "09:00" }
 t3_scheduled_task_id = "scheduled-task:command:mcp:a30faea6-627f-4a5e-aab5-7cb94cd4e81e:schedule-task:foldkit-macair-setup-20261021-pr-keeper"
-prompt = "Run the $maintainer-pr-keeper skill for Foldkit Maintainer. Read /home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md first."
+prompt = "Run the $maintainer-pr-keeper skill for CAFE Maintainer. Read /home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md first."

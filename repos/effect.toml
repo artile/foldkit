@@ -1,0 +1,16 @@
+# Registry entry. Format: designs/cafe-maintainer.md, "Registry".
+# Issue-only: no fork, no pull requests.
+name = "effect"
+upstream = "Effect-TS/effect"
+path = "/home/om/TAO/Tools/effect"
+mode = "issue"
+default_branch = "main"
+# Each package has its own <name>@<version> tag; this glob matches the core package.
+release_tags = "effect@*"
+packages = ["effect"]
+rules = [".agents/AGENTS.md", "CONTRIBUTING.md"]
+owner_plan_authors = []
+clone = "blobless"
+
+[limits]
+issues_opened = 1

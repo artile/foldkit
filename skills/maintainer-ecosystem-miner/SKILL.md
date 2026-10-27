@@ -1,6 +1,6 @@
 ---
 name: maintainer-ecosystem-miner
-description: Weekly Foldkit Maintainer cycle that reads public projects built with Foldkit, from awesome-foldkit and GitHub code search, to find Foldkit bugs, workarounds, DX gaps, and new projects worth listing. Use when the ecosystem miner schedule fires or when asked what other Foldkit users struggle with.
+description: Weekly CAFE Maintainer cycle that reads public projects built with Foldkit, from awesome-foldkit and GitHub code search, to find Foldkit bugs, workarounds, DX gaps, and new projects worth listing. Use when the ecosystem miner schedule fires or when asked what other Foldkit users struggle with.
 ---
 
 # maintainer-ecosystem-miner

@@ -1,0 +1,19 @@
+# Weekly write counts per registry repo, on top of the daily [counts] in
+# autonomy.toml. Limits live in repos/<repo>.toml [limits]. Rules: AGENTS.md,
+# "Weekly limits per repo".
+week = "2026-W44"   # ISO week (UTC) of the counts below
+
+# One table per repo that has [limits], keyed by repo name.
+[repos.alchemy]
+issues_opened = 0
+pull_requests_opened = 1   # alchemy#2700, opened 2026-10-27
+
+[repos.effect-orm]
+issues_opened = 0
+pull_requests_opened = 0
+
+[repos.effect]
+issues_opened = 0
+
+[repos.maple]
+issues_opened = 0

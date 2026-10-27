@@ -1,4 +1,4 @@
-# Foldkit Maintainer autonomy. Every run reads this first. See AGENTS.md, "Autonomy".
+# CAFE Maintainer autonomy. Every run reads this first. See AGENTS.md, "Autonomy".
 mode = "autonomous"   # autonomous | supervised
 paused = false        # true: no GitHub writes outside the maintainer branch
 

@@ -9,14 +9,14 @@ Guiding a contribution to an open-source GitHub project end to end spans three s
 
 ## Autonomous mode
 
-When `/home/om/TAO/Tools/foldkit/.maintainer/state/autonomy.toml` has `mode = "autonomous"`, you act as the contributor's proxy. Wherever this skill or a stage waits for the contributor (a decision, an approval of exact text, permission to push, promotion), decide through the gates in "Autonomy" in `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md` instead, relay the result to the stage as the contributor's reply, and record it in `status.md` as "decided autonomously". Respect the daily limits and `paused`: before each upstream write, check its key from the limit table in `AGENTS.md`. Where a stage or template says a permission prompt confirms a write, the gate result is the confirmation; unattended runs get no prompt.
+When `/home/om/TAO/Tools/foldkit/.maintainer/state/autonomy.toml` has `mode = "autonomous"`, you act as the contributor's proxy. Wherever this skill or a stage waits for the contributor (a decision, an approval of exact text, permission to push, promotion), decide through the gates in "Autonomy" in `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md` instead, relay the result to the stage as the contributor's reply, and record it in `status.md` as "decided autonomously". Respect the daily limits, the weekly limits of the contribution's repository, and `paused`: before each upstream write, check its key per "Daily limits" and "Weekly limits per repo" in `AGENTS.md`. Where a stage or template says a permission prompt confirms a write, the gate result is the confirmation; unattended runs get no prompt.
 
 In autonomous mode also:
 
-- Inputs from a cycle (`maintainer-issue-claim`, `maintainer-ecosystem-miner`, `maintainer-own-apps`, `maintainer-driver`) skip the acknowledgment and summary replies. A setup failure or an unknown slug goes into the run's digest, and the run skips that contribution.
+- Inputs from a cycle (`maintainer-issue-claim`, `maintainer-ecosystem-miner`, `maintainer-friction-miner`, `maintainer-driver`) skip the acknowledgment and summary replies. A setup failure or an unknown slug goes into the run's digest, and the run skips that contribution.
 - When CI checks on the pull request have not started (for example, workflows wait for maintainer approval), do not escalate: keep the state, release the lock, and let the next driver run retry.
 - An unclean contribution worktree with no unpushed commits is removed and recreated from the branch. With unpushed commits, record it in the digest and skip.
-- When analysis resumes and `status.md` lacks the findings it needs (analysis keeps them only in its returns), rerun Phase 1 up to Decision against the current `upstream/main`.
+- When analysis resumes and `status.md` lacks the findings it needs (analysis keeps them only in its returns), rerun Phase 1 up to Decision against the current `upstream/<default>`.
 - Any other escalation: add the step "escalation retry" to `status.md` and route it back to analysis. When `status.md` already has an "escalation retry" step, set the state to `<stage>: abandoned` with the reason instead.
 - At any `abandoned` state, close the contribution's draft pull request if one exists (`gh pr close`).
 - In each implementation round, read the review threads and comments on the contribution's pull request. Treat those from an author whose `authorAssociation` is `OWNER`, `MEMBER`, or `COLLABORATOR` as Must-fix items (evaluation also lists them in `outcome.md`): resolve them in the round and reply through the publish gate and the `review_replies` limit.
@@ -31,13 +31,15 @@ All three stages run as fresh subagents, each guided by its own file under `stag
 
 ## Workspace
 
-This copy is set up for `foldkit/foldkit` from the Foldkit Maintainer checkout `/home/om/TAO/Tools/foldkit`. Read `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md` first; it overrides this file where they differ.
+This copy runs from the CAFE Maintainer worktree `/home/om/TAO/Tools/foldkit/.maintainer`. Read its `AGENTS.md` first; it overrides this file where they differ.
 
-- `upstream` tracks `foldkit/foldkit`. The fork is the `artile` remote (`artile/foldkit`, a personal-account fork, so the maintainer can push to pull request branches). Every mention of `origin` in this skill and its stages means the `artile` remote.
-- A slug names each contribution. Its worktree is `/home/om/TAO/Tools/foldkit-worktrees/<slug>`. Its artifact directory is `/home/om/TAO/Tools/foldkit/.maintainer/contributions/<slug>/`, which is tracked on the `maintainer` branch.
-- After `git worktree add`, run `pnpm install && bash scripts/cloud-session-setup.sh && bash /home/om/TAO/Tools/foldkit/.maintainer/bin/link-skills.sh` in the new worktree.
+Each contribution targets one repository of the registry: the `Repository:` line in `status.md` names it, and a missing line means `foldkit`. Read `upstream`, `fork`, `path`, `default_branch`, and `rules` from `/home/om/TAO/Tools/foldkit/.maintainer/repos/<repo>.toml`. Only `maintain` and `pr` repositories take contributions. In this skill, its stages, and its references, `<owner>/<repo>` is `upstream`, `<default>` is `default_branch`, the fork is `fork`, and `origin` is the `artile` remote.
 
-On entry, confirm on GitHub that `artile/foldkit` is a fork of `foldkit/foldkit` with Actions disabled. Before each stage starts, fetch both remotes; then reuse the worktree of the contribution as is if it already exists, or otherwise create one detached at `upstream/main`. If the clone or either remote is missing, or anything else fails, flag the problem for the contributor rather than work around it.
+- In the clone at `path`, the `upstream` remote tracks `upstream` and the `artile` remote tracks `fork`, a personal-account fork, so maintainers can push to pull request branches.
+- A slug names each contribution. Its worktree is `<worktree root>/<slug>`, with the worktree root from "Clones and worktrees" in `AGENTS.md`. Its artifact directory is `/home/om/TAO/Tools/foldkit/.maintainer/contributions/<slug>/`, which is tracked on the `maintainer` branch.
+- After `git worktree add`, install dependencies and link the skills in the new worktree. For `foldkit`: `pnpm install && bash scripts/cloud-session-setup.sh && bash /home/om/TAO/Tools/foldkit/.maintainer/bin/link-skills.sh`. For another repository: the install command its `rules` files or `README.md` give, then the same `link-skills.sh`.
+
+On entry, confirm on GitHub that `fork` is a fork of `upstream` with Actions disabled. Before each stage starts, fetch both remotes; then reuse the worktree of the contribution as is if it already exists, or otherwise create one detached at `upstream/<default>`. If the clone or either remote is missing, or anything else fails, flag the problem for the contributor rather than work around it.
 
 ## Entry
 
@@ -46,7 +48,7 @@ A contribution starts from what the contributor brings, never from a guess:
 | Input | Action |
 |---|---|
 | A new shortcoming | Settle it with the contributor as below, then route it as new |
-| An issue from `maintainer-issue-claim` | The claim cycle already settled the shortcoming: use the slug it passes, or derive one as `issue-<number>-<topic>`, set up the workspace, and start analysis without the acknowledgment and summary replies |
+| An issue from `maintainer-issue-claim`, or a reproduced finding from `maintainer-friction-miner` | The cycle already settled the shortcoming and its repository: use the slug it passes, or derive one as `issue-<number>-<topic>` for `foldkit` and `<repo>-<number or topic>` for another repository. Write the `Repository:` line, set up the workspace, and start analysis without the acknowledgment and summary replies |
 | A slug of an existing contribution | Route it by its state |
 | An unknown slug, or a resumption without one | List existing contributions to `<owner>/<repo>` and let the contributor choose |
 
@@ -74,5 +76,6 @@ On entry to an existing contribution and after every return that awaits nothing,
 | `evaluation: promoted round N` | Hand the pull request to the contributor for final review; the merge rests with the maintainers unless the contributor is one of them |
 | `<stage>: escalated` | Present the reason; start the stage the contributor chooses |
 | `<stage>: abandoned` | Report the reason; the contribution ends (autonomous mode only) |
+| `tracking: open` | Nothing. The contributor opened the pull request outside the stages; `maintainer-pr-keeper` keeps it mergeable and `maintainer-driver` applies release proposals to it |
 
-`scripts/check.ts` runs as `node <absolute path of this skill>/scripts/check.ts <artifact directory> "<state>"`, passing the state to route by. If it fails, send its output to the subagent that just returned; on entry or if the subagent cannot resolve it, flag the problem for the contributor. Never repair a handoff yourself.
+`scripts/check.ts` runs as `node <absolute path of this skill>/scripts/check.ts <artifact directory> "<state>"`, passing the state to route by. It also checks that the `Repository:` line names a `maintain` or `pr` repository. If it fails, send its output to the subagent that just returned; on entry or if the subagent cannot resolve it, flag the problem for the contributor. Never repair a handoff yourself.

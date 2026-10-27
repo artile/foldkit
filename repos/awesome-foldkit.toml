@@ -1,0 +1,11 @@
+# Registry entry. Format: designs/cafe-maintainer.md, "Registry".
+# Taras owns this repository, so it has no fork. Only maintainer-awesome-curator writes here.
+name = "awesome-foldkit"
+upstream = "foldhub/awesome-foldkit"
+path = "/home/om/TAO/Tools/awesome-foldkit"
+mode = "curate"
+default_branch = "main"
+packages = []
+rules = ["CONTRIBUTING.md"]
+owner_plan_authors = []
+clone = "full"

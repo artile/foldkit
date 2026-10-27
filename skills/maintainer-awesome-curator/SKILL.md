@@ -1,6 +1,6 @@
 ---
 name: maintainer-awesome-curator
-description: Foldkit Maintainer cycle that keeps foldhub/awesome-foldkit current and selective. Reviews the radar issue "New Foldkit projects to review", scores each candidate against a quality bar that rises as the list grows, adds the good ones, rejects the rest, and once a month re-scores and prunes the list. Use when the driver starts it, when the radar issue changes, or when asked to curate awesome-foldkit.
+description: CAFE Maintainer cycle that keeps foldhub/awesome-foldkit current and selective. Reviews the radar issue "New Foldkit projects to review", scores each candidate against a quality bar that rises as the list grows, adds the good ones, rejects the rest, and once a month re-scores and prunes the list. Use when the driver starts it, when the radar issue changes, or when asked to curate awesome-foldkit.
 ---
 
 # maintainer-awesome-curator

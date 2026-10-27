@@ -1,0 +1,9 @@
+# maintainer-release-radar state: the newest release tag seen per registry repo.
+# Written by maintainer-release-radar under the state lock. One table per repo in repos/*.toml with packages:
+#
+# [repos.<name>]
+# last_tag = "v3.19.0"                          # newest tag matching release_tags at the last run
+# last_tag_date = "2026-10-27T08:00:00+00:00"   # creatordate of last_tag; tags created after it are new
+# last_checked = "2026-10-27T08:00:00Z"         # UTC time of the last run
+#
+# A repo with no table gets a baseline on its first run: its newest tag is recorded and nothing is classified.

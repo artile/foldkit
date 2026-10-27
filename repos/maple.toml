@@ -1,0 +1,16 @@
+# Registry entry. Format: designs/cafe-maintainer.md, "Registry".
+# Issue-only: no fork, no pull requests.
+name = "maple"
+upstream = "MapleTechLabs/maple"
+path = "/home/om/TAO/Tools/maple"
+mode = "issue"
+default_branch = "main"
+# v* tags release the Maple app. The npm SDKs have their own @maple-dev/<name>@<version> tags.
+release_tags = "@maple-dev/*@*"
+packages = ["@maple-dev/effect-sdk", "@maple-dev/browser", "@maple-dev/alchemy"]
+rules = ["AGENTS.md", "CLAUDE.md", "CONTRIBUTING.md"]
+owner_plan_authors = []
+clone = "blobless"
+
+[limits]
+issues_opened = 1

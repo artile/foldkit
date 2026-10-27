@@ -1,0 +1,4 @@
+id = "friction-miner"
+skill = "maintainer-friction-miner"
+schedule = { type = "fixed_time", timeOfDay = "10:00", weekdays = [5] }
+prompt = "Run the $maintainer-friction-miner skill for CAFE Maintainer. Read /home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md first."

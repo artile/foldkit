@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Link Foldkit Maintainer skills and rules into a checkout of foldkit/foldkit.
+# Link CAFE Maintainer skills and rules into a checkout of foldkit/foldkit.
 # Usage: link-skills.sh [checkout]   (default: current directory)
 set -euo pipefail
 

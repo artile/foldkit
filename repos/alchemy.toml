@@ -1,0 +1,18 @@
+# Registry entry. Format: designs/cafe-maintainer.md, "Registry".
+name = "alchemy"
+upstream = "alchemy-run/alchemy"
+fork = "artile/alchemy"
+path = "/home/om/TAO/Tools/alchemy"
+mode = "pr"
+merge_method = "squash"                # squash | merge | rebase; how upstream merges pull requests
+default_branch = "main"
+# alchemy and @alchemy.run/domain release together under one v<version> tag.
+release_tags = "v*"
+packages = ["alchemy", "@alchemy.run/domain"]
+rules = ["AGENTS.md", "CONTRIBUTING.md"]
+owner_plan_authors = []
+clone = "full"
+
+[limits]
+issues_opened = 2
+pull_requests_opened = 2

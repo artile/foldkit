@@ -1,0 +1,17 @@
+# Registry entry. Format: designs/cafe-maintainer.md, "Registry".
+name = "effect-orm"
+upstream = "MapleTechLabs/effect-orm"
+fork = "artile/effect-orm"
+path = "/home/om/TAO/Tools/effect-orm"
+mode = "pr"
+merge_method = "merge"                # squash | merge | rebase; how upstream merges pull requests
+default_branch = "main"
+release_tags = "v*"
+packages = ["@maple-dev/effect-orm"]
+rules = ["AGENTS.md", "CONTRIBUTING.md"]
+owner_plan_authors = []
+clone = "full"
+
+[limits]
+issues_opened = 2
+pull_requests_opened = 2

@@ -1,0 +1,16 @@
+# maintainer-release-radar proposals (stream C). Written by maintainer-release-radar under the state lock.
+# Format and rules: skills/maintainer-release-radar/references/proposal-template.md.
+#
+# [proposals."<app>/<tag>/<topic>"]
+# class = "unblock"                # unblock | break | adopt | bridge
+# target = "app:citata-frontend"   # app:<name> | contribution:<slug>
+# repo = "foldkit"
+# release = "foldkit@0.82.0"
+# installed = "0.79.1"
+# location = "src/page/home/view.ts:120"
+# summary = "One or two sentences: what the release changed, what to do at location."
+# workaround = ""                  # state/workarounds.toml id, for unblock
+# priority = "P2"
+# state = "open"                   # open | pr-opened | done | dropped
+# created = "2026-10-27"
+# pull_request_url = ""

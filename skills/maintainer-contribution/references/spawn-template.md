@@ -1,8 +1,10 @@
+Effect source: use `node_modules/effect`, or for full source the read-only copy at `/home/om/TAO/Tools/foldkit/repos/effect`; never create `.vendor/effect` in an upstream checkout.
+
 I am your orchestrator. You run the <analysis, implementation, or evaluation, for the stage to start> stage; follow your stage file, `stages/<that stage>.md`, for this contribution:
 
 - **Slug:** `<slug>`
 - **Skill directory:** `<absolute path of this skill>`, the base for paths to `stages/` and `references/` in this message and in the stage file
-- **Upstream:** `<owner>/<repo>`, with the default branch `<default>`
+- **Upstream:** `<owner>/<repo>`, with the default branch `<default>`, from `repos/<repo>.toml`; follow the files in its `rules`
 - **Worktree:** `<absolute path of the worktree>`, with both remotes freshly fetched
 - **Artifact directory:** `<absolute path of the artifact directory>`
 <For a new shortcoming, write “- **Shortcoming:** ” followed by it; after an escalation, write “- **Decision:** ” followed by the choice of the contributor; otherwise, omit this.>

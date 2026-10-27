@@ -1,31 +1,45 @@
-# Taras's own apps that use Foldkit. maintainer-own-apps reads this list.
+# Taras's own apps. maintainer-friction-miner (stream B) and
+# maintainer-release-radar (stream C) read only apps with kind = "web".
+# allow_pr = false: stream C reports and does not push to the app repo.
 # host = "macmax": the app lives on macmax; read it with `ssh macmax`.
 [apps.citata-frontend]
 path = "/Users/tao/Projects/citata.ai/frontend"
 host = "macmax"
+kind = "web"
+allow_pr = false
 last_checked = ""
 
 [apps.kup-tutor]
 path = "/Users/tao/Projects/kup/apps/tutor"
 host = "macmax"
+kind = "web"
+allow_pr = false
 last_checked = ""
 
 [apps.foldkit-gallery]
 path = "/Users/tao/Projects/foldkit-gallery"
 host = "macmax"
+kind = "web"
+allow_pr = false
 last_checked = ""
 
 [apps.foldcase-docs]
 path = "/Users/tao/Projects/foldcase-docs"
 host = "macmax"
+kind = "web"
+allow_pr = false
 last_checked = ""
 
 [apps.shadcn-foldkit]
 path = "/Users/tao/Tools/shadcn-foldkit"
 host = "macmax"
+kind = "web"
+allow_pr = false
 last_checked = ""
 
 [apps.auto-dark-extension]
 path = "/Users/tao/Tools/auto-dark-extension"
 host = "macmax"
+kind = "web"
+allow_pr = false
 last_checked = ""

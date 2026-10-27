@@ -1,6 +1,6 @@
 ---
 name: maintainer-issue-sweeper
-description: Weekly Foldkit Maintainer cycle that checks open foldkit/foldkit issues against current main and drafts comments for issues already resolved or nearly resolved. Use when the issue sweeper schedule fires or when asked which Foldkit issues are already fixed on main.
+description: Weekly CAFE Maintainer cycle that checks open foldkit/foldkit issues against current main and drafts comments for issues already resolved or nearly resolved. Use when the issue sweeper schedule fires or when asked which Foldkit issues are already fixed on main.
 ---
 
 # maintainer-issue-sweeper

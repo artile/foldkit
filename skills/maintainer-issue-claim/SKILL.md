@@ -1,6 +1,6 @@
 ---
 name: maintainer-issue-claim
-description: Foldkit Maintainer cycle that polls foldkit/foldkit for new issues from other people, triages them, reproduces the good candidates, and asks Taras to approve a claim comment before a fix starts. Use when the issue claim schedule fires or when asked to look for new Foldkit issues to take.
+description: CAFE Maintainer cycle that polls foldkit/foldkit for new issues from other people, triages them, reproduces the good candidates, and asks Taras to approve a claim comment before a fix starts. Use when the issue claim schedule fires or when asked to look for new Foldkit issues to take.
 ---
 
 # maintainer-issue-claim

@@ -2,7 +2,7 @@
 
 <Description: written as the squash commit body. One source line per paragraph, no hard wrapping.>
 
-<Paragraph: what was wrong or missing before, led by its impact on people building with Foldkit (see "Maintainer priorities" in `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md`), as a reader of `git log` on `main` needs it.>
+<Paragraph: what was wrong or missing before, led by its impact on people building with the project (for `foldkit`, see "Maintainer priorities" in `/home/om/TAO/Tools/foldkit/.maintainer/AGENTS.md`), as a reader of `git log` on `<default>` needs it.>
 
 <Paragraph: what changed, by area, naming the affected modules, the version impact, and any public API or behavior change.>
 
