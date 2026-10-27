@@ -350,7 +350,7 @@ decision = "claimed"
 priority = "P2"
 priority_source = "estimate"
 slug = "issue-1811-ssg-preview-route"
-reason = "Draft PR #1814 delivered round 1 at b3652ed9079de2d9c96c17a5d13f41d4e694ebaf. Decoding collision and symlink regressions fixed; clean code/publication reviews and complete pre-push passed, including 18 website browser tests. Evaluation waits for CI completion; F2 is a separate post-merge increment."
+reason = "Draft PR #1814 delivered round 2 at d92ae2d9148dba2a613dc2f3f5eba2c8eb52946b. Evaluation round 1 found disabled proxy entries suppressing prerendered route resolution; both original/candidate regressions now fail without the fix and pass with it. Clean full-range review, 358 plugin tests and complete pre-push passed, including 18 website browser tests. CI is pending; round 2 evaluation resumes on a later driver run. F2 follows merge."
 comment_url = "https://github.com/foldkit/foldkit/issues/1811#issuecomment-6450004955"
 
 [issues.1812]

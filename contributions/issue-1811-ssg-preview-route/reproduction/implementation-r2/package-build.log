@@ -1,0 +1,18 @@
+Scope: 3 of 53 workspace projects
+Scope: all 53 workspace projects
+✓ Lockfile passes supply-chain policies (verified 6d ago)
+Lockfile is up to date, resolution step is skipped
+Already up to date
+
+. prepare$ test -z "$CI" && simple-git-hooks || true
+. prepare: Done
+Done in 639ms using pnpm v11.8.0
+packages/foldkit build$ pnpm run clean && tsc -b tsconfig.build.json
+packages/create-foldkit-app build$ pnpm run clean && tsc -b tsconfig.build.json && node scripts/build-templates.mjs
+packages/foldkit build: $ rimraf dist *.tsbuildinfo
+packages/create-foldkit-app build: $ rimraf dist *.tsbuildinfo
+packages/create-foldkit-app build: Done
+packages/foldkit build: Done
+packages/vite-plugin-foldkit build$ pnpm run clean && tsc -b
+packages/vite-plugin-foldkit build: $ rimraf dist *.tsbuildinfo
+packages/vite-plugin-foldkit build: Done

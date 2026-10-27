@@ -1,0 +1,44 @@
+Scope: all 53 workspace projects
+✓ Lockfile passes supply-chain policies (verified 6d ago)
+Lockfile is up to date, resolution step is skipped
+Already up to date
+
+. prepare$ test -z "$CI" && simple-git-hooks || true
+. prepare: Done
+Done in 918ms using pnpm v11.8.0
+$ vitest run -- test/preview.test.ts -t 'disabled proxy'
+
+ RUN  v4.1.11 /home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit
+
+ ❯ test/preview.test.ts (28 tests | 2 failed) 698ms
+     × serves the generated document with disabled proxy /about 25ms
+     × serves the generated document with disabled proxy /about/index 14ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > serves the generated document with disabled proxy /about
+ FAIL  test/preview.test.ts > prerendered preview directory indexes > serves the generated document with disabled proxy /about/index
+AssertionError: expected '<title>Home</title><h1>Home</h1>' to be '<title>About</title><h1>Generated Abo…' // Object.is equality
+
+Expected: "<title>About</title><h1>Generated About page</h1>"
+Received: "<title>Home</title><h1>Home</h1>"
+
+ ❯ test/preview.test.ts:203:43
+    201|     async context => {
+    202|       const { send } = await startPreview({ preview: { proxy: { [conte…
+    203|       expect((await send('/about')).body).toBe(ABOUT)
+       |                                           ^
+    204|     },
+    205|   )
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed | 17 passed (18)
+      Tests  2 failed | 356 passed | 4 skipped (362)
+   Start at  23:16:16
+   Duration  16.95s (transform 7.86s, setup 0ms, import 13.47s, tests 56.37s, environment 242ms)
+
+/home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit:
+[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] @foldkit/vite-plugin@0.28.0 test: `vitest run -- test/preview.test.ts -t 'disabled proxy'`
+Exit status 1

@@ -1,0 +1,6 @@
+PASS state "implementation: delivered round 2" is a known state
+PASS returned state matches status.md
+PASS artifact directory holds only defined entries
+PASS evaluation/ holds only round-N directories
+PASS assignment.md exists
+PASS 1 earlier evaluation round(s), as round 2 requires

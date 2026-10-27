@@ -1,0 +1,7 @@
+{
+  ".changeset/ssg-preview-directory-index.md": "49a12510c57ab80fa35a4b382f680b795a1bbf2170dff713e271026b81b020a2",
+  "packages/vite-plugin-foldkit/src/build.ts": "f089877b51cbe7144e9b03b58d30aa6bf576cb6aac480f87f8243037bdf659e7",
+  "packages/vite-plugin-foldkit/src/preview.ts": "9c1fd33f9f6aaeca8731bb38692a42073d2264391e32ace955fdc6948d0a6dd1",
+  "packages/vite-plugin-foldkit/test/fixtures/preview/entry.server.ts": "6e30499b703aec7adfc571832095c94eea8ef2855c8e1bbaa2ae1e7811cc6aad",
+  "packages/vite-plugin-foldkit/test/preview.test.ts": "0913c74d7e8c89138a501f67abb59c7d5e3240ac5030ea342321247884be9bce"
+}

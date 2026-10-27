@@ -1,0 +1,10 @@
+$ vitest run
+
+ RUN  v5.0.2 /home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/create-foldkit-app
+
+
+ Test Files  2 passed (2)
+      Tests  18 passed (18)
+   Start at  23:21:56
+   Duration  316ms (import 79%, transform 18%, tests 2%, worker 1%)
+

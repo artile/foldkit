@@ -1,0 +1,9 @@
+{"check": "package-build", "command": ["pnpm", "--workspace-concurrency=2", "--filter", "foldkit", "--filter", "@foldkit/vite-plugin", "--filter", "create-foldkit-app", "build"], "exitCode": 0}
+{"check": "fixed-reproduction", "command": ["node", "/home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1811-ssg-preview-route/reproduction/implementation-r2/fixed-reproduction/reproduce.mjs", "/home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route"], "exitCode": 0}
+{"check": "scripts-typecheck", "command": ["pnpm", "typecheck:scripts"], "exitCode": 0}
+{"check": "scripts-test", "command": ["pnpm", "test:scripts"], "exitCode": 0}
+{"check": "packed-proof", "command": ["pnpm", "check:scaffold-server-rendering"], "exitCode": 0}
+{"check": "generator-test", "command": ["pnpm", "--filter", "create-foldkit-app", "test"], "exitCode": 0}
+{"check": "final-format", "command": ["./node_modules/.bin/oxfmt", "--check", ".changeset/ssg-preview-directory-index.md", "packages/vite-plugin-foldkit/src/build.ts", "packages/vite-plugin-foldkit/src/preview.ts", "packages/vite-plugin-foldkit/test/fixtures/preview/entry.server.ts", "packages/vite-plugin-foldkit/test/preview.test.ts"], "exitCode": 0}
+{"check": "final-whitespace", "command": ["git", "diff", "--check"], "exitCode": 0}
+{"check": "pre-push", "command": ["pnpm", "pre-push"], "exitCode": 0, "rawBytes": 100682753, "rawSha256": "09cc659d8e3019e39396e308fb155b926f0e62dcfa87589d67d2c857e7d15bd0"}
