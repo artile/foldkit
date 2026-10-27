@@ -1,3 +1,5 @@
+> **Moved.** CAFE Maintainer now lives in [artile/cafe-maintainer](https://github.com/artile/cafe-maintainer) (`/Users/tao/Tools/cafe-maintainer`). This branch is frozen on 2026-10-28 and gets no new commits.
+
 # CAFE Maintainer
 
 Tools, state, and digests for contributing, as an outside contributor, to the CAFE stack Taras builds on: [Foldkit](https://github.com/foldkit/foldkit), [Alchemy](https://github.com/alchemy-run/alchemy) (Domain), [Effect](https://github.com/Effect-TS/effect), [effect-orm](https://github.com/MapleTechLabs/effect-orm), and [Maple](https://github.com/MapleTechLabs/maple). The registry in `repos/` lists each repository and what the Maintainer may write there.
