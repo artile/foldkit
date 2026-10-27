@@ -350,7 +350,7 @@ decision = "claimed"
 priority = "P2"
 priority_source = "estimate"
 slug = "issue-1811-ssg-preview-route"
-reason = "Claim published; implementation held at analysis: assignment ready. Local HEAD 2f21134aab09aea336baba57b4acdd3fd6f288b8, three unpublished commits, 499-line diff. Code review failed 3/3: unresolved decodeURIComponent lookup versus Vite decodeURI serving mismatch affects document identity and containment. Full pre-push exited 1 after website Node heap exhaustion and 18 browser failures, without baseline comparison. Driver must correct decoding, add regressions, refresh checks and obtain clean review. No contribution push or PR."
+reason = "Draft PR #1814 delivered round 1 at b3652ed9079de2d9c96c17a5d13f41d4e694ebaf. Decoding collision and symlink regressions fixed; clean code/publication reviews and complete pre-push passed, including 18 website browser tests. Evaluation waits for CI completion; F2 is a separate post-merge increment."
 comment_url = "https://github.com/foldkit/foldkit/issues/1811#issuecomment-6450004955"
 
 [issues.1812]
@@ -364,3 +364,4 @@ decision = "skip"
 priority = "P3"
 priority_source = "estimate"
 reason = "opened by devinjameson; maintainer-owned plan excluded from claiming; P3 estimate for a bounded rendering investigation explicitly described as neither a feature commitment nor a preview blocker"
+pull_request_url = "https://github.com/foldkit/foldkit/pull/1814"

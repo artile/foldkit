@@ -1,0 +1,4 @@
+Command: ['pnpm', 'typecheck:scripts']
+$ tsc -p scripts/tsconfig.json --noEmit
+
+Exit: 0

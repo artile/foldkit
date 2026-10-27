@@ -1,6 +1,6 @@
 # Implementation F1 verification
 
-Base: upstream/main b702a5efbb74bebc056b798b414ddb923a82fbd5. Current local source: 2f21134aab09aea336baba57b4acdd3fd6f288b8. final-source-sha256.json identifies the exact five source files; the unpublished diff is 496 additions plus 3 deletions, 499 changed lines. Publication is held after the third failed code review; this source has an unresolved path-decoding correctness and containment finding.
+Base: upstream/main b702a5efbb74bebc056b798b414ddb923a82fbd5. Previous driver source: 2f21134aab09aea336baba57b4acdd3fd6f288b8. final-source-sha256.json identifies the exact five source files; the unpublished diff is 496 additions plus 3 deletions, 499 changed lines. That source was held after its third failed code review for a path-decoding correctness and containment finding; the resume results below identify the corrected source.
 
 Final source checks:
 
@@ -29,3 +29,21 @@ Review hold:
 - Exact PR title/body review round 1 was CLEAN, with zero failures this run or total. Validation text review has not started. No push, PR, Validation comment, or daily allowance reservation occurred.
 
 Superseded attempts are retained: pre-push-before-review-fixes.log and pre-push-before-proxy-collision-fix.log were stopped and awaited after code-review findings and are not completed gates. plugin-test-final-proxy.log failed because a concurrent package clean removed core imports during the tests; the final checks were rerun sequentially and passed. plugin-typecheck-final.log preserves the optional proxy response fixture typing error, corrected before final verification. final-proxy-lint.log reports no files because the repository excludes plugin source/tests from that targeted configuration; the full prescribed lint suite is the applicable gate. commands.log records every completed command and exit code.
+
+## Decoding correction and resumed checks
+
+Delivered source: b3652ed9079de2d9c96c17a5d13f41d4e694ebaf, four pushed commits, five files, 497 additions plus 3 deletions (500 changed lines). decoding-source-sha256.json identifies exact final bytes. Request rewriting requires decodeURI and segment-wise decodeURIComponent to select the same path. Mismatches pass unchanged to Vite.
+
+- decoding-red.log: exit 1, independently proves a reserved-character document collision and actual outside-sentinel response through an encoded-name symlink. Soft assertions execute both regressions.
+- decoding-green.log: exit 0, all 26 preview cases. plugin-test-decoding.log: exit 0, 356 passed and 4 skipped. plugin-typecheck-decoding.log: exit 0.
+- package-build-decoding.log and fixed-reproduction-decoding.log: exit 0; decoding-reproduction/ contains copied probe and direct About/query response evidence.
+- scripts-typecheck-decoding.log and scripts-test-decoding.log: exit 0 with the unchanged temporary packed assertions; 204 script tests passed.
+- packed-proof-decoding.log: exit 0, final rebuilt and packed packages/generator, installed consumers, raw initial HTTP/HEAD assertions and existing SSR/SSG Chromium checks. Baseline scaffold script restored byte-for-byte afterward. The unchanged assertions retain their earlier packed-mutation.log negative control.
+- Fresh committed-range code review round 1/3 in this driver run: CLEAN for b3652ed9079de2d9c96c17a5d13f41d4e694ebaf. No findings, failures 0.
+- pre-push-decoding.log: exit 0, complete required suite and all 18 website Chromium browser cases passed. Environment: NODE_OPTIONS=--max-old-space-size=4096, CI=1 (one website browser worker), system Chromium and task TMPDIR under /home/om. Full raw log is pre-push-decoding.log.gz; the .log file explicitly shortens oversized slow-view diagnostic lines and records the raw SHA-256. The gzip was decompressed and hash-verified before shortening the readable log. No baseline comparison was needed after this passing run.
+
+Draft PR: https://github.com/foldkit/foldkit/pull/1814, registered with T3. Approved first Validation comment: https://github.com/foldkit/foldkit/pull/1814#issuecomment-6452568777. push-decoding.log, pr-create.log and validation-publish.log record exit 0. pr-readback.json matches the approved exact title/body/comment and final SHA; its single CI snapshot is pending, not a final CI result. No PR monitoring was started.
+
+Code review CLEAN in fresh driver round 1/3. Final title/body exact-text review CLEAN after one prose correction (failures this run/total 1/1); Validation review CLEAN round 1 (failures 0/0). Daily allowance consumed: one non-force push and one draft PR including Validation, reserved under state lock; no rollback. F2 remains a separate post-merge contribution to be enrolled by the parent.
+
+Earlier check results and the failed pre-push attempt remain above as historical evidence; they do not replace final verification.

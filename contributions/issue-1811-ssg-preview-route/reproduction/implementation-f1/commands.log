@@ -35,3 +35,13 @@ fixed-reproduction-verified ['node', '/home/om/TAO/Tools/foldkit/.maintainer/con
 packed-proof-verified ['pnpm', 'check:scaffold-server-rendering'] exit=0
 format-verified ['pnpm', 'exec', 'oxfmt', '--check', 'packages/vite-plugin-foldkit/src/build.ts', 'packages/vite-plugin-foldkit/src/preview.ts', 'packages/vite-plugin-foldkit/test/preview.test.ts', 'packages/vite-plugin-foldkit/test/fixtures/preview/entry.server.ts', '.changeset/ssg-preview-directory-index.md'] exit=0
 pre-push-verified ['pnpm', 'pre-push'] exit=1
+2026-10-27T20:05:25.119595+00:00 package-build-decoding.log exit=0 elapsed=4.35 ['pnpm', '--filter', 'foldkit', '--filter', '@foldkit/vite-plugin', '--filter', 'create-foldkit-app', 'build']
+2026-10-27T20:05:40.561277+00:00 fixed-reproduction-decoding.log exit=0 elapsed=3.37 ['node', '/home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1811-ssg-preview-route/reproduction/implementation-f1/decoding-reproduction/reproduce.mjs', '/home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route']
+2026-10-27T20:05:51.396808+00:00 scripts-typecheck-decoding.log exit=0 elapsed=0.6 ['pnpm', 'typecheck:scripts']
+2026-10-27T20:06:12.680214+00:00 scripts-test-decoding.log exit=0 elapsed=21.26 ['pnpm', 'test:scripts']
+2026-10-27T20:06:59.923920+00:00 packed-proof-decoding.log exit=0 elapsed=47.22 ['pnpm', 'check:scaffold-server-rendering']
+2026-10-27 decoding resume decoding-red.log exit=1 pnpm --filter @foldkit/vite-plugin exec vitest run test/preview.test.ts
+2026-10-27 decoding resume decoding-green.log exit=0 pnpm --filter @foldkit/vite-plugin exec vitest run test/preview.test.ts
+2026-10-27 decoding resume plugin-test-decoding.log exit=0 pnpm --filter @foldkit/vite-plugin test
+2026-10-27 decoding resume plugin-typecheck-decoding.log exit=0 pnpm --filter @foldkit/vite-plugin typecheck
+2026-10-27T20:15:52.583401+00:00 pre-push-decoding.log exit=0 elapsed=526.53 ['pnpm', 'pre-push']

@@ -1,0 +1,11 @@
+Command: ['node', '/home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1811-ssg-preview-route/reproduction/implementation-f1/decoding-reproduction/reproduce.mjs', '/home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route']
+{"method":"GET","path":"/","status":200,"location":null,"title":"Home | Foldkit App","heading":"Statically generated home","isAbout":false,"isHome":true}
+{"method":"GET","path":"/about","status":200,"location":null,"title":"About | Foldkit App","heading":"Statically generated about page","isAbout":true,"isHome":false}
+{"method":"GET","path":"/about/","status":200,"location":null,"title":"About | Foldkit App","heading":"Statically generated about page","isAbout":true,"isHome":false}
+{"method":"GET","path":"/about/index.html","status":200,"location":null,"title":"About | Foldkit App","heading":"Statically generated about page","isAbout":true,"isHome":false}
+{"method":"GET","path":"/about?source=probe","status":200,"location":null,"title":"About | Foldkit App","heading":"Statically generated about page","isAbout":true,"isHome":false}
+{"method":"GET","path":"/about/?source=probe","status":200,"location":null,"title":"About | Foldkit App","heading":"Statically generated about page","isAbout":true,"isHome":false}
+{"method":"GET","path":"/missing","status":200,"location":null,"title":"Home | Foldkit App","heading":"Statically generated home","isAbout":false,"isHome":true}
+{"method":"GET","path":"/about.html","status":200,"location":null,"title":"Home | Foldkit App","heading":"Statically generated home","isAbout":false,"isHome":true}
+
+Exit: 0

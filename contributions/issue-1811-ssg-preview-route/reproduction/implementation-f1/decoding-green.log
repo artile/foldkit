@@ -1,0 +1,9 @@
+
+ RUN  v4.1.11 /home/om/TAO/Tools/foldkit-worktrees/issue-1811-ssg-preview-route/packages/vite-plugin-foldkit
+
+
+ Test Files  1 passed (1)
+      Tests  26 passed (26)
+   Start at  22:03:31
+   Duration  2.02s (transform 778ms, setup 0ms, import 1.06s, tests 848ms, environment 0ms)
+
