@@ -1,6 +1,6 @@
-# Design: Domain and Foldkit as one model
+# Design: a Foldkit adapter for Domain
 
-Status: draft, not published. Target: `packages/domain/docs/foldkit-design.md` in `alchemy-run/alchemy`, as one PR with the adapter it describes.
+Status: draft, reviewed by a two-member committee (2026-10-27), not published. Target: `alchemy-run/alchemy`, as a small design PR before any code. `packages/domain/docs/` exists only in draft #2583, so the maintainer may move this file.
 
 ## The problem
 
@@ -11,237 +11,182 @@ Status: draft, not published. Target: `packages/domain/docs/foldkit-design.md` i
 | Command | Message that asks for a change |
 | `decide(state, command)` gives events or a Rejection | `update(model, message)` gives a Model and Commands |
 | `evolve(state, event)` | the fold that applies a fact to the Model |
-| View `events` with a cursor | Subscription that feeds a Submodel |
+| View `watch` and `events` | Subscription that feeds the Model |
 | Story (given / when / then) | Story and Scene |
 
-Today the two halves meet only at the Api client. Each app writes the bridge by hand. The two Domain guides that show Foldkit, `domain/foldkit.mdx` and `domain/optimistic-updates.mdx`, show how much:
+The two halves meet only at the Api client, and each app writes the bridge by hand. The two Domain guides that show Foldkit show how much:
 
-- A Command per Domain command, each with its own `Effect.catch` that turns a typed Rejection into a string (`error._tag`). The Rejection's fields are lost.
-- A Subscription per View that restarts `events` from the start on every dependency change and drops `Read.CaughtUp` with `Read.isEvent`. The cursor that the server sends is never kept, so a reconnect replays the whole history, and the page cannot show "live" versus "catching up".
-- A pending-line table keyed by `commandId`, written by hand: `ask`, `confirm`, `shownBalance`.
-- `commandId` built from a session string and a counter in the Model, written by hand.
-- A first paint with no data, because nothing carries `View.snapshot`'s `{ state, cursor }` into Flags.
+- `domain/foldkit.mdx` writes one Command per Domain command, each with an `Effect.catch` that turns a typed Rejection into a string (`error._tag`). The Rejection's fields and the command's `reply` are lost.
+- `domain/foldkit.mdx` watches a View with `watch` and keeps only `state` (`({ state }) => ...`). The `cursor` that comes with it is dropped.
+- `domain/optimistic-updates.mdx` reads `events` from the start on every restart and drops `Read.CaughtUp` with `Read.isEvent`. A reconnect replays the whole history, and the page cannot tell "catching up" from "live".
+- Nothing carries `snapshot`'s `{ state, cursor }` into Flags, so the first paint has no data.
 
-The guides also teach patterns that Foldkit's own conventions reject: `null` for absence instead of `Option`, `Succeeded` and `Failed` with no Command name, `GotBalance` for a Subscription fact (`Got*` is for child Submodel results), and `{ ...model }` instead of `modifyFields`. A reader who copies them gets an app that the Foldkit lint rules and skills flag.
+The guides also teach patterns that Foldkit's own conventions reject: `null` for absence instead of `Option`, `Succeeded` and `Failed` with no Command name, `GotBalance` for a Subscription fact (`Got*` is for child Submodel results), and `{ ...model }` instead of `modifyFields`.
 
-A throwaway proof of concept with real production aggregates (Foldkit canary of foldkit/foldkit#1655, Domain beta.84, `Domain.InMemory` in the browser, 51 tests, 175 kB gzip) showed that this glue can move into a library: about 25 lines per command down to 1, and about 130 lines per live feed down to 5.
+A throwaway proof of concept with real production aggregates (Foldkit canary of foldkit/foldkit#1655, Domain beta.84, `Domain.InMemory` in the browser, 51 tests) moved this glue into helpers: about 25 lines per command down to 1, and about 130 lines per live feed down to about 15.
 
 ## What Domain already gives
 
-Most of the server side merged on 2026-10-27, in the maintainer's reshaped form:
+All on `main` since 2026-10-27:
 
-| Need | API on `main` | PR |
+| Need | API | PR |
 | --- | --- | --- |
-| The commands and Rejections of an Api, as values | `MyApi.commands`, `MyApi.rejections` (one Schema union), `Domain.Api.Any`, `CommandsOf`, `RejectionsOf`, `ClientOf` | alchemy#2566 |
-| State and cursor from one read | client `snapshot(key, { atLeast? })` gives `Read.Snapshot<S>` = `{ state, cursor: number }`; `list` takes `atLeast`; typed `ConsistencyTimeout` | alchemy#2567 |
-| Live reads that carry cursors and mark the end of history | `watch` gives `Read.Snapshot`; `events(key, { after? })` gives entries and `Read.CaughtUp { cursor }`; `Read.isCaughtUp`, `Read.isEvent` | alchemy#2579 (replaced our #2569) |
-| Correlation that survives the wire | `Aggregate.Envelope` is a Schema with `commandId` and `correlationId` | alchemy#2565 |
-| The aggregate's own rules on the client | `Aggregate.predict(state, command, { id, now, version?, commandId?, context? })` gives `Accepted { events, envelopes, state }`, `Rejected { rejection }`, or `Unpredictable { cause }`; `View.evolve(state, input)` | alchemy#2568 |
-| A command call with its own id | `client.DepositMoney(target, input?, { commandId?, headers? })` gives `{ reply, stream, version }` | alchemy#2561 |
+| The commands and Rejections of an Api, as values | `MyApi.commands`, `MyApi.rejections` (one Schema union of declared Rejections), `Domain.Api.CommandsOf`, `RejectionsOf`, `ClientOf` | alchemy#2566 |
+| A command call with its own id | `client.X(target, input?, { commandId?, headers? })` gives `{ reply, stream, version }` | alchemy#2561 |
+| State with its cursor | `watch(key)` gives `Read.Snapshot<S>` = `{ state, cursor }` on every change | alchemy#2579 |
+| A log that resumes and marks the end of history | `events(key, { after? })` gives `View.Entry` (output event, `state` after it, `envelope`) and `Read.CaughtUp { cursor }` | alchemy#2579 |
+| State and cursor from one read | `snapshot(key, { atLeast? })` gives `Read.Snapshot<S>`; typed `ConsistencyTimeout` | alchemy#2567 |
+| Correlation on the wire | `Aggregate.Envelope` is a Schema with `commandId` and `correlationId`; every View output envelope carries the source `commandId` | alchemy#2565 |
+| The aggregate's rules on the client | `Aggregate.predict`, `View.evolve` | alchemy#2568 |
 
-The server side needs no new primitive for the first three steps below. Only the trace fixture (step 5) needs Domain work, tracked in alchemy#2570.
+The adapter in this design needs no new Domain primitive.
 
 ## Goals
 
-1. **One line per command.** The app gets a Foldkit Command and its result Messages from the Api, with the Rejection kept as a typed, Schema-encoded value.
-2. **One line per live View.** A keyed live feed that resumes from its last cursor after a restart or a reconnect, tells "catching up" from "live", and counts duplicates and gaps.
-3. **No spinner on the first paint.** The server's `snapshot` reaches the client through Flags, and the feed resumes from that cursor.
-4. **Optimistic UI from the server's rules.** The client predicts with `Aggregate.predict` and `View.evolve`, and confirms by `commandId` from the feed. No second copy of the rules.
-5. **Server stories as client fixtures.** A Domain Story run becomes the input of a Foldkit Story.
-6. **Foldkit conventions by default.** Generated Messages follow Foldkit naming, absence is `Option`, and the guides pass Foldkit's lint rules.
+1. **One line per command.** A Foldkit Command and its result Messages come from the Api. A Rejection reaches `update` typed, with its fields. The `reply` is kept.
+2. **A View's state, live.** A Subscription follows `watch`, keeps the cursor in the Model, and restarts cleanly after a reconnect or a key change.
+3. **A View's log, resumable.** A Subscription follows `events` from the last applied cursor, drops duplicates, and tells "catching up" from "live".
+4. **No spinner on the first paint.** `snapshot` reaches the client through Flags.
+5. **Foldkit conventions by default.** Absence is `Option`, the app names its own facts, and the guides pass Foldkit's lint rules.
 
 ## Non-goals
 
-- Foldkit never imports Domain. Everything in Foldkit stays a general primitive that any cursor-based backend can use.
-- No new wire protocol. The adapter uses the Api client that `Domain.protocolHttp` and `Domain.protocolWebSocket` already give.
-- No client-to-server sync engine, no server-side Messages, no capability catalog for agents. Those belong to foldkit-plus (doeixd/foldkit-plus#190) and to alchemy#2589.
-- No `Domain.Query` support in the first version. It waits for alchemy#2583.
+- Foldkit never imports Domain.
+- No new wire protocol. The adapter uses the client from `Domain.protocolHttp` or `Domain.protocolWebSocket`.
+- No generic optimistic helper in v1. See "Deferred".
+- No trace fixtures in v1. They wait for alchemy#2570.
+- No dependency on Foldkit's `LiveQuery` (foldkit/foldkit#1785) or on the Blocks branch (foldkit/foldkit#1655).
+- No client-to-server sync, no capability catalog. Those belong to foldkit-plus (doeixd/foldkit-plus#190) and alchemy#2589.
 
-## Where each piece lives
+## Placement
 
-```
-                   Foldkit (general)              Domain adapter                   Domain (server)
-                   ─────────────────              ──────────────                   ───────────────
-Command result     Command + Messages      ◀──    commands(Api)              ◀──   Api.commands, Api.rejections
-Live View          LiveQuery Block         ◀──    liveView(Api, View)        ◀──   events(key, { after }), Read.CaughtUp
-First paint        Flags, LiveQuery seed   ◀──    snapshotFlags(View)        ◀──   snapshot(key) → { state, cursor }
-Optimistic         Model + update          ◀──    Pending (pure helpers)     ◀──   Aggregate.predict, View.evolve
-Tests              Story.messageWith,      ◀──    fromTrace(trace)           ◀──   Story.record (alchemy#2570)
-                   Story.Subscription.from
-```
+`@alchemy.run/domain/foldkit`, an experimental subpath with `foldkit` as an optional peer. It is not re-exported from the package root.
 
-Three layers, three owners:
+- Alchemy already couples to Foldkit: `Cloudflare.Website.Foldkit`, `packages/aws/src/Website/Foldkit.ts`, a Foldkit guide, and a Foldkit bank example.
+- The Domain client surface moves faster than Foldkit's.
+- Foldkit stays general. Anything Foldkit gains from this work must serve any cursor-based backend.
 
-| Layer | Owner | Knows about |
-| --- | --- | --- |
-| General client primitives | Foldkit | cursors, feeds, pending Commands; not Domain |
-| Adapter | `@alchemy.run/domain/foldkit`, with `foldkit` as an optional peer | both |
-| Server model | `@alchemy.run/domain` | not Foldkit |
+foldkit-plus Phase 6 plans its own Domain adapter for its Remote layer. That is a different consumer at a different level. The two should share the transport and Schema seams, not compete; this is to agree in doeixd/foldkit-plus#190 after this design is accepted.
 
-The adapter lives in Alchemy, not in Foldkit, for three reasons:
+## Foldkit versions
 
-- Alchemy already couples to Foldkit: it ships `Cloudflare.Website.Foldkit`, a Foldkit guide, and a Foldkit bank example.
-- The Domain client surface moves faster than Foldkit's. Six client-facing Domain PRs merged in three days.
-- The adapter is small. It maps one library's values onto the other's, and owns no state machine of its own.
+The adapter targets Foldkit `main`, where `Command.define` takes `execute`. On the Blocks branch (`codex/layers-and-submodels`, foldkit/foldkit#1655), `Command.define` forbids `execute`, takes a `handler` Layer, and checks construction requirements (`packages/foldkit/src/command/index.ts` at `f3be22cfe`, lines 24 to 26 and 391 to 418). A declaration fixture is pinned to both SHAs. A handler-Layer variant follows once #1655 merges.
 
 ## The adapter
-
-The names below are a sketch for review. They follow Foldkit naming rules: Commands are verb-first imperatives, result Messages are `Succeeded*` / `Failed*` because a Rejection is a meaningful failure.
 
 ### 1. Commands from the Api
 
 ```ts
-// packages/web/src/bank.ts
-import * as DomainFoldkit from "@alchemy.run/domain/foldkit"
-import { CustomerApi } from "@bank/domain/CustomerApi.api"
-
 export const Bank = DomainFoldkit.commands(CustomerApi)
 ```
 
-For each command in `CustomerApi.commands`, `Bank` has:
+For each command in `CustomerApi.commands`:
 
 | Member | What it is |
 | --- | --- |
-| `Bank.DepositMoney` | A Foldkit Command definition. Args: `{ target, input, commandId }`. It calls `client.DepositMoney(target, input, { commandId })`. |
-| `Bank.Message.SucceededDepositMoney` | `{ commandId, receipt: { stream, version } }`. |
-| `Bank.Message.FailedDepositMoney` | `{ commandId, failure: Rejected { rejection } \| Unreachable { message } }`. `rejection` uses `CustomerApi.rejections`, so the Message encodes and decodes, and DevTools and Stories show it with its fields. |
-| `Bank.Message` | One `defineMessageUnion` with every result Message, so the app wraps it once in its own Message. |
+| `Bank.DepositMoney` | A Foldkit Command. Args: `{ target, input, commandId }`. It calls `client.DepositMoney(target, input, { commandId })`. |
+| `Bank.Message.SucceededDepositMoney` | `{ commandId, reply, receipt: { stream, version } }`. `receipt` is what `atLeast` takes. |
+| `Bank.Message.FailedDepositMoney` | `{ commandId, failure }`, where `failure` is one of the three below. |
 
-A transport failure (`RpcClientError`) is `Unreachable`, not a defect, so a lost connection never crashes the app.
+| `failure` | When | What the app does |
+| --- | --- | --- |
+| `Rejected { rejection }` | The aggregate refused. `rejection` decodes with the command's declared Rejections. | Show it. The intent is over. |
+| `Denied { error }` | Middleware refused (not signed in, missing MFA). | Ask for what is missing. The intent can be retried. |
+| `Unknown` | Transport failure. The command may have committed before the reply was lost. | Keep the intent and retry with the same `commandId`. Never treat it as a Rejection. |
 
-`receipt` is the value that `atLeast` takes, so the next read can wait for this write.
+`Bank.Message` types come from a mapped type over `CommandsOf<A>`, not from a runtime record, so each tag keeps its own `input`, `reply`, and Rejections. Declaration tests cover an empty input, a branded target, a Schema transform in the input, and a command with middleware.
 
-`commandId` must be unique and `update` must stay pure. The adapter gives a small Schema value for it:
+Headers such as an MFA code go through a client Layer or a config seam. They are never stored in a Message, because Messages are replayed in DevTools and Stories.
 
-```ts
-const CommandIds = DomainFoldkit.CommandIds // Schema.Struct({ session, sent })
-const [commandId, nextCommandIds] = CommandIds.next(model.commandIds)
-```
+`commandId` must be unique and `update` must stay pure. `DomainFoldkit.CommandIds` is a Schema value `{ session, sent }` with a pure `next`. `session` comes from Flags, once per page load, so two tabs never share it, and a cached server render must not reuse it.
 
-`session` comes from Flags, once per page load.
-
-### 2. Live Views
-
-Foldkit's `LiveQuery` (foldkit/foldkit#1785) is a viewless Block that keeps one feed per Schema key. Each feed has `AsyncData` for the state, a cursor, and a `Connection` (`Connecting`, `Live`, `Offline`, `Failed`). It resumes from its cursor, and counts applied entries, duplicates, and gaps. It knows nothing about Domain. Its source contract is a function from a key and an optional cursor to a stream of entries and catch-up marks.
-
-The adapter gives that source for a View:
+### 2. A View's state: `watchView`
 
 ```ts
-export const Statement = DomainFoldkit.liveView(CustomerApi, "Statement")
-```
-
-| Domain gives | LiveQuery gets |
-| --- | --- |
-| `events(key, { after: cursor })` | the feed's source, called with the feed's own cursor |
-| `View.Entry` with `envelope.seq` | an entry with cursor `seq` |
-| `Read.CaughtUp { cursor }` | the switch from `Connecting` to `Live` |
-| `View.evolve` | the fold from entry to state |
-
-The cursor lives in the Model, not in the socket. When the Subscription restarts (offline, or a dependency change), the feed calls `events` with `after` set to the last cursor it applied. `protocolWebSocket` already resumes inside one live read; this covers the restart between two reads.
-
-### 3. First paint
-
-The server reads `snapshot(key)` and puts `{ state, cursor }` into Flags. `init` seeds the feed with `Ok(state)` and the cursor, and the feed resumes with `after: cursor`. State and cursor come from one read, so no event is lost or applied twice between them.
-
-```ts
-export const Flags = Schema.Struct({
-  session: Schema.String,
-  statement: DomainFoldkit.SnapshotFlags(StatementView),
+watchView(CustomerApi, "AccountSummary", {
+  key: (model) => model.accountId,
+  toMessage: (snapshot) => Message.ReceivedSummary({ snapshot }),
 })
 ```
 
-The seed uses the same Query seeding as foldkit/foldkit#1745 (`seed` / `setData`), so Query and LiveQuery seed one way.
+A Subscription entry on `watch`. The app passes its own Message, so the app names the fact. `state: null` arrives as `Option.none()`. The cursor goes into the Model with the state. A key change restarts the stream; a new cursor does not (`keepAliveEquivalence`, `packages/foldkit/src/subscription/subscription.ts:56` on `main`). A restart reads a fresh Snapshot. A middleware or `validate` failure becomes a Message.
 
-### 4. Optimistic updates
+This is the state source. Not every state change has an output event: the Kernel can evolve a View's state and emit nothing (for example `AccountOpened` in `Statement`), so state never comes from `events`.
 
-The app keeps pending commands by `commandId`. The adapter gives pure helpers, not a Submodel:
+### 3. A View's log: `viewEvents`
 
 ```ts
-const prediction = Account.predict(account, command, { id, now, commandId, context })
-const nextPending = DomainFoldkit.Pending.add(model.pending, commandId, prediction)
-const shown = DomainFoldkit.Pending.fold(confirmedState, nextPending, AccountSummary)
+viewEvents(CustomerApi, "Statement", {
+  key: (model) => model.accountId,
+  cursor: (model) => model.statementCursor,
+  onEntry: (entry) => Message.ReceivedStatementLine({ entry }),
+  onCaughtUp: (cursor) => Message.CaughtUpStatement({ cursor }),
+})
 ```
 
-| Event | Effect on `pending` |
+A Subscription entry on `events(key, { after: cursor })`:
+
+- On a restart (offline, key change), it reads the last applied cursor from the Model (`readDependencies`) and resumes after it.
+- It drops entries at or below the cursor, so a resume never applies an entry twice.
+- `Read.CaughtUp` becomes `onCaughtUp`, so the app can show "live".
+- It does not count gaps. On a filtered feed (`where`), the server drops entries before sending, so a `seq` gap is normal.
+
+The adapter has no reducer. Each entry carries the View's `state` after it; any fold of entries into a list is the app's own UI shape. `View.evolve` takes source events, not View output entries, so it plays no part here.
+
+### 4. First paint: `SnapshotFlags`
+
+The server reads `snapshot(key)` and puts `{ state, cursor }` into Flags. `init` seeds the Model for `watchView` and the cursor for `viewEvents`. State and cursor come from one read, so the log resumes with no gap and no duplicate.
+
+Flags can be stale: a cached page, an old tab, a new deploy that changed the state's Schema. A Flags decode failure falls back to an empty Model and a fresh `watch`. An `events` failure on the Flags cursor restarts with `after` unset.
+
+## Failure modes
+
+| Case | Behavior |
 | --- | --- |
-| `Accepted` prediction | add the predicted envelopes; `fold` applies them with `View.evolve` |
-| `Rejected` prediction | show the Rejection, send nothing |
-| `Unpredictable` | add with no events; show "waiting" |
-| Feed entry with this `commandId` | remove; the confirmed state now has it |
-| `FailedDepositMoney` | remove; mark the Rejection |
+| Live reads and auth | Live reads authenticate by cookie only. Serve the app and the Api from one origin. |
+| Platform | WebSocket push needs a store with `connect` (Cloudflare Durable Objects today). Other platforms answer 501, and the app uses `protocolHttp`, which polls. The adapter does not switch protocols on its own. |
+| `validate` refuses mid-stream | The stream ends with a Rejection; the adapter turns it into a Message, never a defect. |
+| `ConsistencyTimeout` on `snapshot({ atLeast })` | Typed. The page shows the previous state and retries. |
+| Two tabs | Each tab has its own `session`. Nothing is shared between tabs in v1. |
+| Lost reply | `Unknown`. Retry with the same `commandId`. |
 
-Confirm from the feed, not from `SucceededDepositMoney`: the event can arrive before the reply. Nothing commits early, so a Rejection needs no rollback.
+## Deferred
 
-`predict` needs what the command's middleware provides. The app gives it from a client-side Layer.
+Each needs its own design first.
 
-Helpers, not a Submodel, because the Optimistic Submodel is the maintainer's own plan (foldkit/foldkit#1474). When it lands, `Pending` becomes its Domain source.
+- **Optimistic reconciliation.** A generic `Pending` helper does not hold. A command emits zero or more events, a View can drop or transform them, and the number of output entries with one `commandId` does not tell when a command is fully applied. A stored prediction goes stale when another device writes. The design must cover ordered intents, re-prediction from current Aggregate state, completion through the receipt and an `atLeast` read, idempotent duplicate confirmation, and where the Aggregate state for `predict` comes from (reading it over the wire may need a permission the Api does not give). Until then, the bank guide keeps its explicit pattern: confirm a pending line by `commandId` from the feed.
+- **Trace fixtures.** A Domain Story run replayed as a Foldkit Story, after alchemy#2570.
+- **LiveQuery.** Foldkit's keyed live feed (foldkit/foldkit#1785) becomes an optional source once `viewEvents` proves the shape and #1655 merges.
 
-### 5. Server stories as client fixtures
+## PR sequence
 
-`Story.record` (alchemy#2570) runs a Domain Story and keeps a trace: each command, its outcome, and each View entry with its envelope. `DomainFoldkit.fromTrace(trace)` turns the trace into Foldkit Story steps: `Story.Command.resolve` for each Command result, and `Story.Subscription.from(subscriptions).emit` for each feed entry. Both Foldkit steps ship in the Blocks branch (foldkit/foldkit#1801).
+Each PR is under about 500 lines of source, with its own tests.
 
-The client test then checks the client against what the server really did, not against a hand-written guess.
-
-## Requirements
-
-1. The adapter imports `foldkit`, `effect`, and `@alchemy.run/domain` only. `foldkit` is an optional peer.
-2. Every generated Message is a Schema value, so it survives DevTools, Stories, and hydration.
-3. A typed Rejection reaches `update` with its fields. Nothing becomes a string.
-4. A transport failure becomes a Message, never a defect.
-5. A live feed resumes from its last applied cursor and never applies an entry twice.
-6. A first paint from Flags applies no event twice and misses none.
-7. The guides compile under Foldkit's lint rules.
-8. Each piece has a Story test against `Domain.InMemory` in the browser.
-
-## Changes to the existing guides
-
-`domain/foldkit.mdx` and `domain/optimistic-updates.mdx` get rewritten on the adapter:
-
-| Today | After |
-| --- | --- |
-| `balance: Schema.NullOr(Schema.Number)` | `Schema.Option(Schema.Number)` |
-| `Succeeded`, `Failed { reason: string }` | `SucceededDepositMoney`, `FailedDepositMoney { failure }` |
-| `GotBalance` from a Subscription | a fact named for what happened, for example `ReceivedSummary` |
-| `{ ...model, error }` | `modifyFields(model, { error: () => ... })` |
-| `events` from the start, `Read.isEvent` filter | `liveView`, resumes from the cursor, shows `Live` |
-| hand-written `ask` / `confirm` / `shownBalance` | `Pending.add` / `Pending.fold` |
-
-## Foldkit work
-
-| Item | Action |
-| --- | --- |
-| foldkit/foldkit#1780 `keepPending` | Close. foldkit/foldkit#1801 ships it in `Scene`, and Story's `message` runs while Commands are pending. |
-| foldkit/foldkit#1783 `messageWith`, `Subscription.from` | Close. foldkit/foldkit#1801 ships both. |
-| foldkit/foldkit#1785 `LiveQuery` | Keep. Retarget to `codex/layers-and-submodels`, rebuild on the #1801 Block API, and split by size: `encodeKey` move (XS), LiveQuery core and tests, guide. Align seeding with #1745. |
-| foldkit/foldkit#1800 `AgentContext` | Not part of this bridge. Keep on its own track and answer the review on it. |
-| foldkit/foldkit#1776, #1777, #1778, #1779 | Keep open. #1777 is why the adapter generates plain Commands, not Blocks. |
-| discussion foldkit/foldkit#1781 | Rewrite the index to point at this design. |
-
-The Foldkit PRs stay separate, not one PR. After the two closures, LiveQuery and AgentContext are unrelated, and one PR would be `size/XL`.
-
-## Alchemy work
-
-One PR from `artile/alchemy` (a personal fork, so the maintainer can push to it):
-
-1. This design as `packages/domain/docs/foldkit-design.md`.
-2. `@alchemy.run/domain/foldkit`: steps 1 to 4.
-3. The two guides, rewritten on the adapter.
-4. The bank web example, moved to the adapter.
-
-Step 5 follows alchemy#2570 in its own PR.
+| # | Repo | Content | Size |
+| --- | --- | --- | --- |
+| 1 | Alchemy | This design | 150 to 250 |
+| 2 | Alchemy | `commands(Api)`, `CommandIds`, failure union, header seam, declaration tests | 350 to 500 |
+| 3 | Alchemy | `watchView` | 250 to 450 |
+| 4 | Alchemy | `viewEvents` | 350 to 500 |
+| 5 | Alchemy | `SnapshotFlags`, stale-Flags fallback, server render in the bank | 250 to 450 |
+| 6 | Alchemy | `foldkit.mdx`, `optimistic-updates.mdx`, bank example, one PR each. The bank keeps its offline queue on top of `Unknown`. | under 500 each |
+| 7 | Foldkit | After #1655 merges: handler-Layer variant, then #1785 split into `encodeKey` (XS) and LiveQuery core (M) | later |
 
 ## Alternatives considered
 
-- **The adapter in Foldkit.** Foldkit would depend on Domain. Every Domain client change would need a Foldkit release.
-- **The adapter in foldkit-plus (Phase 6 of doeixd/foldkit-plus#190).** It waits on a contract layer that does not exist yet, and it ties Domain users to foldkit-plus. Better: foldkit-plus Remote uses this adapter as its Domain source, so there is one adapter, not two.
-- **Generated Blocks, not Commands.** A generic Block factory cannot yield a Service of a type parameter in a Command handler (foldkit/foldkit#1777). Plain Commands and Messages have no such limit.
-- **`CompletedDepositMoney` with an outcome field.** It hides the Rejection inside a payload. Foldkit's rule says `Succeeded*` / `Failed*` when failure is meaningful, and a Rejection is.
-- **An Optimistic Submodel in the adapter.** It would pre-empt foldkit/foldkit#1474, which is the Foldkit maintainer's plan.
+- **The adapter in Foldkit.** Foldkit would depend on Domain, and every Domain client change would need a Foldkit release.
+- **The adapter in foldkit-plus.** It ties Domain users to a contract layer that does not exist yet.
+- **One PR with design, adapter, guides, and example.** The Domain maintainer reshaped each of the last six merged Domain PRs. One large PR multiplies that cost.
+- **`View.evolve` over `events` entries.** A type mismatch: `evolve` takes source events, entries are output events with the state already applied.
+- **State from `events`.** Some state changes emit no event.
+- **A `Pending` that confirms when the count of entries with a `commandId` reaches the predicted count.** The two counts measure different things.
+- **`Rejected | Unreachable` as the only failures.** It loses middleware errors and treats a lost reply after commit as a failure.
+- **`CompletedDepositMoney` with an outcome field.** It hides the Rejection in a payload. Foldkit names results `Succeeded*` / `Failed*` when failure is meaningful.
 
 ## Open questions
 
-1. Subpath `@alchemy.run/domain/foldkit`, or a separate package `@alchemy.run/domain-foldkit`? A subpath needs no new release train; a package keeps `foldkit` out of Domain's peer list.
-2. Generated Message names: `SucceededDepositMoney` / `FailedDepositMoney`, or a prefix the app chooses?
-3. Bundle budget for `predict`: the client imports aggregates. The PoC was 175 kB gzip in all. Is a per-aggregate import enough, or does Domain need a client-only entry?
-4. Live reads authenticate by cookie only, and push only on Cloudflare (other platforms poll through `protocolHttp`). Does the guide say so, or does the adapter pick the protocol?
-5. `commandId` as a DevTools row label needs foldkit/foldkit#1778. Until then, the adapter puts it first in every payload.
+1. Does the Domain maintainer want an adapter subpath at all? Evidence needed: a reply on alchemy#2590 or on the design PR.
+2. `Middleware.Errors` has no single Schema union, and alchemy#2591 reports that it resolves to `never`. `Denied` needs one union per Api or a tagged fallback.
+3. Does every View output envelope carry the source command's `commandId` on every path, including the stored one? Evidence needed: one `Domain.InMemory` test.
+4. Bundle size per piece, measured in the bank example. The PoC measured 175 kB gzip in total, with no breakdown.
+5. Should a later optimistic design use client-side `predict` at all, or a server-side dry run?
