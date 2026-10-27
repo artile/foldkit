@@ -4,7 +4,7 @@ Rules for agents that work in `/Users/tao/Tools/foldkit` for Taras Kornichuk (`a
 
 ## Host
 
-The CAFE Maintainer runs on `macmax` (macOS, 10 cores, 69 GB RAM, user `admin`). The T3 Code desktop app on macmax runs the schedules in `cycles/` and makes each run's worktree under `/Users/admin/.t3/worktrees/foldkit/`. Cycles ran on `macair` until 2026-10-27.
+The CAFE Maintainer runs on `macmax` (macOS, 10 cores, 69 GB RAM, user `admin`). The T3 Code desktop app on macmax runs the schedules in `cycles/` in the T3 project "CAFE Maintainer", whose root is this worktree (`/Users/tao/Tools/foldkit/.maintainer`). Runs start here in local mode, with no T3 worktree of their own. Cycles ran on `macair` until 2026-10-27.
 
 - Run at most 4 subagents at the same time. Each one runs `pnpm` builds and Vitest.
 - The login shell is fish. Run POSIX scripts with `bash` or `sh` explicitly, such as `bash bin/setup-repos.sh`.
@@ -207,8 +207,8 @@ Before the run's final reply, in this order:
 1. For each contribution the run touched, make sure the state line in `status.md` is one that `check.ts` accepts, and run `check.ts`. Never write a state the script does not know, such as `implementation: in progress`; an unfinished implementation round keeps `analysis: assignment ready` (round 1) or `evaluation: failed round N` and records the progress as a step.
 2. Release every lock the run holds.
 3. Commit, under the state lock, each `state/*.toml` file, contribution file, and digest the run changed, then push `maintainer`.
-4. If T3 started this run in a worktree of its own (the working directory is under `/Users/admin/.t3/worktrees/foldkit/`), remove it once no subagent of this run is still working. Note its path and branch, then `cd /Users/tao/Tools/foldkit`. Remove it only when `git -C <path> status --porcelain` prints nothing and `git log <branch> --not upstream/main artile/maintainer` lists no commits; then run `git worktree remove <path>` and `git branch -d <branch>`. Otherwise keep it and record it in the digest. Contribution worktrees under the worktree roots stay; `maintainer-pr-keeper` cleans those.
-5. From `/Users/tao/Tools/foldkit`, settle the run's own T3 thread: `t3_thread_organize` with `action: "settle"` and no `threadId`. It takes effect when the turn ends. Skip this step only when the run stopped on an error that needs Taras.
+4. Runs start in `/Users/tao/Tools/foldkit/.maintainer` and need no cleanup. Only if T3 started this run in a worktree of its own (the working directory is under `/Users/admin/.t3/worktrees/`), remove it once no subagent of this run is still working. Note its path and branch, then `cd /Users/tao/Tools/foldkit`. Remove it only when `git -C <path> status --porcelain` prints nothing and `git log <branch> --not upstream/main artile/maintainer` lists no commits; then run `git worktree remove <path>` and `git branch -d <branch>`. Otherwise keep it and record it in the digest. Contribution worktrees under the worktree roots stay; `maintainer-pr-keeper` cleans those.
+5. From `/Users/tao/Tools/foldkit/.maintainer`, settle the run's own T3 thread: `t3_thread_organize` with `action: "settle"` and no `threadId`. It takes effect when the turn ends. Skip this step only when the run stopped on an error that needs Taras.
 
 ### Reviews
 
