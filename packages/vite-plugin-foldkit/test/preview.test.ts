@@ -28,6 +28,9 @@ const files = {
   'docs/getting-started/index.html': NESTED,
   'café guide/index.html': 'Unicode route',
   'release.v1/index.html': 'Dotted route',
+  'question?mark/index.html': 'Question route',
+  'question%3Fmark/index.html': 'Encoded question route',
+  'hash#mark/index.html': 'Hash route',
   'indexed/index': 'Extensionless index',
   'indexed/index.html': 'HTML index',
   'flat.html': 'Flat document',
@@ -345,6 +348,7 @@ describe('prerendered preview directory indexes', () => {
     await mkdir(sibling, { recursive: true })
     await writeFile(resolve(sibling, 'index.html'), 'Outside sentinel')
     await symlink(sibling, resolve(root, outDir, 'escape'))
+    await symlink(sibling, resolve(root, outDir, 'hash%23mark'))
     for (const path of [
       '/%',
       '/%ZZ',
@@ -359,11 +363,13 @@ describe('prerendered preview directory indexes', () => {
       '//about',
       'http://example.test/about',
       '/escape',
+      '/question%3Fmark',
+      '/hash%23mark',
       '/about/../../client-outside',
     ]) {
       const response = await send(path)
-      expect(response.body).not.toContain('Outside sentinel')
-      expect(Option.getOrThrow(Array.last(observed)).url).toBe(path)
+      expect.soft(response.body).not.toContain('Outside sentinel')
+      expect.soft(Option.getOrThrow(Array.last(observed)).url).toBe(path)
     }
     expect((await send('/about')).body).toBe(ABOUT)
   })

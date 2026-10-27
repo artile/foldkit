@@ -17,12 +17,9 @@ const rewriteDirectoryIndex = (
     url === undefined ||
     isProxied(url) ||
     isProxied(url.replace(/(\?|$)/, '/index.html$1')) ||
-    !(
-      headers.accept === undefined ||
-      headers.accept === '' ||
-      headers.accept.includes('text/html') ||
-      headers.accept.includes('*/*')
-    )
+    (headers.accept &&
+      !headers.accept.includes('text/html') &&
+      !headers.accept.includes('*/*'))
   ) {
     return
   }
@@ -44,10 +41,8 @@ const rewriteDirectoryIndex = (
 
   const segments = route.split('/').map(segment => decodeURIComponent(segment))
   if (
-    segments.some(
-      segment =>
-        segment === '.' || segment === '..' || /[/\\\u0000:]/.test(segment),
-    )
+    segments.join('/') !== decodeURI(route) ||
+    segments.some(segment => /^\.{1,2}$|[/\\\u0000:]/.test(segment))
   ) {
     return
   }
