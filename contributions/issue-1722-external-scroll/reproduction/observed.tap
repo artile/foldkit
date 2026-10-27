@@ -1,0 +1,85 @@
+TAP version 13
+# parent-scroll probe: {"parentScrollTop":840,"listScrollTop":0,"messages":[{"_tag":"ResizedContainer","containerWidth":320,"containerHeight":30000},{"_tag":"ResizedContainer","containerWidth":320,"containerHeight":30000}]}
+# row-window probe: {"mountedRows":1000,"viewportRows":10,"rowLimit":30}
+# Subtest: parent scrolling must update the external viewport with the list origin subtracted
+not ok 1 - parent scrolling must update the external viewport with the list origin subtracted
+  ---
+  duration_ms: 30.357626
+  type: 'test'
+  location: '/home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1722-external-scroll/reproduction/external-scroll.mjs:74:7'
+  failureType: 'testCodeFailure'
+  error: 'Parent scroll emitted no VirtualList scroll Message'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1722-external-scroll/reproduction/external-scroll.mjs:84:12)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+    async file:///home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1722-external-scroll/reproduction/external-scroll.mjs:74:1
+  ...
+# Subtest: natural-height list must mount a viewport-sized row window
+not ok 2 - natural-height list must mount a viewport-sized row window
+  ---
+  duration_ms: 22.362108
+  type: 'test'
+  location: '/home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1722-external-scroll/reproduction/external-scroll.mjs:92:7'
+  failureType: 'testCodeFailure'
+  error: 'Mounted 1000 rows for a 300px parent viewport'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1722-external-scroll/reproduction/external-scroll.mjs:112:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+    run (node:internal/test_runner/harness:307:12)
+    test (node:internal/test_runner/harness:316:12)
+    file:///home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1722-external-scroll/reproduction/external-scroll.mjs:92:7
+  ...
+# offset-command result: {"_tag":"CompletedApplyScroll","version":1,"outcome":{"_tag":"Applied","scrollTop":0,"scrollHeight":30000,"containerHeight":30000,"anchor":{"_tag":"None"}}}
+# offset-command probe: {"parentScrollTop":0,"listScrollTop":0,"expectedParentScrollTop":840}
+# Subtest: logical offset must scroll the parent to list origin plus offset
+not ok 3 - logical offset must scroll the parent to list origin plus offset
+  ---
+  duration_ms: 25.989048
+  type: 'test'
+  location: '/home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1722-external-scroll/reproduction/external-scroll.mjs:115:7'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    0 !== 840
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 840
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1722-external-scroll/reproduction/external-scroll.mjs:129:12)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+    async file:///home/om/TAO/Tools/foldkit/.maintainer/contributions/issue-1722-external-scroll/reproduction/external-scroll.mjs:115:1
+  ...
+# Subtest: self-contained scroll observation works as a control
+ok 4 - self-contained scroll observation works as a control
+  ---
+  duration_ms: 22.647196
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 1
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 505.89997
