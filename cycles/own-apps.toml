@@ -1,3 +1,4 @@
+# Retired 2026-10-27: no T3 schedule. The friction-miner schedule runs stream B.
 id = "own-apps"
 skill = "maintainer-own-apps"
 schedule = { type = "fixed_time", timeOfDay = "10:00", weekdays = [5] }

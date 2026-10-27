@@ -1,4 +1,5 @@
 id = "release-radar"
 skill = "maintainer-release-radar"
 schedule = { type = "fixed_time", timeOfDay = "08:00" }
+t3_scheduled_task_id = "scheduled-task:45f66a2f-1079-4e06-b72f-e4e4f68a6d08"  # macmax T3
 prompt = "Run the $maintainer-release-radar skill for CAFE Maintainer. Read /Users/tao/Tools/foldkit/.maintainer/AGENTS.md first."

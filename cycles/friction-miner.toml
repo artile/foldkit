@@ -1,4 +1,5 @@
 id = "friction-miner"
 skill = "maintainer-friction-miner"
 schedule = { type = "fixed_time", timeOfDay = "10:00", weekdays = [5] }
+t3_scheduled_task_id = "scheduled-task:98f7c414-ff6f-4afc-a404-ada36cfb6e26"  # macmax T3
 prompt = "Run the $maintainer-friction-miner skill for CAFE Maintainer. Read /Users/tao/Tools/foldkit/.maintainer/AGENTS.md first."
