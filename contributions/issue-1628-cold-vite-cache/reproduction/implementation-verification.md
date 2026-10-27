@@ -54,3 +54,11 @@ For a later fresh review, use the exact files `pr-title.txt`, `pr-body.md` and `
 The complete website output is stored losslessly as `implementation-website-unrestricted-1.log.gz` because the uncompressed log exceeds GitHub's 100 MB file limit. Read it with `gzip -cd`. Its uncompressed SHA-256 is `46c44ceb7ceedcee81ec7dd9bdea1b6e42001042e3549c060fac52c10e259c0e`. Historical `.log` references in the status steps refer to this archive. The concise result summary is saved separately.
 
 Raw process `.log` files and generated Playwright `error-context.md` captures are also stored losslessly with a `.gz` suffix. Append `.gz` to their historical paths and use `gzip -cd` to read them. This preserves exact captured whitespace while keeping raw diagnostic output out of textual diffs. Source fixtures, JSON observations and review records retain their original paths.
+
+## Draft delivery
+
+On 27-10-2026, the new driver continuation obtained a fresh CLEAN exact-text review for the unchanged title, body and final Validation using absolute evidence paths. Review task and result are in publication-r4-start.json and publication-r4-result.json. No source tests or code reviews were repeated. Validation failure counts are 0 this run and 2 across runs; title/body failures are 0.
+
+Delivered draft https://github.com/foldkit/foldkit/pull/1807 at 89442de8e75961407d8463d722d51ea2c03e44ce, with first Validation comment https://github.com/foldkit/foldkit/pull/1807#issuecomment-6433454616. Exact title/body/comment readback passed, maintainer edits are enabled, and T3 linking succeeded. The single saved CI snapshot has Examples E2E Plan successful and the main CI job plus ten E2E shards in progress. No watcher or check polling was started. Full snapshot: delivery-pr-readback.json; summary: delivery-summary.json. Parent owns evaluation and pending CI.
+
+Delivery command output is archived losslessly as `delivery-*.log.gz`; append `.gz` to the corresponding command-log path and read it with `gzip -cd`.

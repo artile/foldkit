@@ -1,0 +1,131 @@
+{
+  "snapshotUtc": "2026-10-27T04:04:32.934795+00:00",
+  "url": "https://github.com/foldkit/foldkit/pull/1807",
+  "head": "89442de8e75961407d8463d722d51ea2c03e44ce",
+  "draft": true,
+  "maintainerCanModify": true,
+  "validation": "https://github.com/foldkit/foldkit/pull/1807#issuecomment-6433454616",
+  "exactTextReadback": true,
+  "checks": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/foldkit/foldkit/actions/runs/40447664018/job/122002677187",
+      "name": "Lint, Typecheck & Test",
+      "startedAt": "2026-10-27T04:04:09Z",
+      "status": "IN_PROGRESS",
+      "workflowName": "CI"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-27T04:04:18Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/foldkit/foldkit/actions/runs/40447664568/job/122002678969",
+      "name": "Plan",
+      "startedAt": "2026-10-27T04:04:10Z",
+      "status": "COMPLETED",
+      "workflowName": "Examples E2E"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/foldkit/foldkit/actions/runs/40447664568/job/122002734659",
+      "name": "Shard 1",
+      "startedAt": "2026-10-27T04:04:20Z",
+      "status": "IN_PROGRESS",
+      "workflowName": "Examples E2E"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/foldkit/foldkit/actions/runs/40447664568/job/122002734668",
+      "name": "Shard 2",
+      "startedAt": "2026-10-27T04:04:21Z",
+      "status": "IN_PROGRESS",
+      "workflowName": "Examples E2E"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/foldkit/foldkit/actions/runs/40447664568/job/122002734684",
+      "name": "Shard 3",
+      "startedAt": "2026-10-27T04:04:21Z",
+      "status": "IN_PROGRESS",
+      "workflowName": "Examples E2E"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/foldkit/foldkit/actions/runs/40447664568/job/122002734644",
+      "name": "Shard 4",
+      "startedAt": "2026-10-27T04:04:20Z",
+      "status": "IN_PROGRESS",
+      "workflowName": "Examples E2E"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/foldkit/foldkit/actions/runs/40447664568/job/122002734772",
+      "name": "Shard 5",
+      "startedAt": "2026-10-27T04:04:21Z",
+      "status": "IN_PROGRESS",
+      "workflowName": "Examples E2E"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/foldkit/foldkit/actions/runs/40447664568/job/122002734687",
+      "name": "Shard 6",
+      "startedAt": "2026-10-27T04:04:21Z",
+      "status": "IN_PROGRESS",
+      "workflowName": "Examples E2E"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/foldkit/foldkit/actions/runs/40447664568/job/122002734615",
+      "name": "Shard 7",
+      "startedAt": "2026-10-27T04:04:21Z",
+      "status": "IN_PROGRESS",
+      "workflowName": "Examples E2E"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/foldkit/foldkit/actions/runs/40447664568/job/122002734716",
+      "name": "Shard 8",
+      "startedAt": "2026-10-27T04:04:21Z",
+      "status": "IN_PROGRESS",
+      "workflowName": "Examples E2E"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/foldkit/foldkit/actions/runs/40447664568/job/122002734692",
+      "name": "Shard 9",
+      "startedAt": "2026-10-27T04:04:21Z",
+      "status": "IN_PROGRESS",
+      "workflowName": "Examples E2E"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/foldkit/foldkit/actions/runs/40447664568/job/122002734634",
+      "name": "Shard 10",
+      "startedAt": "2026-10-27T04:04:21Z",
+      "status": "IN_PROGRESS",
+      "workflowName": "Examples E2E"
+    }
+  ]
+}

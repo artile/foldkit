@@ -14,11 +14,11 @@ awesome_foldkit_pull_requests = 2   # curator: one add, one prune
 
 [counts]
 day = "2026-10-27"
-pull_requests_opened = 1
+pull_requests_opened = 2
 issue_comments = 3
 review_replies = 0
 issues_opened = 0
 discussions_opened = 0
-pushes = 1
+pushes = 2
 force_pushes = 0
 awesome_foldkit_pull_requests = 0

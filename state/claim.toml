@@ -63,7 +63,8 @@ priority_source = "label"
 decision = "claimed"
 slug = "issue-1628-cold-vite-cache"
 comment_url = "https://github.com/foldkit/foldkit/issues/1628#issuecomment-6432151925"
-reason = "Claim published after CLEAN review. F1 committed locally at 89442de8e75961407d8463d722d51ea2c03e44ce, 408 changed lines; all focused and broad checks pass including website E2E 18/18. Draft delivery held after two unsuccessful Validation publication rounds in this run; driver retries review with explicit artifact paths. No branch push or PR."
+pull_request_url = "https://github.com/foldkit/foldkit/pull/1807"
+reason = "F1 delivered as draft PR #1807 at 89442de8e75961407d8463d722d51ea2c03e44ce after CLEAN publication and pre-push reviews; focused and broad local checks passed. CI is running; evaluation awaits completed checks. Permanent browser/CI coverage follows in F2/F3."
 
 [issues.1665]
 priority = "P2"

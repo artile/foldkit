@@ -1,0 +1,21 @@
+{
+  "taskId": "node:delegated-task:command%3Amcp%3A5fa402d4-0012-48c0-acd5-69193ef191cb%3Adelegate-task%3Adriver-20261027-0400-1628-publication-r4",
+  "childThreadId": "thread:delegated-task:command%3Amcp%3A5fa402d4-0012-48c0-acd5-69193ef191cb%3Adelegate-task%3Adriver-20261027-0400-1628-publication-r4",
+  "childRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253A5fa402d4-0012-48c0-acd5-69193ef191cb%253Adelegate-task%253Adriver-20261027-0400-1628-publication-r4:ordinal:1",
+  "childNodeId": "node:delegated-task:command%3Amcp%3A5fa402d4-0012-48c0-acd5-69193ef191cb%3Adelegate-task%3Adriver-20261027-0400-1628-publication-r4",
+  "status": "completed",
+  "workState": "result_available",
+  "hasPendingChildRuns": false,
+  "latestTerminalRunId": "run:thread:thread%3Adelegated-task%3Acommand%253Amcp%253A5fa402d4-0012-48c0-acd5-69193ef191cb%253Adelegate-task%253Adriver-20261027-0400-1628-publication-r4:ordinal:1",
+  "latestTerminalStatus": "completed",
+  "latestTerminalSummary": null,
+  "latestTerminalResultContextTransferId": null,
+  "providerInstanceId": "codex",
+  "model": "gpt-6-luna",
+  "options": [],
+  "summary": "- **PR title — CLEAN.** “fix: declare client dependencies before example startup” is the sole commit subject and contains no attribution.\n- **PR body — CLEAN.** It describes the first increment and follow-up scope, includes `Refs #1628`, and contains no local paths or validation details.\n- **Validation — CLEAN.** The claims match the reproduction evidence: baseline 2 failures and 1 recovery; three fixed cold runs passed all 9 first loads; the negative control had 2 blank pages and 1 page rejected for optimizer reload; broad checks report 7,185 passed, 10 skipped, and 207 script tests; the website run passed 18 tests. The absolute artifact and reproduction roots were available and checked.\n\nNo tests or builds were run.",
+  "resultContextTransferId": "context-transfer:type:subagent_result:source-thread:thread%3Adelegated-task%3Acommand%253Amcp%253A5fa402d4-0012-48c0-acd5-69193ef191cb%253Adelegate-task%253Adriver-20261027-0400-1628-publication-r4:target-thread:thread%3Adelegated-task%3Acommand%253Amcp%253A0446a4aa-9ff0-4f9f-8825-d38d40c2f7e3%253Adelegate-task%253Adriver-20261027-0400-1628-implementation-delivery:a967b1d1-43e3-47d5-944f-e7fd05c085ba",
+  "hasPendingQuestion": false,
+  "pendingApproval": null,
+  "waitTimedOut": false
+}
