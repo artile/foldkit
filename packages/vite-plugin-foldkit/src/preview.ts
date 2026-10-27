@@ -73,10 +73,12 @@ export const installPrerenderPreview = (server: PreviewServer): void => {
 
   const root = resolve(server.config.root, client.build.outDir)
   const isProxied = (url: string): boolean =>
-    Object.keys(server.config.preview.proxy ?? {}).some(context =>
-      context.startsWith('^')
-        ? new RegExp(context).test(url)
-        : url.startsWith(context),
+    Object.entries(server.config.preview.proxy ?? {}).some(
+      ([context, options]) =>
+        Boolean(options) &&
+        (context.startsWith('^')
+          ? new RegExp(context).test(url)
+          : url.startsWith(context)),
     )
 
   server.middlewares.use((request, _response, next) => {

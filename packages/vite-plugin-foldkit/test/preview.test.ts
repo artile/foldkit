@@ -47,11 +47,18 @@ type Response = Readonly<{
   body: string
 }>
 
-const startPreview = async (
-  config: InlineConfig = {},
-  isComposed = false,
-  isBuilt = false,
-) => {
+const previewPlugins = (prerender: boolean | undefined) => {
+  const clientEntry = '/entry.client.ts'
+  const serverEntry = '/entry.server.ts'
+  const build = prerender === undefined ? {} : { prerender }
+
+  return {
+    plugin: foldkitBuild(serverEntry, { clientEntry, ...build }),
+    composed: foldkit({ ssr: { serverEntry, clientEntry, build } }),
+  }
+}
+
+const startPreview = async (config: InlineConfig = {}, isBuilt = false) => {
   const root = await mkdtemp(resolve(tmpdir(), 'foldkit-preview-'))
   onTestFinished(() => rm(root, { recursive: true, force: true }))
   const outDir =
@@ -79,16 +86,8 @@ const startPreview = async (
       })
     },
   }
-  const options = { clientEntry: '/entry.client.ts', prerender: true }
-  const plugins = isComposed
-    ? foldkit({
-        ssr: {
-          serverEntry: '/entry.server.ts',
-          clientEntry: options.clientEntry,
-          build: { prerender: true },
-        },
-      })
-    : [foldkitBuild('/entry.server.ts', options)]
+  const { plugin, composed } = previewPlugins(true)
+
   if (isBuilt) {
     const builder = await createBuilder({
       configFile: false,
@@ -97,7 +96,7 @@ const startPreview = async (
       build: { emptyOutDir: true },
       plugins: [
         foldkitBuild('/entry.server.ts', {
-          ...options,
+          prerender: true,
           clientEntry: '/../build/entry.client.ts',
           clientOutDir: resolve(root, outDir),
           serverOutDir: resolve(root, 'server'),
@@ -113,7 +112,7 @@ const startPreview = async (
     logLevel: 'silent',
     build: { outDir: OUTPUT },
     ...config,
-    plugins: [...(config.plugins ?? plugins), observer],
+    plugins: [...(config.plugins ?? (isBuilt ? composed : [plugin])), observer],
     preview: {
       ...config.preview,
       host: '127.0.0.1',
@@ -180,21 +179,28 @@ describe('prerendered preview directory indexes', () => {
     ['^/about\\?source=probe$', '/about?source=probe'],
     ['/about/index', HOME],
     ['^/about/index\\.html\\?source=probe$', HOME],
-  ])('preserves proxy matching for %s', async (context, expected) => {
-    const { send } = await startPreview({
-      preview: {
-        proxy: {
-          [context]: {
-            bypass(request, response) {
-              response?.end(request.url)
-              return '/'
-            },
+    ['/about', ABOUT, false],
+    ['/about/index', ABOUT, false],
+  ])(
+    'preserves proxy matching for %s',
+    async (context, expected, isEnabled = true) => {
+      const { send } = await startPreview({
+        preview: {
+          proxy: {
+            [context]: isEnabled
+              ? {
+                  bypass(request, response) {
+                    response?.end(request.url)
+                    return '/'
+                  },
+                }
+              : '',
           },
         },
-      },
-    })
-    expect((await send('/about?source=probe')).body).toBe(expected)
-  })
+      })
+      expect((await send('/about?source=probe')).body).toBe(expected)
+    },
+  )
 
   it('selects the same document for HEAD and GET', async () => {
     const { send } = await startPreview()
@@ -308,19 +314,8 @@ describe('prerendered preview directory indexes', () => {
   it.each([undefined, false])(
     'installs no preview hook for prerender %s',
     async prerender => {
-      const build = prerender === undefined ? {} : { prerender }
-      const plugin = foldkitBuild('/entry.server.ts', {
-        clientEntry: '/entry.client.ts',
-        ...build,
-      })
+      const { plugin, composed } = previewPlugins(prerender)
       expect(plugin.configurePreviewServer).toBeUndefined()
-      const composed = foldkit({
-        ssr: {
-          serverEntry: '/entry.server.ts',
-          clientEntry: '/entry.client.ts',
-          build,
-        },
-      })
       expect(composed.every(plugin => !plugin.configurePreviewServer)).toBe(
         true,
       )
@@ -333,7 +328,7 @@ describe('prerendered preview directory indexes', () => {
   )
 
   it('previews built documents without executing or requiring the server output', async () => {
-    const { send, root, outDir } = await startPreview({}, true, true)
+    const { send, root, outDir } = await startPreview({}, true)
     const executions = resolve(root, 'unavailable-server/executions.txt')
     expect(await readFile(executions, 'utf8')).toBe('executed\n')
     expect((await send('/about')).body).toBe(
