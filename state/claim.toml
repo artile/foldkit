@@ -184,7 +184,7 @@ priority = "P2"
 priority_source = "label"
 decision = "claimed"
 slug = "issue-1723-keyboard-previous"
-reason = "Draft PR #1803 delivered at f4f8b0bc54945f7d68f68b715dd82f6442bbae0d. Five regressions and full pre-push suite pass; full-range and exact-text reviews clean. Evaluation round 1 deferred: Plan passed, CI and 10 E2E shards in progress. Next driver retries evaluation."
+reason = "PR #1803 is ready for review at f4f8b0bc54945f7d68f68b715dd82f6442bbae0d. Evaluation round 1 passed: maintainer 100/100, implementation 97/100, zero critical findings, all 13 CI checks successful. One optional Scene OutMessage assertion-placement improvement is recorded in outcome.md. Decided autonomously: promote because the evaluation gate passed; maintainer-pr-keeper owns follow-up."
 comment_url = "https://github.com/foldkit/foldkit/issues/1723#issuecomment-6430308902"
 pull_request_url = "https://github.com/foldkit/foldkit/pull/1803"
 
