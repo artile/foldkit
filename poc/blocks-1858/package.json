@@ -1,0 +1,22 @@
+{
+  "name": "poc-blocks-1858",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@alchemy.run/domain": "2.0.0-beta.84",
+    "@effect/platform-browser": "4.0.6",
+    "alchemy": "2.0.0-beta.84",
+    "effect": "4.0.6",
+    "foldkit": "0.169.0-canary.90746b32d2ca"
+  },
+  "devDependencies": {
+    "@effect/vitest": "4.0.6",
+    "happy-dom": "20.14.5",
+    "typescript": "7.0.2",
+    "vitest": "5.0.2"
+  }
+}
