@@ -1,0 +1,526 @@
+diff --git a/a-preview/app/app.test.ts b/a-preview/app/app.test.ts
+index d1d273b..1ffc414 100644
+--- a/a-preview/app/app.test.ts
++++ b/a-preview/app/app.test.ts
+@@ -46,3 +46,48 @@ it.live('opens and approves a work order through the InMemory Domain', () =>
+     expect(root.querySelector('.approval-panel button')?.hasAttribute('disabled')).toBe(true)
+   }),
+ )
++
++const typeInto = (input: HTMLInputElement, value: string) => {
++  input.value = value
++  input.dispatchEvent(new Event('input', { bubbles: true }))
++}
++
++const isAddEnabled = (root: HTMLElement, row: string) =>
++  root.querySelector(`.photo-row[data-row="${row}"] button`)?.hasAttribute('disabled') === false
++
++const closeButton = (root: HTMLElement) =>
++  Array.from(root.querySelectorAll('.photos-before-after > button')).find(element => element.textContent === 'Close')
++
++it.live('blocks Close until both photo rows are saved through the InMemory Domain', () =>
++  Effect.gen(function* () {
++    const root = document.createElement('div')
++    const container = document.createElement('div')
++    container.id = 'photos'
++    root.appendChild(container)
++    document.body.appendChild(root)
++    Runtime.embed(makeProgram(container, 'photos').provide(ClientInMemory))
++
++    yield* waitFor(() => root.textContent?.includes('New work order') ?? false)
++    clickButton(root, 'New work order')
++    yield* waitFor(() => root.textContent?.includes('Leaking sink · Waiting') ?? false)
++    clickButton(root, 'Leaking sink')
++    yield* waitFor(() => closeButton(root) !== undefined, () => root.innerHTML)
++    expect(closeButton(root)?.hasAttribute('disabled')).toBe(true)
++
++    const rowInput = (row: string) => root.querySelector<HTMLInputElement>(`.photo-row[data-row="${row}"] input`)!
++
++    typeInto(rowInput('Before'), 'https://img/before.jpg')
++    yield* waitFor(() => isAddEnabled(root, 'Before'))
++    clickButton(root, 'Add Before photo')
++    yield* waitFor(() => root.textContent?.includes('https://img/before.jpg') ?? false, () => root.innerHTML)
++    expect(closeButton(root)?.hasAttribute('disabled')).toBe(true)
++
++    typeInto(rowInput('After'), 'https://img/after.jpg')
++    yield* waitFor(() => isAddEnabled(root, 'After'))
++    clickButton(root, 'Add After photo')
++    yield* waitFor(() => closeButton(root)?.hasAttribute('disabled') === false, () => root.innerHTML)
++
++    closeButton(root)?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
++    yield* waitFor(() => root.textContent?.includes('Work order closed') ?? false, () => root.innerHTML)
++  }),
++)
+diff --git a/a-preview/app/photosBeforeAfter.story.test.ts b/a-preview/app/photosBeforeAfter.story.test.ts
+new file mode 100644
+index 0000000..6b39cb7
+--- /dev/null
++++ b/a-preview/app/photosBeforeAfter.story.test.ts
+@@ -0,0 +1,146 @@
++import { Option } from 'effect'
++import { Command, expectNoOutMessage, expectOutMessage, given, message, model, story } from 'foldkit/story'
++import { toParentMessage } from 'foldkit/test'
++import { expect, test } from 'vitest'
++
++import { WorkOrderId } from '../../domain/workOrder'
++import * as PhotosBeforeAfter from './photosBeforeAfter'
++import { Row } from './shared'
++import * as WorkOrderList from './workOrderList'
++import { ListBinding, PhotosBinding, init, update } from './workOrdersPage'
++
++const workOrderId = WorkOrderId.make('wo-1')
++const otherWorkOrderId = WorkOrderId.make('wo-2')
++const row = Row.make({ id: workOrderId, title: 'Leaking sink', amount: 400, approval: 'Waiting' })
++
++const { Message, OutMessage, AttachPhoto, CloseWorkOrder, canClose } = PhotosBeforeAfter
++
++const shownModel = PhotosBeforeAfter.update(PhotosBeforeAfter.init('s').model, Message.RequestedShow({ workOrderId })).model
++
++const withPhotos = (before: ReadonlyArray<string>, after: ReadonlyArray<string>) => ({
++  ...shownModel,
++  before: { ...shownModel.before, urls: before },
++  after: { ...shownModel.after, urls: after },
++})
++
++test('adding a Before photo saves it through AttachPhoto', () => {
++  story(
++    PhotosBeforeAfter.update,
++    given(shownModel),
++    message(Message.UpdatedPhotoDraft({ row: 'Before', value: ' https://img/before-1.jpg ' })),
++    message(Message.ClickedAddPhoto({ row: 'Before' })),
++    model(model => expect(model.before.isSaving).toBe(true)),
++    Command.expectExact(
++      AttachPhoto({
++        target: workOrderId,
++        input: { row: 'Before', url: 'https://img/before-1.jpg' },
++        commandId: 's:PhotosBeforeAfter:0',
++      }),
++    ),
++    Command.resolve(
++      AttachPhoto,
++      Message.SucceededAttachPhoto({ workOrderId, row: 'Before', url: 'https://img/before-1.jpg' }),
++    ),
++    model(model => {
++      expect(model.before).toEqual({ urls: ['https://img/before-1.jpg'], draft: '', isSaving: false })
++      expect(model.after.urls).toEqual([])
++      expect(canClose(model)).toBe(false)
++    }),
++  )
++})
++
++test('an empty draft does not save', () => {
++  story(
++    PhotosBeforeAfter.update,
++    given(shownModel),
++    message(Message.UpdatedPhotoDraft({ row: 'After', value: '   ' })),
++    message(Message.ClickedAddPhoto({ row: 'After' })),
++    Command.expectNone(),
++  )
++})
++
++test('Close is blocked until both rows have a saved photo', () => {
++  story(
++    PhotosBeforeAfter.update,
++    given(withPhotos(['https://img/before-1.jpg'], [])),
++    model(model => expect(canClose(model)).toBe(false)),
++    message(Message.ClickedClose()),
++    Command.expectNone(),
++    model(model => expect(model.closeState).toBe('Open')),
++    message(Message.UpdatedPhotoDraft({ row: 'After', value: 'https://img/after-1.jpg' })),
++    message(Message.ClickedAddPhoto({ row: 'After' })),
++    model(model => expect(canClose(model)).toBe(false)),
++    Command.resolve(AttachPhoto, Message.SucceededAttachPhoto({ workOrderId, row: 'After', url: 'https://img/after-1.jpg' })),
++    model(model => expect(canClose(model)).toBe(true)),
++  )
++})
++
++test('Close saves through CloseWorkOrder and reports the close', () => {
++  story(
++    PhotosBeforeAfter.update,
++    given(withPhotos(['https://img/before-1.jpg'], ['https://img/after-1.jpg'])),
++    message(Message.ClickedClose()),
++    model(model => {
++      expect(model.closeState).toBe('Closing')
++      expect(canClose(model)).toBe(false)
++    }),
++    Command.expectExact(CloseWorkOrder({ target: workOrderId, input: {}, commandId: 's:PhotosBeforeAfter:0' })),
++    Command.resolve(CloseWorkOrder, Message.SucceededCloseWorkOrder({ workOrderId })),
++    expectOutMessage(OutMessage.ClosedWorkOrder({ workOrderId })),
++    model(model => expect(model.closeState).toBe('Closed')),
++  )
++})
++
++test('a refused close shows the reason and allows a retry', () => {
++  story(
++    PhotosBeforeAfter.update,
++    given(withPhotos(['https://img/before-1.jpg'], ['https://img/after-1.jpg'])),
++    message(Message.ClickedClose()),
++    Command.resolve(CloseWorkOrder, Message.FailedCloseWorkOrder({ workOrderId, reason: 'MissingPhotos' })),
++    expectNoOutMessage(),
++    model(model => {
++      expect(model.closeState).toBe('Open')
++      expect(model.maybeError).toEqual(Option.some('MissingPhotos'))
++      expect(canClose(model)).toBe(true)
++    }),
++  )
++})
++
++test('a refused photo keeps the draft and shows the reason', () => {
++  story(
++    PhotosBeforeAfter.update,
++    given(shownModel),
++    message(Message.UpdatedPhotoDraft({ row: 'Before', value: 'https://img/before-1.jpg' })),
++    message(Message.ClickedAddPhoto({ row: 'Before' })),
++    Command.resolve(AttachPhoto, Message.FailedAttachPhoto({ workOrderId, row: 'Before', reason: 'NotOpen' })),
++    model(model => {
++      expect(model.before).toEqual({ urls: [], draft: 'https://img/before-1.jpg', isSaving: false })
++      expect(model.maybeError).toEqual(Option.some('NotOpen'))
++    }),
++  )
++})
++
++test('a photo result for another work order is ignored', () => {
++  story(
++    PhotosBeforeAfter.update,
++    given(shownModel),
++    message(Message.SucceededAttachPhoto({ workOrderId: otherWorkOrderId, row: 'Before', url: 'https://img/x.jpg' })),
++    model(model => expect(model.before.urls).toEqual([])),
++  )
++})
++
++const pageModel = init({ session: 's' }).model
++
++test('selecting a row shows its photos, and a close adds a line', () => {
++  story(
++    update,
++    given({ ...pageModel, list: { ...pageModel.list, rows: [row] } }),
++    message(toParentMessage(ListBinding, WorkOrderList.Message.ClickedRow({ id: row.id }))),
++    model(model => expect(model.photos.maybeWorkOrderId).toEqual(Option.some(workOrderId))),
++    message(toParentMessage(PhotosBinding, Message.SucceededCloseWorkOrder({ workOrderId }))),
++    model(model => {
++      expect(model.photos.closeState).toBe('Closed')
++      expect(model.conversation.lines).toEqual(['Work order closed'])
++    }),
++  )
++})
+diff --git a/a-preview/app/photosBeforeAfter.ts b/a-preview/app/photosBeforeAfter.ts
+new file mode 100644
+index 0000000..3390a80
+--- /dev/null
++++ b/a-preview/app/photosBeforeAfter.ts
+@@ -0,0 +1,251 @@
++import { Array, Effect, Layer, Option, Schema, String } from 'effect'
++import { Block } from 'foldkit'
++import { defineMessageUnion } from 'foldkit/message'
++
++import {
++  AttachPhotoArgs,
++  Client,
++  CloseWorkOrderArgs,
++  CommandIds,
++  execute,
++  nextCommandId,
++} from '../../domain/domainCommands'
++import { PhotoRow, WorkOrderId } from '../../domain/workOrder'
++
++const RowModel = Schema.Struct({
++  urls: Schema.Array(Schema.String),
++  draft: Schema.String,
++  isSaving: Schema.Boolean,
++})
++type RowModel = typeof RowModel.Type
++
++const Model = Schema.Struct({
++  maybeWorkOrderId: Schema.Option(WorkOrderId),
++  before: RowModel,
++  after: RowModel,
++  closeState: Schema.Literals(['Open', 'Closing', 'Closed']),
++  maybeError: Schema.Option(Schema.String),
++  commandIds: CommandIds,
++})
++export type Model = typeof Model.Type
++
++export const Message = defineMessageUnion({
++  RequestedShow: { workOrderId: WorkOrderId },
++  UpdatedPhotoDraft: { row: PhotoRow, value: Schema.String },
++  ClickedAddPhoto: { row: PhotoRow },
++  SucceededAttachPhoto: { workOrderId: WorkOrderId, row: PhotoRow, url: Schema.String },
++  FailedAttachPhoto: { workOrderId: WorkOrderId, row: PhotoRow, reason: Schema.String },
++  ClickedClose: {},
++  SucceededCloseWorkOrder: { workOrderId: WorkOrderId },
++  FailedCloseWorkOrder: { workOrderId: WorkOrderId, reason: Schema.String },
++})
++
++export const OutMessage = defineMessageUnion({ ClosedWorkOrder: { workOrderId: WorkOrderId } })
++
++const PhotosBeforeAfterDefinition = Block.makeDefinition('PhotosBeforeAfter', { Model, Message, OutMessage })
++
++const failureReason = (failure: Readonly<{ _tag: 'Rejected'; rejection: { _tag: string } }> | Readonly<{ _tag: 'Unknown' }>) =>
++  failure._tag === 'Rejected' ? failure.rejection._tag : 'Unknown'
++
++export const AttachPhoto = PhotosBeforeAfterDefinition.makeCommand('AttachPhoto', {
++  args: AttachPhotoArgs,
++  messages: [Message.SucceededAttachPhoto, Message.FailedAttachPhoto],
++  handler: function* () {
++    const client = yield* Client
++    return args =>
++      execute.AttachPhoto(args).pipe(
++        Effect.map(result =>
++          result._tag === 'SucceededAttachPhoto'
++            ? Message.SucceededAttachPhoto({ workOrderId: args.target, row: args.input.row, url: args.input.url })
++            : Message.FailedAttachPhoto({
++                workOrderId: args.target,
++                row: args.input.row,
++                reason: failureReason(result.failure),
++              }),
++        ),
++        Effect.provideService(Client, client),
++      )
++  },
++})
++
++export const CloseWorkOrder = PhotosBeforeAfterDefinition.makeCommand('CloseWorkOrder', {
++  args: CloseWorkOrderArgs,
++  messages: [Message.SucceededCloseWorkOrder, Message.FailedCloseWorkOrder],
++  handler: function* () {
++    const client = yield* Client
++    return args =>
++      execute.CloseWorkOrder(args).pipe(
++        Effect.map(result =>
++          result._tag === 'SucceededCloseWorkOrder'
++            ? Message.SucceededCloseWorkOrder({ workOrderId: args.target })
++            : Message.FailedCloseWorkOrder({ workOrderId: args.target, reason: failureReason(result.failure) }),
++        ),
++        Effect.provideService(Client, client),
++      )
++  },
++})
++
++const emptyRow: RowModel = { urls: [], draft: '', isSaving: false }
++
++const readRow = (model: Model, row: PhotoRow): RowModel => (row === 'Before' ? model.before : model.after)
++
++const writeRow = (model: Model, row: PhotoRow, nextRow: RowModel): Model =>
++  row === 'Before' ? { ...model, before: nextRow } : { ...model, after: nextRow }
++
++const isCurrent = (model: Model, workOrderId: WorkOrderId) => Option.contains(model.maybeWorkOrderId, workOrderId)
++
++export const canClose = (model: Model) =>
++  Option.isSome(model.maybeWorkOrderId) &&
++  model.closeState === 'Open' &&
++  Array.isReadonlyArrayNonEmpty(model.before.urls) &&
++  Array.isReadonlyArrayNonEmpty(model.after.urls)
++
++const PhotosBeforeAfterComposition = PhotosBeforeAfterDefinition.makeComposition()
++
++export const init = PhotosBeforeAfterComposition.makeInit((session: string) => ({
++  model: {
++    maybeWorkOrderId: Option.none(),
++    before: emptyRow,
++    after: emptyRow,
++    closeState: 'Open' as const,
++    maybeError: Option.none(),
++    commandIds: CommandIds.make({ session: `${session}:PhotosBeforeAfter`, sent: 0 }),
++  },
++}))
++
++export const update = PhotosBeforeAfterComposition.makeUpdate({
++  RequestedShow: (model, { workOrderId }) =>
++    isCurrent(model, workOrderId)
++      ? { model }
++      : {
++          model: {
++            ...model,
++            maybeWorkOrderId: Option.some(workOrderId),
++            before: emptyRow,
++            after: emptyRow,
++            closeState: 'Open' as const,
++            maybeError: Option.none(),
++          },
++        },
++  UpdatedPhotoDraft: (model, { row, value }) => ({
++    model: writeRow(model, row, { ...readRow(model, row), draft: value }),
++  }),
++  ClickedAddPhoto: (model, { row }) => {
++    const rowModel = readRow(model, row)
++    const url = rowModel.draft.trim()
++
++    if (Option.isNone(model.maybeWorkOrderId) || String.isEmpty(url) || rowModel.isSaving || model.closeState !== 'Open') {
++      return { model }
++    }
++
++    const allocation = nextCommandId(model.commandIds)
++    return {
++      model: { ...writeRow(model, row, { ...rowModel, isSaving: true }), commandIds: allocation.commandIds },
++      commands: [
++        AttachPhoto({
++          target: model.maybeWorkOrderId.value,
++          input: { row, url },
++          commandId: allocation.commandId,
++        }),
++      ],
++    }
++  },
++  SucceededAttachPhoto: (model, { workOrderId, row, url }) => {
++    if (!isCurrent(model, workOrderId)) {
++      return { model }
++    }
++
++    const rowModel = readRow(model, row)
++    return {
++      model: {
++        ...writeRow(model, row, { urls: Array.append(rowModel.urls, url), draft: '', isSaving: false }),
++        maybeError: Option.none(),
++      },
++    }
++  },
++  FailedAttachPhoto: (model, { workOrderId, row, reason }) => {
++    if (!isCurrent(model, workOrderId)) {
++      return { model }
++    }
++
++    return {
++      model: { ...writeRow(model, row, { ...readRow(model, row), isSaving: false }), maybeError: Option.some(reason) },
++    }
++  },
++  ClickedClose: model => {
++    if (!canClose(model) || Option.isNone(model.maybeWorkOrderId)) {
++      return { model }
++    }
++
++    const allocation = nextCommandId(model.commandIds)
++    return {
++      model: { ...model, closeState: 'Closing' as const, commandIds: allocation.commandIds },
++      commands: [CloseWorkOrder({ target: model.maybeWorkOrderId.value, input: {}, commandId: allocation.commandId })],
++    }
++  },
++  SucceededCloseWorkOrder: (model, { workOrderId }) =>
++    isCurrent(model, workOrderId)
++      ? {
++          model: { ...model, closeState: 'Closed' as const, maybeError: Option.none() },
++          outMessage: OutMessage.ClosedWorkOrder({ workOrderId }),
++        }
++      : { model },
++  FailedCloseWorkOrder: (model, { workOrderId, reason }) =>
++    isCurrent(model, workOrderId)
++      ? { model: { ...model, closeState: 'Open' as const, maybeError: Option.some(reason) } }
++      : { model },
++})
++
++const view = PhotosBeforeAfterComposition.makeView((model, h) => {
++  const rowView = (row: PhotoRow) => {
++    const rowModel = readRow(model, row)
++    return h.div(
++      [h.Class('photo-row'), h.DataAttribute('row', row)],
++      [
++        h.h3([], [row]),
++        h.ul(
++          [],
++          Array.map(rowModel.urls, url => h.li([], [url])),
++        ),
++        h.input([
++          h.Value(rowModel.draft),
++          h.Disabled(model.closeState !== 'Open'),
++          h.OnInput(value => Message.UpdatedPhotoDraft({ row, value })),
++        ]),
++        h.button(
++          [
++            h.Disabled(rowModel.isSaving || model.closeState !== 'Open' || String.isEmpty(rowModel.draft.trim())),
++            h.OnClick(Message.ClickedAddPhoto({ row })),
++          ],
++          [`Add ${row} photo`],
++        ),
++      ],
++    )
++  }
++
++  return h.section(
++    [h.Class('photos-before-after')],
++    Option.match(model.maybeWorkOrderId, {
++      onNone: () => [h.p([], ['Select a work order'])],
++      onSome: () => [
++        rowView('Before'),
++        rowView('After'),
++        h.button([h.Disabled(!canClose(model)), h.OnClick(Message.ClickedClose())], [
++          model.closeState === 'Closed' ? 'Closed' : 'Close',
++        ]),
++        ...Option.toArray(Option.map(model.maybeError, reason => h.p([h.Class('error')], [reason]))),
++      ],
++    }),
++  )
++})
++
++const prepare = () =>
++  PhotosBeforeAfterComposition.prepareBlock({
++    init,
++    update,
++    view,
++    EffectsLayer: Layer.mergeAll(AttachPhoto.layer, CloseWorkOrder.layer),
++    operations: { requestShow: Message.RequestedShow },
++  })
++export const PhotosBeforeAfterBlock: Block.FromAssemblyWithViewAndOutMessage<typeof Model, typeof prepare> =
++  Block.assemble(prepare)
+diff --git a/a-preview/app/workOrdersPage.ts b/a-preview/app/workOrdersPage.ts
+index 2964682..ebe2d3d 100644
+--- a/a-preview/app/workOrdersPage.ts
++++ b/a-preview/app/workOrdersPage.ts
+@@ -8,6 +8,7 @@ import { WorkOrderId } from '../../domain/workOrder'
+ import { ApprovalPanelBlock } from './approvalPanel'
+ import { ConversationBlock } from './conversation'
+ import { LiveTickerBlock } from './liveTicker'
++import { PhotosBeforeAfterBlock } from './photosBeforeAfter'
+ import { Row } from './shared'
+ import { WorkOrderListBlock } from './workOrderList'
+ 
+@@ -15,6 +16,7 @@ const Model = Schema.Struct({
+   list: WorkOrderListBlock.Model,
+   conversation: ConversationBlock.Model,
+   approval: ApprovalPanelBlock.Model,
++  photos: PhotosBeforeAfterBlock.Model,
+   tickers: Schema.Array(LiveTickerBlock.Model),
+   maybeError: Schema.Option(Schema.String),
+   commandIds: CommandIds,
+@@ -67,10 +69,25 @@ export const ApprovalBinding = WorkOrdersPageDefinition.makeBinding(ApprovalPane
+   }),
+ })
+ 
++export const PhotosBinding = WorkOrdersPageDefinition.makeBinding(PhotosBeforeAfterBlock, {
++  field: 'photos',
++  init: { contextToArgs: session => [session] },
++}).withOutMessagePolicy({
++  fold: WorkOrdersPageDefinition.makeOutMessageFold(PhotosBeforeAfterBlock, {
++    ClosedWorkOrder: () => ConversationBinding.informSystemLine({ text: 'Work order closed' }),
++  }),
++})
++
+ export const ListBinding = WorkOrdersPageDefinition.makeBinding(WorkOrderListBlock, { field: 'list' }).withOutMessagePolicy({
+   fold: WorkOrdersPageDefinition.makeOutMessageFold(WorkOrderListBlock, {
+     SelectedWorkOrder: ({ row }) =>
+-      makeStep(() => Update.combineSteps([ApprovalBinding.requestShow({ row }), ConversationBinding.requestReset()])),
++      makeStep(() =>
++        Update.combineSteps([
++          ApprovalBinding.requestShow({ row }),
++          PhotosBinding.requestShow({ workOrderId: row.id }),
++          ConversationBinding.requestReset(),
++        ]),
++      ),
+   }),
+ })
+ 
+@@ -93,7 +110,7 @@ export const TickersBinding = WorkOrdersPageDefinition.makeBinding(LiveTickerBlo
+ })
+ 
+ export const WorkOrdersPageComposition = WorkOrdersPageDefinition.makeComposition({
+-  bindings: [ListBinding, ConversationBinding, ApprovalBinding, TickersBinding],
++  bindings: [ListBinding, ConversationBinding, ApprovalBinding, PhotosBinding, TickersBinding],
+ })
+ 
+ export const Flags = Schema.Struct({ session: Schema.String })
+@@ -149,6 +166,7 @@ const view = WorkOrdersPageComposition.makeView((model, h) =>
+       h.block(ListBinding.embedView({ slotId: 'list', model: model.list })),
+       h.block(ConversationBinding.embedView({ slotId: 'conversation', model: model.conversation })),
+       h.block(ApprovalBinding.embedView({ slotId: 'approval', model: model.approval })),
++      h.block(PhotosBinding.embedView({ slotId: 'photos', model: model.photos })),
+     ],
+   ),
+ )
