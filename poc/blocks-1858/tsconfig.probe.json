@@ -1,4 +1,4 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["probes"]
+  "include": ["domain", "b-sam", "probes/b-missing.ts"]
 }

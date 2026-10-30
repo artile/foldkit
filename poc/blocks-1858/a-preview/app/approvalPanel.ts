@@ -15,6 +15,7 @@ const Model = Schema.Struct({
 
 export const Message = defineMessageUnion({
   RequestedShow: { row: Row },
+  ReceivedRowUpdate: { row: Row },
   ClickedApprove: {},
   SucceededApproveWorkOrder: { workOrderId: WorkOrderId },
   FailedApproveWorkOrder: { reason: Schema.String },
@@ -61,6 +62,8 @@ export const update = ApprovalPanelComposition.makeUpdate({
     maybeRow: () => Option.some(row),
     maybeError: () => Option.none(),
   })),
+  ReceivedRowUpdate: (model, { row }) =>
+    Option.exists(model.maybeRow, ({ id }) => id === row.id) ? { model: { ...model, maybeRow: Option.some(row) } } : { model },
   ClickedApprove: model =>
     Option.match(model.maybeRow, {
       onNone: () => ({ model }),
@@ -105,7 +108,7 @@ const prepare = () =>
     update,
     view,
     EffectsLayer: ApproveWorkOrder.layer,
-    operations: { requestShow: Message.RequestedShow },
+    operations: { requestShow: Message.RequestedShow, informRowUpdate: Message.ReceivedRowUpdate },
   })
 export const ApprovalPanelBlock: Block.FromAssemblyWithViewAndOutMessage<typeof Model, typeof prepare> =
   Block.assemble(prepare)

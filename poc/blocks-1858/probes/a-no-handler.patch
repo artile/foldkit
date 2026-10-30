@@ -1,0 +1,32 @@
+diff -ru a/a-preview/app/approvalPanel.ts b/a-preview/app/approvalPanel.ts
+--- a/a-preview/app/approvalPanel.ts	2026-10-30 02:23:45
++++ b/a-preview/app/approvalPanel.ts	2026-10-30 02:23:45
+@@ -30,20 +30,6 @@
+ export const ApproveWorkOrder = ApprovalPanelDefinition.makeCommand('ApproveWorkOrder', {
+   args: ApproveWorkOrderArgs,
+   messages: [Message.SucceededApproveWorkOrder, Message.FailedApproveWorkOrder],
+-  handler: function* () {
+-    const client = yield* Client
+-    return args =>
+-      execute.ApproveWorkOrder(args).pipe(
+-        Effect.map(result =>
+-          result._tag === 'SucceededApproveWorkOrder'
+-            ? Message.SucceededApproveWorkOrder({ workOrderId: args.target })
+-            : Message.FailedApproveWorkOrder({
+-                reason: result.failure._tag === 'Rejected' ? result.failure.rejection._tag : 'Unknown',
+-              }),
+-        ),
+-        Effect.provideService(Client, client),
+-      )
+-  },
+ })
+ 
+ const ApprovalPanelComposition = ApprovalPanelDefinition.makeComposition()
+@@ -107,7 +93,6 @@
+     init,
+     update,
+     view,
+-    EffectsLayer: ApproveWorkOrder.layer,
+     operations: { requestShow: Message.RequestedShow, informRowUpdate: Message.ReceivedRowUpdate },
+   })
+ export const ApprovalPanelBlock: Block.FromAssemblyWithViewAndOutMessage<typeof Model, typeof prepare> =

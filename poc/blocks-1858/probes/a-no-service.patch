@@ -1,0 +1,12 @@
+diff -ru a/a-preview/app/app.test.ts b/a-preview/app/app.test.ts
+--- a/a-preview/app/app.test.ts	2026-10-30 02:23:45
++++ b/a-preview/app/app.test.ts	2026-10-30 02:23:45
+@@ -31,7 +31,7 @@
+     container.id = 'work-orders'
+     root.appendChild(container)
+     document.body.appendChild(root)
+-    Runtime.embed(makeProgram(container, 'page').provide(ClientInMemory))
++    Runtime.embed(makeProgram(container, 'page'))
+ 
+     yield* waitFor(() => root.textContent?.includes('New work order') ?? false, () => document.body.innerHTML)
+     clickButton(root, 'New work order')

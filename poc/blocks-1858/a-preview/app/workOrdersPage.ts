@@ -79,7 +79,7 @@ const foldTickerOutMessage = WorkOrdersPageDefinition.makeOutMessageFold(LiveTic
     makeStep(() =>
       Update.combineSteps([
         ListBinding.requestUpsertRow({ row: toRow(id, summary) }),
-        ApprovalBinding.requestShow({ row: toRow(id, summary) }),
+        ApprovalBinding.informRowUpdate({ row: toRow(id, summary) }),
       ]),
     ),
 })

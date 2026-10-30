@@ -97,7 +97,7 @@ export const WorkOrdersPageLive = WorkOrdersPage.make(
             model,
             messages: [
               model.list.send(WorkOrderList.Message.RequestedUpsertRow({ row: toRow(workOrderId, summary) })),
-              model.approval.send(ApprovalPanel.Message.RequestedShow({ row: toRow(workOrderId, summary) })),
+              model.approval.send(ApprovalPanel.Message.ReceivedRowUpdate({ row: toRow(workOrderId, summary) })),
             ],
           }),
         }),

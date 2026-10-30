@@ -41,11 +41,11 @@ API = {
     'a': ['makeDefinition', 'makeComposition', 'makeInit', 'makeUpdate', 'makeView', 'prepareBlock', 'Block.assemble',
           'FromAssemblyWithView', 'FromAssemblyWithOutMessage', 'FromAssemblyWithViewAndOutMessage', 'makeCommand', '.layer',
           'EffectsLayer', 'makeSubscriptions', 'entry(', 'makeBinding', 'withOutMessagePolicy', 'makeOutMessageFold',
-          'makeOutMessageStep', 'makeFieldsStep', '.fromMessage', 'makeStep', 'Update.combineSteps', 'initAndAppend',
-          'embedView', 'h.block', 'operations', 'ChildInitContext', 'childInitContext', 'contextToArgs', 'instances:',
-          'toItem', 'Program.makeElement', 'Runtime.embed', '.provide(', 'Layer.mergeAll'],
+          'makeOutMessageStep', 'makeFieldsStep', 'makeStep', 'Update.combineSteps', 'initAndAppend',
+          'embedView', 'h.block', 'operations', 'ChildInitContext', 'contextToArgs', 'instances:',
+          'toItem', 'Program.makeElement', 'Runtime.embed', '.provide(', 'Layer.mergeAll', 'modifyFields'],
     'b': ['Block<', '.make(', '.instance(', '.each(', '.on(', '.send(', '.view()', '.Ref', '.model', 'Output.map',
-          'Command.make', 'commands:', 'stream:', 'Layer.provide', 'Runtime.run', 'Block.deliver', 'Layer.mergeAll'],
+          'Command.make', 'commands:', 'stream:', 'messages:', 'Layer.provide', 'Runtime.run', 'Block.deliver', 'Layer.mergeAll', 'modifyFields'],
 }
 
 def measure(variant: str, files: list[pathlib.Path]):

@@ -1,0 +1,12 @@
+diff -ru a/a-preview/app/workOrdersPage.ts b/a-preview/app/workOrdersPage.ts
+--- a/a-preview/app/workOrdersPage.ts	2026-10-30 02:23:45
++++ b/a-preview/app/workOrdersPage.ts	2026-10-30 02:23:45
+@@ -93,7 +93,7 @@
+ })
+ 
+ export const WorkOrdersPageComposition = WorkOrdersPageDefinition.makeComposition({
+-  bindings: [ListBinding, ConversationBinding, ApprovalBinding, TickersBinding],
++  bindings: [ListBinding, ConversationBinding, ApprovalBinding],
+ })
+ 
+ export const Flags = Schema.Struct({ session: Schema.String })

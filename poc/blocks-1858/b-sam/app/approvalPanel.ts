@@ -9,6 +9,7 @@ import { Row } from './shared'
 
 const Message = defineMessageUnion({
   RequestedShow: { row: Row },
+  ReceivedRowUpdate: { row: Row },
   ClickedApprove: {},
   SucceededApproveWorkOrder: { workOrderId: WorkOrderId },
   FailedApproveWorkOrder: { reason: Schema.String },
@@ -46,6 +47,10 @@ export const ApprovalPanelLive = ApprovalPanel.make(
         RequestedShow: (model, { row }) => ({
           model: modifyFields(model, { maybeRow: () => Option.some(row), maybeError: () => Option.none() }),
         }),
+        ReceivedRowUpdate: (model, { row }) =>
+          Option.exists(model.maybeRow, ({ id }) => id === row.id)
+            ? { model: modifyFields(model, { maybeRow: () => Option.some(row) }) }
+            : { model },
         ClickedApprove: model =>
           Option.match(model.maybeRow, {
             onNone: () => ({ model }),
