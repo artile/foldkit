@@ -4,6 +4,7 @@ import { ClientInMemory } from '../domain/inMemory'
 import { Runtime } from '../b-sam/blocks'
 import { ApprovalPanelLive } from '../b-sam/app/approvalPanel'
 import { ConversationLive } from '../b-sam/app/conversation'
+import { LiveTickerLive } from '../b-sam/app/liveTicker'
 import { WorkOrderListLive } from '../b-sam/app/workOrderList'
 import { WorkOrdersPage, WorkOrdersPageLive } from '../b-sam/app/workOrdersPage'
 
@@ -22,7 +23,7 @@ export const missingBlock = Runtime.run(WorkOrdersPage, {
 
 export const missingService = Runtime.run(WorkOrdersPage, {
   container: document.body,
-  layer: WorkOrdersPageLive.pipe(Layer.provide([WorkOrderListLive, ConversationLive, ApprovalPanelLive])),
+  layer: WorkOrdersPageLive.pipe(Layer.provide([WorkOrderListLive, ConversationLive, ApprovalPanelLive, LiveTickerLive])),
   args: { session: 's' },
 })
 void Effect

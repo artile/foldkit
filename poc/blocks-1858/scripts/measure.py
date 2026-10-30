@@ -43,9 +43,9 @@ API = {
           'EffectsLayer', 'makeSubscriptions', 'entry(', 'makeBinding', 'withOutMessagePolicy', 'makeOutMessageFold',
           'makeOutMessageStep', 'makeFieldsStep', 'makeStep', 'Update.combineSteps', 'initAndAppend',
           'embedView', 'h.block', 'operations', 'ChildInitContext', 'contextToArgs', 'instances:',
-          'toItem', 'Program.makeElement', 'Runtime.embed', '.provide(', 'Layer.mergeAll', 'modifyFields'],
+          'toItem', 'Program.makeElement', 'Runtime.embed', '.provide(', 'Layer.mergeAll'],
     'b': ['Block<', '.make(', '.instance(', '.each(', '.on(', '.send(', '.view()', '.Ref', '.model', 'Output.map',
-          'Command.make', 'commands:', 'stream:', 'messages:', 'Layer.provide', 'Runtime.run', 'Block.deliver', 'Layer.mergeAll', 'modifyFields'],
+          'Command.make', 'commands:', 'stream:', 'Layer.provide', 'Runtime.run', 'Block.deliver', 'Layer.mergeAll'],
 }
 
 def measure(variant: str, files: list[pathlib.Path]):
@@ -55,9 +55,9 @@ def measure(variant: str, files: list[pathlib.Path]):
         glue = code_lines(strip_view(src))
         total_glue += len(glue)
         body = '\n'.join(code_lines(src))
-        used |= {name for name in API[variant] if name in body}
+        used |= {name for name in API[variant] if re.search(re.escape(name) + (r'\b' if name[-1].isalnum() else ''), body)}
         print(f'  {f.name:28} all={len(code_lines(src)):4} glue={len(glue):4}')
-    print(f'  TOTAL glue={total_glue} distinct framework APIs={len(used)}: {sorted(used)}')
+    print(f'  TOTAL glue={total_glue} distinct framework names={len(used)}: {sorted(used)}')
 
 root = pathlib.Path(sys.argv[1])
 for variant, folder in (('a', 'a-preview/app'), ('b', 'b-sam/app')):

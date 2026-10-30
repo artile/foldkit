@@ -22,5 +22,4 @@ make({
   }),
 })
 
-declare function makeSeparate(update: Own<Model>, on: ReadonlyArray<Outs<Model>>): void
 export {}

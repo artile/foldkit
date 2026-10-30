@@ -1,0 +1,21 @@
+diff -ru a/b-sam/app/workOrdersPage.ts b/b-sam/app/workOrdersPage.ts
+--- a/b-sam/app/workOrdersPage.ts	2026-10-30 02:30:47
++++ b/b-sam/app/workOrdersPage.ts	2026-10-30 02:30:47
+@@ -76,7 +76,7 @@
+           }
+         },
+         SucceededOpenWorkOrder: (model, { row }) => ({
+-          model: modifyFields(model, { tickers: Array.append(ticker(row.id)) }),
++          model: modifyFields(model, { tickrs: Array.append(ticker(row.id)) }),
+           messages: [model.list.send(WorkOrderList.Message.RequestedUpsertRow({ row }))],
+         }),
+         FailedOpenWorkOrder: (model, { reason }) => ({
+@@ -102,7 +102,7 @@
+           }),
+         }),
+         ...WorkOrdersPage.on(approval, {
+-          ApprovedWorkOrder: model => ({
++          ApprovedWorkOrdr: model => ({
+             model,
+             messages: [model.conversation.send(Conversation.Message.ReceivedSystemLine({ text: 'Owner approved' }))],
+           }),

@@ -85,3 +85,12 @@ test('a live summary updates the row, and an approval adds a line', () => {
     model(model => expect(model.conversation.lines).toEqual(['Owner approved'])),
   )
 })
+
+test('a live summary for another work order leaves the shown row', () => {
+  story(
+    ApprovalPanel.update,
+    given({ ...panelModel, maybeRow: Option.some(row) }),
+    message(ApprovalPanel.Message.ReceivedRowUpdate({ row: { ...row, id: WorkOrderId.make('wo-2'), approval: 'Approved' } })),
+    model(model => expect(model.maybeRow).toEqual(Option.some(row))),
+  )
+})

@@ -16,7 +16,7 @@ bun install
 npx vitest run
 ```
 
-There are 13 tests: 1 Domain test, and in each variant 5 story tests plus 1 end-to-end test. The end-to-end test runs the app in happy-dom on the InMemory Domain. It opens a work order, selects it, approves it and waits for the live View update.
+There are 15 tests: 1 Domain test, and in each variant 6 story tests plus 1 end-to-end test. The end-to-end test runs the app in happy-dom on the InMemory Domain. It opens a work order, selects it, approves it and waits for the live View update.
 
 ## The Domain adapter is a typed stand-in
 
@@ -27,8 +27,8 @@ There are 13 tests: 1 Domain test, and in each variant 5 story tests plus 1 end-
 | | (a) #1655 preview | (b) #1858 proposal |
 | --- | --- | --- |
 | Glue lines, app code without views, imports, blanks | 279 | 270 |
-| Distinct framework names in app code, from the list in `scripts/measure.py` | 31 | 16 |
-| Story test, code lines (5 scenarios) | 69 | 71 |
+| Distinct framework names in app code, from the list in `scripts/measure.py` | 31 | 14 |
+| Story test, code lines (6 scenarios) | 77 | 80 |
 | Type instantiations (`tsc --extendedDiagnostics`) | 1.90 M | 0.28 M |
 | Domain alone | 0.11 M | same |
 
@@ -38,11 +38,11 @@ There are 13 tests: 1 Domain test, and in each variant 5 story tests plus 1 end-
 
 | Mistake | (a) | (b) |
 | --- | --- | --- |
-| Child not wired | Binding left out of `bindings`: 7 errors in 3 files. One is `Argument of type '{ block: AssemblyWithView<...> }' is not assignable to parameter of type 'never'`. No error points at `bindings`. | `LiveTickerLive` not provided: `Type 'Layer<WorkOrdersPage, never, LiveTicker>' is not assignable to type 'Layer<WorkOrdersPage, never, never>'`. |
-| Service not provided | `TS2739` at `Runtime.embed`, with `ClientKey<"WorkOrdersApi">` inside a `Pending<...>` type. | `Type 'ClientKey<"WorkOrdersApi"> \| LiveTicker' is not assignable to type 'never'`. |
+| Child not wired | Binding left out of `bindings`: 7 errors in 3 files. One is `Argument of type '{ block: AssemblyWithView<...> }' is not assignable to parameter of type 'never'`. No error is reported at the `bindings` array; the `prepareBlock` error says `Block operations may use only registered child bindings` deep in its detail. | `LiveTickerLive` not provided: `Type 'Layer<WorkOrdersPage, never, LiveTicker>' is not assignable to type 'Layer<WorkOrdersPage, never, never>'`. |
+| Service not provided | `TS2739` at `Runtime.embed`, with `ClientKey<"WorkOrdersApi">` inside a `Pending<...>` type. | `Type 'Layer<WorkOrdersPage, never, ClientKey<"WorkOrdersApi">>' is not assignable to type 'Layer<WorkOrdersPage, never, never>'`. |
 | Command handler missing | `TS2769` at `prepareBlock` and at `Runtime.embed`, with `Handler<"ApprovalPanel/ApproveWorkOrder", ...>` in the requirements. | `Property 'commands' is missing` at `ApprovalPanel.make`. |
 
-Run `./probes/run.sh` to see each error. The (a) probes are patches in `probes/a-*.patch`, the (b) probe is `probes/b-missing.ts`, and `probes/b-spread-on.ts` and `probes/b-parent-on.ts` show the `on` typing below.
+Run `./probes/run.sh` to see each error. Patches in `probes/a-*.patch` and `probes/b-*.patch` change one thing in a copy of the app: an unregistered Binding, a missing service or handler, `Program.make` for an Element view, and two misspellings. `probes/b-missing.ts` leaves out a child Layer and the service. `probes/b-spread-on.ts`, `probes/b-parent-on.ts` and `probes/b-symbol-on.ts` are small standalone type models for the `on` typing below; they do not import `b-sam/blocks`.
 
 ## Domain command to Block Command
 
@@ -58,7 +58,7 @@ Two new subagents with no context got the same task in each variant: "add a Phot
 | `tsc` runs / with errors | 5 / 1 | 4 / 1 |
 | Type errors | TS4104 (`Array.isArrayNonEmpty` on a readonly array) | the same TS4104 |
 | Story tests pass on first run | yes (8 tests) | yes (6 tests, other coverage) |
-| New Block: lines / glue lines / framework names | 214 / 173 / 14 | 181 / 150 / 6 |
+| New Block: lines / glue lines / framework names | 214 / 173 / 13 | 181 / 150 / 4 |
 | Hardest part, as the agent reported it | `EffectsLayer` is `unknown` for two Commands, Binding declaration order, `toParentMessage` is in `foldkit/test` | `given` merges only at instance boundaries (a limit of this runtime), wiring in 4 places |
 
 One run per variant does not support a claim about agents in general.
@@ -67,6 +67,10 @@ One run per variant does not support a claim about agents in general.
 
 - `Counter('home', args)` is `Counter.instance('home', args)`. JavaScript cannot call an ES class without `new`.
 - A Model field is `Counter.Ref`, not `Counter`. In this runtime the class is not a Schema.
-- `...child.on({ ... })` is `...Parent.on(child, { ... })`. In TypeScript 7.0.2 the handler's `model` is `unknown` in the spread form, because the parent's Model type does not flow into a generic call inside a spread. When the parent class owns `on`, the handlers are typed and a misspelled tag is an excess-property error.
+- `...child.on({ ... })` is `...Parent.on(child, { ... })`. This runtime keys spread handlers by strings such as `@primary/ReachedMax`, and with that shape TypeScript 7.0.2 types `model` as `unknown` in the spread form. When the parent class owns `on`, the handlers are typed and a misspelled tag is an excess-property error. #1860 keys the spread by one symbol (`OnEntry<Model>`); with that shape the spread form is typed (`probes/b-symbol-on.ts`).
 - `Runtime.run(Block, { container, layer, args })` takes the root args.
 - `update` and `view` get their types through `Effect.fn` with no wrapper (open question 1). A misspelled field inside a handler is a type error.
+
+## #1860
+
+#1860 adds the #1858 design to the preview branch as `packages/foldkit/src/blocks/`. This PoC does not use it: `b-sam/blocks/` was written before #1860. #1860 already has `yield* new Counter(id, args)`, a class that is a `Schema.declare`, and a symbol-keyed `on` for the spread form. In #1860 the constructor gets the local `id` and Command handlers have `never` requirements, as in this runtime.

@@ -1,0 +1,9 @@
+diff -ru a/a-preview/app/main.ts b/a-preview/app/main.ts
+--- a/a-preview/app/main.ts	2026-10-30 02:30:47
++++ b/a-preview/app/main.ts	2026-10-30 02:30:47
+@@ -4,4 +4,4 @@
+ import { Flags, WorkOrdersPageBlock } from './workOrdersPage'
+ 
+ export const makeProgram = (container: HTMLElement, session: string) =>
+-  Program.makeElement({ block: WorkOrdersPageBlock, Flags, flags: Effect.succeed({ session }), container })
++  Program.make({ block: WorkOrdersPageBlock, Flags, flags: Effect.succeed({ session }), container })
