@@ -25,7 +25,7 @@ npx vitest run
 
 Each variant has 6 story tests and 1 end-to-end test, and each package has 1 Domain test. The end-to-end test runs the app in happy-dom on the InMemory Domain. It opens a work order, selects it, approves it and waits for the live View update.
 
-#1860 has no public `foldkit/blocks` entry. `c-1860/app/blocks.ts` imports `foldkit/dist/blocks/*` by path. #1860's `Program.make` takes no root args, so the page reads its session from a `Session` service.
+#1860 has no public `foldkit/blocks` entry. `c-1860/app/blocks.ts` imports `foldkit/dist/blocks/*` by path. #1860's `Program.make` takes no root args, so the page reads its session from a `Session` service. Without `container.id` the #1860 runtime stops with an error; the end-to-end test forks `program.start()` in a scope and prints the fiber exit when a wait times out.
 
 ## The Domain adapter is a typed stand-in
 
@@ -37,20 +37,20 @@ Each variant has 6 story tests and 1 end-to-end test, and each package has 1 Dom
 | --- | --- | --- | --- |
 | Glue lines, app code without views, imports, blanks | 279 | 270 | 264 |
 | Distinct framework names in app code, from the list in `scripts/measure.py` | 31 | 14 | 12 |
-| Story test, code lines (6 scenarios) | 77 | 80 | 78 |
+| Story test, code lines (6 scenarios) | 86 | 89 | 88 |
 | Type instantiations (`tsc --extendedDiagnostics`) | 1.90 M | 0.28 M | 0.34 M |
 | Domain alone | 0.11 M | 0.11 M | 0.11 M |
 
-`scripts/measure.py` counts the lines and names. The name count depends on its hand-made list. Check time changed by more than 3x between runs on one machine (Apple M1 Max), so this table gives instantiations only. (a) and (c) are both real Foldkit builds; (b) checks less.
+`scripts/measure.py` counts the lines and names. The name count depends on its hand-made lists (34, 17 and 15 entries); it counts neither `messages:` nor `modifyFields`, which more than one variant uses. Check time changed by more than 3x between runs on one machine (Apple M1 Max), so this table gives instantiations only. (a) and (c) are both real Foldkit builds; (b) checks less.
 
 ## A missing child, service or handler
 
 | Mistake | (a) | (b) | (c) |
 | --- | --- | --- | --- |
-| Child not wired | Binding left out of `bindings`: 7 errors in 3 files. One is `Argument of type '{ block: AssemblyWithView<...> }' is not assignable to parameter of type 'never'`. No error is at the `bindings` array; the `prepareBlock` error says `Block operations may use only registered child bindings` deep in its detail. | `Type 'Layer<WorkOrdersPage, never, LiveTicker>' is not assignable to type 'Layer<WorkOrdersPage, never, never>'` | `Type 'Layer<WorkOrdersPage, never, LiveTicker>' is not assignable to type 'Layer<WorkOrdersPage, unknown, never>'` |
-| Service not provided | `TS2739` at `Runtime.embed`, with `ClientKey<"WorkOrdersApi">` inside a `Pending<...>` type | `Type 'Layer<WorkOrdersPage, never, ClientKey<"WorkOrdersApi">>' is not assignable to ...` | the same message as (b) |
+| Child not wired (`TS2375` in (b) and (c), with an `exactOptionalPropertyTypes` hint that does not apply) | Binding left out of `bindings`: 7 errors in 3 files. One is `Argument of type '{ block: AssemblyWithView<...> }' is not assignable to parameter of type 'never'`. No error is at the `bindings` array; the `prepareBlock` error says `Block operations may use only registered child bindings` deep in its detail. | `Type 'Layer<WorkOrdersPage, never, LiveTicker>' is not assignable to type 'Layer<WorkOrdersPage, never, never>'` | `Type 'Layer<WorkOrdersPage, never, LiveTicker>' is not assignable to type 'Layer<WorkOrdersPage, unknown, never>'` |
+| Service not provided | `TS2739` at `Runtime.embed`, with `ClientKey<"WorkOrdersApi">` inside a `Pending<...>` type | `TS2375`: `Type 'Layer<WorkOrdersPage, never, ClientKey<"WorkOrdersApi">>' is not assignable to type 'Layer<WorkOrdersPage, never, never>'` | `TS2375` at `Program.make`, the same shape with the target `Layer<WorkOrdersPage, unknown, never>` |
 | Command handler missing | `TS2769` at `prepareBlock` and at `Runtime.embed`, with `Handler<"ApprovalPanel/ApproveWorkOrder", ...>` in the requirements | `Property 'commands' is missing` at `ApprovalPanel.make` | `TS2345` at `ApprovalPanel.make`, with `commands` missing deep in its detail |
-| Misspelled tag in a spread `on` handler | — | `Parent.on` form: `TS2561`, did you mean `ApprovedWorkOrder` | `...approval.on({ ... })`: `TS2561`, did you mean `ApprovedWorkOrder` |
+| Misspelled tag in an `on` handler | — | `Parent.on` form: `TS2561`, did you mean `ApprovedWorkOrder` | `...approval.on({ ... })`: `TS2561`, did you mean `ApprovedWorkOrder`; `model` in that handler is then `any` (`TS7006`) |
 | Misspelled Model field | — | `TS2561` for `tickrs` in `modifyFields` | `TS2551` inside a spread `on` handler: `Property 'aproval' does not exist`, did you mean `approval` |
 
 Run `./probes/run.sh` and `c-1860/probes/run.sh` to see each error. Each patch in `probes/` and `c-1860/probes/` changes one thing in a copy of the app. `probes/b-missing.ts` leaves out a child Layer and the service. `probes/b-spread-on.ts`, `probes/b-parent-on.ts` and `probes/b-symbol-on.ts` are small standalone type models of the `on` typing; they do not import `b-sam/blocks`.
@@ -61,7 +61,7 @@ All three variants map a Domain command to a Block Command in the same way. The 
 
 ## Fresh-agent check
 
-A new subagent with no context got the same task in each variant: "add a PhotosBeforeAfter Block that saves through a Domain command and blocks Close until both rows have a photo". Their diffs are in `agent-check/`. The (a) and (b) diffs apply to commit `50488ed11`, before the approval panel fix.
+A new subagent with no context got the same task in each variant: "add a PhotosBeforeAfter Block that saves through a Domain command and blocks Close until both rows have a photo". Their diffs are in `agent-check/`. The (a) and (b) diffs apply to commit `50488ed11`, before the approval panel fix. The (c) diff applies to `c-1860/` at commit `56de9d0fa`. "Lines" below are code lines without imports and blank lines.
 
 | | (a) | (b) | (c) |
 | --- | --- | --- | --- |
@@ -70,7 +70,7 @@ A new subagent with no context got the same task in each variant: "add a PhotosB
 | Type errors | TS4104 (`Array.isArrayNonEmpty` on a readonly array) | the same TS4104 | TS4104; TS2375, the page story Layer had no `PhotosBeforeAfterLive`; TS2339, `Message` is on the class, not on the instance type |
 | Story tests pass on first run | yes (8 tests) | yes (6 tests) | no: 6 of 7; a page story left an `AttachPhoto` Command unresolved |
 | New Block: lines / glue lines / framework names | 214 / 173 / 13 | 181 / 150 / 4 | 161 / 130 / 4 |
-| Hardest part, as the agent reported it | `EffectsLayer` is `unknown` for two Commands, Binding declaration order, `toParentMessage` is in `foldkit/test` | `given` merges only at instance boundaries (a limit of our runtime), wiring in 4 places | the missing-Layer error in a story reads as "not assignable to `Scope`"; instance ids (root id in a story, key for `each`); `Program.make` renders nothing without `container.id` |
+| Hardest part, as the agent reported it | `EffectsLayer` is `unknown` for two Commands, Binding declaration order, `toParentMessage` is in `foldkit/test` | `given` merges only at instance boundaries (a limit of our runtime), wiring in 4 places | the missing-Layer error in a story reads as "not assignable to `Scope`"; instance ids (root id in a story, key for `each`); the app rendered nothing without `container.id` |
 
 The coverage of the agents' stories differs. One run per variant does not support a claim about agents in general.
 
@@ -78,7 +78,7 @@ The coverage of the agents' stories differs. One run per variant does not suppor
 
 - `Counter('home', args)` is `Counter.instance('home', args)`. JavaScript cannot call an ES class without `new`. #1860 uses `yield* new Counter('home', args)`.
 - A Model field is `Counter.Ref`, not `Counter`. In our runtime the class is not a Schema. In #1860 it is a `Schema.declare`.
-- `...child.on({ ... })` is `...Parent.on(child, { ... })`. Our runtime keys spread handlers by strings such as `@primary/ReachedMax`, and with that shape TypeScript 7.0.2 types `model` as `unknown` in the spread form. #1860 keys the spread by one symbol (`OnEntry<Model>`), and there the spread form is typed (see the (c) probes).
+- `...child.on({ ... })` is `...Parent.on(child, { ... })`. Our runtime keys spread handlers by strings such as `@primary/ReachedMax`, and with that shape TypeScript 7.0.2 types `model` as `unknown` in the spread form. In #1860 the type of a spread entry has one symbol key (`OnEntry<Model>`; at run time each `on` call makes a new symbol), and there the spread form is typed (see the (c) probes).
 - `Runtime.run(Block, { container, layer, args })` takes the root args.
 - `update` and `view` get their types through `Effect.fn` with no wrapper, in (b) and (c).
 - #1858 section 5 (`Output`) is in (b) only; #1860 has no `Output`. (c) reads `model.list.model` in the view instead.

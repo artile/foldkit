@@ -6,7 +6,7 @@ import { ClientInMemory } from '../domain/inMemory'
 import { WorkOrderId } from '../domain/workOrder'
 import { ApprovalPanel, ApprovalPanelLive, ApproveWorkOrder } from './approvalPanel'
 import { deliver, story } from './blocks'
-import { ConversationLive } from './conversation'
+import { Conversation, ConversationLive } from './conversation'
 import { LiveTicker, LiveTickerLive } from './liveTicker'
 import { Session } from './session'
 import { Row } from './shared'
@@ -74,6 +74,7 @@ it.effect('selecting a row shows it in the approval panel', () =>
   story(
     PageLayer,
     message(deliver(WorkOrderList, 'list', WorkOrderList.Message.RequestedUpsertRow({ row }))),
+    message(deliver(Conversation, 'conversation', Conversation.Message.ReceivedSystemLine({ text: 'old' }))),
     message(deliver(WorkOrderList, 'list', WorkOrderList.Message.ClickedRow({ id: row.id }))),
     model(model => {
       expect(model.approval.maybeRow).toEqual(Option.some(row))
@@ -95,6 +96,15 @@ it.effect('a live summary updates the row, and an approval adds a line', () =>
       ),
     ),
     model(model => expect(model.list.rows[0]?.approval).toBe('Approved')),
+    message(deliver(WorkOrderList, 'list', WorkOrderList.Message.ClickedRow({ id: row.id }))),
+    message(
+      deliver(
+        LiveTicker,
+        ['tickers', 'wo-1'],
+        LiveTicker.Message.ReceivedSummary({ summary: { title: 'Leaking sink', amount: 400, approval: 'Waiting', isClosed: false } }),
+      ),
+    ),
+    model(model => expect(Option.map(model.approval.maybeRow, ({ approval }) => approval)).toEqual(Option.some('Waiting'))),
     message(deliver(ApprovalPanel, 'approval', ApprovalPanel.Message.SucceededApproveWorkOrder({ workOrderId: row.id }))),
     model(model => expect(model.conversation.lines).toEqual(['Owner approved'])),
   ).pipe(Effect.provide(Services)),

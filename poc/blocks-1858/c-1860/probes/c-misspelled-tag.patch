@@ -1,15 +1,12 @@
 diff -ru a/app/workOrdersPage.ts b/app/workOrdersPage.ts
---- a/app/workOrdersPage.ts	2026-10-30 02:35:33
-+++ b/app/workOrdersPage.ts	2026-10-30 02:35:33
-@@ -96,9 +96,9 @@
+--- a/app/workOrdersPage.ts	2026-10-30 02:51:12
++++ b/app/workOrdersPage.ts	2026-10-30 02:51:12
+@@ -96,7 +96,7 @@
            }),
          }),
          ...approval.on({
 -          ApprovedWorkOrder: model => ({
 +          ApprovedWorkOrdr: model => ({
              model,
--            messages: [model.conversation.send(Conversation.Message.ReceivedSystemLine({ text: 'Owner approved' }))],
-+            messages: [model.conversaton.send(Conversation.Message.ReceivedSystemLine({ text: 'Owner approved' }))],
+             messages: [model.conversation.send(Conversation.Message.ReceivedSystemLine({ text: 'Owner approved' }))],
            }),
-         }),
-       },

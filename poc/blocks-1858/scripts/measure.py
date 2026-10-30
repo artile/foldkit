@@ -64,7 +64,7 @@ def measure(variant: str, files: list[pathlib.Path]):
 root = pathlib.Path(sys.argv[1])
 for variant, folder in (('a', 'a-preview/app'), ('b', 'b-sam/app'), ('c', 'c-1860/app')):
     files = sorted(p for p in (root / folder).glob('*.ts') if not p.name.endswith('.test.ts') and p.name not in ('shared.ts', 'blocks.ts'))
-    print(variant, folder)
+    print(variant, folder, f'(name list: {len(API[variant])} entries)')
     measure(variant, files)
     tests = sorted((root / folder).glob('story.test.ts'))
     for t in tests:

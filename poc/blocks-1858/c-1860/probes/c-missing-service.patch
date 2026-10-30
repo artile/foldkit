@@ -1,6 +1,6 @@
 diff -ru a/app/app.test.ts b/app/app.test.ts
---- a/app/app.test.ts	2026-10-30 02:35:33
-+++ b/app/app.test.ts	2026-10-30 02:35:33
+--- a/app/app.test.ts	2026-10-30 02:51:12
++++ b/app/app.test.ts	2026-10-30 02:51:12
 @@ -35,7 +35,7 @@
      document.body.appendChild(root)
      const program = Program.make(WorkOrdersPage, {
@@ -8,5 +8,5 @@ diff -ru a/app/app.test.ts b/app/app.test.ts
 -      layer: BlocksLayer.pipe(Layer.provide(Layer.merge(ClientInMemory, Layer.succeed(Session, 'page')))),
 +      layer: BlocksLayer.pipe(Layer.provide(Layer.succeed(Session, 'page'))),
      })
-     Effect.runFork(program.start())
- 
+     const fiber = yield* Effect.forkScoped(program.start())
+     const describeFailure = () => `${root.innerHTML} ${JSON.stringify(fiber.pollUnsafe())}`

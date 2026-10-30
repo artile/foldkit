@@ -1,6 +1,6 @@
 diff -ru a/app/workOrdersPage.ts b/app/workOrdersPage.ts
---- a/app/workOrdersPage.ts	2026-10-30 02:35:42
-+++ b/app/workOrdersPage.ts	2026-10-30 02:35:42
+--- a/app/workOrdersPage.ts	2026-10-30 02:51:12
++++ b/app/workOrdersPage.ts	2026-10-30 02:51:12
 @@ -81,7 +81,7 @@
            SelectedWorkOrder: (model, { row }) => ({
              model,

@@ -85,6 +85,15 @@ it.effect('a live summary updates the row, and an approval adds a line', () =>
       ),
     ),
     model(model => expect(model.list.rows[0]?.approval).toBe('Approved')),
+    message(Block.deliver(WorkOrderList, 'list', WorkOrderList.Message.ClickedRow({ id: row.id }))),
+    message(
+      Block.deliver(
+        LiveTicker,
+        'wo-1',
+        LiveTicker.Message.ReceivedSummary({ summary: { title: 'Leaking sink', amount: 400, approval: 'Waiting', isClosed: false } }),
+      ),
+    ),
+    model(model => expect(Option.map(model.approval.maybeRow, ({ approval }) => approval)).toEqual(Option.some('Waiting'))),
     message(Block.deliver(ApprovalPanel, 'approval', ApprovalPanel.Message.SucceededApproveWorkOrder({ workOrderId: row.id }))),
     model(model => expect(model.conversation.lines).toEqual(['Owner approved'])),
   ).pipe(Effect.provide(ClientInMemory)),

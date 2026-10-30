@@ -37,18 +37,19 @@ it.live('opens and approves a work order through the InMemory Domain', () =>
       container,
       layer: BlocksLayer.pipe(Layer.provide(Layer.merge(ClientInMemory, Layer.succeed(Session, 'page')))),
     })
-    Effect.runFork(program.start())
+    const fiber = yield* Effect.forkScoped(program.start())
+    const describeFailure = () => `${root.innerHTML} ${JSON.stringify(fiber.pollUnsafe())}`
 
-    yield* waitFor(() => root.textContent?.includes('New work order') ?? false, () => document.body.innerHTML)
+    yield* waitFor(() => root.textContent?.includes('New work order') ?? false, describeFailure)
     clickButton(root, 'New work order')
-    yield* waitFor(() => root.textContent?.includes('Leaking sink · Waiting') ?? false, () => root.innerHTML)
+    yield* waitFor(() => root.textContent?.includes('Leaking sink · Waiting') ?? false, describeFailure)
 
     clickButton(root, 'Leaking sink')
-    yield* waitFor(() => root.textContent?.includes('Selected: Leaking sink') ?? false, () => root.innerHTML)
+    yield* waitFor(() => root.textContent?.includes('Selected: Leaking sink') ?? false, describeFailure)
 
     clickButton(root, 'Approve')
-    yield* waitFor(() => root.textContent?.includes('Leaking sink · Approved') ?? false, () => root.innerHTML)
-    yield* waitFor(() => root.textContent?.includes('Owner approved') ?? false, () => root.innerHTML)
+    yield* waitFor(() => root.textContent?.includes('Leaking sink · Approved') ?? false, describeFailure)
+    yield* waitFor(() => root.textContent?.includes('Owner approved') ?? false, describeFailure)
     expect(root.querySelector('.approval-panel button')?.hasAttribute('disabled')).toBe(true)
-  }),
+  }).pipe(Effect.scoped),
 )

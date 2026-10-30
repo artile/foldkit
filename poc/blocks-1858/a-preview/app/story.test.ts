@@ -81,6 +81,15 @@ test('a live summary updates the row, and an approval adds a line', () => {
       ),
     ),
     model(model => expect(model.list.rows[0]?.approval).toBe('Approved')),
+    message(toParentMessage(ListBinding, WorkOrderList.Message.ClickedRow({ id: row.id }))),
+    message(
+      toParentMessage(
+        TickersBinding,
+        row.id,
+        LiveTicker.Message.ReceivedSummary({ summary: { title: 'Leaking sink', amount: 400, approval: 'Waiting', isClosed: false } }),
+      ),
+    ),
+    model(model => expect(Option.map(model.approval.maybeRow, ({ approval }) => approval)).toEqual(Option.some('Waiting'))),
     message(toParentMessage(ApprovalBinding, ApprovalPanel.Message.SucceededApproveWorkOrder({ workOrderId: row.id }))),
     model(model => expect(model.conversation.lines).toEqual(['Owner approved'])),
   )
