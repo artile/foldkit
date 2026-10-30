@@ -46,6 +46,8 @@ API = {
           'toItem', 'Program.makeElement', 'Runtime.embed', '.provide(', 'Layer.mergeAll'],
     'b': ['Block<', '.make(', '.instance(', '.each(', '.on(', '.send(', '.view()', '.Ref', '.model', 'Output.map',
           'Command.make', 'commands:', 'stream:', 'Layer.provide', 'Runtime.run', 'Block.deliver', 'Layer.mergeAll'],
+    'c': ['Block<', '.make(', 'yield* new ', '.each(', '.on(', '.send(', '.view()', '.model.', 'Command.define',
+          'commands:', 'stream:', 'Layer.provide', 'Program.make', 'deliver(', 'Layer.mergeAll'],
 }
 
 def measure(variant: str, files: list[pathlib.Path]):
@@ -60,8 +62,8 @@ def measure(variant: str, files: list[pathlib.Path]):
     print(f'  TOTAL glue={total_glue} distinct framework names={len(used)}: {sorted(used)}')
 
 root = pathlib.Path(sys.argv[1])
-for variant, folder in (('a', 'a-preview/app'), ('b', 'b-sam/app')):
-    files = sorted(p for p in (root / folder).glob('*.ts') if not p.name.endswith('.test.ts') and p.name != 'shared.ts')
+for variant, folder in (('a', 'a-preview/app'), ('b', 'b-sam/app'), ('c', 'c-1860/app')):
+    files = sorted(p for p in (root / folder).glob('*.ts') if not p.name.endswith('.test.ts') and p.name not in ('shared.ts', 'blocks.ts'))
     print(variant, folder)
     measure(variant, files)
     tests = sorted((root / folder).glob('story.test.ts'))

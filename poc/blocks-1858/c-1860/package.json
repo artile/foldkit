@@ -1,0 +1,23 @@
+{
+  "name": "poc-blocks-1858-c-1860",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "pack-1860": "./pack-1860.sh",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@alchemy.run/domain": "2.0.0-beta.84",
+    "@effect/platform-browser": "4.0.6",
+    "alchemy": "2.0.0-beta.84",
+    "effect": "4.0.6",
+    "foldkit": "file:./vendor/foldkit-1860.tgz"
+  },
+  "devDependencies": {
+    "@effect/vitest": "4.0.6",
+    "happy-dom": "20.14.5",
+    "typescript": "7.0.2",
+    "vitest": "5.0.2"
+  }
+}

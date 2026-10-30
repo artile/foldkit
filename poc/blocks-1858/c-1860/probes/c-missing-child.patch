@@ -1,0 +1,10 @@
+diff -ru a/app/main.ts b/app/main.ts
+--- a/app/main.ts	2026-10-30 02:35:33
++++ b/app/main.ts	2026-10-30 02:35:33
+@@ -10,5 +10,5 @@
+   Layer.provide(WorkOrderListLive),
+   Layer.provide(ConversationLive),
+   Layer.provide(ApprovalPanelLive),
+-  Layer.provide(LiveTickerLive),
++
+ )

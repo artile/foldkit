@@ -1,0 +1,23 @@
+diff -ru a/app/approvalPanel.ts b/app/approvalPanel.ts
+--- a/app/approvalPanel.ts	2026-10-30 02:35:33
++++ b/app/approvalPanel.ts	2026-10-30 02:35:33
+@@ -73,19 +73,6 @@
+           model: modifyFields(model, { isSubmitting: () => false, maybeError: () => Option.some(reason) }),
+         }),
+       },
+-      commands: {
+-        ApproveWorkOrder: args =>
+-          execute.ApproveWorkOrder(args).pipe(
+-            Effect.map(result =>
+-              result._tag === 'SucceededApproveWorkOrder'
+-                ? ApprovalPanel.Message.SucceededApproveWorkOrder({ workOrderId: args.target })
+-                : ApprovalPanel.Message.FailedApproveWorkOrder({
+-                    reason: result.failure._tag === 'Rejected' ? result.failure.rejection._tag : 'Unknown',
+-                  }),
+-            ),
+-            Effect.provideService(Client, client),
+-          ),
+-      },
+       view: (model, h) =>
+         h.section(
+           [h.Class('approval-panel')],

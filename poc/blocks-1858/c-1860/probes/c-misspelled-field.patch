@@ -1,0 +1,12 @@
+diff -ru a/app/workOrdersPage.ts b/app/workOrdersPage.ts
+--- a/app/workOrdersPage.ts	2026-10-30 02:35:42
++++ b/app/workOrdersPage.ts	2026-10-30 02:35:42
+@@ -81,7 +81,7 @@
+           SelectedWorkOrder: (model, { row }) => ({
+             model,
+             messages: [
+-              model.approval.send(ApprovalPanel.Message.RequestedShow({ row })),
++              model.aproval.send(ApprovalPanel.Message.RequestedShow({ row })),
+               model.conversation.send(Conversation.Message.RequestedReset()),
+             ],
+           }),
