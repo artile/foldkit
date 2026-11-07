@@ -16,6 +16,7 @@ export type {
   DefinedStep,
   DefinedUpdate,
   DeferredCombinedStepsPolicy,
+  StaticOutMessageEvidence,
   DeferredResultEvidence,
   GraphCapability,
   NoRegistrationEvidence,

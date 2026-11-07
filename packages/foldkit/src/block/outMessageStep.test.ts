@@ -129,32 +129,17 @@ it('emits a derived OutMessage from an inferred Binding policy', () => {
   expect(result.outMessage).toEqual(ParentOutMessage.Chose({ value: 'Pear' }))
   expectTypeOf<Update.RequirementsOf<typeof update>>().toEqualTypeOf<never>()
 
-  const unsafeUpdate = Reflect.apply(
-    ParentComposition.makeUpdate,
-    ParentComposition,
-    [
-      {
-        RequestedSelect: (parentModel: ParentModel) => {
-          const combined = Reflect.apply(Update.combineSteps, undefined, [
-            [
-              ParentDefinition.makeNoopStep(),
-              SelectionBinding.requestSelect({ value: 'Pear' }),
-            ],
-          ])
-
-          return Reflect.apply(combined, undefined, [parentModel])
-        },
-      },
-    ],
-  )
-  expect(() =>
-    Reflect.apply(unsafeUpdate, undefined, [
-      model,
-      Message.RequestedSelect({ value: 'Pear' }),
-    ]),
-  ).toThrow(
-    '[foldkit] Update.combineSteps cannot combine a Step that emits an OutMessage.',
-  )
+  const combinedUpdate = ParentComposition.makeUpdate({
+    RequestedSelect: (parentModel, { value }) =>
+      Update.combineSteps(parentModel, [
+        ParentDefinition.makeNoopStep(),
+        SelectionBinding.requestSelect({ value }),
+      ]),
+  })
+  expect(
+    combinedUpdate(model, Message.RequestedSelect({ value: 'Pear' }))
+      .outMessage,
+  ).toEqual(ParentOutMessage.Chose({ value: 'Pear' }))
 
   if (false) {
     const selectAndPreserve = ParentDefinition.makeStep(() =>
@@ -163,25 +148,36 @@ it('emits a derived OutMessage from an inferred Binding policy', () => {
         SelectionBinding.requestSelect({ value: 'Pear' }),
       ]),
     )
+    const selectTwice = ParentDefinition.makeStep(() =>
+      Update.combineSteps([
+        SelectionBinding.requestSelect({ value: 'Pear' }),
+        ParentDefinition.makeNoopStep(),
+        SelectionBinding.requestSelect({ value: 'Plum' }),
+      ]),
+    )
 
+    // One OutMessage-capable Binding request keeps its OutMessage.
     ParentComposition.makeUpdate({
-      // @ts-expect-error combineSteps cannot discard an OutMessage produced by a registered Binding policy.
+      RequestedSelect: model => selectAndPreserve(model),
+    })
+    ParentComposition.makeUpdate({
+      // @ts-expect-error Two OutMessage-capable Binding requests cannot share one result.
       RequestedSelect: model => {
         const combined = Update.combineSteps(model, [
-          ParentDefinition.makeNoopStep(),
           SelectionBinding.requestSelect({ value: 'Pear' }),
+          SelectionBinding.requestSelect({ value: 'Plum' }),
         ])
         return combined
       },
     })
     ParentComposition.makeUpdate({
-      // @ts-expect-error Extracting the combination through makeStep cannot erase the deferred OutMessage.
-      RequestedSelect: model => selectAndPreserve(model),
+      // @ts-expect-error Extracting the combination through makeStep keeps the count.
+      RequestedSelect: model => selectTwice(model),
     })
     ParentComposition.makeUpdate({
-      // @ts-expect-error Conditional use cannot erase the deferred OutMessage.
+      // @ts-expect-error Conditional use keeps the count.
       RequestedSelect: (model, message) =>
-        message.value === 'Pear' ? selectAndPreserve(model) : { model },
+        message.value === 'Pear' ? selectTwice(model) : { model },
     })
     ParentComposition.makeInit(
       // @ts-expect-error Initializers cannot discard an OutMessage from a deferred combined Step.
@@ -229,13 +225,21 @@ if (false) {
   const fieldsAndClose = [changeFields, emitClose]
   // @ts-expect-error The produced Step checks its owning Model.
   emitClose({ count: 'invalid' })
-  // @ts-expect-error combineSteps cannot discard an OutMessage.
-  Update.combineSteps(Model.make({ count: 0 }), [emitClose, keepModel])
-  // @ts-expect-error A preceding Model-only Step cannot hide an OutMessage.
+  // One emitting Step in a fixed list keeps its OutMessage on the result.
+  const closedOnce = Update.combineSteps(Model.make({ count: 0 }), [
+    emitClose,
+    keepModel,
+  ])
+  expectTypeOf(closedOnce.outMessage).toEqualTypeOf<
+    typeof OutMessage.Closed.Type | undefined
+  >()
   Update.combineSteps([keepModel, emitClose])
-  // @ts-expect-error A later Model-only Step cannot hide an OutMessage.
+  // @ts-expect-error Two emitting Steps cannot share one result.
+  Update.combineSteps(Model.make({ count: 0 }), [emitClose, emitClose])
+  // @ts-expect-error Two emitting Steps around a Model-only Step stay rejected.
+  Update.combineSteps([emitClose, keepModel, emitClose])
   Update.combineSteps([emitClose, keepModel])
-  // @ts-expect-error An extracted Step list retains its OutMessage channel.
+  // @ts-expect-error An extracted Step list of unknown length cannot emit.
   Update.combineSteps(noopAndClose)
   // @ts-expect-error A field Step cannot hide an OutMessage in an extracted list.
   Update.combineSteps(fieldsAndClose)
@@ -257,6 +261,8 @@ if (false) {
     OutMessage.Closed(),
   )
   const preserveUnknown = UnknownDefinition.makeNoopStep()
-  // @ts-expect-error An unconstrained Model still retains its OutMessage channel.
+  // An unconstrained Model still retains its OutMessage channel.
   Update.combineSteps([preserveUnknown, emitUnknown])
+  // @ts-expect-error Two emitting Steps over an unconstrained Model stay rejected.
+  Update.combineSteps([emitUnknown, preserveUnknown, emitUnknown])
 }

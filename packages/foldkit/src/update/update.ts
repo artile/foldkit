@@ -129,10 +129,22 @@ export interface DeferredResultEvidence<Evidence> {
   readonly [DeferredResultEvidenceTypeId]: (evidence: Evidence) => Evidence
 }
 
-/** @internal Marks the exact deferred Binding policy evidence whose OutMessage
- * would be discarded by `combineSteps`. */
-export interface DeferredCombinedStepsPolicy<Evidence> {
-  readonly [DeferredCombinedStepsPolicyTypeId]: (evidence: Evidence) => Evidence
+/** @internal Marks the exact deferred Binding policy evidence of one
+ * `combineSteps` call. `StepEvidence` keeps the evidence of each Step apart, so
+ * a completed graph can count the Steps whose OutMessage it must carry. */
+export interface DeferredCombinedStepsPolicy<Evidence, StepEvidence = never> {
+  readonly [DeferredCombinedStepsPolicyTypeId]: (
+    evidence: Evidence,
+    steps: StepEvidence,
+  ) => Evidence
+}
+
+declare const StaticOutMessageEvidenceTypeId: unique symbol
+
+/** @internal Marks a combined Step whose resolved result can already emit an
+ * OutMessage before any Binding policy runs. */
+export interface StaticOutMessageEvidence {
+  readonly [StaticOutMessageEvidenceTypeId]: true
 }
 
 type AnyDeferredResultEvidence = DeferredResultEvidence<any>
@@ -767,13 +779,58 @@ type FirstStepModel<Steps extends NonEmptySteps> = GraphModelOf<Steps[0]>
 type ComposableReturnValue<Model> = Readonly<{
   model: Model
   commands?: ReadonlyArray<unknown> | undefined
-  outMessage?: never
+  outMessage?: unknown
 }>
 
 type NonEmptyStepReturnsFor<Model> = readonly [
-  ReturnValue<Model, any, any>,
-  ...ReadonlyArray<ReturnValue<Model, any, any>>,
+  ReturnWithOutMessageValue<Model, any, unknown, any>,
+  ...ReadonlyArray<ReturnWithOutMessageValue<Model, any, unknown, any>>,
 ]
+
+type ReturnCanEmitOutMessage<Output> = [Output] extends [
+  ReturnValue<any, any, any>,
+]
+  ? false
+  : true
+
+type CountEmittingReturns<
+  StepReturns extends ReadonlyArray<unknown>,
+  Count extends ReadonlyArray<unknown> = readonly [],
+> = Count['length'] extends 2
+  ? Count
+  : StepReturns extends readonly [infer Head, ...infer Tail]
+    ? CountEmittingReturns<
+        Tail,
+        ReturnCanEmitOutMessage<Head> extends true
+          ? readonly [...Count, Head]
+          : Count
+      >
+    : Count
+
+type StepReturnsWithoutOutMessage<StepReturns extends ReadonlyArray<unknown>> =
+  CountEmittingReturns<StepReturns>['length'] extends 2 ? never : unknown
+
+type StepReturnsOutMessage<StepReturns extends ReadonlyArray<unknown>> =
+  StepReturns[number] extends infer Output
+    ? Output extends Readonly<{ outMessage?: infer OutMessage }>
+      ? Exclude<OutMessage, undefined>
+      : never
+    : never
+
+type StepReturnsResult<Model, StepReturns extends ReadonlyArray<unknown>> = [
+  StepReturnsOutMessage<StepReturns>,
+] extends [never]
+  ? Return<
+      Model,
+      CommandMessage<StepReturns[number]>,
+      CommandRequirements<StepReturns[number]>
+    >
+  : ReturnWithOutMessage<
+      Model,
+      CommandMessage<StepReturns[number]>,
+      StepReturnsOutMessage<StepReturns>,
+      CommandRequirements<StepReturns[number]>
+    >
 
 type StepsFromReturns<
   Model,
@@ -838,11 +895,54 @@ type StepsForModel<Steps extends ReadonlyArray<AnyStep>, Model> =
       : never
     : never
 
-type StepsWithoutOutMessage<Steps extends ReadonlyArray<unknown>> = [
-  ResolvedStepReturn<Extract<Steps[number], AnyStep>>,
+type StepCanEmitOutMessage<StepValue> = [
+  ResolvedStepReturn<Extract<StepValue, AnyStep>>,
 ] extends [ReturnValue<any, any, any>]
-  ? unknown
-  : never
+  ? false
+  : true
+
+type CountEmittingSteps<
+  Steps extends ReadonlyArray<unknown>,
+  Count extends ReadonlyArray<unknown> = readonly [],
+> = Count['length'] extends 2
+  ? Count
+  : Steps extends readonly [infer Head, ...infer Tail]
+    ? CountEmittingSteps<
+        Tail,
+        StepCanEmitOutMessage<Head> extends true
+          ? readonly [...Count, Head]
+          : Count
+      >
+    : Count
+
+/** At most one Step of a fixed list may emit an OutMessage. The combined result
+ * carries it. A list of unknown length may not emit at all. */
+type StepsWithoutOutMessage<Steps extends ReadonlyArray<unknown>> =
+  number extends Steps['length']
+    ? StepCanEmitOutMessage<Steps[number]> extends true
+      ? never
+      : unknown
+    : CountEmittingSteps<Steps>['length'] extends 2
+      ? never
+      : unknown
+
+type CombinedStepOutMessage<Steps extends ReadonlyArray<AnyStep>> =
+  ResolvedStepReturn<Steps[number]> extends infer Output
+    ? Output extends Readonly<{ outMessage?: infer OutMessage }>
+      ? Exclude<OutMessage, undefined>
+      : never
+    : never
+
+type CombinedReturn<Model, Steps extends ReadonlyArray<AnyStep>> = [
+  CombinedStepOutMessage<Steps>,
+] extends [never]
+  ? Return<Model, CombinedStepMessage<Steps>, CombinedStepRequirements<Steps>>
+  : ReturnWithOutMessage<
+      Model,
+      CombinedStepMessage<Steps>,
+      CombinedStepOutMessage<Steps>,
+      CombinedStepRequirements<Steps>
+    >
 
 type CombinedStepModel<Steps extends ReadonlyArray<AnyStep>> = GraphModelOf<
   Steps[number]
@@ -857,10 +957,25 @@ type CombinedStepRequirements<Steps extends ReadonlyArray<AnyStep>> =
 
 type UnwrapCombinedStepDeferredPolicy<Evidence> =
   Evidence extends DeferredResultEvidence<infer Marker>
-    ? Marker extends DeferredCombinedStepsPolicy<infer NestedEvidence>
+    ? Marker extends DeferredCombinedStepsPolicy<infer NestedEvidence, any>
       ? NestedEvidence
       : Evidence
     : never
+
+type StepDeferredEvidence<StepValue> =
+  | Extract<
+      ConcreteRegistrationEvidence<
+        ResultEvidenceChannelOf<ResolvedStepReturn<StepValue>>
+      >,
+      AnyDeferredResultEvidence
+    >
+  | (StepCanEmitOutMessage<StepValue> extends true
+      ? StaticOutMessageEvidence
+      : never)
+
+type CombinedStepEvidenceList<StepList extends ReadonlyArray<unknown>> = {
+  readonly [Index in keyof StepList]: StepDeferredEvidence<StepList[Index]>
+}
 
 type CombinedStepDeferredPolicyEvidence<Steps extends ReadonlyArray<AnyStep>> =
   UnwrapCombinedStepDeferredPolicy<
@@ -872,32 +987,47 @@ type CombinedStepDeferredPolicyEvidence<Steps extends ReadonlyArray<AnyStep>> =
     >
   >
 
-type CombinedStepRegistrationEvidence<Steps extends ReadonlyArray<AnyStep>> =
+type CombinedStepRegistrationEvidence<
+  Steps extends ReadonlyArray<AnyStep>,
+  StepList extends ReadonlyArray<unknown> = Steps,
+> =
   | ResultEvidenceChannelOf<ResolvedStepReturn<Steps[number]>>
   | CombinedGraphRequirement<Steps>
   | ([CombinedStepDeferredPolicyEvidence<Steps>] extends [never]
       ? never
       : DeferredResultEvidence<
-          DeferredCombinedStepsPolicy<CombinedStepDeferredPolicyEvidence<Steps>>
+          DeferredCombinedStepsPolicy<
+            CombinedStepDeferredPolicyEvidence<Steps>,
+            CombinedStepEvidenceList<StepList>
+          >
         >)
 
 type CombinedStepOutputFor<
   Model,
   Steps extends ReadonlyArray<AnyStep>,
+  StepList extends ReadonlyArray<unknown> = Steps,
 > = WithRegistrationEvidence<
-  Return<Model, CombinedStepMessage<Steps>, CombinedStepRequirements<Steps>>,
-  CombinedStepRegistrationEvidence<Steps>
+  CombinedReturn<Model, Steps>,
+  CombinedStepRegistrationEvidence<Steps, StepList>
 >
 
 type CombinedStepRecipe<
   Model,
   Steps extends ReadonlyArray<AnyStep>,
+  StepList extends ReadonlyArray<unknown> = Steps,
 > = ResultRecipe<
   Model,
   CombinedStepMessage<Steps>,
-  never,
+  CombinedStepOutMessage<Steps>,
   CombinedStepRequirements<Steps>,
-  CombinedStepRegistrationEvidence<Steps>
+  CombinedStepRegistrationEvidence<Steps, StepList>
+>
+
+type CombinedRunReturn<Model, Message, R> = ReturnWithOutMessage<
+  Model,
+  Message,
+  unknown,
+  R
 >
 
 /**
@@ -911,11 +1041,13 @@ type CombinedStepRecipe<
  * (`combineSteps(steps)`, for a `pipe` or a nested Step list). Ordinary Steps
  * produce a readable {@link Return}. Connected Steps preserve an opaque
  * {@link ResultRecipe} for execution by a matching registered Composition.
- * A Composition rejects a connected combination whose registered Binding
- * policy can emit an OutMessage from update or init, including combinations
- * extracted through `Definition.makeStep` and combinations returned by a
- * Binding OutMessage policy. Return an OutMessage-producing bound operation
- * directly so its caller can observe it.
+ * At most one Step of a fixed list may emit an OutMessage, directly or
+ * through a registered Binding policy; the combined result carries it beside
+ * the Commands. A Composition rejects a connected combination where two or
+ * more Steps can emit one, or where any can emit from init, including
+ * combinations extracted through `Definition.makeStep` and combinations
+ * returned by a Binding OutMessage policy. A Step list of unknown length may
+ * not emit at all.
  *
  * Steps only ever accumulate Commands; a Step cannot cancel or replace
  * another Step's Commands, and no Command runs during the fold. The
@@ -959,14 +1091,18 @@ export const combineSteps: {
       RequireOperationStep<Steps> &
       StepsWithoutOutMessage<NoInfer<Steps>>,
   ): CombinedStepRecipe<GraphModelOfValue<ModelInput>, Steps>
-  <StepValue>(
-    steps: ReadonlyArray<StepValue> &
+  <
+    StepValue,
+    const StepList extends ReadonlyArray<StepValue> = ReadonlyArray<StepValue>,
+  >(
+    steps: StepList &
+      ReadonlyArray<StepValue> &
       StepsForModel<
         CommonOperationSteps<StepValue>,
         OperationStepModel<CommonOperationSteps<StepValue>>
       > &
       RequireOperationStep<CommonOperationSteps<StepValue>> &
-      StepsWithoutOutMessage<ReadonlyArray<StepValue>>,
+      StepsWithoutOutMessage<StepList>,
   ): NoInfer<
     (
       model: GraphInput<
@@ -976,34 +1112,43 @@ export const combineSteps: {
     ) =>
       | CombinedStepOutputFor<
           OperationStepModel<CommonOperationSteps<StepValue>>,
-          CommonOperationSteps<StepValue>
+          CommonOperationSteps<StepValue>,
+          StepList
         >
       | CombinedStepRecipe<
           OperationStepModel<CommonOperationSteps<StepValue>>,
-          CommonOperationSteps<StepValue>
+          CommonOperationSteps<StepValue>,
+          StepList
         >
   >
-  <ModelInput, StepValue>(
+  <
+    ModelInput,
+    StepValue,
+    const StepList extends ReadonlyArray<StepValue> = ReadonlyArray<StepValue>,
+  >(
     model: ModelInput &
       GraphInput<
         GraphModelOfValue<ModelInput>,
         NoInfer<CombinedGraphRequirement<CommonOperationSteps<StepValue>>>
       >,
-    steps: ReadonlyArray<StepValue> &
+    steps: StepList &
+      ReadonlyArray<StepValue> &
       StepsForModel<
         CommonOperationSteps<StepValue>,
         GraphModelOfValue<ModelInput>
       > &
       RequireOperationStep<CommonOperationSteps<StepValue>> &
-      StepsWithoutOutMessage<ReadonlyArray<StepValue>>,
+      StepsWithoutOutMessage<StepList>,
   ):
     | CombinedStepOutputFor<
         GraphModelOfValue<ModelInput>,
-        CommonOperationSteps<StepValue>
+        CommonOperationSteps<StepValue>,
+        StepList
       >
     | CombinedStepRecipe<
         GraphModelOfValue<ModelInput>,
-        CommonOperationSteps<StepValue>
+        CommonOperationSteps<StepValue>,
+        StepList
       >
   <const Steps extends NonEmptySteps>(
     steps: Steps &
@@ -1012,22 +1157,15 @@ export const combineSteps: {
   ): (
     model: GraphInput<FirstStepModel<Steps>, CombinedGraphRequirement<Steps>>,
   ) => WithRegistrationEvidence<
-    Return<
-      FirstStepModel<Steps>,
-      CombinedStepMessage<Steps>,
-      CombinedStepRequirements<Steps>
-    >,
+    CombinedReturn<FirstStepModel<Steps>, Steps>,
     CombinedStepRegistrationEvidence<Steps>
   >
   <Model, const StepReturns extends NonEmptyStepReturnsFor<Model>>(
     model: Model,
-    steps: StepsFromReturns<Model, StepReturns>,
+    steps: StepsFromReturns<Model, StepReturns> &
+      StepReturnsWithoutOutMessage<StepReturns>,
   ): WithRegistrationEvidence<
-    Return<
-      Model,
-      CommandMessage<StepReturns[number]>,
-      CommandRequirements<StepReturns[number]>
-    >,
+    StepReturnsResult<Model, StepReturns>,
     RegistrationEvidenceOf<StepReturns[number]>
   >
   <ModelInput, const Steps extends ReadonlyArray<AnyStep>>(
@@ -1042,11 +1180,7 @@ export const combineSteps: {
           : never
         : never,
   ): WithRegistrationEvidence<
-    Return<
-      GraphModelOfValue<ModelInput>,
-      CombinedStepMessage<Steps>,
-      CombinedStepRequirements<Steps>
-    >,
+    CombinedReturn<GraphModelOfValue<ModelInput>, Steps>,
     CombinedStepRegistrationEvidence<Steps>
   >
   <
@@ -1062,11 +1196,7 @@ export const combineSteps: {
       StepsForModel<Steps, GraphModelOfValue<ModelInput>> &
       StepsWithoutOutMessage<NoInfer<Steps>>,
   ): WithRegistrationEvidence<
-    Return<
-      GraphModelOfValue<ModelInput>,
-      CombinedStepMessage<Steps>,
-      CombinedStepRequirements<Steps>
-    >,
+    CombinedReturn<GraphModelOfValue<ModelInput>, Steps>,
     CombinedStepRegistrationEvidence<Steps>
   >
   <const Steps extends ReadonlyArray<AnyStep>>(
@@ -1079,11 +1209,7 @@ export const combineSteps: {
       CombinedGraphRequirement<Steps>
     >,
   ) => WithRegistrationEvidence<
-    Return<
-      CombinedStepModel<Steps>,
-      CombinedStepMessage<Steps>,
-      CombinedStepRequirements<Steps>
-    >,
+    CombinedReturn<CombinedStepModel<Steps>, Steps>,
     CombinedStepRegistrationEvidence<Steps>
   >
   <Model, Message, R = never>(
@@ -1097,14 +1223,14 @@ export const combineSteps: {
   /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions */
 } = ((modelOrSteps: unknown, maybeSteps?: ReadonlyArray<AnyStep>) => {
   const continueRun = <Model, Message, R>(
-    current: Return<Model, Message, R>,
+    current: CombinedRunReturn<Model, Message, R>,
     steps: ReadonlyArray<AnyStep>,
     startIndex: number,
     resolvePending = false,
     environment?: OperationEnvironment,
   ):
-    | Return<Model, Message, R>
-    | ResultRecipeFor<Model, Return<Model, Message, R>> => {
+    | CombinedRunReturn<Model, Message, R>
+    | ResultRecipeFor<Model, CombinedRunReturn<Model, Message, R>> => {
     let index = startIndex
     while (true) {
       const maybeStep = Array.get(steps, index)
@@ -1115,14 +1241,14 @@ export const combineSteps: {
       const step = maybeStep.value
       const output = step(current.model)
       if (isResultRecipe(output) && !resolvePending) {
-        return makeResultRecipe<Model, Return<Model, Message, R>>(
+        return makeResultRecipe<Model, CombinedRunReturn<Model, Message, R>>(
           (model, environment) =>
             /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions */
             resolveOperationOutput(
               continueRun({ model }, steps, 0, true, environment),
               model,
               environment,
-            ) as Return<Model, Message, R>,
+            ) as CombinedRunReturn<Model, Message, R>,
         )
       }
 
@@ -1132,14 +1258,16 @@ export const combineSteps: {
       if (!resolvePending) {
         assertResolvedStep(next)
       }
-      if (next.outMessage !== undefined) {
+      if (next.outMessage !== undefined && current.outMessage !== undefined) {
         throw new Error(
-          '[foldkit] Update.combineSteps cannot combine a Step that emits an OutMessage. Return the OutMessage-producing Step directly so its caller can observe it.',
+          '[foldkit] Update.combineSteps cannot combine two Steps that emit an OutMessage. At most one combined Step may emit one; return the others directly so their caller can observe them.',
         )
       }
+      const outMessage = next.outMessage ?? current.outMessage
       current = {
         model: next.model,
         commands: [...(current.commands ?? []), ...(next.commands ?? [])],
+        ...(outMessage === undefined ? {} : { outMessage }),
       }
       index += 1
     }
@@ -1149,9 +1277,9 @@ export const combineSteps: {
     model: Model,
     steps: ReadonlyArray<AnyStep>,
   ):
-    | Return<Model, Message, R>
-    | ResultRecipeFor<Model, Return<Model, Message, R>> => {
-    const seed: Return<Model, Message, R> = { model }
+    | CombinedRunReturn<Model, Message, R>
+    | ResultRecipeFor<Model, CombinedRunReturn<Model, Message, R>> => {
+    const seed: CombinedRunReturn<Model, Message, R> = { model }
     return continueRun(seed, steps, 0)
   }
 

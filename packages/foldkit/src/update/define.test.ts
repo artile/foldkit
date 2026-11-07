@@ -357,11 +357,10 @@ describe('combineSteps inference', () => {
         (_model: Model) => ({ model: 'wrong' }),
       ])
 
-      combineSteps([
-        loadProfile,
-        // @ts-expect-error combineSteps cannot discard an OutMessage.
-        outward,
-      ])
+      // One emitting Step keeps its OutMessage on the combined result.
+      combineSteps([loadProfile, outward])
+      // @ts-expect-error A second emitting Step cannot share the result.
+      combineSteps([outward, loadProfile, outward])
     }
   })
 })

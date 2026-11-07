@@ -1903,15 +1903,23 @@ describe('types', () => {
     expect(wrongMessageCommands.model).toBe(baseModel)
   })
 
-  it('prevents an OutMessage Step from flowing into combineSteps', () => {
+  it('keeps one OutMessage Step in combineSteps and rejects two', () => {
     const emitOutMessage: StepWithOutMessage<
       TestModel,
       TestMessage,
       TestOutMessage
     > = model => ({ model, outMessage: { _tag: 'ClosedEditor' } })
 
-    // @ts-expect-error combineSteps would lose this OutMessage.
-    combineSteps([emitOutMessage])
+    const combined = combineSteps(baseModel, [emitOutMessage])
+    expect(combined.outMessage).toEqual({ _tag: 'ClosedEditor' })
+    // @ts-expect-error Two OutMessage Steps cannot share one result.
+    combineSteps([emitOutMessage, emitOutMessage])
+    expect(() =>
+      Reflect.apply(combineSteps, undefined, [
+        baseModel,
+        [emitOutMessage, emitOutMessage],
+      ]),
+    ).toThrow('cannot combine two Steps that emit an OutMessage')
   })
 
   it('Step maps a Model to a Return over the same Model', () => {

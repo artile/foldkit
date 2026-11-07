@@ -75,7 +75,7 @@ type MarkersOf<Output> =
     : never
 
 type BindingMarkers<Marker> =
-  Marker extends Update.DeferredCombinedStepsPolicy<infer Evidence>
+  Marker extends Update.DeferredCombinedStepsPolicy<infer Evidence, any>
     ? Evidence extends Update.DeferredResultEvidence<infer NestedMarker>
       ? BindingMarkers<NestedMarker>
       : never
@@ -133,18 +133,50 @@ type ReachableOutMessage<Marker, Children extends ReadonlyArray<unknown>> =
         | OutputOutMessage<DirectOutputOf<Reached, Children>>
     : never
 
+type MarkerOfEvidence<Evidence> =
+  Evidence extends Update.DeferredResultEvidence<infer Marker> ? Marker : never
+
+type CombinedStepCanEmit<
+  StepEvidence,
+  Children extends ReadonlyArray<unknown>,
+> = [Extract<StepEvidence, Update.StaticOutMessageEvidence>] extends [never]
+  ? [ReachableOutMessage<MarkerOfEvidence<StepEvidence>, Children>] extends [
+      never,
+    ]
+    ? false
+    : true
+  : true
+
+type CountEmittingCombinedSteps<
+  StepEvidence extends ReadonlyArray<unknown>,
+  Children extends ReadonlyArray<unknown>,
+  Count extends ReadonlyArray<unknown> = readonly [],
+> = Count['length'] extends 2
+  ? 2
+  : StepEvidence extends readonly [infer Head, ...infer Tail]
+    ? CountEmittingCombinedSteps<
+        Tail,
+        Children,
+        CombinedStepCanEmit<Head, Children> extends true
+          ? readonly [...Count, Head]
+          : Count
+      >
+    : number extends StepEvidence['length']
+      ? CombinedStepCanEmit<StepEvidence[number], Children> extends true
+        ? 2
+        : Count['length']
+      : Count['length']
+
+/** At most one combined Step may reach a Binding policy that emits an
+ * OutMessage; the combined result carries that OutMessage. Two or more such
+ * Steps stay rejected, because one result holds at most one OutMessage. */
 type CombinedChannels<Marker, Children extends ReadonlyArray<unknown>> =
-  Marker extends Update.DeferredCombinedStepsPolicy<infer Evidence>
-    ? [
-        ReachableOutMessage<
-          Evidence extends Update.DeferredResultEvidence<infer NestedMarker>
-            ? NestedMarker
-            : never,
-          Children
-        >,
-      ] extends [never]
-      ? EmptyChannels
-      : InvalidCombinedStepsChannels
+  Marker extends Update.DeferredCombinedStepsPolicy<any, infer StepEvidence>
+    ? StepEvidence extends ReadonlyArray<unknown>
+      ? CountEmittingCombinedSteps<StepEvidence, Children> extends 2
+        ? InvalidCombinedStepsChannels
+        : EmptyChannels
+      : EmptyChannels
     : EmptyChannels
 
 type DirectChannels<Marker, Children extends ReadonlyArray<unknown>> =
