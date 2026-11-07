@@ -39,7 +39,6 @@ import type {
   CustomConstructorFields,
   ImplementationRecord,
   RecordAcquisition,
-  ValidateImplementationRecord,
 } from './completionRecord.js'
 import type {
   ActualFacts,
@@ -64,10 +63,34 @@ import type {
   WithoutPendingHandlers,
 } from './contract.js'
 import type {
+  CompiledRecord,
+  ImplementationRecordShape,
+} from './handlerRecord.js'
+import type {
   ImplementationFacts,
   SelectedImplementationFacts,
 } from './implementationFacts.js'
 import type { ExactReadable } from './readableProvider.js'
+
+/** The effect channels a `handlers` record may use: the declared effects contract. */
+type DeclaredHandlerChannels<
+  MessageSchema extends AnySelfContainedSchema,
+  OutMessageSchema extends AnySchema | undefined,
+  Config extends ContractConfiguration,
+> =
+  DeclaredFacts<
+    MessageSchema,
+    OutMessageSchema,
+    Config
+  > extends infer Facts extends Readonly<{
+    effectsLayerError: unknown
+    effectsLayerRequirements: unknown
+  }>
+    ? Readonly<{
+        error: Facts['effectsLayerError']
+        services: Facts['effectsLayerRequirements']
+      }>
+    : never
 import {
   type Declaration,
   type IsUnion,
@@ -185,34 +208,98 @@ export interface MakeLayer<
   OutMessageSchema extends AnySchema | undefined,
   Config extends ContractConfiguration,
 > {
-  <const Record extends ImplementationRecord>(
-    implementation: Record & ValidateImplementationRecord<Record>,
+  <
+    const Record extends ImplementationRecord,
+    const InitPlan,
+    const UpdatePlan,
+    const InMessageUpdatePlan = never,
+  >(
+    implementation: ImplementationRecordShape<
+      Record,
+      InitPlan | UpdatePlan | InMessageUpdatePlan,
+      NominalId<Id, Config['key']>,
+      DeclaredHandlerChannels<MessageSchema, OutMessageSchema, Config>
+    > &
+      Readonly<{
+        init: InitPlan
+        update: UpdatePlan
+        inMessageUpdate?: InMessageUpdatePlan
+      }>,
     ...validation: NoInfer<
       readonly [
+        ...([Extract<Record, Effect.Effect<any, any, any>>] extends [never]
+          ? readonly []
+          : readonly [implementationRecordIsAnEffect: never]),
         ...Validate<
           NominalId<Id, Config['key']>,
           ModelSchema,
           MessageSchema,
           OutMessageSchema,
-          NativeBody<AcquiredConstructorBody<Record>, Config>
+          NativeBody<
+            AcquiredConstructorBody<
+              CompiledRecord<
+                Record,
+                InitPlan | UpdatePlan | InMessageUpdatePlan,
+                NominalId<Id, Config['key']>,
+                DeclaredHandlerChannels<MessageSchema, OutMessageSchema, Config>
+              >
+            >,
+            Config
+          >
         >,
         ...PublishedMountValidation<
-          SourceOf<AcquiredConstructorBody<Record>>,
+          SourceOf<
+            AcquiredConstructorBody<
+              CompiledRecord<
+                Record,
+                InitPlan | UpdatePlan | InMessageUpdatePlan,
+                NominalId<Id, Config['key']>,
+                DeclaredHandlerChannels<MessageSchema, OutMessageSchema, Config>
+              >
+            >
+          >,
           Config
         >,
         ...InMessageUpdateBodyValidation<
-          AcquiredConstructorBody<Record>,
+          AcquiredConstructorBody<
+            CompiledRecord<
+              Record,
+              InitPlan | UpdatePlan | InMessageUpdatePlan,
+              NominalId<Id, Config['key']>,
+              DeclaredHandlerChannels<MessageSchema, OutMessageSchema, Config>
+            >
+          >,
           Config
         >,
         ...HostContractValidation<
-          ActualFacts<MessageSchema, AcquiredConstructorBody<Record>, Config>,
+          ActualFacts<
+            MessageSchema,
+            AcquiredConstructorBody<
+              CompiledRecord<
+                Record,
+                InitPlan | UpdatePlan | InMessageUpdatePlan,
+                NominalId<Id, Config['key']>,
+                DeclaredHandlerChannels<MessageSchema, OutMessageSchema, Config>
+              >
+            >,
+            Config
+          >,
           DeclaredFacts<
             MessageSchema,
             OutMessageSchema,
             Config,
             Owner<NominalId<Id, Config['key']>, true>
           >,
-          HostDefinitions<AcquiredConstructorBody<Record>>
+          HostDefinitions<
+            AcquiredConstructorBody<
+              CompiledRecord<
+                Record,
+                InitPlan | UpdatePlan | InMessageUpdatePlan,
+                NominalId<Id, Config['key']>,
+                DeclaredHandlerChannels<MessageSchema, OutMessageSchema, Config>
+              >
+            >
+          >
         >,
       ]
     >
@@ -231,20 +318,54 @@ export interface MakeLayer<
     Effect.Services<RecordAcquisition<Record>>,
     ActualFacts<
       MessageSchema,
-      NoInfer<AcquiredConstructorBody<Record>>,
+      NoInfer<
+        AcquiredConstructorBody<
+          CompiledRecord<
+            Record,
+            InitPlan | UpdatePlan | InMessageUpdatePlan,
+            NominalId<Id, Config['key']>,
+            DeclaredHandlerChannels<MessageSchema, OutMessageSchema, Config>
+          >
+        >
+      >,
       Config
     >['subscriptions'],
-    HostDefinitions<AcquiredConstructorBody<Record>>
+    HostDefinitions<
+      AcquiredConstructorBody<
+        CompiledRecord<
+          Record,
+          InitPlan | UpdatePlan | InMessageUpdatePlan,
+          NominalId<Id, Config['key']>,
+          DeclaredHandlerChannels<MessageSchema, OutMessageSchema, Config>
+        >
+      >
+    >
   >['layer'] extends infer GraphLayer extends Layer.Layer<any, any, any>
     ? LayerWithImplementationFacts<
         GraphLayer,
         Owner<NominalId<Id, Config['key']>, true>,
         SelectedActualFacts<
           MessageSchema,
-          AcquiredConstructorBody<Record>,
+          AcquiredConstructorBody<
+            CompiledRecord<
+              Record,
+              InitPlan | UpdatePlan | InMessageUpdatePlan,
+              NominalId<Id, Config['key']>,
+              DeclaredHandlerChannels<MessageSchema, OutMessageSchema, Config>
+            >
+          >,
           Config
         >,
-        HostDefinitions<AcquiredConstructorBody<Record>>
+        HostDefinitions<
+          AcquiredConstructorBody<
+            CompiledRecord<
+              Record,
+              InitPlan | UpdatePlan | InMessageUpdatePlan,
+              NominalId<Id, Config['key']>,
+              DeclaredHandlerChannels<MessageSchema, OutMessageSchema, Config>
+            >
+          >
+        >
       >
     : never
   <const Body extends ConstructorBody, Error, Requirements>(

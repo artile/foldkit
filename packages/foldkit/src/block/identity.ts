@@ -113,6 +113,13 @@ export const registerDefinition = (
   invocationOwners.set(identity.token, owned)
 }
 
+/** @internal Reads one operation declaration of a named Block by its local name. */
+export const declaredDefinitionOf = (
+  owner: NamedIdentity,
+  kind: DefinitionIdentity['kind'],
+  localName: string,
+): object | undefined => declarations.get(owner)?.get(`${kind}/${localName}`)
+
 /** @internal Registers a ManagedResource accessor's Context key. */
 export const registerResource = (key: string): void => {
   resourceKeys.add(key)

@@ -48,6 +48,7 @@ import type {
   Definition,
   DefinitionConfigurationArguments,
 } from './contract.js'
+import { compileHandlerRecord } from './handlerRecord.js'
 import {
   assertInMessageConfiguration,
   compileInputs,
@@ -967,7 +968,9 @@ export const makeDefinitionRuntime = (
         }
       }
 
-      const body = Object.freeze({ ...implementation })
+      const body = Object.freeze(
+        compileHandlerRecord(definition.owner, { ...implementation }),
+      )
       const constructor = Effect.gen(function* () {
         const source = planComposition<any>(Reflect.get(body, 'init'))
 

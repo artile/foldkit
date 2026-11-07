@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "files": [
+    "handlers.ts"
+  ],
+  "include": []
+}
