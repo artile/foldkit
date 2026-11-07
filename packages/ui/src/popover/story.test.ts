@@ -251,6 +251,34 @@ it.layer(layer, { buildPerTest: true })(it => {
         )
       })
 
+      describe('RequestedCloseWithoutFocus', () => {
+        it.effect('closes the popover without a focus command', () =>
+          Story.story(
+            PopoverBlock,
+            givenClosed,
+            givenOpen,
+            Story.inMessage(InMessage.RequestedCloseWithoutFocus()),
+            Story.expectOutMessage(OutMessage.Closed()),
+            Story.Command.expectNone(),
+            Story.model(model => {
+              expect(model.isOpen).toBe(false)
+            }),
+          ),
+        )
+
+        it.effect(
+          'returns no Command and no OutMessage when already closed',
+          () =>
+            Story.story(
+              PopoverBlock,
+              givenClosed,
+              Story.inMessage(InMessage.RequestedCloseWithoutFocus()),
+              Story.expectNoOutMessage(),
+              Story.Command.expectNone(),
+            ),
+        )
+      })
+
       describe('BlurredPanel', () => {
         it.effect('closes the popover without restoring button focus', () =>
           Story.story(
@@ -864,6 +892,25 @@ it.layer(layer, { buildPerTest: true })(it => {
             Story.inMessage(InMessage.RequestedClose()),
             Story.Command.resolveAll(
               [FocusPopoverButton, Message.CompletedFocusPopoverButton()],
+              [UnlockPopoverScroll, Message.CompletedUnlockPopoverScroll()],
+              [RestorePopoverInert, Message.CompletedRestorePopoverInert()],
+            ),
+            Story.model(model => {
+              expect(model.isOpen).toBe(false)
+            }),
+          ),
+      )
+
+      it.effect(
+        'emits unlockScroll and restoreInert without a focus Command on RequestedCloseWithoutFocus when isModal is true',
+        () =>
+          Story.story(
+            PopoverBlock,
+            givenClosedModal,
+            givenOpenModal,
+            Story.inMessage(InMessage.RequestedCloseWithoutFocus()),
+            Story.Command.expectExact(UnlockPopoverScroll, RestorePopoverInert),
+            Story.Command.resolveAll(
               [UnlockPopoverScroll, Message.CompletedUnlockPopoverScroll()],
               [RestorePopoverInert, Message.CompletedRestorePopoverInert()],
             ),

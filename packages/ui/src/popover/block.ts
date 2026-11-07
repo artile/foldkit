@@ -77,11 +77,15 @@ export type SuppressedSpaceScroll = typeof Message.SuppressedSpaceScroll.Type
 export const InMessage = defineInMessageUnion({
   RequestedOpen: {},
   RequestedClose: {},
+  /** Closes without returning focus to the trigger, for a parent that moves focus elsewhere. */
+  RequestedCloseWithoutFocus: {},
 })
 export type InMessage = typeof InMessage.Type
 
 export type RequestedOpen = typeof InMessage.RequestedOpen.Type
 export type RequestedClose = typeof InMessage.RequestedClose.Type
+export type RequestedCloseWithoutFocus =
+  typeof InMessage.RequestedCloseWithoutFocus.Type
 
 // OUT MESSAGE
 
@@ -177,6 +181,7 @@ export const PopoverBlock = Block.make(PopoverNamespace, {
   inMessageOutputs: {
     RequestedOpen: { outMessage: OutMessage },
     RequestedClose: { outMessage: OutMessage },
+    RequestedCloseWithoutFocus: { outMessage: OutMessage },
   },
   Model,
   Message,
@@ -451,6 +456,9 @@ const closePopoverWithFocus = PopoverBlock.makeStep(model =>
 export const inMessageUpdate = PopoverComposition.makeInMessageUpdate({
   RequestedOpen: PopoverBlock.makeStep(openPopover),
   RequestedClose: closePopoverWithFocus,
+  RequestedCloseWithoutFocus: PopoverBlock.makeStep(model =>
+    closePopover(model, closePopoverCommands(model, false)),
+  ),
 })
 
 const internalUpdate = (model: Model, message: Message) => {
