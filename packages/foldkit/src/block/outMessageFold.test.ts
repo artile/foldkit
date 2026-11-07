@@ -125,6 +125,35 @@ it('infers exact child payloads and the parent Model without running a transitio
   >().toEqualTypeOf<never>()
 })
 
+it('partial folds handle named variants and leave the parent Model unchanged for the rest', () => {
+  const fold = FoldParentDefinition.makeOutMessageFold.partial(ChildBlock, {
+    Selected:
+      ({ value }) =>
+      model => {
+        expectTypeOf(value).toEqualTypeOf<'Apple' | 'Pear'>()
+        return { model: modifyFields(model, { choice: () => value }) }
+      },
+  })
+
+  expect(
+    fold(ChildOutMessage.Selected({ value: 'Pear' }))(initialModel).model
+      .choice,
+  ).toBe('Pear')
+  expect(fold(ChildOutMessage.Closed())(initialModel).model).toBe(initialModel)
+
+  const empty = FoldParentDefinition.makeOutMessageFold.partial(ChildBlock, {})
+  expect(
+    empty(ChildOutMessage.Selected({ value: 'Pear' }))(initialModel).model,
+  ).toBe(initialModel)
+
+  expect(() =>
+    FoldParentDefinition.makeOutMessageFold.partial(ChildBlock, {
+      // @ts-expect-error a partial fold still rejects variants the child does not declare
+      Escaped: () => FoldParentDefinition.makeNoopStep(),
+    }),
+  ).toThrow('unexpected handlers for: Escaped')
+})
+
 it('contextually types literal Model fields in folds and authored updates', () => {
   const Model = Schema.Struct({ phase: Schema.Literals(['Idle', 'Done']) })
   type Model = typeof Model.Type

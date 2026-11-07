@@ -981,6 +981,53 @@ export interface MakeDescriptorOutMessageFold<
         Child['Message']['Type']
       >
     : never
+  /** Handles only the named child OutMessage variants; every other variant leaves the parent Model unchanged. */
+  readonly partial: MakeOutMessageFold<Model, Message, OutMessage>['partial'] &
+    (<const Child extends OutMessageDescriptor, const Cases>(
+      child: Child,
+      cases: Cases &
+        Partial<
+          OutMessageFoldCases<
+            Model,
+            Message,
+            CoreOutMessageContract<NoInfer<Child>>
+          >
+        > &
+        CaseValidation<
+          Model,
+          Message,
+          OutMessage,
+          CoreOutMessageContract<Child>,
+          NoInfer<Cases>
+        >,
+    ) => NormalizedFoldCaseData<
+      Model,
+      Cases & UnchangedFoldCases<Model, Child['OutMessage']['Type'], Cases>
+    > extends infer Data extends ReadonlyArray<unknown>
+      ? NormalizedOutMessageFold<
+          Model,
+          Child['OutMessage']['Type'],
+          OutMessageFoldContext<
+            Model,
+            Message,
+            CoreOutMessageContract<Child>,
+            Cases
+          >,
+          readonly [...Data],
+          Child['Message']['Type']
+        >
+      : never)
+}
+
+type UnchangedFoldCases<Model, ChildOutMessage, Cases> = {
+  readonly [
+    Tag in Exclude<
+      ChildOutMessage extends Readonly<{ _tag: infer Name extends string }>
+        ? Name
+        : never,
+      keyof Cases
+    >
+  ]: () => (model: Model) => Readonly<{ model: Model }>
 }
 
 /** Extends exhaustive forwarding to original passive child contracts. */

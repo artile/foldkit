@@ -307,12 +307,31 @@ export interface MakeOutMessageFold<Model, Message, OutMessage> {
     OutMessageFoldContext<Model, Message, Child, Cases>,
     ChildMessage<Child>
   >
+  /**
+   * Authors handlers for only the child OutMessage variants the parent reacts
+   * to. Every other variant leaves the parent Model unchanged.
+   *
+   * @param child The completed child Block whose OutMessages are handled.
+   * @param cases Named handlers for a subset of the child OutMessage variants.
+   */
+  readonly partial: <const Child extends ChildOutMessageContract, const Cases>(
+    child: Child & ValidateChild<Child>,
+    cases: Cases &
+      Partial<OutMessageFoldCases<Model, Message, NoInfer<Child>>> &
+      CaseValidation<Model, Message, OutMessage, Child, NoInfer<Cases>>,
+  ) => OutMessageFold<
+    ChildOutMessage<Child>,
+    | DefinedCaseSteps<Model, Cases>
+    | OutMessageFoldStep<Model, Readonly<{ model: Model }>, never>,
+    OutMessageFoldContext<Model, Message, Child, Cases>,
+    ChildMessage<Child>
+  >
 }
 
 /** @internal Creates a Definition-owned OutMessage fold authoring helper. */
 export function makeOutMessageFold(): MakeOutMessageFold<any, any, any>
 export function makeOutMessageFold(): AnyFunction {
-  return (child: unknown, cases: unknown) => {
+  const fold = (child: unknown, cases: unknown) => {
     if (cases === undefined) {
       throw new Error(
         '[foldkit] Definition.makeOutMessageFold requires a completed child Block followed by a record of variant handlers.',
@@ -342,4 +361,33 @@ export function makeOutMessageFold(): AnyFunction {
 
     return handler
   }
+
+  const partial = (child: unknown, cases: unknown) => {
+    if (!Predicate.isObject(cases)) {
+      throw new Error(
+        '[foldkit] Definition.makeOutMessageFold.partial requires a completed child Block followed by a record of variant handlers.',
+      )
+    }
+    const outMessage = Predicate.isObjectKeyword(child)
+      ? Reflect.get(child, 'OutMessage')
+      : undefined
+    const variants = Predicate.isObjectKeyword(outMessage)
+      ? Reflect.get(outMessage, 'cases')
+      : undefined
+    if (!Predicate.isObject(variants)) {
+      throw new Error(
+        '[foldkit] Definition.makeOutMessageFold.partial requires a child Block with a tagged OutMessage union.',
+      )
+    }
+    const unchanged = () => (model: unknown) => ({ model })
+    const filled = Object.fromEntries(
+      Object.keys(variants).map(tag => [
+        tag,
+        Object.hasOwn(cases, tag) ? Reflect.get(cases, tag) : unchanged,
+      ]),
+    )
+    return fold(child, { ...cases, ...filled })
+  }
+
+  return Object.assign(fold, { partial })
 }
