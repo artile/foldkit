@@ -1,5 +1,5 @@
-import { Predicate } from 'effect'
-import type { Effect, Layer, Schema } from 'effect'
+import { Predicate, Schema } from 'effect'
+import type { Effect, Layer } from 'effect'
 
 import type { MakeCommandsStep } from '../../block/commandsStep.js'
 import type { Primitives } from '../../block/define.js'
@@ -624,6 +624,9 @@ export type UnifiedBlock<
  * implementation graph. Its unique symbol key preserves registration identity;
  * its display name does not replace that identity.
  */
+/** `InitArgs` defaults to an empty tuple: a Block whose init takes no arguments. */
+type NoInitArgs = Readonly<{ InitArgs: Schema.Tuple<readonly []> }>
+
 export function makeUnifiedBlock<
   const Id extends string,
   const Key extends symbol,
@@ -647,12 +650,47 @@ export function makeUnifiedBlock<
   OptionalSchema<Config, 'ChildInitContext'>,
   Config & Readonly<{ key: Key }>
 >
+/** A Block whose init takes no arguments may omit `InitArgs`. */
+export function makeUnifiedBlock<
+  const Id extends string,
+  const Key extends symbol,
+  const Config extends Omit<Declaration, 'key' | 'InitArgs'>,
+>(
+  id: (Id & LiteralContractId<Id>) | NamespaceIdentity<Id>,
+  config: Config &
+    Readonly<{ key: Key; InitArgs?: never }> &
+    (symbol extends Key ? never : true extends IsUnion<Key> ? never : unknown),
+  ...validation: readonly [
+    ...MessageFreeValidation<
+      NoInfer<Config & NoInitArgs & Readonly<{ key: Key }>>
+    >,
+    ...DefinitionConfigurationArguments<
+      NoInfer<Config & NoInitArgs & Readonly<{ key: Key }>>
+    >,
+  ]
+): UnifiedBlock<
+  Id,
+  Config['Model'],
+  Config['Message'],
+  OptionalSchema<Config, 'OutMessage'>,
+  OptionalSchema<Config, 'ChildInitContext'>,
+  Config & NoInitArgs & Readonly<{ key: Key }>
+>
 export function makeUnifiedBlock(
   id: string | object,
-  config: Declaration,
+  config: Omit<Declaration, 'InitArgs'> &
+    Partial<Pick<Declaration, 'InitArgs'>>,
   ..._validation: ReadonlyArray<unknown>
 ): object {
-  const snapshot = snapshotDefinitionConfiguration(config)
+  if (config.InitArgs === undefined && Object.hasOwn(config, 'Init')) {
+    throw new Error(
+      '[foldkit] Block.make no longer accepts `Init`. Rename it to `InitArgs`, or omit it for a Block whose init takes no arguments.',
+    )
+  }
+  const snapshot = snapshotDefinitionConfiguration({
+    ...config,
+    InitArgs: config.InitArgs ?? Schema.Tuple([]),
+  })
   const source = Predicate.isString(id) ? undefined : namespaceSourceOf(id)
   const block =
     source === undefined

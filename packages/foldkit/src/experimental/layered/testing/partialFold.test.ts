@@ -18,12 +18,12 @@ const ChoiceOutMessage = defineMessageUnion({
   Closed: {},
 })
 const ChoiceKey = Symbol('PartialFoldChoice')
+// InitArgs omitted: init takes no arguments.
 const ChoiceBlock = Block.make('PartialFoldChoice', {
   key: ChoiceKey,
   Model: ChoiceModel,
   Message: ChoiceMessage,
   OutMessage: ChoiceOutMessage,
-  InitArgs: Schema.Tuple([]),
 })
 const ChoiceComposition = ChoiceBlock.makeComposition()
 const choiceLayer = ChoiceBlock.makeLayer({
@@ -87,6 +87,16 @@ describe('makeOutMessageFold.partial with Block.make children', () => {
       Story.model(model => {
         expect(model.picked).toBe('Pear')
         expect(model.choice.value).toBe('Pear')
+      }),
+    ),
+  )
+
+  it.effect('initializes a child Block declared without InitArgs', () =>
+    Story.story(
+      { block: ParentBlock, layer: parentLayer },
+      Story.init(),
+      Story.model(model => {
+        expect(model.choice).toEqual({ value: '' })
       }),
     ),
   )
